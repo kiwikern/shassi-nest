@@ -20,7 +20,7 @@ export class AuthService {
     if (!await this.checkPassword(login.password, user.password)) {
       throw new UnauthorizedException('Wrong password');
     }
-    const payload: JwtPayload = { userId: user.id, username: user.username };
+    const payload: JwtPayload = { userId: user._id.toString(), username: user.username };
     return this.jwtService.sign(payload);
   }
 

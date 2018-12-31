@@ -27,7 +27,7 @@ export class UsersController {
   @Put('/')
   @UseGuards(AuthGuard('jwt'))
   updateUser(@User() user: UserEntity, @Body() userUpdate: UserUpdateDto): Promise<UserEntity> {
-    return this.usersService.updateUser(user.id, userUpdate);
+    return this.usersService.updateUser(user._id, userUpdate);
   }
 
 }

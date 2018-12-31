@@ -20,7 +20,7 @@ class UserServiceMock {
 describe('Users Controller', () => {
   let module: TestingModule;
   let controller: UsersController;
-  const user: UserEntity = { id: '100', username: 'name', email: '', notificationTypes: null, password: '' };
+  const user: UserEntity = { _id: null, username: 'name', email: '', notificationTypes: null, password: '' };
 
   beforeAll(async () => {
     module = await Test.createTestingModule({

@@ -1,10 +1,8 @@
-import { Column, ObjectIdColumn } from 'typeorm';
-import { Exclude } from 'class-transformer';
+import { Column, CreateDateColumn } from 'typeorm';
 
 export class ProductUpdate {
-  @ObjectIdColumn()
-  @Exclude()
-  id?: string;
+  @CreateDateColumn()
+  createdAt: Date;
 
   @Column('number')
   price: number;

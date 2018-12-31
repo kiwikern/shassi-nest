@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { hash } from 'bcrypt';
 import { UserUpdateDto } from './dtos/user-update.dto';
-import { ObjectId } from 'mongodb';
+import { ObjectID } from 'mongodb';
 
 @Injectable()
 export class UsersService {
@@ -23,8 +23,8 @@ export class UsersService {
     return this.userRepository.findOne({ username });
   }
 
-  async updateUser(userId: string, userUpdate: UserUpdateDto): Promise<UserEntity> {
-    const user = await this.userRepository.findOne(userId);
+  async updateUser(userId: ObjectID, userUpdate: UserUpdateDto): Promise<UserEntity> {
+    const user = await this.userRepository.findOne({_id: userId});
     Object.assign(user, userUpdate);
     return this.userRepository.save(user);
   }

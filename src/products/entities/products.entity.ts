@@ -2,28 +2,24 @@ import { Column, Entity, Index, ObjectIdColumn } from 'typeorm';
 import { Exclude, Expose, Transform } from 'class-transformer';
 import { ProductSize } from './product-size.entity';
 import { ProductUpdate } from './product-update.entity';
-import { Logger } from '@nestjs/common';
-import { ObjectId } from 'mongodb';
+import { ObjectID } from 'mongodb';
 
 @Entity({ name: 'products' })
 export class ProductEntity {
-  @Exclude()
-  logger: Logger = new Logger(ProductEntity.name);
-
   @ObjectIdColumn()
-  @Transform((value) => value.toString())
-  id: string;
+  @Transform((value) => value.toString(), { toPlainOnly: true })
+  _id: ObjectID;
 
-  @Index({unique: true})
+  // @Index({unique: true})
   @Column()
   url: string;
 
   @Column()
   name: string;
 
-  @Column()
-  @Transform((value) => value ? value.toString() : null)
-  userId: string;
+  @Column('text')
+  @Transform((value) => value ? value.toString() : null, { toPlainOnly: true })
+  userId: ObjectID;
 
   @Exclude()
   @Column(type => ProductSize)
@@ -52,13 +48,14 @@ export class ProductEntity {
 
   @Expose({ name: 'createdAt' })
   getCreationDate(): Date {
-    return ObjectId(this.id).getTimestamp();
+    return this._id.getTimestamp();
   }
 
   @Expose({ name: 'updatedAt' })
   getUpdateDate(): Date {
     const latestUpdate = this.getLatestUpdate();
-    return latestUpdate ? ObjectId(latestUpdate.id).getTimestamp() : this.getCreationDate();
+    // TODO: Create date manually
+    return latestUpdate ? latestUpdate.createdAt : this.getCreationDate();
   }
 
   @Expose({ name: 'sizeName' })
@@ -80,7 +77,7 @@ export class ProductEntity {
     } else if (this.url.includes('amazon')) {
       return 'Amazon';
     } else {
-      this.logger.warn('Could not find store for URL', this.url);
+      console.warn('Could not find store for URL', this.url);
       return '';
     }
   }
