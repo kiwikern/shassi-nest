@@ -14,10 +14,12 @@ export class HmCrawler implements Crawler {
 
   async init(url: string) {
     this.url = url.replace('m.hm.com', 'www.hm.com');
-    const response = await this.httpService.get(this.url).toPromise();
-    this.logger.log(response.data);
+    const headers = {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+      'Cookie': 'HMCORP_locale=de_DE;HMCORP_currency=EUR;',
+    };
+    const response = await this.httpService.get(this.url, {headers}).toPromise();
     this.document = new JSDOM(response.data).window.document;
-    this.logger.log(this.document);
   }
 
   getName(): string {
