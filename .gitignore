@@ -11,6 +11,8 @@ packages/**/*.d.ts
 packages/**/*.js
 
 # misc
+*.env
+/coverage
 .DS_Store
 lerna-debug.log
 npm-debug.log
