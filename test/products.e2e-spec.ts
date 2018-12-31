@@ -8,7 +8,23 @@ import { AuthService } from '../src/auth/auth.service';
 import { CreateProductDto } from '../src/products/dtos/create-product.dto';
 
 describe('ProductsController (e2e)', () => {
-  const url = 'https://www.hm.com/de/product/08723?article=08723-A';
+  const testCases = [
+    {
+      url: 'https://www.hm.com/de/product/08723?article=08723-J',
+      name: 'H&M',
+      expectedPrice: 19.99,
+    },
+    {
+      url: 'https://www.aboutyou.de/p/only-und-sons/jeans-loom-blue-jog-pk-8472-noos-3774568',
+      name: 'Aboutyou',
+      expectedPrice: 39.9,
+    },
+    {
+      url: 'https://www.amazon.de/Die-Argonauten-Maggie-Nelson-ebook/dp/B071FCV5KW/ref=tmm_kin_swatch_0?_encoding=UTF8&qid=&sr=',
+      name: 'Amazon',
+      expectedPrice: 15.99,
+    },
+  ];
   let app: INestApplication;
   let token: string;
 
@@ -32,28 +48,33 @@ describe('ProductsController (e2e)', () => {
     await createLogin();
   });
 
-  it('should init a product and then create it.', async () => {
-    const initData = (await request(app.getHttpServer())
-      .post('/products/init')
-      .set('Authorization', 'Bearer ' + token)
-      .send({ url })
-      .expect(201)
-      .expect(res => expect(res.body.name)
-        .toBeDefined()))
-      .body;
+  testCases.forEach(({ name, expectedPrice, url }) => {
+    describe(name, () => {
+      it(`should init a product and then create it.`, async () => {
+        const initData = (await request(app.getHttpServer())
+          .post('/products/init')
+          .set('Authorization', 'Bearer ' + token)
+          .send({ url })
+          .expect(201)
+          .expect(res => expect(res.body.name)
+            .toBeDefined()))
+          .body;
 
-    const createData: CreateProductDto = {
-      url: initData.url,
-      name: initData.name,
-      size: initData.sizes[0],
-    };
-    await request(app.getHttpServer())
-      .post('/products')
-      .set('Authorization', 'Bearer ' + token)
-      .send(createData)
-      .expect(201)
-      .expect(res => expect(res.body.price)
-        .toBe(19.99));
+        const createData: CreateProductDto = {
+          url: initData.url,
+          name: initData.name,
+          size: initData.sizes[0],
+        };
+        await request(app.getHttpServer())
+          .post('/products')
+          .set('Authorization', 'Bearer ' + token)
+          .send(createData)
+          .expect(201)
+          .expect(res => expect(res.body.price)
+            .toBe(expectedPrice));
 
+      });
+    });
   });
+
 });
