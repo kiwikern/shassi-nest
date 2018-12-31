@@ -55,27 +55,30 @@ export class ProductsService {
   async updateAllProducts() {
     const products: ProductEntity[] = await this.productRepository.find();
     // TODO: Should this be processed in parallel?
-    const updatedProducts = products.map(async product => {
+    const updatedProducts = [];
+    for (const product of products) {
       try {
-        return await this.updateProduct(product);
+        const updatedProduct = await this.updateProduct(product);
+        if (updatedProduct) {
+          updatedProducts.push(updatedProduct);
+        }
       } catch (error) {
         this.logger.error({ message: 'Failed to update product.', error, product });
       }
-    })
-      .filter(p => !!p);
+    }
+    this.logger.log({ updatedProducts });
     // TODO: Notify about updates.
   }
 
   private async updateProduct(product: ProductEntity) {
     const latestUpdate = await this.crawlerService.getUpdateData(product.url, product.size.id);
-    const hasPriceChanged = product.getPrice() === latestUpdate.price;
-    const hasAvailabilityChanged = product.isAvailable() === latestUpdate.isAvailable;
+    const hasPriceChanged = product.getPrice() !== latestUpdate.price;
+    const hasAvailabilityChanged = product.isAvailable() !== latestUpdate.isAvailable;
     const hasChange = hasPriceChanged || hasAvailabilityChanged;
     if (hasChange) {
       product.updates.push(latestUpdate);
       product.hasUnreadUpdate = true;
-      await this.productRepository.update({ _id: product._id }, product);
-      return product;
+      return await this.productRepository.save(product);
     }
   }
 
