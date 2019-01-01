@@ -38,6 +38,7 @@
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
     "rxjs": "^6.2.2",
+    "telegraf": "^3.25.5",
     "typeorm": "^0.2.9",
     "typescript": "^3.0.1"
   },

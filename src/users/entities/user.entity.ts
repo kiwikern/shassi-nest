@@ -20,9 +20,6 @@ export class UserEntity {
   @Column()
   password: string;
 
-  @Column({nullable: true})
-  telegramId?: string;
-
   @Column(type => NotificationType)
   notificationTypes: NotificationType;
 }
