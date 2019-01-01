@@ -1,6 +1,6 @@
-import { Crawler } from './crawler.interface';
+import { Crawler } from '../crawler.interface';
 import { HttpService, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
-import { ProductSizeAvailability } from './product-size.interface';
+import { ProductSizeAvailability } from '../product-size.interface';
 import { JSDOM } from 'jsdom';
 
 @Injectable()
@@ -42,9 +42,25 @@ export class AmazonCrawler implements Crawler {
       }
     }
 
+    const offerPrice = this.document.getElementsByClassName('offer-price');
+    if (offerPrice && offerPrice[0]) {
+      const price = this.formatPrice(offerPrice[0].innerHTML);
+      if (price) {
+        return price;
+      }
+    }
+
     const salePrice = this.document.getElementById('priceblock_saleprice');
     if (salePrice) {
       const price = this.formatPrice(salePrice.innerHTML);
+      if (price) {
+        return price;
+      }
+    }
+
+    const dealPrice = this.document.getElementById('priceblock_dealprice');
+    if (dealPrice) {
+      const price = this.formatPrice(dealPrice.innerHTML);
       if (price) {
         return price;
       }
@@ -58,7 +74,7 @@ export class AmazonCrawler implements Crawler {
       }
     }
     this.logger.error('Could not find price for product: ' + this.url);
-    throw new InternalServerErrorException('Could not determine amazon price');
+    throw new InternalServerErrorException('Could not determine Amazon price');
   }
 
   getSizes(): ProductSizeAvailability[] {

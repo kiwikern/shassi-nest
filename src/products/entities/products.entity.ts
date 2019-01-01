@@ -3,11 +3,13 @@ import { Exclude, Expose, Transform } from 'class-transformer';
 import { ProductSize } from './product-size.entity';
 import { ProductUpdate } from './product-update.entity';
 import { ObjectID } from 'mongodb';
+import { Logger } from '@nestjs/common';
 
 @Entity({ name: 'products' })
 export class ProductEntity {
   @ObjectIdColumn()
   @Transform((value) => value.toString(), { toPlainOnly: true })
+    // tslint:disable-next-line:variable-name
   _id: ObjectID;
 
   // @Index({unique: true})
@@ -63,6 +65,7 @@ export class ProductEntity {
     return this.size ? this.size.name : '';
   }
 
+  @Expose({name: 'store'})
   getStoreName() {
     if (this.url.includes('hm.com')) {
       return 'H&M';
@@ -77,7 +80,7 @@ export class ProductEntity {
     } else if (this.url.includes('amazon')) {
       return 'Amazon';
     } else {
-      console.warn('Could not find store for URL', this.url);
+      Logger.warn('Could not find store for URL', this.url);
       return '';
     }
   }

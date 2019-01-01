@@ -1,6 +1,6 @@
-import { Crawler } from './crawler.interface';
+import { Crawler } from '../crawler.interface';
 import { HttpService, Injectable, Logger } from '@nestjs/common';
-import { ProductSizeAvailability } from './product-size.interface';
+import { ProductSizeAvailability } from '../product-size.interface';
 import { JSDOM } from 'jsdom';
 
 @Injectable()
@@ -18,7 +18,7 @@ export class HmCrawler implements Crawler {
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
       'Cookie': 'HMCORP_locale=de_DE;HMCORP_currency=EUR;',
     };
-    const response = await this.httpService.get(this.url, {headers}).toPromise();
+    const response = await this.httpService.get(this.url, { headers }).toPromise();
     this.document = new JSDOM(response.data).window.document;
   }
 
@@ -69,7 +69,13 @@ export class HmCrawler implements Crawler {
     if (id === 'ONESIZE') {
       return true;
     }
-    return !this.document.getElementById(id).className.includes('soldOut');
+
+    const sizeEl = this.document.getElementById(id);
+    if (!sizeEl || !sizeEl.className) {
+      return false;
+    }
+
+    return !sizeEl.className.includes('soldOut');
   }
 
   getUrl(): string {

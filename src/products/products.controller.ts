@@ -8,7 +8,6 @@ import { UserEntity } from '../users/entities/user.entity';
 import { InitializeProductDto } from './dtos/initialize-product.dto';
 import { ObjectID } from 'mongodb';
 
-
 @Controller('products')
 @UseGuards(AuthGuard('jwt'))
 @UseInterceptors(ClassSerializerInterceptor)

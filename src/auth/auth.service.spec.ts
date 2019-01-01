@@ -3,11 +3,15 @@ import { AuthService } from './auth.service';
 import { UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
+import { ObjectId } from 'mongodb';
 
 class UserServiceMock {
   async findOneByUsername(username) {
     if (username === 'accept') {
-      return { password: '$2b$10$NsNNUH7JZNnNvW/pQCpXf.iFO41cMVBrGYpb9IpOWjlh.N8pFhCL2' };
+      return {
+        _id: ObjectId.createFromTime(Date.now()),
+        password: '$2b$10$NsNNUH7JZNnNvW/pQCpXf.iFO41cMVBrGYpb9IpOWjlh.N8pFhCL2',
+      };
     } else {
       return null;
     }

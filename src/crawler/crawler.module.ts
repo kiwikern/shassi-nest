@@ -1,8 +1,8 @@
 import { HttpModule, Module } from '@nestjs/common';
 import { CrawlerService } from './crawler.service';
-import { HmCrawler } from './hm.crawler';
-import { AboutyouCrawler } from './aboutyou.crawler';
-import { AmazonCrawler } from './amazon.crawler';
+import { HmCrawler } from './crawlers/hm.crawler';
+import { AboutyouCrawler } from './crawlers/aboutyou.crawler';
+import { AmazonCrawler } from './crawlers/amazon.crawler';
 
 @Module({
   providers: [

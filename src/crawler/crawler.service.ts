@@ -1,9 +1,9 @@
 import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { Crawler } from './crawler.interface';
-import { HmCrawler } from './hm.crawler';
+import { HmCrawler } from './crawlers/hm.crawler';
 import { ProductUpdate } from '../products/entities/product-update.entity';
-import { AboutyouCrawler } from './aboutyou.crawler';
-import { AmazonCrawler } from './amazon.crawler';
+import { AboutyouCrawler } from './crawlers/aboutyou.crawler';
+import { AmazonCrawler } from './crawlers/amazon.crawler';
 
 @Injectable()
 export class CrawlerService {

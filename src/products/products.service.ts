@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CrawlerService } from '../crawler/crawler.service';
 import { ObjectID } from 'mongodb';
+import { ProductSizeAvailability } from '../crawler/product-size.interface';
 
 @Injectable()
 export class ProductsService {
@@ -29,12 +30,13 @@ export class ProductsService {
    * Product is not yet saved in database.
    * @param productUrl
    */
-  async initializeProduct(productUrl: string) {
+  async initializeProduct(productUrl: string): Promise<{ sizes: ProductSizeAvailability[]; name: string; url: string }> {
     return this.crawlerService.getInitData(productUrl);
   }
 
   /**
    * Product is saved in database with first update.
+   * <code>initializeProduct</code> should be called first to create <code>CreateProductDto</code>.
    * @param userId
    * @param product
    */
@@ -63,11 +65,12 @@ export class ProductsService {
           updatedProducts.push(updatedProduct);
         }
       } catch (error) {
-        this.logger.error({ message: 'Failed to update product.', error, product });
+        this.logger.error({ message: 'Failed to update product.', error: error.toString(), product });
       }
     }
     this.logger.log({ updatedProducts });
     // TODO: Notify about updates.
+    return updatedProducts;
   }
 
   private async updateProduct(product: ProductEntity) {
@@ -88,8 +91,6 @@ export class ProductsService {
       throw new NotFoundException('Product not found.');
     }
     product.hasUnreadUpdate = false;
-    // await this.productRepository.update({ _id: productId, userId }, { hasUnreadUpdate: false });
-    // return product;
     return this.productRepository.save(product);
   }
 
