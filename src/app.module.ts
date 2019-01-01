@@ -6,6 +6,7 @@ import { ConfigModule } from './config/config.module';
 import { ConfigService } from './config/config.service';
 import { AuthModule } from './auth/auth.module';
 import { CrawlerModule } from './crawler/crawler.module';
+import { TelegramModule } from './telegram/telegram.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { CrawlerModule } from './crawler/crawler.module';
     UsersModule,
     AuthModule,
     CrawlerModule,
+    TelegramModule,
   ],
 })
 export class AppModule {
