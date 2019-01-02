@@ -6,3 +6,8 @@ script:
   - jest --coverage --coverageReporters=text-lcov | coveralls
   - npm run lint
   - npm run test:e2e
+  - sonar-scanner
+addons:
+  sonarcloud:
+    organization: "kiwikern-github"
+    token: $SONAR_TOKEN
