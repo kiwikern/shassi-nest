@@ -1,7 +1,7 @@
 import { Column, Entity, Index, ObjectIdColumn } from 'typeorm';
 import { ObjectID } from 'mongodb';
 
-@Entity({ name: 'users' })
+@Entity({ name: 'telegram-user-ids' })
 export class TelegramUserIdEntity {
   @ObjectIdColumn()
     // tslint:disable-next-line:variable-name

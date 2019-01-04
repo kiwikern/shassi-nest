@@ -13,6 +13,7 @@ import { CronJob } from 'cron';
     TypeOrmModule.forFeature([ProductEntity]),
     CrawlerModule,
   ],
+  exports: [ProductsService],
 })
 export class ProductsModule implements OnModuleInit {
 
