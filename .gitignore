@@ -10,8 +10,11 @@ node_modules/
 packages/**/*.d.ts
 packages/**/*.js
 
-# misc
+# environment variables
 *.env
+!travis.env
+
+# misc
 /coverage
 .DS_Store
 lerna-debug.log
