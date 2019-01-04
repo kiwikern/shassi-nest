@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { TelegramUserIdEntity } from './telegram-user-id.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -10,6 +10,9 @@ export class TelegramUserIdService {
   }
 
   async saveTelegramId(userId: ObjectID, telegramId: string): Promise<TelegramUserIdEntity> {
+    if (!userId || !telegramId) {
+      throw new BadRequestException('Has to provide userId and telegramId.');
+    }
     const newTelegramId = this.telegramUserIdRepository.create();
     Object.assign(newTelegramId, { userId, telegramId });
     return await this.telegramUserIdRepository.save(newTelegramId);
