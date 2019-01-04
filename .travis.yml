@@ -13,9 +13,11 @@ jobs:
       name: "Lint"
     - script: npm run test:e2e
       name: "Integration Tests"
-      before_script: mongo shassi --eval 'db.createUser({user:"admin", pwd:"admin", roles:["readWrite"]});'
-    - script: sonar-scanner
-      name: "Sonarcloud"
+      before_script: mongo shassi_ci --eval 'db.createUser({user:"admin", pwd:"admin", roles:["readWrite"]});'
+    - stage: "Sonarcloud"
+      script:
+        - npm run test:cov
+        - sonar-scanner
       addons:
         sonarcloud:
           organization: "kiwikern-github"
