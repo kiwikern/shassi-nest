@@ -4,15 +4,17 @@ services:
   - mongodb
 env:
   - NODE_ENV=travis
-
-before_script:
-  - mongo shassi --eval 'db.createUser({user:"admin", pwd:"admin", roles:["readWrite"]});'
-script:
-  - jest --coverage --coverageReporters=text-lcov | coveralls
-  - npm run lint
-  - npm run test:e2e
-  - sonar-scanner
 addons:
   sonarcloud:
     organization: "kiwikern-github"
     token: $SONAR_TOKEN
+before_script:
+  - mongo shassi --eval 'db.createUser({user:"admin", pwd:"admin", roles:["readWrite"]});'
+jobs:
+  include:
+    - stage: test
+    script: jest --coverage --coverageReporters=text-lcov | coveralls
+    - script: npm run lint
+    - script: npm run test:e2e
+    - script: sonar-scanner
+
