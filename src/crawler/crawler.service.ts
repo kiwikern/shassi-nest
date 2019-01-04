@@ -38,6 +38,11 @@ export class CrawlerService {
 
   private async getCrawler(url: string): Promise<Crawler> {
     let crawler: Crawler;
+    url = url.replace('http', 'https');
+    if (!url.startsWith('https')) {
+      url = 'https://' + url;
+    }
+
     if (url.includes('hm.com')) {
       crawler = this.hmCrawler;
     } else if (url.includes('asos.')) {
