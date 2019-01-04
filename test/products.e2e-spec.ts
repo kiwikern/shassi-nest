@@ -8,6 +8,7 @@ import { AuthService } from '../src/auth/auth.service';
 import { CreateProductDto } from '../src/products/dtos/create-product.dto';
 
 describe('ProductsController (e2e)', () => {
+  jest.setTimeout(10_000);
   const testCases = [
     {
       url: 'https://www.hm.com/de/product/08723?article=08723-J',
