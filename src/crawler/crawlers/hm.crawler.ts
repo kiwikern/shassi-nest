@@ -7,6 +7,7 @@ import { JSDOM } from 'jsdom';
 export class HmCrawler implements Crawler {
   url: string;
   document: Document;
+  apiData;
   logger: Logger = new Logger(HmCrawler.name);
 
   constructor(private httpService: HttpService) {
@@ -19,17 +20,35 @@ export class HmCrawler implements Crawler {
       'Cookie': 'HMCORP_locale=de_DE;HMCORP_currency=EUR;',
     };
     const response = await this.httpService.get(this.url, { headers }).toPromise();
+    if (response.data && response.data.pdp) {
+      this.logger.log('Using API data.');
+      this.apiData = response.data.pdp;
+      return;
+    }
     this.document = new JSDOM(response.data).window.document;
   }
 
   getName(): string {
+    if (this.apiData) {
+      return this.apiData.product.name;
+    }
     return this.document.getElementsByTagName('h1')[0]
       .childNodes[0]
       .nodeValue
       .trim();
   }
 
-  getPrice(): number {
+  getPrice(sizeId?: string): number {
+    if (this.apiData) {
+      if (sizeId) {
+        return parseFloat(Object.keys(this.apiData.currentArticle.variants)
+          .map(key => this.apiData.currentArticle.variants[key])
+          .find(variant => 'option-variant-' + variant.variantCode === sizeId)
+          .price.priceWithoutCurrency);
+      } else {
+        return parseFloat(this.apiData.price.priceWithoutCurrency);
+      }
+    }
     const priceSpan = this.document.getElementById('text-price');
     const children = priceSpan.children;
     let priceText;
@@ -40,6 +59,12 @@ export class HmCrawler implements Crawler {
   }
 
   getSizes(): ProductSizeAvailability[] {
+    if (this.apiData) {
+      return Object.keys(this.apiData.currentArticle.variants)
+        .map(key => this.apiData.currentArticle.variants[key])
+        .map(variant => ({id: 'option-variant-' + variant.variantCode,
+        name: variant.size.name, isAvailable: variant.availableForPurchase}));
+    }
     const variants = this.document.getElementById('options-variants');
     if (!variants) {
       const sizeSpan = this.document.getElementById('text-selected-variant');
@@ -62,12 +87,17 @@ export class HmCrawler implements Crawler {
   }
 
   isInCatalog(): boolean {
-    return !this.document.getElementById('errorMessage');
+    return this.apiData || !this.document.getElementById('errorMessage');
   }
 
   isSizeAvailable(id?: string): boolean {
     if (id === 'ONESIZE') {
       return true;
+    }
+
+    if (this.apiData) {
+      const sizes = this.getSizes();
+      return sizes.find(s => s.id === id).isAvailable
     }
 
     const sizeEl = this.document.getElementById(id);
