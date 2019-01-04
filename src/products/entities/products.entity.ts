@@ -47,36 +47,41 @@ export class ProductEntity {
   @Expose({ name: 'price' })
   // TODO: Expose correct property
   @ApiModelProperty()
-  getPrice(): number {
+  get price(): number {
     const latestUpdate = this.getLatestUpdate();
     return latestUpdate ? latestUpdate.price : null;
   }
 
   @Expose({ name: 'isAvailable' })
-  isAvailable(): boolean {
+  @ApiModelProperty()
+  get isAvailable(): boolean {
     const latestUpdate = this.getLatestUpdate();
     return latestUpdate ? latestUpdate.isAvailable : false;
   }
 
   @Expose({ name: 'createdAt' })
-  getCreationDate(): Date {
+  @ApiModelProperty()
+  get createdAt(): Date {
     return this._id.getTimestamp();
   }
 
   @Expose({ name: 'updatedAt' })
-  getUpdateDate(): Date {
+  @ApiModelProperty()
+  get updatedAt(): Date {
     const latestUpdate = this.getLatestUpdate();
     // TODO: Create date manually
-    return latestUpdate ? latestUpdate.createdAt : this.getCreationDate();
+    return latestUpdate ? latestUpdate.createdAt : this.createdAt;
   }
 
   @Expose({ name: 'sizeName' })
-  getSizeName() {
+  @ApiModelProperty()
+  get sizeName(): string {
     return this.size ? this.size.name : '';
   }
 
   @Expose({name: 'store'})
-  getStoreName() {
+  @ApiModelProperty({enum: ['H&M', 'ASOS', 'Weekday', 'ABOUT YOU', 'COS', 'Amazon']})
+  get store(): string {
     if (this.url.includes('hm.com')) {
       return 'H&M';
     } else if (this.url.includes('asos')) {

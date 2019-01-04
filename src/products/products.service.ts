@@ -75,8 +75,8 @@ export class ProductsService {
 
   private async updateProduct(product: ProductEntity) {
     const latestUpdate = await this.crawlerService.getUpdateData(product.url, product.size.id);
-    const hasPriceChanged = product.getPrice() !== latestUpdate.price;
-    const hasAvailabilityChanged = product.isAvailable() !== latestUpdate.isAvailable;
+    const hasPriceChanged = product.price !== latestUpdate.price;
+    const hasAvailabilityChanged = product.isAvailable !== latestUpdate.isAvailable;
     const hasChange = hasPriceChanged || hasAvailabilityChanged;
     if (hasChange) {
       product.updates.push(latestUpdate);
