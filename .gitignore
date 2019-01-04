@@ -23,3 +23,4 @@ yarn-error.log
 /**/npm-debug.log
 /packages/**/.npmignore
 /packages/**/LICENSE
+test-report.xml
