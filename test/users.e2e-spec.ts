@@ -19,6 +19,12 @@ describe('UsersController (e2e)', () => {
     await getConnection().synchronize(true);
   });
 
+  afterAll(async () => {
+    if (app) {
+      await app.close();
+    }
+  });
+
   it('should reject login', () => {
     return request(app.getHttpServer())
       .post('/auth/login')

@@ -48,6 +48,12 @@ describe('ProductsController (e2e)', () => {
     await createLogin();
   });
 
+  afterAll(async () => {
+    if (app) {
+      await app.close();
+    }
+  });
+
   testCases.forEach(({ name, expectedPrice, url }) => {
     describe(name, () => {
       it(`should init a product and then create it.`, async () => {
