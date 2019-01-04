@@ -31,8 +31,8 @@ describe('TelegramTokenService', () => {
     service = module.get<TelegramTokenService>(TelegramTokenService);
   });
 
-  it('should create the index', async () => {
-    await service.onModuleInit();
+  it('should create the index', () => {
+    service.onModuleInit();
     expect(entityManagerMock.createCollectionIndex).toHaveBeenCalled();
   });
 
