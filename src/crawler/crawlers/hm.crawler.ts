@@ -41,12 +41,16 @@ export class HmCrawler implements Crawler {
   getPrice(sizeId?: string): number {
     if (this.apiData) {
       if (sizeId) {
-        return parseFloat(Object.keys(this.apiData.currentArticle.variants)
+        const foundSize = Object.keys(this.apiData.currentArticle.variants)
           .map(key => this.apiData.currentArticle.variants[key])
-          .find(variant => 'option-variant-' + variant.variantCode === sizeId)
-          .price.priceWithoutCurrency);
+          .find(variant => 'option-variant-' + variant.variantCode === sizeId);
+        if (foundSize) {
+          return parseFloat(foundSize.price.priceWithoutCurrency);
+        } else {
+          return parseFloat(this.apiData.currentArticle.price.priceWithoutCurrency);
+        }
       } else {
-        return parseFloat(this.apiData.price.priceWithoutCurrency);
+        return parseFloat(this.apiData.currentArticle.price.priceWithoutCurrency);
       }
     }
     const priceSpan = this.document.getElementById('text-price');
@@ -87,7 +91,7 @@ export class HmCrawler implements Crawler {
   }
 
   isInCatalog(): boolean {
-    return this.apiData || !this.document.getElementById('errorMessage');
+    return !!this.apiData || !this.document.getElementById('errorMessage');
   }
 
   isSizeAvailable(id?: string): boolean {
@@ -97,7 +101,8 @@ export class HmCrawler implements Crawler {
 
     if (this.apiData) {
       const sizes = this.getSizes();
-      return sizes.find(s => s.id === id).isAvailable
+      const foundSize = sizes.find(s => s.id === id);
+      return !!foundSize && foundSize.isAvailable;
     }
 
     const sizeEl = this.document.getElementById(id);

@@ -82,22 +82,22 @@ describe('ProductsService', () => {
         url: 'hasUpdate',
         updates: [],
         size: { id: '' },
-        getPrice: () => 90,
-        isAvailable: () => true,
+        price: 90,
+        isAvailable: true,
       };
       const productMockWithAvailabilityUpdate = {
         url: 'hasUpdate',
         updates: [],
         size: { id: '' },
-        getPrice: () => 100,
-        isAvailable: () => false,
+        price: 100,
+        isAvailable: false,
       };
       const productMockWithoutUpdate = {
         url: 'hasNoUpdate',
         updates: [],
         size: { id: '' },
-        getPrice: () => 100,
-        isAvailable: () => true,
+        price: 100,
+        isAvailable: true,
       };
       repositoryMock.find.mockReturnValue([
         productMockWithoutUpdate,
