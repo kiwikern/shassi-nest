@@ -33,23 +33,27 @@ export class TelegramService implements OnModuleInit {
   }
 
   async notifyAboutUpdate(update) {
-    const product = update.product;
+    const telegramId = await this.telegramIdService.findTelegramId(update.product.userId);
+    if (!telegramId) {
+      throw new Error('User has telegram notification activated, but no account is linked.');
+    }
+
+    const text = this.getMarkdownUpdateText(update);
+    this.telegraf.telegram.sendMessage(telegramId, text, { parse_mode: 'Markdown' } as any);
+  }
+
+  getMarkdownUpdateText(update) {
     const priceDelta = (update.new.price - update.old.price);
     let updateText;
-    if (priceDelta < 0) {
-      updateText = `is now at ${update.new.price}€ (${priceDelta.toFixed(2)}€)`;
-    } else if (priceDelta > 0) {
-      updateText = `is now at ${update.new.price}€ (+${priceDelta.toFixed(2)}€)`;
+    const prefix = priceDelta > 0 ? '+' : '';
+    if (priceDelta !== 0) {
+      updateText = `is now at ${update.new.price}€ (${prefix}${priceDelta.toFixed(2)}€)`;
     } else {
       updateText = `is available again`;
     }
-    const telegramId = await this.telegramIdService.findTelegramId(product.userId);
-    if (!telegramId) {
-      throw new Error('User has telegram notification activated, but no account linked.');
-    }
+    const product = update.product;
     const url = `[${product.name}](${this.configService.frontendDomain}/products/${product._id})`;
-    const text = `Your product ${url} ${updateText}.`;
-    this.telegraf.telegram.sendMessage(telegramId, text, { parse_mode: 'Markdown' } as any);
+    return `Your product ${url} ${updateText}.`;
   }
 
   private handleErrors(err) {
