@@ -8,16 +8,16 @@ import { ConfigService } from '../config/config.service';
 
 describe('TelegramService', () => {
   let service: TelegramService;
-  
+
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         TelegramService,
-        {provide: ProductsService, useValue: null},
-        {provide: Telegraf, useValue: null},
-        {provide: TelegramTokenService, useValue: null},
-        {provide: TelegramUserIdService, useValue: null},
-        {provide: ConfigService, useValue: null},
+        { provide: ProductsService, useValue: null },
+        { provide: Telegraf, useValue: null },
+        { provide: TelegramTokenService, useValue: null },
+        { provide: TelegramUserIdService, useValue: null },
+        { provide: ConfigService, useValue: null },
       ],
     }).compile();
     service = module.get<TelegramService>(TelegramService);

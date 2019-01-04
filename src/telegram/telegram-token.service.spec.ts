@@ -6,13 +6,13 @@ import { getRepositoryToken, getEntityManagerToken } from '@nestjs/typeorm';
 
 describe('TelegramTokenService', () => {
   let service: TelegramTokenService;
-  
+
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         TelegramTokenService,
-        {provide: getEntityManagerToken(), useValue: null},
-        {provide: getRepositoryToken(TelegramTokenEntity), useValue: null},
+        { provide: getEntityManagerToken(), useValue: null },
+        { provide: getRepositoryToken(TelegramTokenEntity), useValue: null },
       ],
     }).compile();
     service = module.get<TelegramTokenService>(TelegramTokenService);
