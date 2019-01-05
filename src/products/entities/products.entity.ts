@@ -1,5 +1,5 @@
 import { Column, Entity, Index, ObjectIdColumn } from 'typeorm';
-import { Exclude, Expose, Transform } from 'class-transformer';
+import { Exclude, Expose, Transform, Type } from 'class-transformer';
 import { ProductSize } from './product-size.entity';
 import { ProductUpdate } from './product-update.entity';
 import { ObjectID } from 'mongodb';
@@ -10,6 +10,7 @@ import { ApiModelProperty } from '@nestjs/swagger';
 export class ProductEntity {
   @ObjectIdColumn()
   @Transform((value) => value.toString(), { toPlainOnly: true })
+  @Transform((value) => typeof value === 'string' ? new ObjectID(value) : value, { toClassOnly: true })
   @ApiModelProperty()
     // tslint:disable-next-line:variable-name
   _id: ObjectID;
@@ -28,8 +29,9 @@ export class ProductEntity {
   @ApiModelProperty()
   userId: ObjectID;
 
-  @Exclude()
-  @Column(type => ProductSize)
+  @Exclude({toPlainOnly: true})
+  @Column(() => ProductSize)
+  @Type(() => ProductSize)
   size: ProductSize;
 
   @Column({ type: 'boolean', default: true })
@@ -40,7 +42,7 @@ export class ProductEntity {
   @ApiModelProperty()
   hasUnreadUpdate: boolean;
 
-  @Column(type => ProductUpdate)
+  @Column(() => ProductUpdate)
   @ApiModelProperty()
   updates: ProductUpdate[];
 
@@ -79,8 +81,8 @@ export class ProductEntity {
     return this.size ? this.size.name : '';
   }
 
-  @Expose({name: 'store'})
-  @ApiModelProperty({enum: ['H&M', 'ASOS', 'Weekday', 'ABOUT YOU', 'COS', 'Amazon']})
+  @Expose({ name: 'store' })
+  @ApiModelProperty({ enum: ['H&M', 'ASOS', 'Weekday', 'ABOUT YOU', 'COS', 'Amazon'] })
   get store(): string {
     if (this.url.includes('hm.com')) {
       return 'H&M';
