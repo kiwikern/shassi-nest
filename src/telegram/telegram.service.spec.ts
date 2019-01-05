@@ -7,17 +7,14 @@ import { TelegramUserIdService } from './telegram-user-id.service';
 import { ConfigService } from '../config/config.service';
 import { BadRequestException, ConflictException, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { CronJobService } from './cron-job.service';
-
-type Mockify<T> = {
-  [P in keyof T]: jest.Mock<{}>;
-};
+import { MockType } from '../../test/mock.type';
 
 describe('TelegramService', () => {
   let service: TelegramService;
-  let productsService: Mockify<ProductsService>;
-  let telegramUserIdService: Mockify<TelegramUserIdService>;
-  let tokenService: Mockify<TelegramTokenService>;
-  let telegraf: Mockify<Telegraf<any>>;
+  let productsService: MockType<ProductsService>;
+  let telegramUserIdService: MockType<TelegramUserIdService>;
+  let tokenService: MockType<TelegramTokenService>;
+  let telegraf: MockType<Telegraf<any>>;
 
   beforeEach(async () => {
     const configService: Partial<ConfigService> = { frontendDomain: 'domain' };
@@ -87,7 +84,7 @@ describe('TelegramService', () => {
       { name: '2', id: 's2', isAvailable: false },
     ];
 
-    const ctx: Mockify<ContextMessageUpdate> = jest.fn(() => ({
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
       session: { productData: { set: jest.fn() }, userId: '' },
       match: ['full-match', 'url'],
       message: { message_id: 'id' },
@@ -106,7 +103,7 @@ describe('TelegramService', () => {
       { name: '1', id: 's1', isAvailable: true },
     ];
 
-    const ctx: Mockify<ContextMessageUpdate> = jest.fn(() => ({
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
       session: { productData: { set: jest.fn() }, userId: 'userId' },
       match: ['full-match', 'url'],
       reply: jest.fn(),
@@ -120,7 +117,7 @@ describe('TelegramService', () => {
   });
 
   it('should handle rejection when product already added', async () => {
-    const ctx: Mockify<ContextMessageUpdate> = jest.fn(() => ({
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
       session: { productData: { set: jest.fn() }, userId: '' },
       match: ['full-match', 'url'],
       reply: jest.fn(),
@@ -134,7 +131,7 @@ describe('TelegramService', () => {
   });
 
   it('should handle rejection on unknown store', async () => {
-    const ctx: Mockify<ContextMessageUpdate> = jest.fn(() => ({
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
       session: { productData: { set: jest.fn() }, userId: '' },
       match: ['full-match', 'url'],
       reply: jest.fn(),
@@ -147,7 +144,7 @@ describe('TelegramService', () => {
   });
 
   it('should handle rejection on invalid url', async () => {
-    const ctx: Mockify<ContextMessageUpdate> = jest.fn(() => ({
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
       session: { productData: { set: jest.fn() }, userId: '' },
       match: ['full-match', 'url'],
       reply: jest.fn(),
@@ -160,7 +157,7 @@ describe('TelegramService', () => {
   });
 
   it('should handle rejection on internal error', async () => {
-    const ctx: Mockify<ContextMessageUpdate> = jest.fn(() => ({
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
       session: { productData: { set: jest.fn() }, userId: '' },
       match: ['full-match', 'url'],
       reply: jest.fn(),
@@ -173,7 +170,7 @@ describe('TelegramService', () => {
   });
 
   it('should update the product when a size was chosen', async () => {
-    const ctx: Mockify<ContextMessageUpdate> = jest.fn(() => ({
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
       session: { productData: { get: jest.fn(), delete: jest.fn() }, userId: 'userId' },
       match: ['sizeName|-|sizeId|-|productSessionId'],
       reply: jest.fn(),
@@ -196,7 +193,7 @@ describe('TelegramService', () => {
   });
 
   it('should handle when init data in session has been deleted.', async () => {
-    const ctx: Mockify<ContextMessageUpdate> = jest.fn(() => ({
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
       session: { productData: { get: jest.fn(), delete: jest.fn() }, userId: 'userId' },
       match: ['sizeName|-|sizeId|-|productSessionId'],
       reply: jest.fn(),
@@ -215,7 +212,7 @@ describe('TelegramService', () => {
   });
 
   it('should handle errors.', async () => {
-    const ctx: Mockify<ContextMessageUpdate> = jest.fn(() => ({
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
       session: { productData: { get: jest.fn(), delete: jest.fn() }, userId: 'userId' },
       match: ['sizeName|-|sizeId|-|productSessionId'],
       reply: jest.fn(),
@@ -251,7 +248,7 @@ describe('TelegramService', () => {
   });
 
   it('should return the userId if already in session', async () => {
-    const ctx: Mockify<ContextMessageUpdate> = jest.fn(() => ({
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
       session: { userId: 'userId' },
     }))();
     const next = () => 'next was called';
@@ -259,7 +256,7 @@ describe('TelegramService', () => {
   });
 
   it('should initialize a new session when userId is found', async () => {
-    const ctx: Mockify<ContextMessageUpdate> = jest.fn(() => ({
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
       session: {},
       from: { id: 'telegramId' },
     }))();
@@ -271,7 +268,7 @@ describe('TelegramService', () => {
   });
 
   it('should notify the user that authorization is needed', async () => {
-    const ctx: Mockify<ContextMessageUpdate> = jest.fn(() => ({
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
       session: {},
       from: { id: 'telegramId' },
       message: { text: 'any text' },
@@ -288,7 +285,7 @@ describe('TelegramService', () => {
   });
 
   it('should not do anything when /start is running', async () => {
-    const ctx: Mockify<ContextMessageUpdate> = jest.fn(() => ({
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
       session: {},
       from: { id: 'telegramId' },
       message: { text: '/start' },
@@ -326,7 +323,7 @@ describe('TelegramService', () => {
   });
 
   it('should link telegram account if token is valid', async () => {
-    const ctx: Mockify<ContextMessageUpdate> = jest.fn(() => ({
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
       session: {},
       from: { id: 'telegramId' },
       message: { text: '/start userId---token' },
@@ -343,7 +340,7 @@ describe('TelegramService', () => {
   });
 
   it('should not link telegram account if already in use', async () => {
-    const ctx: Mockify<ContextMessageUpdate> = jest.fn(() => ({
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
       session: {},
       from: { id: 'telegramId' },
       message: { text: '/start userId---token' },
@@ -362,7 +359,7 @@ describe('TelegramService', () => {
   });
 
   it('should not link telegram if token invalid', async () => {
-    const ctx: Mockify<ContextMessageUpdate> = jest.fn(() => ({
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
       session: {},
       from: { id: 'telegramId' },
       message: { text: '/start userId---token' },
@@ -379,7 +376,7 @@ describe('TelegramService', () => {
   });
 
   it('should not link telegram if token format invalid', async () => {
-    const ctx: Mockify<ContextMessageUpdate> = jest.fn(() => ({
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
       session: {},
       from: { id: 'telegramId' },
       message: { text: '/start othertext' },

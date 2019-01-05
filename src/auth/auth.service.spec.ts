@@ -3,64 +3,69 @@ import { AuthService } from './auth.service';
 import { UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
-import { ObjectId } from 'mongodb';
-
-class UserServiceMock {
-  async findOneByUsername(username) {
-    if (username === 'accept') {
-      return {
-        _id: ObjectId.createFromTime(Date.now()),
-        password: '$2b$10$NsNNUH7JZNnNvW/pQCpXf.iFO41cMVBrGYpb9IpOWjlh.N8pFhCL2',
-      };
-    } else {
-      return null;
-    }
-  }
-}
+import { ObjectID } from 'mongodb';
+import { BcryptService } from './bcrypt.service';
+import { MockType } from '../../test/mock.type';
 
 describe('AuthService', () => {
   let service: AuthService;
+  const bcryptService: MockType<BcryptService> = jest.fn(() => ({
+    checkEncryptedData: jest.fn(),
+  }))();
+  const userService: MockType<UsersService> = jest.fn(() => ({
+    findOneByUsername: jest.fn(),
+  }))();
   const jwtServiceMock: JwtService | any = { sign: () => 'token' };
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         AuthService,
-        {
-          provide: UsersService,
-          useClass: UserServiceMock,
-        },
-        {
-          provide: JwtService,
-          useValue: jwtServiceMock,
-        },
+        { provide: UsersService, useValue: userService },
+        { provide: JwtService, useValue: jwtServiceMock },
+        { provide: BcryptService, useValue: bcryptService },
       ],
     }).compile();
     service = module.get<AuthService>(AuthService);
   });
 
   it('should reject login if user not found', async () => {
+    bcryptService.checkEncryptedData.mockReturnValue(false);
+    userService.findOneByUsername.mockReturnValue(null);
     try {
-      await service.login({ username: '', password: '' });
+      await service.login({ username: 'user', password: '' });
+      fail('Should not allow login');
     } catch (e) {
       expect(e).toBeInstanceOf(UnauthorizedException);
-      return;
     }
-    fail('Should not allow login');
+    expect(userService.findOneByUsername).toBeCalledWith('user');
   });
 
   it('should reject login if password is wrong', async () => {
+    bcryptService.checkEncryptedData.mockReturnValue(false);
+    userService.findOneByUsername.mockReturnValue({ username: 'user', password: 'encrypted' });
     try {
-      await service.login({ username: 'accept', password: '' });
+      await service.login({ username: 'user', password: 'password' });
+      fail('Should not allow login');
     } catch (e) {
       expect(e).toBeInstanceOf(UnauthorizedException);
-      return;
     }
-    fail('Should not allow login');
+    expect(userService.findOneByUsername).toBeCalledWith('user');
+    expect(bcryptService.checkEncryptedData).toBeCalledWith('password', 'encrypted');
   });
 
   it('should accept login on correct credentials', async () => {
-    const token = await service.login({ username: 'accept', password: '123456' });
+    bcryptService.checkEncryptedData.mockReturnValue(true);
+    userService.findOneByUsername.mockReturnValue(
+      { _id: ObjectID.createFromTime(0), username: 'user', password: 'encrypted' });
+    const token = await service.login({ username: 'user', password: 'password' });
     expect(token).toEqual('token');
+    expect(userService.findOneByUsername).toBeCalledWith('user');
+    expect(bcryptService.checkEncryptedData).toBeCalledWith('password', 'encrypted');
+  });
+
+  it('should validate user', async () => {
+    userService.findOneByUsername.mockReturnValue('user');
+    expect(await service.validateUser({ username: 'user', userId: 'id' })).toBe('user');
   });
 });
