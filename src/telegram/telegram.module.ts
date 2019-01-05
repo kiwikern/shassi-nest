@@ -8,8 +8,8 @@ import { TelegramUserIdService } from './telegram-user-id.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TelegramTokenEntity } from './telegram-token.entity';
 import { TelegramUserIdEntity } from './telegram-user-id.entity';
-import { CronJobService } from './cron-job.service';
 import Telegraf from 'telegraf';
+import { CommonModule } from '../common/common.module';
 
 @Module({
   providers: [
@@ -23,9 +23,9 @@ import Telegraf from 'telegraf';
       inject: [ConfigService],
     },
     TelegramUserIdService,
-    CronJobService,
   ],
   imports: [
+    CommonModule,
     ConfigModule,
     ProductsModule,
     TypeOrmModule.forFeature([TelegramTokenEntity, TelegramUserIdEntity]),

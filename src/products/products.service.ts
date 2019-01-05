@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, Logger, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { CreateProductDto } from './dtos/create-product.dto';
 import { ProductEntity } from './entities/products.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -6,16 +6,26 @@ import { Repository } from 'typeorm';
 import { CrawlerService } from '../crawler/crawler.service';
 import { ObjectID } from 'mongodb';
 import { ProductSizeAvailability } from '../crawler/product-size.interface';
+import { CronJobService } from '../common/cron-job.service';
 
 @Injectable()
-export class ProductsService {
+export class ProductsService  implements OnModuleInit  {
 
   private readonly logger: Logger = new Logger(ProductsService.name);
 
   constructor(
     @InjectRepository(ProductEntity) private readonly productRepository: Repository<ProductEntity>,
     private readonly crawlerService: CrawlerService,
+    private readonly cronJobService: CronJobService,
   ) {
+  }
+
+  onModuleInit() {
+    const job = this.cronJobService.create('00 00 8,14,18 * * *',
+      () => this.updateAllProducts());
+    job.start();
+    this.logger.log('Product CronJob started, next execution: ' + new Date(job.nextDates()).toString())
+    ;
   }
 
   /**

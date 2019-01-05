@@ -6,7 +6,7 @@ import { TelegramTokenService } from './telegram-token.service';
 import { TelegramUserIdService } from './telegram-user-id.service';
 import { ConfigService } from '../config/config.service';
 import { BadRequestException, ConflictException, InternalServerErrorException, NotFoundException } from '@nestjs/common';
-import { CronJobService } from './cron-job.service';
+import { CronJobService } from '../common/cron-job.service';
 import { MockType } from '../../test/mock.type';
 
 describe('TelegramService', () => {

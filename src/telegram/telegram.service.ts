@@ -7,7 +7,7 @@ import { TelegramTokenService } from './telegram-token.service';
 import { TelegramUserIdService } from './telegram-user-id.service';
 import { CronJob } from 'cron';
 import { InitializeProductDto } from '../products/dtos/initialize-product.dto';
-import { CronJobService } from './cron-job.service';
+import { CronJobService } from '../common/cron-job.service';
 
 @Injectable()
 export class TelegramService implements OnModuleInit {

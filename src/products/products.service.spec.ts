@@ -5,13 +5,17 @@ import { CrawlerService } from '../crawler/crawler.service';
 import { ProductEntity } from './entities/products.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { ObjectID } from 'mongodb';
-import { ConflictException, NotFoundException } from '@nestjs/common';
+import { ConflictException, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { useAsPath } from 'tslint/lib/configuration';
+import { CronJobService } from '../common/cron-job.service';
+import { MockType } from '../../test/mock.type';
+import { CronJob } from 'cron';
 
 describe('ProductsService', () => {
   let service: ProductsService;
   let repositoryMock;
   let crawlerServiceMock;
+  let cronJobService: MockType<CronJobService>;
 
   beforeEach(async () => {
     repositoryMock = new (jest.fn(() => ({
@@ -27,11 +31,19 @@ describe('ProductsService', () => {
       getUpdateData: jest.fn(),
     })))();
 
+    cronJobService = new (jest.fn(() => ({
+      create: jest.fn(() => ({
+        start: () => null,
+        nextDates: () => new Date(),
+      })),
+    })))();
+
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         ProductsService,
         { provide: getRepositoryToken(ProductEntity), useValue: repositoryMock },
         { provide: CrawlerService, useValue: crawlerServiceMock },
+        { provide: CronJobService, useValue: cronJobService },
       ],
     }).compile();
     service = module.get<ProductsService>(ProductsService);
@@ -104,11 +116,49 @@ describe('ProductsService', () => {
         productMockWithPriceUpdate,
         productMockWithAvailabilityUpdate,
       ]);
-      crawlerServiceMock.getUpdateData.mockReturnValue({price: 100, isAvailable: true});
+      crawlerServiceMock.getUpdateData.mockReturnValue({ price: 100, isAvailable: true });
       const updatedProducts = await service.updateAllProducts();
       expect(updatedProducts.length).toBe(2);
-      expect(updatedProducts[0]).toMatchObject({updates: [{price: 100, isAvailable: true}]});
-      expect(updatedProducts[1]).toMatchObject({updates: [{price: 100, isAvailable: true}]});
+      expect(updatedProducts[0]).toMatchObject({ updates: [{ price: 100, isAvailable: true }] });
+      expect(updatedProducts[1]).toMatchObject({ updates: [{ price: 100, isAvailable: true }] });
+    });
+
+    it('should continue if one update fails', async () => {
+      const productMockWithPriceUpdate = {
+        url: 'hasUpdate',
+        updates: [],
+        size: { id: '' },
+        price: 90,
+        isAvailable: true,
+      };
+      const productMockWithAvailabilityUpdate = {
+        url: 'error',
+        updates: [],
+        size: { id: '' },
+        price: 100,
+        isAvailable: false,
+      };
+      const productMockWithoutUpdate = {
+        url: 'hasNoUpdate',
+        updates: [],
+        size: { id: '' },
+        price: 100,
+        isAvailable: true,
+      };
+      repositoryMock.find.mockReturnValue([
+        productMockWithoutUpdate,
+        productMockWithPriceUpdate,
+        productMockWithAvailabilityUpdate,
+      ]);
+      crawlerServiceMock.getUpdateData.mockImplementation(url => {
+        if (url === 'error') {
+          throw new InternalServerErrorException();
+        }
+        return { price: 100, isAvailable: true };
+      });
+      const updatedProducts = await service.updateAllProducts();
+      expect(updatedProducts.length).toBe(1);
+      expect(updatedProducts[0]).toMatchObject({ updates: [{ price: 100, isAvailable: true }] });
     });
 
   });
@@ -143,4 +193,10 @@ describe('ProductsService', () => {
       expect(e).toBeInstanceOf(NotFoundException);
     }
   });
+
+  it('should setup the cronjob', async () => {
+    service.onModuleInit();
+    expect(cronJobService.create).toHaveBeenCalled();
+  });
+
 });
