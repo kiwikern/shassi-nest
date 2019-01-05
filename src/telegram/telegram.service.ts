@@ -1,11 +1,10 @@
 import { ConflictException, Inject, Injectable, Logger, NotFoundException, OnModuleInit } from '@nestjs/common';
-import Telegraf, { Markup } from 'telegraf';
+import Telegraf, { ContextMessageUpdate, Markup } from 'telegraf';
 import * as session from 'telegraf/session';
 import { ProductsService } from '../products/products.service';
 import { ConfigService } from '../config/config.service';
 import { TelegramTokenService } from './telegram-token.service';
 import { TelegramUserIdService } from './telegram-user-id.service';
-import { CronJob } from 'cron';
 import { InitializeProductDto } from '../products/dtos/initialize-product.dto';
 import { CronJobService } from '../common/cron-job.service';
 
@@ -83,17 +82,7 @@ export class TelegramService implements OnModuleInit {
         ctx.reply(`Product ${newProduct.name} for ${newProduct.price.toFixed(2)}€ at store ${newProduct.store} was added.`);
       }
     } catch (err) {
-      this.logger.log('Could not add product: ' + err.message);
-      if (err instanceof ConflictException) {
-        ctx.reply('Product has already been added.');
-      } else if (JSON.stringify(err).includes('Unknown store')) {
-        ctx.reply('Invalid URL. Is store supported?');
-      } else if (err instanceof NotFoundException) {
-        ctx.reply('Product does not exist. Check URL.');
-      } else {
-        ctx.reply('Internal error. Could not add product.');
-        this.logger.error(err.message, err.stack);
-      }
+      this.handleProductAddErrors(err, ctx);
     }
   }
 
@@ -115,16 +104,20 @@ export class TelegramService implements OnModuleInit {
       ctx.reply(`Your product ${p.name} for ${p.price.toFixed(2)}€ at store ${p.store} with size ${size.name} was added successfully.`,
         { reply_to_message_id: ctx.callbackQuery.message.reply_to_message.message_id });
     } catch (err) {
-      this.logger.log('Could not add product: ' + err.message);
-      if (err instanceof ConflictException) {
-        ctx.reply('Product has already been added.');
-      } else if (JSON.stringify(err).includes('Unknown store')) {
-        ctx.reply('Invalid URL. Is store supported?');
-      } else if (err instanceof NotFoundException) {
-        ctx.reply('Product does not exist. Check URL.');
-      } else {
-        ctx.reply('Internal error. Could not add product.');
-      }
+      this.handleProductAddErrors(err, ctx);
+    }
+  }
+
+  private handleProductAddErrors(err, ctx: ContextMessageUpdate) {
+    this.logger.log('Could not add product: ' + err.message);
+    if (err instanceof ConflictException) {
+      ctx.reply('Product has already been added.');
+    } else if (JSON.stringify(err).includes('Unknown store')) {
+      ctx.reply('Invalid URL. Is store supported?');
+    } else if (err instanceof NotFoundException) {
+      ctx.reply('Product does not exist. Check URL.');
+    } else {
+      ctx.reply('Internal error. Could not add product.');
     }
   }
 
