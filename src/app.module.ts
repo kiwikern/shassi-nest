@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { CrawlerModule } from './crawler/crawler.module';
 import { TelegramModule } from './telegram/telegram.module';
 import { CommonModule } from './common/common.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { CommonModule } from './common/common.module';
     CrawlerModule,
     TelegramModule,
     CommonModule,
+    NotificationsModule,
   ],
 })
 export class AppModule {

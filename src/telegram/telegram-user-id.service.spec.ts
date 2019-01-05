@@ -13,7 +13,7 @@ describe('TelegramUserIdService', () => {
     repositoryMock = new (jest.fn(() => ({
       find: jest.fn(),
       findOne: jest.fn(),
-      create: jest.fn(() => ({})),
+      create: jest.fn(entity => entity),
       save: jest.fn(entity => entity),
       delete: jest.fn(() => Promise.resolve()),
     })))();

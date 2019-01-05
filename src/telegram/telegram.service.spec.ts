@@ -60,24 +60,6 @@ describe('TelegramService', () => {
     service = module.get<TelegramService>(TelegramService);
   });
 
-  it('should formulate update text for price decrease', () => {
-    const update = { new: { price: 90 }, old: { price: 100 }, product: { _id: 'id', name: 'name' } };
-    const updateText = 'Your product [name](domain/products/id) is now at 90€ (-10.00€).';
-    expect(service.getMarkdownUpdateText(update)).toBe(updateText);
-  });
-
-  it('should formulate update text for price increase', () => {
-    const update = { new: { price: 110 }, old: { price: 100 }, product: { _id: 'id', name: 'name' } };
-    const updateText = 'Your product [name](domain/products/id) is now at 110€ (+10.00€).';
-    expect(service.getMarkdownUpdateText(update)).toBe(updateText);
-  });
-
-  it('should formulate text for availability change', () => {
-    const update = { new: { price: 100 }, old: { price: 100 }, product: { _id: 'id', name: 'name' } };
-    const updateText = 'Your product [name](domain/products/id) is available again.';
-    expect(service.getMarkdownUpdateText(update)).toBe(updateText);
-  });
-
   it('should ask for the size', async () => {
     const sizes = [
       { name: '1', id: 's1', isAvailable: true },
@@ -393,18 +375,16 @@ describe('TelegramService', () => {
   });
 
   it('should notify about an update', async () => {
-    const update = { new: { price: 1 }, old: { price: 1 }, product: { userId: 'userId' } };
     telegramUserIdService.findTelegramId.mockReturnValue('telegramId');
-    await service.notifyAboutUpdate(update);
+    await service.notifyAboutUpdate('userId', 'text');
     expect(telegramUserIdService.findTelegramId).toHaveBeenCalledWith('userId');
-    expect((telegraf.telegram as any).sendMessage).toHaveBeenCalledWith('telegramId', expect.any(String), { parse_mode: 'Markdown' });
+    expect((telegraf.telegram as any).sendMessage).toHaveBeenCalledWith('telegramId', 'text', { parse_mode: 'Markdown' });
   });
 
   it('should throw when user to be notified has no linked account', async () => {
-    const update = { new: { price: 1 }, old: { price: 1 }, product: { userId: 'userId' } };
     telegramUserIdService.findTelegramId.mockReturnValue(null);
     try {
-      await service.notifyAboutUpdate(update);
+      await service.notifyAboutUpdate('userId', 'text');
       fail('Should have thrown an error.');
     } catch (e) {
       expect(e.message).toBe('User has telegram notification activated, but no account is linked.');

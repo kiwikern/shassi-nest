@@ -13,8 +13,7 @@ export class TelegramUserIdService {
     if (!userId || !telegramId) {
       throw new BadRequestException('Has to provide userId and telegramId.');
     }
-    const newTelegramId = this.telegramUserIdRepository.create();
-    Object.assign(newTelegramId, { userId, telegramId });
+    const newTelegramId = this.telegramUserIdRepository.create({ userId, telegramId });
     return await this.telegramUserIdRepository.save(newTelegramId);
   }
 

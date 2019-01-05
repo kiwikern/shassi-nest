@@ -25,8 +25,7 @@ export class TelegramTokenService implements OnModuleInit {
     } else {
       token = Math.random().toString(36).substring(2);
     }
-    const newToken = this.tokenRepository.create();
-    Object.assign(newToken, { userId, token });
+    const newToken = this.tokenRepository.create({ userId, token });
     await this.tokenRepository.save(newToken);
     return `${userId.toString()}---${token}`;
   }

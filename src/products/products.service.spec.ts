@@ -15,13 +15,12 @@ describe('ProductsService', () => {
   let service: ProductsService;
   let repositoryMock;
   let crawlerServiceMock;
-  let cronJobService: MockType<CronJobService>;
 
   beforeEach(async () => {
     repositoryMock = new (jest.fn(() => ({
       find: jest.fn(),
       findOne: jest.fn(),
-      create: jest.fn(() => ({})),
+      create: jest.fn(entity => entity),
       save: jest.fn(entity => entity),
       delete: jest.fn(() => Promise.resolve()),
     })))();
@@ -31,19 +30,11 @@ describe('ProductsService', () => {
       getUpdateData: jest.fn(),
     })))();
 
-    cronJobService = new (jest.fn(() => ({
-      create: jest.fn(() => ({
-        start: () => null,
-        nextDates: () => new Date(),
-      })),
-    })))();
-
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         ProductsService,
         { provide: getRepositoryToken(ProductEntity), useValue: repositoryMock },
         { provide: CrawlerService, useValue: crawlerServiceMock },
-        { provide: CronJobService, useValue: cronJobService },
       ],
     }).compile();
     service = module.get<ProductsService>(ProductsService);
@@ -119,8 +110,14 @@ describe('ProductsService', () => {
       crawlerServiceMock.getUpdateData.mockReturnValue({ price: 100, isAvailable: true });
       const updatedProducts = await service.updateAllProducts();
       expect(updatedProducts.length).toBe(2);
-      expect(updatedProducts[0]).toMatchObject({ updates: [{ price: 100, isAvailable: true }] });
-      expect(updatedProducts[1]).toMatchObject({ updates: [{ price: 100, isAvailable: true }] });
+      expect(updatedProducts[0]).toMatchObject({
+        productAttributeChanges: [{ attributeName: 'price', oldValue: 90, newValue: 100 }],
+        product: { updates: [{ price: 100, isAvailable: true }] },
+      });
+      expect(updatedProducts[1]).toMatchObject({
+        productAttributeChanges: [{ attributeName: 'isAvailable', oldValue: false, newValue: true }],
+        product: { updates: [{ price: 100, isAvailable: true }] },
+      });
     });
 
     it('should continue if updates fail', async () => {
@@ -161,7 +158,10 @@ describe('ProductsService', () => {
       });
       const updatedProducts = await service.updateAllProducts();
       expect(updatedProducts.length).toBe(1);
-      expect(updatedProducts[0]).toMatchObject({ updates: [{ price: 100, isAvailable: true }] });
+      expect(updatedProducts[0]).toMatchObject({
+        productAttributeChanges: [{ attributeName: 'price', oldValue: 90, newValue: 100 }],
+        product: { updates: [{ price: 100, isAvailable: true }] },
+      });
       expect(repositoryMock.save).toBeCalledWith(expect.objectContaining({ isActive: false }));
     });
 
@@ -196,11 +196,6 @@ describe('ProductsService', () => {
     } catch (e) {
       expect(e).toBeInstanceOf(NotFoundException);
     }
-  });
-
-  it('should setup the cronjob', async () => {
-    service.onModuleInit();
-    expect(cronJobService.create).toHaveBeenCalled();
   });
 
 });

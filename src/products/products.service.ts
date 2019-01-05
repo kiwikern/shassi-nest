@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, Logger, NotFoundException, OnModuleInit } from '@nestjs/common';
+import { ConflictException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateProductDto } from './dtos/create-product.dto';
 import { ProductEntity } from './entities/products.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -6,25 +6,17 @@ import { Repository } from 'typeorm';
 import { CrawlerService } from '../crawler/crawler.service';
 import { ObjectID } from 'mongodb';
 import { ProductSizeAvailability } from '../crawler/product-size.interface';
-import { CronJobService } from '../common/cron-job.service';
+import { ProductAttributeChange, ProductAvailabilityChange, ProductChange, ProductPriceChange } from './dtos/product-change.interface';
 
 @Injectable()
-export class ProductsService implements OnModuleInit {
+export class ProductsService {
 
   private readonly logger: Logger = new Logger(ProductsService.name);
 
   constructor(
     @InjectRepository(ProductEntity) private readonly productRepository: Repository<ProductEntity>,
     private readonly crawlerService: CrawlerService,
-    private readonly cronJobService: CronJobService,
   ) {
-  }
-
-  onModuleInit() {
-    const job = this.cronJobService.create('00 00 8,14,18 * * *', () => this.updateAllProducts());
-    job.start();
-    this.logger.log('Product CronJob started, next execution: ' + new Date(job.nextDates()).toString())
-    ;
   }
 
   /**
@@ -55,35 +47,43 @@ export class ProductsService implements OnModuleInit {
       throw new ConflictException('This product has already been added in the given size.');
     }
 
-    const newProduct: ProductEntity = this.productRepository.create();
-    Object.assign(newProduct, product);
+    const newProduct: ProductEntity = this.productRepository.create(product);
     newProduct.userId = userId;
     const firstUpdate = await this.crawlerService.getUpdateData(product.url, product.size.id);
     newProduct.updates = [firstUpdate];
     return this.productRepository.save(newProduct);
   }
 
-  async updateAllProducts() {
+  async updateAllProducts(): Promise<ProductChange[]> {
     const products: ProductEntity[] = await this.productRepository.find({ isActive: true });
     // TODO: Use concurrency control
     const updatedProducts = (await Promise.all(products
       .map(product => this.updateProduct(product))))
       .filter(updatedProduct => !!updatedProduct);
-    this.logger.log({ updatedProducts });
-    // TODO: Notify about updates.
     return updatedProducts;
   }
 
-  private async updateProduct(product: ProductEntity) {
+  private async updateProduct(product: ProductEntity): Promise<ProductChange | null> {
     try {
       const latestUpdate = await this.crawlerService.getUpdateData(product.url, product.size.id);
-      const hasPriceChanged = product.price !== latestUpdate.price;
-      const hasAvailabilityChanged = product.isAvailable !== latestUpdate.isAvailable;
-      const hasChange = hasPriceChanged || hasAvailabilityChanged;
-      if (hasChange) {
+      const productAttributeChanges: Array<ProductAttributeChange<boolean | number>> = [];
+      if (product.price !== latestUpdate.price) {
+        productAttributeChanges.push(new ProductPriceChange({
+          oldValue: product.price,
+          newValue: latestUpdate.price,
+        }));
+      }
+      if (product.isAvailable !== latestUpdate.isAvailable) {
+        productAttributeChanges.push(new ProductAvailabilityChange({
+          oldValue: product.isAvailable,
+          newValue: latestUpdate.isAvailable,
+        }));
+      }
+      if (productAttributeChanges.length > 0) {
         product.updates.push(latestUpdate);
         product.hasUnreadUpdate = true;
-        return await this.productRepository.save(product);
+        const updatedProduct = await this.productRepository.save(product);
+        return { product: updatedProduct, productAttributeChanges };
       }
     } catch (error) {
       if (error instanceof NotFoundException) {

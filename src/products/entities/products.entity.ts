@@ -34,7 +34,8 @@ export class ProductEntity {
   @Type(() => ProductSize)
   size: ProductSize;
 
-  @Column({ type: 'boolean', default: true })
+  // TODO: Why does default value not work?
+  @Column({ type: 'boolean', default: true})
   @ApiModelProperty()
   isActive: boolean;
 
@@ -47,7 +48,6 @@ export class ProductEntity {
   updates: ProductUpdate[];
 
   @Expose({ name: 'price' })
-  // TODO: Expose correct property
   @ApiModelProperty()
   get price(): number {
     const latestUpdate = this.getLatestUpdate();
@@ -71,7 +71,6 @@ export class ProductEntity {
   @ApiModelProperty()
   get updatedAt(): Date {
     const latestUpdate = this.getLatestUpdate();
-    // TODO: Create date manually
     return latestUpdate ? latestUpdate.createdAt : this.createdAt;
   }
 
