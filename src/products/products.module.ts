@@ -4,6 +4,7 @@ import { ProductsService } from './products.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductEntity } from './entities/products.entity';
 import { CrawlerModule } from '../crawler/crawler.module';
+import { CommonModule } from '../common/common.module';
 
 @Module({
   controllers: [ProductsController],
@@ -11,6 +12,7 @@ import { CrawlerModule } from '../crawler/crawler.module';
   imports: [
     TypeOrmModule.forFeature([ProductEntity]),
     CrawlerModule,
+    CommonModule,
   ],
   exports: [ProductsService],
 })
