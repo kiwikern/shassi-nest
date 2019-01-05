@@ -53,8 +53,8 @@ export class TelegramService implements OnModuleInit {
       updateText = `is available again`;
     }
     const product = update.product;
-    const url = `[${product.name}](${this.configService.frontendDomain}/products/${product._id})`;
-    return `Your product ${url} ${updateText}.`;
+    const nameLink = `[${product.name}](${this.configService.frontendDomain}/products/${product._id})`;
+    return `Your product ${nameLink} ${updateText}.`;
   }
 
   handleErrors(err) {
