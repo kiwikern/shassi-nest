@@ -29,6 +29,9 @@ export class CrawlerService {
 
   async getUpdateData(url: string, sizeId?: string): Promise<ProductUpdate> {
     const crawler = await this.getCrawler(url);
+    if (!crawler.isInCatalog()) {
+      throw new NotFoundException('Product does not exist.');
+    }
     return {
       price: crawler.getPrice(sizeId),
       isAvailable: crawler.isSizeAvailable(sizeId),

@@ -9,7 +9,7 @@ import { ProductSizeAvailability } from '../crawler/product-size.interface';
 import { CronJobService } from '../common/cron-job.service';
 
 @Injectable()
-export class ProductsService  implements OnModuleInit  {
+export class ProductsService implements OnModuleInit {
 
   private readonly logger: Logger = new Logger(ProductsService.name);
 
@@ -21,8 +21,7 @@ export class ProductsService  implements OnModuleInit  {
   }
 
   onModuleInit() {
-    const job = this.cronJobService.create('00 00 8,14,18 * * *',
-      () => this.updateAllProducts());
+    const job = this.cronJobService.create('00 00 8,14,18 * * *', () => this.updateAllProducts());
     job.start();
     this.logger.log('Product CronJob started, next execution: ' + new Date(job.nextDates()).toString())
     ;
@@ -65,33 +64,34 @@ export class ProductsService  implements OnModuleInit  {
   }
 
   async updateAllProducts() {
-    const products: ProductEntity[] = await this.productRepository.find();
-    // TODO: Should this be processed in parallel?
-    const updatedProducts = [];
-    for (const product of products) {
-      try {
-        const updatedProduct = await this.updateProduct(product);
-        if (updatedProduct) {
-          updatedProducts.push(updatedProduct);
-        }
-      } catch (error) {
-        this.logger.error({ message: 'Failed to update product.', error: error.toString(), product });
-      }
-    }
+    const products: ProductEntity[] = await this.productRepository.find({ isActive: true });
+    // TODO: Use concurrency control
+    const updatedProducts = (await Promise.all(products
+      .map(product => this.updateProduct(product))))
+      .filter(updatedProduct => !!updatedProduct);
     this.logger.log({ updatedProducts });
     // TODO: Notify about updates.
     return updatedProducts;
   }
 
   private async updateProduct(product: ProductEntity) {
-    const latestUpdate = await this.crawlerService.getUpdateData(product.url, product.size.id);
-    const hasPriceChanged = product.price !== latestUpdate.price;
-    const hasAvailabilityChanged = product.isAvailable !== latestUpdate.isAvailable;
-    const hasChange = hasPriceChanged || hasAvailabilityChanged;
-    if (hasChange) {
-      product.updates.push(latestUpdate);
-      product.hasUnreadUpdate = true;
-      return await this.productRepository.save(product);
+    try {
+      const latestUpdate = await this.crawlerService.getUpdateData(product.url, product.size.id);
+      const hasPriceChanged = product.price !== latestUpdate.price;
+      const hasAvailabilityChanged = product.isAvailable !== latestUpdate.isAvailable;
+      const hasChange = hasPriceChanged || hasAvailabilityChanged;
+      if (hasChange) {
+        product.updates.push(latestUpdate);
+        product.hasUnreadUpdate = true;
+        return await this.productRepository.save(product);
+      }
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        product.isActive = false;
+        await this.productRepository.save(product);
+      } else {
+        this.logger.error({ message: 'Failed to update product.', error: error.toString(), product });
+      }
     }
   }
 

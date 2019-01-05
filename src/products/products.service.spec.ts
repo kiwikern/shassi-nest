@@ -123,7 +123,7 @@ describe('ProductsService', () => {
       expect(updatedProducts[1]).toMatchObject({ updates: [{ price: 100, isAvailable: true }] });
     });
 
-    it('should continue if one update fails', async () => {
+    it('should continue if updates fail', async () => {
       const productMockWithPriceUpdate = {
         url: 'hasUpdate',
         updates: [],
@@ -139,7 +139,7 @@ describe('ProductsService', () => {
         isAvailable: false,
       };
       const productMockWithoutUpdate = {
-        url: 'hasNoUpdate',
+        url: 'notfound',
         updates: [],
         size: { id: '' },
         price: 100,
@@ -154,11 +154,15 @@ describe('ProductsService', () => {
         if (url === 'error') {
           throw new InternalServerErrorException();
         }
+        if (url === 'notfound') {
+          throw new NotFoundException();
+        }
         return { price: 100, isAvailable: true };
       });
       const updatedProducts = await service.updateAllProducts();
       expect(updatedProducts.length).toBe(1);
       expect(updatedProducts[0]).toMatchObject({ updates: [{ price: 100, isAvailable: true }] });
+      expect(repositoryMock.save).toBeCalledWith(expect.objectContaining({ isActive: false }));
     });
 
   });
