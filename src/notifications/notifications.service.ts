@@ -29,7 +29,7 @@ export class NotificationsService implements OnModuleInit {
     const changes = await this.productsService.updateAllProducts();
     const changesPerUser = new Map<string, ProductChange[]>();
     for (const change of changes) {
-      this.logger.log({message: 'Processing change:', change})
+      this.logger.log({ message: 'Processing change:', change });
       const userChanges = changesPerUser.get(change.product.userId) || [];
       userChanges.push(change);
       changesPerUser.set(change.product.userId, userChanges);
