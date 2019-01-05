@@ -8,4 +8,8 @@ export class BcryptService {
     return bcrypt.compare(dataToBeChecked, encryptedControlData);
   }
 
+  hash(value: string): Promise<string> {
+    return bcrypt.hash(value, 10);
+  }
+
 }

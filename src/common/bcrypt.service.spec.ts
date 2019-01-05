@@ -10,7 +10,13 @@ describe('BcryptService', () => {
     }).compile();
     service = module.get<BcryptService>(BcryptService);
   });
+
   it('should check encrypted data', async () => {
     expect(await service.checkEncryptedData('', '')).toBe(false);
   });
+
+  it('should hash data', async () => {
+    expect(await service.hash('data')).toBeDefined();
+  });
+
 });

@@ -4,7 +4,7 @@ import { UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { ObjectID } from 'mongodb';
-import { BcryptService } from './bcrypt.service';
+import { BcryptService } from '../common/bcrypt.service';
 import { MockType } from '../../test/mock.type';
 
 describe('AuthService', () => {

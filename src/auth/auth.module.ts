@@ -7,13 +7,12 @@ import { AuthController } from './auth.controller';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '../config/config.service';
-import { BcryptService } from './bcrypt.service';
+import { CommonModule } from '../common/common.module';
 
 @Module({
   providers: [
     AuthService,
     JwtStrategy,
-    BcryptService,
   ],
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),
@@ -29,6 +28,7 @@ import { BcryptService } from './bcrypt.service';
     }),
     ConfigModule,
     UsersModule,
+    CommonModule,
   ],
   controllers: [AuthController],
 })
