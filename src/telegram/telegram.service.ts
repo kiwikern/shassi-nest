@@ -7,6 +7,7 @@ import { TelegramTokenService } from './telegram-token.service';
 import { TelegramUserIdService } from './telegram-user-id.service';
 import { CronJob } from 'cron';
 import { InitializeProductDto } from '../products/dtos/initialize-product.dto';
+import { CronJobService } from './cron-job.service';
 
 @Injectable()
 export class TelegramService implements OnModuleInit {
@@ -19,6 +20,7 @@ export class TelegramService implements OnModuleInit {
               private productsService: ProductsService,
               private tokenService: TelegramTokenService,
               private telegramIdService: TelegramUserIdService,
+              private cronJobService: CronJobService,
               private configService: ConfigService) {
   }
 
@@ -143,7 +145,7 @@ export class TelegramService implements OnModuleInit {
     if (userId) {
       ctx.session.userId = userId;
       ctx.session.productData = new Map();
-      const job = new CronJob('0 0 3 * * *', () => this.cleanUpSessionData(ctx));
+      const job = this.cronJobService.create('0 0 3 * * *', () => this.cleanUpSessionData(ctx));
       job.start();
       this.logger.log('Product CronJob started, next execution: ' + new Date(job.nextDates()).toString());
       return next(ctx);

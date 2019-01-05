@@ -6,6 +6,7 @@ import { TelegramTokenService } from './telegram-token.service';
 import { TelegramUserIdService } from './telegram-user-id.service';
 import { ConfigService } from '../config/config.service';
 import { BadRequestException, ConflictException, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { CronJobService } from './cron-job.service';
 
 type Mockify<T> = {
   [P in keyof T]: jest.Mock<{}>;
@@ -20,6 +21,12 @@ describe('TelegramService', () => {
 
   beforeEach(async () => {
     const configService: Partial<ConfigService> = { frontendDomain: 'domain' };
+    const cronJobService: CronJobService = {
+      create: () => ({
+        start: () => null,
+        nextDates: () => new Date(),
+      }) as any,
+    };
     productsService = jest.fn(() => ({
       addProduct: jest.fn(),
       initializeProduct: jest.fn(),
@@ -50,6 +57,7 @@ describe('TelegramService', () => {
         { provide: TelegramTokenService, useValue: tokenService },
         { provide: TelegramUserIdService, useValue: telegramUserIdService },
         { provide: ConfigService, useValue: configService },
+        { provide: CronJobService, useValue: cronJobService },
       ],
     }).compile();
     service = module.get<TelegramService>(TelegramService);

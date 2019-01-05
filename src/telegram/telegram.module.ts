@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { TelegramService } from './telegram.service';
-import Telegraf from 'telegraf';
 import { ConfigService } from '../config/config.service';
 import { ConfigModule } from '../config/config.module';
 import { ProductsModule } from '../products/products.module';
@@ -9,6 +8,8 @@ import { TelegramUserIdService } from './telegram-user-id.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TelegramTokenEntity } from './telegram-token.entity';
 import { TelegramUserIdEntity } from './telegram-user-id.entity';
+import { CronJobService } from './cron-job.service';
+import Telegraf from 'telegraf';
 
 @Module({
   providers: [
@@ -22,6 +23,7 @@ import { TelegramUserIdEntity } from './telegram-user-id.entity';
       inject: [ConfigService],
     },
     TelegramUserIdService,
+    CronJobService,
   ],
   imports: [
     ConfigModule,
