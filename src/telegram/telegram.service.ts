@@ -1,5 +1,5 @@
 import { ConflictException, Inject, Injectable, Logger, NotFoundException, OnModuleInit } from '@nestjs/common';
-import Telegraf, { Markup, Extra, Context, ContextMessageUpdate } from 'telegraf';
+import Telegraf, { Markup } from 'telegraf';
 import * as session from 'telegraf/session';
 import { ProductsService } from '../products/products.service';
 import { ConfigService } from '../config/config.service';
@@ -56,11 +56,11 @@ export class TelegramService implements OnModuleInit {
     return `Your product ${url} ${updateText}.`;
   }
 
-  private handleErrors(err) {
+  handleErrors(err) {
     this.logger.error(err.message, err.stack);
   }
 
-  private async addProductOnURLSent(ctx) {
+  async addProductOnURLSent(ctx) {
     try {
       const url = ctx.match[1];
       const userId = ctx.session.userId;
@@ -73,7 +73,7 @@ export class TelegramService implements OnModuleInit {
           reply_to_message_id: ctx.message.message_id,
         });
       } else {
-        const productUpdate = { name: product.name, url: product.url, size: product.sizes[0] };
+        const productUpdate = { name: product.name, url: product.url, size: { name: 'ONESIZE', id: 'ONESIZE' } };
         if (product.sizes && product.sizes[0] && product.sizes[0].id !== 'ONESIZE') {
           Object.assign(productUpdate, { size: product.sizes[0] });
         }
@@ -84,7 +84,7 @@ export class TelegramService implements OnModuleInit {
       this.logger.log('Could not add product: ' + err.message);
       if (err instanceof ConflictException) {
         ctx.reply('Product has already been added.');
-      } else if (err.message.includes('Unknown store')) {
+      } else if (JSON.stringify(err).includes('Unknown store')) {
         ctx.reply('Invalid URL. Is store supported?');
       } else if (err instanceof NotFoundException) {
         ctx.reply('Product does not exist. Check URL.');
@@ -95,7 +95,7 @@ export class TelegramService implements OnModuleInit {
     }
   }
 
-  private async updateProductOnSizeChosen(ctx) {
+  async updateProductOnSizeChosen(ctx) {
     try {
       const answer = ctx.match[0].split('|-|');
       const size = { name: answer[0], id: answer[1] };
@@ -110,13 +110,13 @@ export class TelegramService implements OnModuleInit {
       ctx.session.productData.delete(productId);
       Object.assign(productData, { size });
       const p = await this.productsService.addProduct(ctx.session.userId, productData);
-      ctx.reply(`Your product ${p.name} for ${p.price}€ at store ${p.store} with size ${size.name} was added successfully.`,
+      ctx.reply(`Your product ${p.name} for ${p.price.toFixed(2)}€ at store ${p.store} with size ${size.name} was added successfully.`,
         { reply_to_message_id: ctx.callbackQuery.message.reply_to_message.message_id });
     } catch (err) {
       this.logger.log('Could not add product: ' + err.message);
       if (err instanceof ConflictException) {
         ctx.reply('Product has already been added.');
-      } else if (err.message.includes('Unknown store')) {
+      } else if (JSON.stringify(err).includes('Unknown store')) {
         ctx.reply('Invalid URL. Is store supported?');
       } else if (err instanceof NotFoundException) {
         ctx.reply('Product does not exist. Check URL.');
@@ -133,7 +133,7 @@ export class TelegramService implements OnModuleInit {
           `${s.name}|-|${s.id}|-|${productId}`)));
   }
 
-  private async authSession(ctx, next) {
+  async authSession(ctx, next) {
     if (ctx.session.userId) {
       return next(ctx);
     }
@@ -143,14 +143,7 @@ export class TelegramService implements OnModuleInit {
     if (userId) {
       ctx.session.userId = userId;
       ctx.session.productData = new Map();
-      const job = new CronJob('0 0 3 * * *', () => {
-        const map: Map<number, InitializeProductDto> = ctx.session.productData;
-        for (const productId of map.keys()) {
-          if (productId < Date.now() - TelegramService.ONE_DAY_MS) {
-            map.delete(productId);
-          }
-        }
-      });
+      const job = new CronJob('0 0 3 * * *', () => this.cleanUpSessionData(ctx));
       job.start();
       this.logger.log('Product CronJob started, next execution: ' + new Date(job.nextDates()).toString());
       return next(ctx);
@@ -162,16 +155,22 @@ export class TelegramService implements OnModuleInit {
     // Do not call next() without account.
   }
 
-  private async startCommand(ctx, next) {
+  cleanUpSessionData(ctx) {
+    const map: Map<number, InitializeProductDto> = ctx.session.productData;
+    for (const productId of map.keys()) {
+      if (productId < Date.now() - TelegramService.ONE_DAY_MS) {
+        map.delete(productId);
+      }
+    }
+  }
+
+  async startCommand(ctx, next) {
     const message = ctx.message.text.replace('/start ', '');
     const params = message.split('---');
     const userId = params[0];
     const token = params.length > 1 ? params[1] : null;
     const isValid = await this.tokenService.checkToken(userId, token);
-    if (!isValid) {
-      ctx.reply('Given token was invalid. Try again');
-      ctx.reply(`You need to link your shassi account first. Go to ${this.configService.frontendDomain}?action=createTelegramToken`);
-    } else {
+    if (isValid) {
       try {
         await this.telegramIdService.saveTelegramId(userId, ctx.from.id);
         ctx.session.userId = userId;
@@ -180,6 +179,9 @@ export class TelegramService implements OnModuleInit {
       } catch (err) {
         ctx.reply(`Could not connect Telegram account. Already linked to different shassi user account.`);
       }
+    } else {
+      ctx.reply('Given token was invalid. Try again');
+      ctx.reply(`You need to link your shassi account first. Go to ${this.configService.frontendDomain}?action=createTelegramToken`);
     }
     return next(ctx);
   }

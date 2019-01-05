@@ -1,4 +1,4 @@
-import { Module, OnModuleInit } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { TelegramService } from './telegram.service';
 import Telegraf from 'telegraf';
 import { ConfigService } from '../config/config.service';
