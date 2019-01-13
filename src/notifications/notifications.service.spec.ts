@@ -45,12 +45,23 @@ describe('NotificationsService', () => {
     // TODO: Write tests for missing methods
     const changes: ProductChange[] = [
       {
+        product: { userId: 'userId', name: 'name', isAvailable: true } as any,
+        productAttributeChanges: [new ProductPriceChange({ newValue: 100, oldValue: 90 })] as any,
+      },
+      {
         product: { userId: 'userId', isAvailable: true } as any,
-        productAttributeChanges: [new ProductPriceChange({ newValue: 20, oldValue: 10 })] as any,
+        productAttributeChanges: [
+          new ProductAvailabilityChange({ newValue: true, oldValue: false }),
+          new ProductPriceChange({ newValue: 90, oldValue: 100 }),
+        ] as any,
       },
       {
         product: { userId: 'userId', isAvailable: true } as any,
         productAttributeChanges: [new ProductAvailabilityChange({ newValue: true, oldValue: false })] as any,
+      },
+      {
+        product: { userId: 'userId', isAvailable: true } as any,
+        productAttributeChanges: [new ProductAvailabilityChange({ newValue: false, oldValue: true })] as any,
       },
       {
         product: { userId: 'userId', isAvailable: true } as any,
@@ -62,6 +73,8 @@ describe('NotificationsService', () => {
     });
     productsService.updateAllProducts.mockReturnValue(changes);
     expect(service.sendNotificationsPerUser()).toBeDefined();
+    // expect(telegramService.notifyAboutUpdate).toBeCalledWith('userId',
+    //   'Your product [name](domain/products/id) is now at 90.00€ (-10.00€).');
   });
 
   it('should formulate update text for price decrease', () => {
