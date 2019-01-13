@@ -3,18 +3,26 @@ import { Observable, of } from 'rxjs';
 import { Crawler } from '../src/crawler/crawler.interface';
 import { Type } from '@nestjs/common';
 
-export const crawlerTestRun = ({ crawlerType, testResponse, sizes, sizeChecks, name, priceChecks, url = 'my-url' }: {
+export const crawlerTestRun = ({ crawlerType, testResponse, sizes, sizeChecks, name, priceChecks, url = 'my-url', secondResponse = null }: {
   crawlerType: Type<Crawler>,
   testResponse: string | object,
   sizes: ProductSizeAvailability[],
   sizeChecks: Array<{ size: string; isAvailable: boolean }>,
   name: string, priceChecks: Array<{ size: string; price: number }>,
   url?: string,
+  secondResponse?: string | object,
 }) => {
 
   class HttpServiceMock {
+    calls = 0;
+
     get(): Observable<any> {
-      return of({ data: testResponse });
+      this.calls++;
+      if (this.calls === 1) {
+        return of({ data: testResponse });
+      } else {
+        return of({ data: secondResponse });
+      }
     }
   }
 

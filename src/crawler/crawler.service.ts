@@ -4,6 +4,7 @@ import { HmCrawler } from './crawlers/hm.crawler';
 import { ProductUpdate } from '../products/entities/product-update.entity';
 import { AboutyouCrawler } from './crawlers/aboutyou.crawler';
 import { AmazonCrawler } from './crawlers/amazon.crawler';
+import { CosCrawler } from './crawlers/cos.crawler';
 
 @Injectable()
 export class CrawlerService {
@@ -12,7 +13,9 @@ export class CrawlerService {
 
   constructor(private hmCrawler: HmCrawler,
               private aboutyouCrawler: AboutyouCrawler,
-              private amazonCrawler: AmazonCrawler) {
+              private amazonCrawler: AmazonCrawler,
+              private cosCrawler: CosCrawler,
+              ) {
   }
 
   async getInitData(url: string) {
@@ -53,7 +56,7 @@ export class CrawlerService {
     } else if (url.includes('weekday.')) {
       // crawler = new WeekdayCrawler(url);
     } else if (url.includes('cosstores.')) {
-      // crawler = new CosCrawler(url);
+      crawler = this.cosCrawler;
     } else if (url.includes('aboutyou.de')) {
       crawler = this.aboutyouCrawler;
     } else if (url.includes('amazon.de')) {

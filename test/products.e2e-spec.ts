@@ -25,6 +25,11 @@ describe('ProductsController (e2e)', () => {
       name: 'Amazon',
       expectedPrice: 15.99,
     },
+    {
+      url: 'https://www.cosstores.com/en_eur/men/menswear/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html',
+      name: 'COS',
+      expectedPrice: 49,
+    },
   ];
   let app: INestApplication;
   let token: string;

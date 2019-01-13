@@ -3,6 +3,7 @@ import { CrawlerService } from './crawler.service';
 import { HmCrawler } from './crawlers/hm.crawler';
 import { AboutyouCrawler } from './crawlers/aboutyou.crawler';
 import { AmazonCrawler } from './crawlers/amazon.crawler';
+import { CosCrawler } from './crawlers/cos.crawler';
 
 @Module({
   providers: [
@@ -10,6 +11,7 @@ import { AmazonCrawler } from './crawlers/amazon.crawler';
     HmCrawler,
     AboutyouCrawler,
     AmazonCrawler,
+    CosCrawler,
   ],
   imports: [HttpModule],
   exports: [CrawlerService],
