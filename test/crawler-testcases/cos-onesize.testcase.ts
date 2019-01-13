@@ -1,61 +1,54 @@
 /* tslint:disable:max-line-length */
 import { CosCrawler } from '../../src/crawler/crawlers/cos.crawler';
 
-export const cosTestCase = {
+export const cosOneSizeTestCase = {
   crawlerType: CosCrawler,
 
   url: 'https://cosstores-293828',
 
   sizes: [
-    { id: '0722148001001', isAvailable: false, name: 'XS' },
-    { id: '0722148001002', isAvailable: true, name: 'S' },
-    { id: '0722148001003', isAvailable: true, name: 'M' },
-    { id: '0722148001004', isAvailable: true, name: 'L' },
-    { id: '0722148001005', isAvailable: true, name: 'XL' },
-    { id: '0722148001006', isAvailable: false, name: 'XXL' },
+    { id: '0695515001001', isAvailable: true, name: 'ONESIZE' },
   ],
 
   sizeChecks: [
-    { size: '0722148001002', isAvailable: true },
-    { size: '0722148001001', isAvailable: false },
+    { size: '0695515001001', isAvailable: true },
     { size: 'sizedoesnotexist', isAvailable: false },
   ],
 
-  name: 'RIBBED LONG-SLEEVED T-SHIRT',
+  name: 'CURVED HAIR COMB',
 
   priceChecks: [
-    { size: '0722148001005', price: 49 },
-    { size: '0722148001006', price: 49 },
-    { size: 'unknown-size', price: 49 },
+    { size: '0695515001001', price: 25 },
+    { size: 'unknown-size', price: 25 },
   ],
 
-  secondResponse: { availability: ['0722148001005', '0722148001003', '0722148001004', '0722148001002'], fewPieceLeft: [] },
+  secondResponse: {availability: ['0695515001001'], fewPieceLeft: []},
 
   testResponse: `<!DOCTYPE HTML>
 <html class="no-js">
     <head>
-    <title>RIBBED LONG-SLEEVED T-SHIRT - White / black - Tops - COS</title><meta name="description" content="&lt;p>Designed with vertical ribs updated with an intricate printed pattern, this long-sleeved T-shirt is made from structured cotton. Cut for a regular fit, it has a wide neck trim and clean-cut edges for a minimal finish.&amp;nbsp;&lt;/p>&lt;p>&amp;nbsp;&lt;/p>&lt;p>Back length of size M is 69.5cm /&amp;nbsp;Model is 189cm tall and wearing a size M&lt;/p>"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+    <title>CURVED HAIR COMB - Gold - Accessories - COS</title><meta name="description" content="&lt;p>A sleek geometric design with a curved profile, this hair comb is made from polished gold-tone brass with shaped pins that taper to rounded-off ends for a functional finish.&lt;/p>&lt;p>&amp;nbsp;&lt;/p>&lt;p>Length: 9cm&lt;/p>"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
 <meta name="format-detection" content="telephone=no">
 <script type="text/javascript" src="/etc/designs/hm/clientlibs/shared/jquery.min.js"></script>
 <script type="text/javascript" src="/etc/designs/appeaser/shared/clientlibs/metaTags.min.js"></script>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta name="keywords" content="RIBBED LONG-SLEEVED T-SHIRT">
+    <meta name="keywords" content="CURVED HAIR COMB">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
 <meta name="format-detection" content="telephone=no">
-<meta property="og:title" content="RIBBED LONG-SLEEVED T-SHIRT">
-	<meta property="og:description" content="RIBBED LONG-SLEEVED T-SHIRT: Designed with vertical ribs updated with an intricate printed pattern, this long-sleeved T-shirt is made from structured cotton. Cut for a regular fit, it has a wide neck trim and clean-cut edges for a minimal finish. Back length of size M is 69.5cm / Model is 189cm tall and wearing a size M ">
+<meta property="og:title" content="CURVED HAIR COMB">
+	<meta property="og:description" content="CURVED HAIR COMB: A sleek geometric design with a curved profile, this hair comb is made from polished gold-tone brass with shaped pins that taper to rounded-off ends for a functional finish. Length: 9cm ">
 	<meta property="og:site_name" content="COS">
 	<meta property="og:type" content="product">
 
-	<meta property="og:price:amount" content="49.00">
-	<meta property="product:price:amount" content="49.00">
+	<meta property="og:price:amount" content="25.00">
+	<meta property="product:price:amount" content="25.00">
 
 
 	<meta property="og:price:currency" content="EUR">
 <meta property="product:price:currency" content="EUR">
 <meta property="og:availability" content="instock">
 
-	<meta property="og:url" content="https://www.cosstores.com/en_eur/men/menswear/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html">
+	<meta property="og:url" content="https://www.cosstores.com/en_eur/women/accessories/product.curved-hair-comb-gold.0695515001.html">
 	<!--[if lt IE 9]>
      <script src="/etc/designs/hm/clientlibs/shared/head/js/libs/angularjs.1.2.28.min.js"></script>
      <script src="/etc/designs/hm/clientlibs/shared/head/js/libs/angular-sanitize.1.2.28.min.js"></script>
@@ -110,7 +103,7 @@ export const cosTestCase = {
                     	if (currencyFromCookie.includes("USD")){
                     		en_parameter = ".en_usd.";
                     	}
-                    	var georguriURL = '?goeorguri=%2Fen_eur%2Fmen%2Fmenswear%2Ftops%2Fproduct.ribbed-long-sleeved-t-shirt-white.0722148001.html';
+                    	var georguriURL = '?goeorguri=%2Fen_eur%2Fwomen%2Faccessories%2Fproduct.curved-hair-comb-gold.0695515001.html';
                     	var redirectPageURL = "/content/cos/page.countryselector."+ locale + en_parameter + currencyFromCookie+ ".jsp" + georguriURL;
                     	window.location.href = redirectPageURL;
                     }
@@ -120,33 +113,33 @@ export const cosTestCase = {
     <script src="/etc/designs/appeaser/shared/rakuten/js/rakuten.js"></script><link rel="shortcut icon" type="image/png" href="/etc/designs/appeaser/cos/favicons/favicon-32.png">
     <link rel="apple-touch-icon" href="/etc/designs/appeaser/cos/favicons/favicon-57.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/etc/designs/appeaser/cos/favicons/favicon-180.png">
-    <link rel="alternate" hreflang="en-AT" href="https://www.cosstores.com/en_eur/men/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html">
-        <link rel="alternate" hreflang="en-BE" href="https://www.cosstores.com/en_eur/men/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html">
-        <link rel="alternate" hreflang="en-CZ" href="https://www.cosstores.com/en_eur/men/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html">
-	<link rel="alternate" hreflang="en-DK" href="https://www.cosstores.com/en_dkk/men/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html">
-        <link rel="alternate" hreflang="en-FI" href="https://www.cosstores.com/en_eur/men/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html">
-        <link rel="alternate" hreflang="en-FR" href="https://www.cosstores.com/en_eur/men/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html">
-        <link rel="alternate" hreflang="en-DE" href="https://www.cosstores.com/en_eur/men/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html">
-        <link rel="alternate" hreflang="en-HU" href="https://www.cosstores.com/en_eur/men/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html">
-        <link rel="alternate" hreflang="en-IE" href="https://www.cosstores.com/en_eur/men/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html">
-        <link rel="alternate" hreflang="en-IT" href="https://www.cosstores.com/en_eur/men/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html">
-        <link rel="alternate" hreflang="en-NL" href="https://www.cosstores.com/en_eur/men/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html">
-        <link rel="alternate" hreflang="en-PL" href="https://www.cosstores.com/en_eur/men/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html">
-        <link rel="alternate" hreflang="en-PT" href="https://www.cosstores.com/en_eur/men/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html">
-        <link rel="alternate" hreflang="en-SK" href="https://www.cosstores.com/en_eur/men/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html">
-        <link rel="alternate" hreflang="en-SI" href="https://www.cosstores.com/en_eur/men/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html">
-        <link rel="alternate" hreflang="en-ES" href="https://www.cosstores.com/en_eur/men/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html">
-      	<link rel="alternate" hreflang="en-SE" href="https://www.cosstores.com/en_sek/men/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html">
-       	<link rel="alternate" hreflang="en-GB" href="https://www.cosstores.com/en_gbp/men/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html">
-       	<link rel="alternate" hreflang="en-US" href="https://www.cosstores.com/en_usd/men/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html">
-		<link rel="alternate" hreflang="x-default" href="https://www.cosstores.com/en_eur/men/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html">
+    <link rel="alternate" hreflang="en-AT" href="https://www.cosstores.com/en_eur/women/product.curved-hair-comb-gold.0695515001.html">
+        <link rel="alternate" hreflang="en-BE" href="https://www.cosstores.com/en_eur/women/product.curved-hair-comb-gold.0695515001.html">
+        <link rel="alternate" hreflang="en-CZ" href="https://www.cosstores.com/en_eur/women/product.curved-hair-comb-gold.0695515001.html">
+	<link rel="alternate" hreflang="en-DK" href="https://www.cosstores.com/en_dkk/women/product.curved-hair-comb-gold.0695515001.html">
+        <link rel="alternate" hreflang="en-FI" href="https://www.cosstores.com/en_eur/women/product.curved-hair-comb-gold.0695515001.html">
+        <link rel="alternate" hreflang="en-FR" href="https://www.cosstores.com/en_eur/women/product.curved-hair-comb-gold.0695515001.html">
+        <link rel="alternate" hreflang="en-DE" href="https://www.cosstores.com/en_eur/women/product.curved-hair-comb-gold.0695515001.html">
+        <link rel="alternate" hreflang="en-HU" href="https://www.cosstores.com/en_eur/women/product.curved-hair-comb-gold.0695515001.html">
+        <link rel="alternate" hreflang="en-IE" href="https://www.cosstores.com/en_eur/women/product.curved-hair-comb-gold.0695515001.html">
+        <link rel="alternate" hreflang="en-IT" href="https://www.cosstores.com/en_eur/women/product.curved-hair-comb-gold.0695515001.html">
+        <link rel="alternate" hreflang="en-NL" href="https://www.cosstores.com/en_eur/women/product.curved-hair-comb-gold.0695515001.html">
+        <link rel="alternate" hreflang="en-PL" href="https://www.cosstores.com/en_eur/women/product.curved-hair-comb-gold.0695515001.html">
+        <link rel="alternate" hreflang="en-PT" href="https://www.cosstores.com/en_eur/women/product.curved-hair-comb-gold.0695515001.html">
+        <link rel="alternate" hreflang="en-SK" href="https://www.cosstores.com/en_eur/women/product.curved-hair-comb-gold.0695515001.html">
+        <link rel="alternate" hreflang="en-SI" href="https://www.cosstores.com/en_eur/women/product.curved-hair-comb-gold.0695515001.html">
+        <link rel="alternate" hreflang="en-ES" href="https://www.cosstores.com/en_eur/women/product.curved-hair-comb-gold.0695515001.html">
+      	<link rel="alternate" hreflang="en-SE" href="https://www.cosstores.com/en_sek/women/product.curved-hair-comb-gold.0695515001.html">
+       	<link rel="alternate" hreflang="en-GB" href="https://www.cosstores.com/en_gbp/women/product.curved-hair-comb-gold.0695515001.html">
+       	<link rel="alternate" hreflang="en-US" href="https://www.cosstores.com/en_usd/women/product.curved-hair-comb-gold.0695515001.html">
+		<link rel="alternate" hreflang="x-default" href="https://www.cosstores.com/en_eur/women/product.curved-hair-comb-gold.0695515001.html">
 
-		<link rel="canonical" href="https://www.cosstores.com/en_eur/men/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html"/>
+		<link rel="canonical" href="https://www.cosstores.com/en_eur/women/product.curved-hair-comb-gold.0695515001.html"/>
 		<div class="generatorScriptTouchpoint touchpoint parbase"><script type="text/javascript" src="/en_eur/metrics/default/touchpoint.js"></script>
 
     </div>
 <div class="dnsprefetch parbase"></div>
-<input type="hidden" id="metaPrice" value="49.0"/>
+<input type="hidden" id="metaPrice" value="25.0"/>
 		</head><!-- Code to manage the mobile preview after css changes by HTML team -->
 <body data-component="OPage" class="layout-inside">
 <div class="header parbase"><div class="u-no-select">
@@ -2915,7 +2908,7 @@ function sendNotifications(locale, url, articleId, type, pageType){
     </div>
 </div>
 
-<input type="hidden" id="georguri" value="?goeorguri=%2Fen_eur%2Fmen%2Fmenswear%2Ftops%2Fproduct.ribbed-long-sleeved-t-shirt-white.0722148001.html"/>
+<input type="hidden" id="georguri" value="?goeorguri=%2Fen_eur%2Fwomen%2Faccessories%2Fproduct.curved-hair-comb-gold.0695515001.html"/>
 <script type="text/html" id="country-selector">
 			<div class="selectCountryLightbox parbase"><div class="o-country-selector">
     <div class="selector-content">
@@ -3365,80 +3358,53 @@ delivery costs may vary depending on your location.</p>
 <img src="/alive/user" width="1" height="1" style="position: absolute; left: -999px"/>
 <div data-component="OPageContent" class="o-page-content" style="margin-top: 68px">
 	<div class="content-section">
-	<!--zAEMPUBAPPWW14.goep.hm.com-->
+	<!--zAEMPUBAPPWW01-->
 	<div class="product parbase"><script>
 	var productArticleDetails = {
 
-		'articleCode':'0722148001',
-		'baseProductCode' : '0722148_group_001',
-		'mainCategorySummary' : 'Tops - men_menswear_tops',
-		'name': 'RIBBED LONG-SLEEVED T-SHIRT',
+		'articleCode':'0695515001',
+		'baseProductCode' : '0695515_group_001',
+		'mainCategorySummary' : 'Accessories - women_accessories_all',
+		'name': 'CURVED HAIR COMB',
 
 		'styleWithArticles' : [
 
-		    	'0726796001',
-		    	'0719540001'
+		    	'0712440001'
 		],
 
-		'0722148001': {
-			'title': 'RIBBED LONG-SLEEVED T-SHIRT',
-			'name': 'White \\/ black',
-			'colorCode': '10',
-			'description': '<p>Designed with vertical ribs updated with an intricate printed pattern, this long-sleeved T-shirt is made from structured cotton. Cut for a regular fit, it has a wide neck trim and clean-cut edges for a minimal finish.&nbsp;<\\/p><p>&nbsp;<\\/p><p>Back length of size M is 69.5cm \\/&nbsp;Model is 189cm tall and wearing a size M<\\/p>',
+		'0695515001': {
+			'title': 'CURVED HAIR COMB',
+			'name': 'Gold',
+			'colorCode': '05',
+			'description': '<p>A sleek geometric design with a curved profile, this hair comb is made from polished gold-tone brass with shaped pins that taper to rounded-off ends for a functional finish.<\\/p><p>&nbsp;<\\/p><p>Length: 9cm<\\/p>',
 			'atelierName': "",
 			'brandName': "",
-			'colorLoc': "White / black",
-			'pdpLink' : 'https:\\/\\/www.cosstores.com\\/en_eur\\/men\\/menswear\\/tops\\/product.ribbed-long-sleeved-t-shirt-white.0722148001.html',
+			'colorLoc': "Gold",
+			'pdpLink' : 'https:\\/\\/www.cosstores.com\\/en_eur\\/women\\/accessories\\/product.curved-hair-comb-gold.0695515001.html',
 			'originCountry': "",
 
 				'styleWithArticles' : [
 
 						{
-							'code':'0726796001',
-							'name': 'COTTON JERSEY TURTLENECK TOP',
+							'code':'0712440001',
+							'name': 'MID-LENGTH SHIRT DRESS',
 							'brandName': '',
-							'url':'https://www.cosstores.com/en_eur/men/menswear/tops/product.cotton-jersey-turtleneck-top-black.0726796001.html',
+							'url':'https://www.cosstores.com/en_eur/women/womenswear/dresses/product.mid-length-shirt-dress-blue.0712440001.html',
 
-							'imageUrl':'//lp.cosstores.com/app001prod?set=source[02_0726796_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/style]',
-							'imageAlt':'Front image of Cos cotton jersey roll-neck top in black',
+							'imageUrl':'//lp.cosstores.com/app001prod?set=source[02_0712440_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2018082]&call=url[file:/product/style]',
+							'imageAlt':'Front image of Cos  in blue',
 
-									'price': '€39',
-									'priceOriginal': false,
-									'priceValue': '39.0',
-									'priceSaleValue': null,
+									'price': '€88',
+									'priceOriginal': '€125',
+									'priceValue': '125.0',
+									'priceSaleValue': '88.0',
 
-							'colorName':'Black',
+							'colorName':'Midnight blue',
 							'color':[
 
 									{
-										'colorAlt': 'Fabric Swatch image of Cos cotton jersey roll-neck top in black',
-										'colorSrc': '//lp.cosstores.com/app001prod?set=source[04_0726796_001_001],type[FABRICSWATCH],device[],quality[80],ImageVersion[2019091]&call=url[file:/product/style]'
-									}
-							],
-							'marker': [
-
-							]
-						},
-						{
-							'code':'0719540001',
-							'name': 'WIDE-LEG TROUSERS',
-							'brandName': '',
-							'url':'https://www.cosstores.com/en_eur/men/menswear/suits/trousers/product.wide-leg-trousers-black.0719540001.html',
-
-							'imageUrl':'//lp.cosstores.com/app001prod?set=source[02_0719540_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/style]',
-							'imageAlt':'Front image of Cos wide-leg trousers in black',
-
-									'price': '€89',
-									'priceOriginal': false,
-									'priceValue': '89.0',
-									'priceSaleValue': null,
-
-							'colorName':'Black',
-							'color':[
-
-									{
-										'colorAlt': 'Fabric Swatch image of Cos  in black',
-										'colorSrc': '//lp.cosstores.com/app001prod?set=source[04_0719540_001_001],type[FABRICSWATCH],device[],quality[80],ImageVersion[2018091]&call=url[file:/product/style]'
+										'colorAlt': 'Fabric Swatch image of Cos  in blue',
+										'colorSrc': '//lp.cosstores.com/app001prod?set=source[04_0712440_001_001],type[FABRICSWATCH],device[],quality[80],ImageVersion[2018081]&call=url[file:/product/style]'
 									}
 							],
 							'marker': [
@@ -3450,34 +3416,9 @@ delivery costs may vary depending on your location.</p>
 			'variants' : [
 
 								{
-									'variantCode' : '0722148001001',
+									'variantCode' : '0695515001001',
 									'sizeCode' : '001',
-									'sizeName' : 'XS',
-								},
-								{
-									'variantCode' : '0722148001002',
-									'sizeCode' : '002',
-									'sizeName' : 'S',
-								},
-								{
-									'variantCode' : '0722148001003',
-									'sizeCode' : '003',
-									'sizeName' : 'M',
-								},
-								{
-									'variantCode' : '0722148001004',
-									'sizeCode' : '004',
-									'sizeName' : 'L',
-								},
-								{
-									'variantCode' : '0722148001005',
-									'sizeCode' : '005',
-									'sizeName' : 'XL',
-								},
-								{
-									'variantCode' : '0722148001006',
-									'sizeCode' : '006',
-									'sizeName' : 'XXL',
+									'sizeName' : 'ONESIZE',
 								}
 			],
 
@@ -3485,10 +3426,10 @@ delivery costs may vary depending on your location.</p>
 			'productFrontImages' : [
 
 					{
-						'thumbnail': '//lp.cosstores.com/app001prod?set=source[02_0722148_001_002],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/style]',
-						'image': '//lp.cosstores.com/app001prod?set=source[02_0722148_001_002],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]',
-						'fullscreen': '//lp.cosstores.com/app001prod?set=source[02_0722148_001_002],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]',
-						'zoom': '//lp.cosstores.com/app001prod?set=source[02_0722148_001_002],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/zoom]'
+						'thumbnail': '//lp.cosstores.com/app001prod?set=source[02_0695515_001_002],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2018082]&call=url[file:/product/style]',
+						'image': '//lp.cosstores.com/app001prod?set=source[02_0695515_001_002],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2018082]&call=url[file:/product/main]',
+						'fullscreen': '//lp.cosstores.com/app001prod?set=source[02_0695515_001_002],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2018082]&call=url[file:/product/main]',
+						'zoom': '//lp.cosstores.com/app001prod?set=source[02_0695515_001_002],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2018082]&call=url[file:/product/zoom]'
 					}
 			],
 			'logoImages' : [
@@ -3499,73 +3440,38 @@ delivery costs may vary depending on your location.</p>
 			],
 			'thumbnailImages' : [
 
-					{
-						'thumbnail': '//lp.cosstores.com/app001prod?set=source[01_0722148_001_003],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/style]',
-						'image': '//lp.cosstores.com/app001prod?set=source[01_0722148_001_003],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]',
-						'fullscreen': '//lp.cosstores.com/app001prod?set=source[01_0722148_001_003],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]',
-						'zoom': '//lp.cosstores.com/app001prod?set=source[01_0722148_001_003],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/zoom]'
-					},
-					{
-						'thumbnail': '//lp.cosstores.com/app001prod?set=source[01_0722148_001_004],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/style]',
-						'image': '//lp.cosstores.com/app001prod?set=source[01_0722148_001_004],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]',
-						'fullscreen': '//lp.cosstores.com/app001prod?set=source[01_0722148_001_004],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]',
-						'zoom': '//lp.cosstores.com/app001prod?set=source[01_0722148_001_004],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/zoom]'
-					}
 			],
 			'otherImages' : [
 
-					{
-						'thumbnail': '//lp.cosstores.com/app001prod?set=source[01_0722148_001_001],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/style]',
-						'image': '//lp.cosstores.com/app001prod?set=source[01_0722148_001_001],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]',
-						'fullscreen': '//lp.cosstores.com/app001prod?set=source[01_0722148_001_001],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]',
-						'zoom': '//lp.cosstores.com/app001prod?set=source[01_0722148_001_001],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/zoom]'
-					}
 			],
 			'normalImages' : [
 
 					{
-						'thumbnail': '//lp.cosstores.com/app001prod?set=source[02_0722148_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/style]',
-						'image': '//lp.cosstores.com/app001prod?set=source[02_0722148_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]',
-						'fullscreen': '//lp.cosstores.com/app001prod?set=source[02_0722148_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]',
-						'zoom': '//lp.cosstores.com/app001prod?set=source[02_0722148_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/zoom]'
+						'thumbnail': '//lp.cosstores.com/app001prod?set=source[02_0695515_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2018082]&call=url[file:/product/style]',
+						'image': '//lp.cosstores.com/app001prod?set=source[02_0695515_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2018082]&call=url[file:/product/main]',
+						'fullscreen': '//lp.cosstores.com/app001prod?set=source[02_0695515_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2018082]&call=url[file:/product/main]',
+						'zoom': '//lp.cosstores.com/app001prod?set=source[02_0695515_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2018082]&call=url[file:/product/zoom]'
 					}
 			],
 			'detailImages' : [
 
-					{
-						'thumbnail': '//lp.cosstores.com/app001prod?set=source[01_0722148_001_002],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/style]',
-						'image': '//lp.cosstores.com/app001prod?set=source[01_0722148_001_002],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]',
-						'fullscreen': '//lp.cosstores.com/app001prod?set=source[01_0722148_001_002],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]',
-						'zoom': '//lp.cosstores.com/app001prod?set=source[01_0722148_001_002],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/zoom]'
-					}
 			],
 			'images':[
 
-			    {
-					'thumbnail': '//lp.cosstores.com/app001prod?set=source[01_0722148_001_002],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/style]',
-					'image': '//lp.cosstores.com/app001prod?set=source[01_0722148_001_002],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]',
-					'fullscreen': '//lp.cosstores.com/app001prod?set=source[01_0722148_001_002],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]',
-					'zoom': '//lp.cosstores.com/app001prod?set=source[01_0722148_001_002],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/zoom]'
-				}
 			],
 
-					'price': '€49',
+					'price': '€25',
 					'priceOriginal': false,
-					'priceValue': '49.0',
+					'priceValue': '25.0',
 					'priceSaleValue': null,
 
 			'compositions': [
 
-					'Cotton 99%; Elastane 1%'
+					'Brass 100%'
 				],
 
-            'careInstructions': [
 
-                    'Machine washable '
-            ],
-
-
-			'url': 'https:\\/\\/www.cosstores.com\\/en_eur\\/men\\/menswear\\/tops\\/product.ribbed-long-sleeved-t-shirt-white.0722148001.html'
+			'url': 'https:\\/\\/www.cosstores.com\\/en_eur\\/women\\/accessories\\/product.curved-hair-comb-gold.0695515001.html'
 
 		}
 	};
@@ -3580,12 +3486,8 @@ delivery costs may vary depending on your location.</p>
 			<div id="imageSlider" data-slides-desktop="8" data-slides-tablet="4" data-slides-mobile="1" class="o-slider">
 		<div class="a-heading-2 slider-title u-align-center"></div>
 		<div class="slider" id="imageContainer">
-			<a href="#gallery-product-1" target="_self" class="a-link"><div class="swiper-zoom-container"><img class="a-image default-image" src="//lp.cosstores.com/app001prod?set=source[01_0722148_001_001],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]" data-zoom-src="//lp.cosstores.com/app001prod?set=source[01_0722148_001_001],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/zoom]"  alt="Model front image of Cos ribbed long-sleeved t-shirt in white"/></div></a>
-			<a href="#gallery-product-2" target="_self" class="a-link"><div class="swiper-zoom-container"><img class="a-image default-image" src="//lp.cosstores.com/app001prod?set=source[01_0722148_001_003],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]" data-zoom-src="//lp.cosstores.com/app001prod?set=source[01_0722148_001_003],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/zoom]"  alt="Model side image of Cos ribbed long-sleeved t-shirt in white"/></div></a>
-			<a href="#gallery-product-3" target="_self" class="a-link"><div class="swiper-zoom-container"><img class="a-image default-image" src="//lp.cosstores.com/app001prod?set=source[01_0722148_001_004],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]" data-zoom-src="//lp.cosstores.com/app001prod?set=source[01_0722148_001_004],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/zoom]"  alt="Model side image of Cos ribbed long-sleeved t-shirt in white"/></div></a>
-			<a href="#gallery-product-4" target="_self" class="a-link"><div class="swiper-zoom-container"><img class="a-image default-image" src="//lp.cosstores.com/app001prod?set=source[01_0722148_001_002],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]" data-zoom-src="//lp.cosstores.com/app001prod?set=source[01_0722148_001_002],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/zoom]"  alt="Model side image of Cos ribbed long-sleeved t-shirt in white"/></div></a>
-			<a href="#gallery-product-5" target="_self" class="a-link"><div class="swiper-zoom-container"><img class="a-image default-image" src="//lp.cosstores.com/app001prod?set=source[02_0722148_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]" data-zoom-src="//lp.cosstores.com/app001prod?set=source[02_0722148_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/zoom]"  alt="Front image of Cos ribbed long-sleeved t-shirt in white"/></div></a>
-			<a href="#gallery-product-6" target="_self" class="a-link"><div class="swiper-zoom-container"><img class="a-image default-image" src="//lp.cosstores.com/app001prod?set=source[02_0722148_001_002],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]" data-zoom-src="//lp.cosstores.com/app001prod?set=source[02_0722148_001_002],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/zoom]"  alt="Side image of Cos ribbed long-sleeved t-shirt in white"/></div></a>
+			<a href="#gallery-product-1" target="_self" class="a-link"><div class="swiper-zoom-container"><img class="a-image default-image" src="//lp.cosstores.com/app001prod?set=source[02_0695515_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2018082]&call=url[file:/product/main]" data-zoom-src="//lp.cosstores.com/app001prod?set=source[02_0695515_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2018082]&call=url[file:/product/zoom]"  alt="Front image of Cos  in gold"/></div></a>
+			<a href="#gallery-product-2" target="_self" class="a-link"><div class="swiper-zoom-container"><img class="a-image default-image" src="//lp.cosstores.com/app001prod?set=source[02_0695515_001_002],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2018082]&call=url[file:/product/main]" data-zoom-src="//lp.cosstores.com/app001prod?set=source[02_0695515_001_002],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2018082]&call=url[file:/product/zoom]"  alt="Side image of Cos  in gold"/></div></a>
 			</div>
 	</div>
 </div>
@@ -3593,38 +3495,18 @@ delivery costs may vary depending on your location.</p>
 	<ul id="mainImageList">
 		<li>
 				<div class="m-product-image"><div class="cross"></div>
-					<img class="default-image" src="//lp.cosstores.com/app001prod?set=source[01_0722148_001_001],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]" alt="Model front image of Cos ribbed long-sleeved t-shirt in white" data-zoom-src="//lp.cosstores.com/app001prod?set=source[01_0722148_001_001],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/zoom]" id="gallery-product-1"/>
+					<img class="default-image" src="//lp.cosstores.com/app001prod?set=source[02_0695515_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2018082]&call=url[file:/product/main]" alt="Front image of Cos  in gold" data-zoom-src="//lp.cosstores.com/app001prod?set=source[02_0695515_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2018082]&call=url[file:/product/zoom]" id="gallery-product-1"/>
 				</div>
 			</li>
 		<li>
 				<div class="m-product-image"><div class="cross"></div>
-					<img class="default-image" src="//lp.cosstores.com/app001prod?set=source[01_0722148_001_003],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]" alt="Model side image of Cos ribbed long-sleeved t-shirt in white" data-zoom-src="//lp.cosstores.com/app001prod?set=source[01_0722148_001_003],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/zoom]" id="gallery-product-2"/>
-				</div>
-			</li>
-		<li>
-				<div class="m-product-image"><div class="cross"></div>
-					<img class="default-image" src="//lp.cosstores.com/app001prod?set=source[01_0722148_001_004],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]" alt="Model side image of Cos ribbed long-sleeved t-shirt in white" data-zoom-src="//lp.cosstores.com/app001prod?set=source[01_0722148_001_004],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/zoom]" id="gallery-product-3"/>
-				</div>
-			</li>
-		<li>
-				<div class="m-product-image"><div class="cross"></div>
-					<img class="default-image" src="//lp.cosstores.com/app001prod?set=source[01_0722148_001_002],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]" alt="Model side image of Cos ribbed long-sleeved t-shirt in white" data-zoom-src="//lp.cosstores.com/app001prod?set=source[01_0722148_001_002],type[ECOMLOOK],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/zoom]" id="gallery-product-4"/>
-				</div>
-			</li>
-		<li>
-				<div class="m-product-image"><div class="cross"></div>
-					<img class="default-image" src="//lp.cosstores.com/app001prod?set=source[02_0722148_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]" alt="Front image of Cos ribbed long-sleeved t-shirt in white" data-zoom-src="//lp.cosstores.com/app001prod?set=source[02_0722148_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/zoom]" id="gallery-product-5"/>
-				</div>
-			</li>
-		<li>
-				<div class="m-product-image"><div class="cross"></div>
-					<img class="default-image" src="//lp.cosstores.com/app001prod?set=source[02_0722148_001_002],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/main]" alt="Side image of Cos ribbed long-sleeved t-shirt in white" data-zoom-src="//lp.cosstores.com/app001prod?set=source[02_0722148_001_002],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/zoom]" id="gallery-product-6"/>
+					<img class="default-image" src="//lp.cosstores.com/app001prod?set=source[02_0695515_001_002],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2018082]&call=url[file:/product/main]" alt="Side image of Cos  in gold" data-zoom-src="//lp.cosstores.com/app001prod?set=source[02_0695515_001_002],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2018082]&call=url[file:/product/zoom]" id="gallery-product-2"/>
 				</div>
 			</li>
 		</ul>
 </div>
 
-	<input type="hidden" value="https://lp.cosstores.com/app001prod%3Fset%3Dsource%5B02_0722148_001_001%5D%2Ctype%5BPRODUCT%5D%2Cdevice%5Bhdpi%5D%2Cquality%5B80%5D%2CImageVersion%5B2019092%5D%26call%3Durl%5Bfile%3A%2Fproduct%2Fmain%5D" id="thisArticleStillLifeImage"/>
+	<input type="hidden" value="https://lp.cosstores.com/app001prod%3Fset%3Dsource%5B02_0695515_001_001%5D%2Ctype%5BPRODUCT%5D%2Cdevice%5Bhdpi%5D%2Cquality%5B80%5D%2CImageVersion%5B2018082%5D%26call%3Durl%5Bfile%3A%2Fproduct%2Fmain%5D" id="thisArticleStillLifeImage"/>
 </div>
 
 
@@ -3635,7 +3517,7 @@ delivery costs may vary depending on your location.</p>
 	function loadSizesByCodeOnReady(code){
 		var articlesIds={
 
-				"0722148001" : "size_0722148001"
+				"0695515001" : "size_0695515001"
 		};
 		cosApp.productDetails.loadSizesByCode(code,false,articlesIds,'en_eur');
 	}
@@ -3655,13 +3537,13 @@ delivery costs may vary depending on your location.</p>
 						</label>
 				</div>
 			<div class="title">
-				<p class="a-paragraph" id="productTitle" data-product-title="RIBBED LONG-SLEEVED T-SHIRT">RIBBED LONG-SLEEVED T-SHIRT</p>
+				<p class="a-paragraph" id="productTitle" data-product-title="CURVED HAIR COMB">CURVED HAIR COMB</p>
 			</div>
 			<div class="m-product-price" id="product-price">
-				<div class="price parbase"><!-- white price € 49 -->
+				<div class="price parbase"><!-- white price € 25 -->
 
 <label class="a-label js-a-label price-value product-price" id="productPrice">
-			€49</label>
+			€25</label>
 	</div>
 </div>
 
@@ -3671,18 +3553,18 @@ delivery costs may vary depending on your location.</p>
 				</div>
 			<div class="color-section">
 				<p class="a-paragraph">COLOUR</p>
-				<div data-component="MDropdown" id="pdpDropdown" class="m-dropdown pdp-dropdown " data-selected="0722148001" data-value="White / black">
-					<img id="imgSwatch_0722148001" class="a-image placeholder-image" src="https://lp.cosstores.com/app001prod%3Fset%3Dsource%5B04_0722148_001_001%5D%2Ctype%5BFABRICSWATCH%5D%2Cdevice%5B%5D%2Cquality%5B80%5D%2CImageVersion%5B2019091%5D%26call%3Durl%5Bfile%3A%2Fproduct%2Fmain%5D" alt="Fabric Swatch image of Cos ribbed long-sleeved t-shirt in white" />
-					<button type="button" id="pdp-dropdown-label" class="a-button-nostyle placeholder">White / black</button>
+				<div data-component="MDropdown" id="pdpDropdown" class="m-dropdown pdp-dropdown " data-selected="0695515001" data-value="Gold">
+					<img id="imgSwatch_0695515001" class="a-image placeholder-image" src="https://lp.cosstores.com/app001prod%3Fset%3Dsource%5B04_0695515_001_001%5D%2Ctype%5BFABRICSWATCH%5D%2Cdevice%5B%5D%2Cquality%5B80%5D%2CImageVersion%5B2018081%5D%26call%3Durl%5Bfile%3A%2Fproduct%2Fmain%5D" alt="Fabric Swatch image of Cos  in gold" />
+					<button type="button" id="pdp-dropdown-label" class="a-button-nostyle placeholder">Gold</button>
 						<button type="button" class="a-button-nostyle a-icon-close"></button>
 						<input name="selectColor" type="hidden" class="js-input"/>
 						<span class="a-icon-arrow-down-small"></span>
 					<ul class="list-wrapper">
 						<li>
 							<ul id="swatchDropdown" class="options">
-								<li id="swatch_0722148001" class="a-option color-list" data-articlecode="0722148001" data-value="white / black" onclick="loadSizes(this);trackProductVariant(this);">
-										<img class="a-image option-swatch" src="https://lp.cosstores.com/app001prod%3Fset%3Dsource%5B04_0722148_001_001%5D%2Ctype%5BFABRICSWATCH%5D%2Cdevice%5B%5D%2Cquality%5B80%5D%2CImageVersion%5B2019091%5D%26call%3Durl%5Bfile%3A%2Fproduct%2Fmain%5D" alt="Fabric Swatch image of Cos ribbed long-sleeved t-shirt in white" />
-										<span class="color-name">White / black<span class="color-disabled"> </span> </span>
+								<li id="swatch_0695515001" class="a-option color-list" data-articlecode="0695515001" data-value="gold" onclick="loadSizes(this);trackProductVariant(this);">
+										<img class="a-image option-swatch" src="https://lp.cosstores.com/app001prod%3Fset%3Dsource%5B04_0695515_001_001%5D%2Ctype%5BFABRICSWATCH%5D%2Cdevice%5B%5D%2Cquality%5B80%5D%2CImageVersion%5B2018081%5D%26call%3Durl%5Bfile%3A%2Fproduct%2Fmain%5D" alt="Fabric Swatch image of Cos  in gold" />
+										<span class="color-name">Gold<span class="color-disabled"> </span> </span>
 									</li>
 								</ul>
 							<ul class="bottom-option">
@@ -3695,30 +3577,10 @@ delivery costs may vary depending on your location.</p>
 			</div>
 			<div class="size-select">
 				<p class="a-paragraph">SIZE</p>
-				<div id="sizes" data-component="ASizeSwatch" data-sizelist="0722148001" class="a-size-swatch">
+				<div id="sizes" data-component="ASizeSwatch" data-sizelist="0695515001" class="a-size-swatch">
 					<input hidden name="selectSize" class="a-input js-input"/>
-						<button type="button" id="size_0722148001001"  class="size-options a-button-nostyle">
-							<span>XS</span>
-						</button>
-					<input hidden name="selectSize" class="a-input js-input"/>
-						<button type="button" id="size_0722148001002"  class="size-options a-button-nostyle">
-							<span>S</span>
-						</button>
-					<input hidden name="selectSize" class="a-input js-input"/>
-						<button type="button" id="size_0722148001003"  class="size-options a-button-nostyle">
-							<span>M</span>
-						</button>
-					<input hidden name="selectSize" class="a-input js-input"/>
-						<button type="button" id="size_0722148001004"  class="size-options a-button-nostyle">
-							<span>L</span>
-						</button>
-					<input hidden name="selectSize" class="a-input js-input"/>
-						<button type="button" id="size_0722148001005"  class="size-options a-button-nostyle">
-							<span>XL</span>
-						</button>
-					<input hidden name="selectSize" class="a-input js-input"/>
-						<button type="button" id="size_0722148001006"  class="size-options a-button-nostyle">
-							<span>XXL</span>
+						<button type="button" id="size_0695515001001"  class="size-options a-button-nostyle">
+							<span>ONESIZE</span>
 						</button>
 					</div>
 				<!-- PL merge -->
@@ -3734,7 +3596,7 @@ delivery costs may vary depending on your location.</p>
 			<div class="product-description">
 				<div id="description" class="description-text is-open">
 					<p class="a-paragraph">
-						<p>Designed with vertical ribs updated with an intricate printed pattern, this long-sleeved T-shirt is made from structured cotton. Cut for a regular fit, it has a wide neck trim and clean-cut edges for a minimal finish.&nbsp;</p><p>&nbsp;</p><p>Back length of size M is 69.5cm /&nbsp;Model is 189cm tall and wearing a size M</p></p>
+						<p>A sleek geometric design with a curved profile, this hair comb is made from polished gold-tone brass with shaped pins that taper to rounded-off ends for a functional finish.</p><p>&nbsp;</p><p>Length: 9cm</p></p>
 				</div>
 
 				<div id="delivery-and-returns" class="delivery-and-returns-text">
@@ -3746,15 +3608,13 @@ delivery costs may vary depending on your location.</p>
 				</div>
 
 				<div id="details" class="details-text">
-				<!-- articleCompositions [99% Cotton; 1% Elastane] -->
+				<!-- articleCompositions [100% Brass] -->
 				 <p class="a-paragraph">
-						99% Cotton /  1% Elastane / <span id="careInstructions">
-	                     			Machine washable </span>
-	                     	<br>
+						100% Brass<br>
 						<br>
 						<div id="details" class="details-text is-open">Make sure that your favourite items remain long-loved pieces for years to come; read our <a href="https://www.cosstores.com/en_eur/product-care.html" style="color: #444 ;"><u>product care guide</u></a> and explore our selection of carefully chosen <a href="https://www.cosstores.com/en_eur/care-products.html" style="color: #444;"><u>care products</u></a>.<br><a href="#" target="_self" class="a-link has-underline open-lightbox" data-template="garment-care-template" style="text-decoration: none;"><span class="underline"></span></a>
 
-						<br> Product No: <span id="article-number">0722148001</span><br>
+						<br> Product No: <span id="article-number">0695515001</span><br>
 						<span id="imported">
 							</span>
 					</p>
@@ -3782,106 +3642,20 @@ delivery costs may vary depending on your location.</p>
 		<script type="text/x-handlebars-template" id="garment-care-template">
 
 	</script>
-</div><!-- sizeguide product com.accenture.hm.aem.integration.product.ProductControl@96fe229  product supercategorys: [men_menswear_tshirts_all, men_menswear_tshirts_longsleevetshirts, men_all, men_menswear, W52_EU_Men_Ink, Men_US_New_W50]-->
+</div><!-- sizeguide product com.accenture.hm.aem.integration.product.ProductControl@776da2d5  product supercategorys: [women_accessories_hairaccessories, women_accessories_jewellery_hair-accessories, women_accessories_jewellery_all, women_accessories_new_accessories, women_accessories_all, women_womenswear_all, all-gifts-eu-women, small-gifts-eu-women, women_all, us-ess-s8-womens-added-lines-2-update]-->
 <script type="text/x-handlebars-template" id="size-guide-template">
 	<div class="o-sizeguide">
 		 <div class="sizelisting_24c0 sizelisting parbase"><div class="intro parbase"><div class="o-sizeguide">
     <div>
         <span id="sizeguideIntroID" class="is-richtext">
-			<link rel="stylesheet" href="/content/dam/cos/CSS-Sizeguide/size-guide-lightbox.min.css"></span>
+			<p style="text-align: center;">Sorry, we don't have a size guide for this item<br>
+but you can still find product measurements in the description.</p>
+</span>
     </div>
     </div>
 </div>
 <div class="toggle-list size-guides">
-    <div class="listing parsys"><div class="faq parbase section"><div class="u-cols-sm-12-12 u-cols-md-12-12 u-cols-lg-24-24 u-row u-full-width">
-	<div class="contain">
-		<div class="u-cols-sm-12-12 u-cols-md-8-12 u-cols-lg-10-24 u-transform-center">
-			<div class="o-contain">
-				<div data-component="OAccordion" class="o-accordion has-uppercase" data-exclusive="data-exclusive" data-exclusive-group="group">
-					<div class="accordion-header">
-						<a href="#" target="_self" class="a-link a-link accordion-title js-accordion-toggle no-styling">
-							<span class="a-icon-plus"></span><span class="a-icon-minus"></span>
-							<h3 class="a-heading-3">SIZE GUIDE: READY-TO-WEAR</h3>
-						</a>
-					</div>
-					<div class="accordion-content u-clearfix">
-						<div class="accordion-inner-content">
-							<p>The size chart is a guide to help you find the right size for you. As
-  many pieces are designed in a unique way, we suggest you also refer to
-  the specific product lengths and measurements provided in the
-  description.<br /> <br /> </p>
- <h3>SIZE CONVERSION</h3>
- <p> </p>
- <table width="100%"> <tbody>
-    <tr>
-      <th>Size</th> <th>XS</th> <th>S</th> <th>M</th> <th>L</th>
-      <th>XL</th> </tr>
-    <tr>
-      <td class="left-align">EU</td> <td>44</td> <td>46-48</td>
-      <td>50</td> <td>52-54</td> <td>56</td> </tr>
-    <tr>
-      <td class="left-align">FR/IT/ES</td> <td>44</td> <td>46</td>
-      <td>48</td> <td>50</td> <td>52</td> </tr></tbody></table>
- <p> </p>
- <h3>BODY MEASUREMENTS IN CM</h3>
- <table width="100%"> <tbody>
-    <tr>
-      <th>Size</th> <th>XS</th> <th>S</th> <th>M</th> <th>L</th>
-      <th>XL</th> </tr>
-    <tr>
-      <td class="left-align">Chest</td> <td>88</td> <td>94</td>
-      <td>100</td> <td>106</td> <td>112</td> </tr>
-    <tr>
-      <td class="left-align">Shoulder to shoulder</td> <td>42</td>
-      <td>43.5</td> <td>45</td> <td>46.5</td> <td>48</td> </tr>
-    <tr>
-      <td class="left-align">Waist</td> <td>74</td> <td>80</td>
-      <td>86</td> <td>92</td> <td>98</td> </tr>
-    <tr>
-      <td class="left-align">Hip</td> <td>90</td> <td>96</td>
-      <td>102</td> <td>108</td> <td>114</td> </tr></tbody></table>
-
-						</div>
-					</div>
-				</div>
-
-				<div data-component="OAccordion" class="o-accordion has-uppercase" data-exclusive="data-exclusive" data-exclusive-group="group">
-					<div class="accordion-header">
-						<a href="#" target="_self" class="a-link a-link accordion-title js-accordion-toggle no-styling">
-							<span class="a-icon-plus"></span><span class="a-icon-minus"></span>
-							<h3 class="a-heading-3">HOW TO MEASURE</h3>
-						</a>
-					</div>
-					<div class="accordion-content u-clearfix">
-						<div class="accordion-inner-content">
-							<p>Chest:</p>
- <p>Measure around the fullest part of your chest.</p>
- <p> </p>
- <p>Shoulder to shoulder:</p>
- <p>Measure from edge of shoulder to shoulder.</p>
- <p> </p>
- <p>Waist:</p>
- <p>Measure at the narrowest part of your waistline.</p>
- <p> </p>
- <p>Hip:</p>
- <p>Measure at the fullest part of your hips.</p>
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-
-<div style="clear: both;"></div>
-<script>
-	$('.accordion-inner-content').find('a').addClass('a-link');
-	$('.accordion-inner-content').find('p').addClass('a-paragraph');
-</script>
-</div>
-</div>
+    <div class="listing parsys"></div>
 </div>
 
 <style>
@@ -3906,7 +3680,7 @@ delivery costs may vary depending on your location.</p>
 		</div>
 	<script>
 function loadSwatchSize() {
-	if ('0722148001' !== '') {
+	if ('0695515001' !== '') {
 		var variantList = [];
 		var variantCodes = cosApp.productDetails.getAllProductVariantCodes();
 		$(variantCodes).each(function(index,value){
@@ -3962,13 +3736,13 @@ function deliveryPoliciesClick(caller, url){
 
 	    <div class="slider">
 
-	    	<a href="https://www.cosstores.com/en_eur/men/menswear/tops/product.cotton-jersey-turtleneck-top-black.0726796001.html" target="_self" class="a-link no-styling" onclick="trackProductClick(this,'.o-product')">
+	    	<a href="https://www.cosstores.com/en_eur/women/womenswear/dresses/product.mid-length-shirt-dress-blue.0712440001.html" target="_self" class="a-link no-styling" onclick="trackProductClick(this,'.o-product')">
 
 
 			            <div class="o-product">
 
 				            <div class="image-holder">
-			                    <img class="a-image product-image" src="//lp.cosstores.com/app001prod?set=source[02_0726796_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/style]" alt="Front image of Cos cotton jersey roll-neck top in black" />
+			                    <img class="a-image product-image" src="//lp.cosstores.com/app001prod?set=source[02_0712440_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2018082]&call=url[file:/product/style]" alt="Front image of Cos  in blue" />
 		                	</div>
 
 		                	<div class="description">
@@ -3976,12 +3750,14 @@ function deliveryPoliciesClick(caller, url){
 		                		<div class="product-variants">
                     				<label class="a-label js-a-label">Colors (3)</label>
                     			</div>
-                    			<label class="a-label js-a-label product-title">COTTON JERSEY TURTLENECK TOP</label>
+                    			<label class="a-label js-a-label product-title">MID-LENGTH SHIRT DRESS</label>
                     			<div class="m-product-price">
-								    <!-- white price € 39 -->
+								    <!-- white price € 125 -->
 
-<label class="a-label js-a-label price-value product-price" id="productPrice">
-			€39</label>
+<label class="a-label js-a-label is-deprecated ">
+			€125</label>
+		<label class="a-label js-a-label is-reduced product-price" id="productPrice">
+			€88</label>
 	</div>
                     			<div class="m-product-marker m-product-markers">
                     				</div>
@@ -3993,61 +3769,14 @@ function deliveryPoliciesClick(caller, url){
 	                    		</div>
 	                 <!-- product styleWith details -->
 					<div class="producttile-details" hidden>
-						<span class="articleCode">0726796001</span>
+						<span class="articleCode">0712440001</span>
 						<span class="baseProductCode"></span>
-						<span class="productName">COTTON JERSEY TURTLENECK TOP</span>
-						<span class="productCategory">Tops - men_menswear_tops</span>
+						<span class="productName">MID-LENGTH SHIRT DRESS</span>
+						<span class="productCategory">Dresses - women_womenswear_dresses_all</span>
 						<span class="currencyCode"></span>
-						<span class="price">39.0</span>
-						<span class="originalPrice">39.0</span>
-						<span class="colorName">Black</span>
-						<span class="brandName">[]</span>
-						<span class="colorLoc"></span>
-						<span class="atelierName"></span>
-						<span class="originCountry"></span>
-					</div>
-						</div>
-		            </a>
-
-				<a href="https://www.cosstores.com/en_eur/men/menswear/suits/trousers/product.wide-leg-trousers-black.0719540001.html" target="_self" class="a-link no-styling" onclick="trackProductClick(this,'.o-product')">
-
-
-			            <div class="o-product">
-
-				            <div class="image-holder">
-			                    <img class="a-image product-image" src="//lp.cosstores.com/app001prod?set=source[02_0719540_001_001],type[PRODUCT],device[hdpi],quality[80],ImageVersion[2019092]&call=url[file:/product/style]" alt="Front image of Cos wide-leg trousers in black" />
-		                	</div>
-
-		                	<div class="description">
-
-		                		<div class="product-variants">
-                    				<label class="a-label js-a-label">Colors (3)</label>
-                    			</div>
-                    			<label class="a-label js-a-label product-title">WIDE-LEG TROUSERS</label>
-                    			<div class="m-product-price">
-								    <!-- white price € 89 -->
-
-<label class="a-label js-a-label price-value product-price" id="productPrice">
-			€89</label>
-	</div>
-                    			<div class="m-product-marker m-product-markers">
-                    				</div>
-		                    	<div class="marker-label temp-marker">
-		                    		<label class="a-label js-a-label">
-										</label>
-		                    	</div>
-		                    	<label class="a-label js-a-label product-brand"></label>
-	                    		</div>
-	                 <!-- product styleWith details -->
-					<div class="producttile-details" hidden>
-						<span class="articleCode">0719540001</span>
-						<span class="baseProductCode"></span>
-						<span class="productName">WIDE-LEG TROUSERS</span>
-						<span class="productCategory">Trousers - men_menswear_suits_trousers</span>
-						<span class="currencyCode"></span>
-						<span class="price">89.0</span>
-						<span class="originalPrice">89.0</span>
-						<span class="colorName">Black</span>
+						<span class="price">88.0</span>
+						<span class="originalPrice">125.0</span>
+						<span class="colorName">Midnight blue</span>
 						<span class="brandName">[]</span>
 						<span class="colorLoc"></span>
 						<span class="atelierName"></span>
@@ -4366,8 +4095,8 @@ function deliveryPoliciesClick(caller, url){
 <script type="text/javascript" src="/etc/designs/hm/clientlibs/desktop.min.js"></script>
 <script>
 
-loadSizesByCodeOnReady('0722148001');
-if ('com.hm.appeaser.aem.integration.product.AppProduct@15570d8f' !== '') {
+loadSizesByCodeOnReady('0695515001');
+if ('com.hm.appeaser.aem.integration.product.AppProduct@3a742959' !== '') {
     loadSwatchSize(cosApp.productDetails.selectedArticle);
 }else if(false){
 	loadSwatchSize(storiesApp.productDetails.selectedArticle);
@@ -4416,7 +4145,7 @@ function trackAddToCart(articleCode, sizeCode, productArticleDetails) {
 // begin of AppTealiumScript functions
 
 function getOsaArea(){
-    var areaAttr = "osa_area_0722148001";
+    var areaAttr = "osa_area_0695515001";
     var osaArea = "";
     if(sessionStorage){
         osaArea = sessionStorage.getItem(areaAttr);
@@ -4431,7 +4160,7 @@ function getOsaArea(){
     return osaArea;
 }
 function getOsaType(){
-    var typeAttr = "osa_type_0722148001";
+    var typeAttr = "osa_type_0695515001";
     var osaType = "";
     if(sessionStorage){
         osaType = sessionStorage.getItem(typeAttr);
@@ -4446,7 +4175,7 @@ function getOsaType(){
     return osaType;
 }
 function getVirtualCategory(){
-    var vcAttr = "vc_0722148001";
+    var vcAttr = "vc_0695515001";
     var virtualCategory = "";
     if(sessionStorage){
         virtualCategory = sessionStorage.getItem(vcAttr);
@@ -4566,9 +4295,8 @@ appeaser.subscribe(appeaser.Enums.trigger.ADD_ITEM_TO_CART,function(formData){
 
 
 </script>
-<div class="tealiumProductviewtag productview parbase"><script id="tealiumScript" type="text/javascript">initHMCookies(); initImpression(); initP11SearchPDP(); utag_data = {product_id : ["0722148001"], product_name : ["RIBBED LONG-SLEEVED T-SHIRT"], product_view_type : "pdp", product_category : [TealiumUtils.getProductCategory()], product_color: [TealiumUtils.getArticleColor()], product_size : [""], product_origin: [TealiumUtils.getProductOrigin()], product_variant: [TealiumUtils.getProductColorLoc()], product_atelier: [TealiumUtils.getProductAtelier()], product_brand: [TealiumUtils.getBrandNameorExternalBrandName()], product_action : "detail", product_price : [TealiumUtils.getProductPrice()], product_original_price : [TealiumUtils.getProductOriginalPrice()], product_material : [TealiumUtils.getArticleMaterial()], region_currency : TealiumUtils.getRegionCurrency(), customer_id : TealiumUtils.getCustomerData()[0], customer_email : TealiumUtils.getCustomerData()[1], customer_zip : TealiumUtils.getCustomerData()[2], customer_city : TealiumUtils.getCustomerData()[3], customer_state : TealiumUtils.getCustomerData()[4], customer_country : TealiumUtils.getCustomerData()[8], event_type: "", session_touchpoint : getTouchpoint() , session_login_status : TealiumUtils.getSessionLoginStatus(), page_id : "PRODUCT DETAIL : 0722148001 : RIBBED LONG-SLEEVED T-SHIRT", page_type : "productpage", category_id : "Tops", category_path : TealiumUtils.getCategoryPath('true','RIBBED LONG-SLEEVED T-SHIRT'), region_market : hm.multiCountry.getCountryCode('HMCORP_locale'), region_locale : hm.multiCountry.getLocale('HMCORP_locale','en'), navigation_behavior : TealiumUtils.getNavigationBehaviour(), content_category: TealiumUtils.getContentCategory(), content_action: TealiumUtils.getContentAction(), content_id: TealiumUtils.getContentId(), content_count: TealiumUtils.getContentCount(), list_action: '', customer_id : TealiumUtils.getCustomerData()[0], customer_email : TealiumUtils.getCustomerData()[1], customer_zip : TealiumUtils.getCustomerData()[2], customer_city : TealiumUtils.getCustomerData()[3], customer_state : TealiumUtils.getCustomerData()[4], customer_country : TealiumUtils.getCustomerData()[8], event_type: ""}; utagTealiumTrack(function(a,b,c,d){a=getTealiumURL('brands-cos');b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);});</script> </div>
+<div class="tealiumProductviewtag productview parbase"><script id="tealiumScript" type="text/javascript">initHMCookies(); initImpression(); initP11SearchPDP(); utag_data = {product_id : ["0695515001"], product_name : ["CURVED HAIR COMB"], product_view_type : "pdp", product_category : [TealiumUtils.getProductCategory()], product_color: [TealiumUtils.getArticleColor()], product_size : [""], product_origin: [TealiumUtils.getProductOrigin()], product_variant: [TealiumUtils.getProductColorLoc()], product_atelier: [TealiumUtils.getProductAtelier()], product_brand: [TealiumUtils.getBrandNameorExternalBrandName()], product_action : "detail", product_price : [TealiumUtils.getProductPrice()], product_original_price : [TealiumUtils.getProductOriginalPrice()], product_material : [TealiumUtils.getArticleMaterial()], region_currency : TealiumUtils.getRegionCurrency(), customer_id : TealiumUtils.getCustomerData()[0], customer_email : TealiumUtils.getCustomerData()[1], customer_zip : TealiumUtils.getCustomerData()[2], customer_city : TealiumUtils.getCustomerData()[3], customer_state : TealiumUtils.getCustomerData()[4], customer_country : TealiumUtils.getCustomerData()[8], event_type: "", session_touchpoint : getTouchpoint() , session_login_status : TealiumUtils.getSessionLoginStatus(), page_id : "PRODUCT DETAIL : 0695515001 : CURVED HAIR COMB", page_type : "productpage", category_id : "Accessories", category_path : TealiumUtils.getCategoryPath('true','CURVED HAIR COMB'), region_market : hm.multiCountry.getCountryCode('HMCORP_locale'), region_locale : hm.multiCountry.getLocale('HMCORP_locale','en'), navigation_behavior : TealiumUtils.getNavigationBehaviour(), content_category: TealiumUtils.getContentCategory(), content_action: TealiumUtils.getContentAction(), content_id: TealiumUtils.getContentId(), content_count: TealiumUtils.getContentCount(), list_action: '', customer_id : TealiumUtils.getCustomerData()[0], customer_email : TealiumUtils.getCustomerData()[1], customer_zip : TealiumUtils.getCustomerData()[2], customer_city : TealiumUtils.getCustomerData()[3], customer_state : TealiumUtils.getCustomerData()[4], customer_country : TealiumUtils.getCustomerData()[8], event_type: ""}; utagTealiumTrack(function(a,b,c,d){a=getTealiumURL('brands-cos');b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);});</script> </div>
 <script>
-
 		$(document).ready(function() {
 
 			 var appnt = '';
