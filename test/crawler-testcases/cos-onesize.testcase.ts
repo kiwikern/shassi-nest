@@ -4,7 +4,7 @@ import { CosCrawler } from '../../src/crawler/crawlers/cos.crawler';
 export const cosOneSizeTestCase = {
   crawlerType: CosCrawler,
 
-  url: 'https://cosstores-293828',
+  url: 'cosstores-0695515001.html',
 
   sizes: [
     { id: '0695515001001', isAvailable: true, name: 'ONESIZE' },

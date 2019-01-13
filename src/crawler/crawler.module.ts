@@ -4,6 +4,7 @@ import { HmCrawler } from './crawlers/hm.crawler';
 import { AboutyouCrawler } from './crawlers/aboutyou.crawler';
 import { AmazonCrawler } from './crawlers/amazon.crawler';
 import { CosCrawler } from './crawlers/cos.crawler';
+import { WeekdayCrawler } from './crawlers/weekday.crawler';
 
 @Module({
   providers: [
@@ -12,6 +13,7 @@ import { CosCrawler } from './crawlers/cos.crawler';
     AboutyouCrawler,
     AmazonCrawler,
     CosCrawler,
+    WeekdayCrawler,
   ],
   imports: [HttpModule],
   exports: [CrawlerService],

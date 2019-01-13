@@ -30,6 +30,11 @@ describe('ProductsController (e2e)', () => {
       name: 'COS',
       expectedPrice: 49,
     },
+    {
+      url: 'https://www.weekday.com/en_eur/men/categories/basics/product.alan-t-shirt-white.0410605002.html',
+      name: 'Weekday',
+      expectedPrice: 10,
+    },
   ];
   let app: INestApplication;
   let token: string;

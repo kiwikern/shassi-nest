@@ -6,6 +6,8 @@ import { AmazonCrawler } from './crawlers/amazon.crawler';
 import { Crawler } from './crawler.interface';
 import { ProductSizeAvailability } from './product-size.interface';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
+import { CosCrawler } from './crawlers/cos.crawler';
+import { WeekdayCrawler } from './crawlers/weekday.crawler';
 
 class CrawlerMock implements Crawler {
   url;
@@ -52,6 +54,8 @@ describe('CrawlerService', () => {
         { provide: HmCrawler, useValue: new CrawlerMock('H&M') },
         { provide: AboutyouCrawler, useValue: new CrawlerMock('Aboutyou') },
         { provide: AmazonCrawler, useValue: new CrawlerMock('Amazon') },
+        { provide: CosCrawler, useValue: new CrawlerMock('COS') },
+        { provide: WeekdayCrawler, useValue: new CrawlerMock('Weekday') },
       ],
     }).compile();
     service = module.get<CrawlerService>(CrawlerService);
@@ -72,28 +76,45 @@ describe('CrawlerService', () => {
     expect(initData.name).toEqual('Amazon');
   });
 
+  it('should get the Weekday crawler', async () => {
+    const initData = await service.getInitData('cosstores.com');
+    expect(initData.name).toEqual('COS');
+  });
+
+  it('should get the COS crawler', async () => {
+    const initData = await service.getInitData('weekday.com');
+    expect(initData.name).toEqual('Weekday');
+  });
+
   it('should throw on unknown url', async () => {
     try {
       await service.getInitData('unknown');
+      fail('Should have thrown on invalid url.');
     } catch (e) {
       expect(e).toBeInstanceOf(BadRequestException);
-      return;
     }
-    fail('Should have thrown on invalid url.');
   });
 
-  it('should reject when not in catalog', async () => {
+  it('should reject init when not in catalog', async () => {
     try {
       await service.getInitData('hm.com/not in catalog');
+      fail('Should have thrown on invalid url.');
     } catch (e) {
       expect(e).toBeInstanceOf(NotFoundException);
-      return;
     }
-    fail('Should have thrown on invalid url.');
   });
 
   it('should get update data', async () => {
     const updateData = await service.getUpdateData('hm.com');
     expect(updateData.price).toBe(0);
+  });
+
+  it('should reject update when not in catalog', async () => {
+    try {
+      await service.getUpdateData('hm.com/not in catalog');
+      fail('Should have thrown on invalid url.');
+    } catch (e) {
+      expect(e).toBeInstanceOf(NotFoundException);
+    }
   });
 });

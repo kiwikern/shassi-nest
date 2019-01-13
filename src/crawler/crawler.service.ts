@@ -5,6 +5,7 @@ import { ProductUpdate } from '../products/entities/product-update.entity';
 import { AboutyouCrawler } from './crawlers/aboutyou.crawler';
 import { AmazonCrawler } from './crawlers/amazon.crawler';
 import { CosCrawler } from './crawlers/cos.crawler';
+import { WeekdayCrawler } from './crawlers/weekday.crawler';
 
 @Injectable()
 export class CrawlerService {
@@ -15,6 +16,7 @@ export class CrawlerService {
               private aboutyouCrawler: AboutyouCrawler,
               private amazonCrawler: AmazonCrawler,
               private cosCrawler: CosCrawler,
+              private weekdayCrawler: WeekdayCrawler,
               ) {
   }
 
@@ -54,7 +56,7 @@ export class CrawlerService {
     } else if (url.includes('asos.')) {
       // crawler = new AsosCrawler(url);
     } else if (url.includes('weekday.')) {
-      // crawler = new WeekdayCrawler(url);
+      crawler = this.weekdayCrawler;
     } else if (url.includes('cosstores.')) {
       crawler = this.cosCrawler;
     } else if (url.includes('aboutyou.de')) {
