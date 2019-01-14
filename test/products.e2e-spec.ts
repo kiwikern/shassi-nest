@@ -35,6 +35,11 @@ describe('ProductsController (e2e)', () => {
       name: 'Weekday',
       expectedPrice: 10,
     },
+    {
+      url: 'https://www.asos.de/river-island/river-island-schwarze-steppjacke-mit-kapuze/prd/10697359?clr=schwarz',
+      name: 'Asos',
+      expectedPrice: 49.19,
+    },
   ];
   let app: INestApplication;
   let token: string;

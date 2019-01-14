@@ -8,6 +8,7 @@ import { ProductSizeAvailability } from './product-size.interface';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { CosCrawler } from './crawlers/cos.crawler';
 import { WeekdayCrawler } from './crawlers/weekday.crawler';
+import { AsosCrawler } from './crawlers/asos.crawler';
 
 class CrawlerMock implements Crawler {
   url;
@@ -56,6 +57,7 @@ describe('CrawlerService', () => {
         { provide: AmazonCrawler, useValue: new CrawlerMock('Amazon') },
         { provide: CosCrawler, useValue: new CrawlerMock('COS') },
         { provide: WeekdayCrawler, useValue: new CrawlerMock('Weekday') },
+        { provide: AsosCrawler, useValue: new CrawlerMock('Asos') },
       ],
     }).compile();
     service = module.get<CrawlerService>(CrawlerService);
@@ -84,6 +86,11 @@ describe('CrawlerService', () => {
   it('should get the COS crawler', async () => {
     const initData = await service.getInitData('weekday.com');
     expect(initData.name).toEqual('Weekday');
+  });
+
+  it('should get the Asos crawler', async () => {
+    const initData = await service.getInitData('asos.com');
+    expect(initData.name).toEqual('Asos');
   });
 
   it('should throw on unknown url', async () => {
