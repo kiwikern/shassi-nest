@@ -40,7 +40,7 @@ export class NotificationsService implements OnModuleInit {
   sendNotifications(changesPerUser: Map<string, ProductChange[]>) {
     for (const userId of changesPerUser.keys()) {
       const changes = changesPerUser.get(userId);
-      const updatesText = changes
+      changes
         .filter(change => change.product.isAvailable)
         .map(change => ({
           product: change.product,
