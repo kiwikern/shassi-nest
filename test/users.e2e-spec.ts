@@ -4,6 +4,8 @@ import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { UserCreateDto } from '../src/users/dtos/user-create.dto';
 import { getConnection } from 'typeorm';
+import Telegraf from 'Telegraf';
+import { TelegrafMock } from './mocks/telegraf.mock';
 
 describe('UsersController (e2e)', () => {
   let app: INestApplication;
@@ -11,7 +13,8 @@ describe('UsersController (e2e)', () => {
   beforeAll(async () => {
     const moduleFixture = await Test.createTestingModule({
       imports: [AppModule],
-    }).compile();
+    }).overrideProvider(Telegraf).useClass(TelegrafMock)
+      .compile();
     app = moduleFixture.createNestApplication();
     await app.init();
 

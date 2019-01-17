@@ -6,6 +6,8 @@ import { getConnection } from 'typeorm';
 import { UsersService } from '../src/users/users.service';
 import { AuthService } from '../src/auth/auth.service';
 import { CreateProductDto } from '../src/products/dtos/create-product.dto';
+import Telegraf from 'telegraf';
+import { TelegrafMock } from './mocks/telegraf.mock';
 
 describe('ProductsController (e2e)', () => {
   jest.setTimeout(10_000);
@@ -54,7 +56,8 @@ describe('ProductsController (e2e)', () => {
   beforeAll(async () => {
     const moduleFixture = await Test.createTestingModule({
       imports: [AppModule],
-    }).compile();
+    }).overrideProvider(Telegraf).useClass(TelegrafMock)
+      .compile();
     app = moduleFixture.createNestApplication();
     await app.init();
 
