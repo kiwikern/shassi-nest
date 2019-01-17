@@ -5,7 +5,7 @@ import { AuthService } from './auth.service';
 describe('Auth Controller', () => {
   let module: TestingModule;
   let controller: AuthController;
-  const authServiceMock = { login: () => 'token' };
+  const authServiceMock = { login: () => ({jwt: 'jwt', user: 'user'}) };
 
   beforeAll(async () => {
     module = await Test.createTestingModule({
@@ -19,7 +19,7 @@ describe('Auth Controller', () => {
 
   it('should login', async () => {
     expect(await controller.login({ username: 'user', password: 'password' }))
-      .toEqual({ token: 'token' });
+      .toEqual({jwt: 'jwt', user: 'user'});
   });
 
 });

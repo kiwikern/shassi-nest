@@ -56,11 +56,11 @@ describe('UsersController (e2e)', () => {
       .post('/auth/login')
       .send({ username: 'kiwi', password: '123456' })
       .expect(201);
-    const { token } = loginResponse.body;
+    const { jwt } = loginResponse.body;
 
     await request(app.getHttpServer())
       .put('/users')
-      .set('Authorization', 'Bearer ' + token)
+      .set('Authorization', 'Bearer ' + jwt)
       .send({ notificationTypes: { telegram: true, email: true } })
       .expect(200)
       .expect(res => expect(res.body.notificationTypes)

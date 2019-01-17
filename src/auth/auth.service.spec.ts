@@ -56,10 +56,10 @@ describe('AuthService', () => {
 
   it('should accept login on correct credentials', async () => {
     bcryptService.checkEncryptedData.mockReturnValue(true);
-    userService.findOneByUsername.mockReturnValue(
-      { _id: ObjectID.createFromTime(0), username: 'user', password: 'encrypted' });
+    const user = { _id: ObjectID.createFromTime(0), username: 'user', password: 'encrypted' };
+    userService.findOneByUsername.mockReturnValue(user);
     const token = await service.login({ username: 'user', password: 'password' });
-    expect(token).toEqual('token');
+    expect(token).toEqual({ jwt: 'token', user: expect.objectContaining({username: 'user', _id: expect.anything()}) });
     expect(userService.findOneByUsername).toBeCalledWith('user');
     expect(bcryptService.checkEncryptedData).toBeCalledWith('password', 'encrypted');
   });

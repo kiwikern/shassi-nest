@@ -50,7 +50,7 @@ describe('ProductsController (e2e)', () => {
     const userService = app.get(UsersService);
     const authService = app.get(AuthService);
     await userService.createUser({ username: 'kiwi', password: '123456', email: 'mail@mail.local' });
-    token = await authService.login({ username: 'kiwi', password: '123456' });
+    token = (await authService.login({ username: 'kiwi', password: '123456' })).jwt;
   }
 
   beforeAll(async () => {
