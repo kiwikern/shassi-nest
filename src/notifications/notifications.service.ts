@@ -18,7 +18,6 @@ export class NotificationsService implements OnModuleInit {
   }
 
   onModuleInit() {
-    this.sendNotificationsPerUser();
     const job = this.cronJobService.create('00 00 8,14,18 * * *', () => this.sendNotificationsPerUser());
     job.start();
     this.logger.log('Product CronJob started, next execution: ' + new Date(job.nextDates()).toString())
