@@ -26,5 +26,5 @@ export class UserEntity {
 
   @Column(type => NotificationType)
   @ApiModelProperty()
-  notificationTypes: NotificationType;
+  notificationTypes: NotificationType = {telegram: true, email: false};
 }

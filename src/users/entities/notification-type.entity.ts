@@ -6,10 +6,10 @@ export class NotificationType {
   @Column({ type: 'boolean' })
   @IsBoolean()
   @ApiModelProperty()
-  telegram: boolean;
+  telegram: boolean = true;
 
   @Column({ type: 'boolean' })
   @IsBoolean()
   @ApiModelProperty()
-  email: boolean;
+  email: boolean = false;
 }

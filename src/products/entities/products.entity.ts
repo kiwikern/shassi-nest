@@ -35,13 +35,13 @@ export class ProductEntity {
   size: ProductSize;
 
   // TODO: Why does default value not work?
-  @Column({ type: 'boolean', default: true})
+  @Column({ default: true})
   @ApiModelProperty()
-  isActive: boolean;
+  isActive: boolean = true;
 
-  @Column({ type: 'boolean', default: false })
+  @Column({ default: false })
   @ApiModelProperty()
-  hasUnreadUpdate: boolean;
+  hasUnreadUpdate: boolean = false;
 
   @Column(() => ProductUpdate)
   @ApiModelProperty()
