@@ -4,7 +4,7 @@ import * as request from 'supertest';
 import { AppModule } from '../src/app.module';
 import { UserCreateDto } from '../src/users/dtos/user-create.dto';
 import { getConnection } from 'typeorm';
-import Telegraf from 'Telegraf';
+import Telegraf from 'telegraf';
 import { TelegrafMock } from './mocks/telegraf.mock';
 
 describe('UsersController (e2e)', () => {
