@@ -64,6 +64,10 @@ export class ConfigService {
     return this.envConfig.FRONTEND_DOMAIN;
   }
 
+  get port(): string {
+    return this.envConfig.PORT;
+  }
+
   private validateInput(envConfig: EnvConfig): EnvConfig {
     const envVarsSchema: Joi.ObjectSchema = Joi.object({
       DATABASE_NAME: Joi.string().required(),
@@ -78,6 +82,7 @@ export class ConfigService {
       MAIL_PASSWORD: Joi.string().required(),
       TELEGRAM_TOKEN: Joi.string().required(),
       FRONTEND_DOMAIN: Joi.string().required(),
+      PORT: Joi.number().default(3000),
     });
 
     const { error, value: validatedEnvConfig } = Joi.validate(

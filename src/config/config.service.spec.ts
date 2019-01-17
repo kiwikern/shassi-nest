@@ -23,6 +23,7 @@ describe('ConfigService', () => {
       service.mailPassword &&
       service.mailServer &&
       service.mailUsername &&
+      service.port &&
       service.telegramToken).toBeTruthy();
   });
 });
