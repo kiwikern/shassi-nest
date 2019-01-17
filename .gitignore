@@ -15,6 +15,7 @@ packages/**/*.js
 !travis.env
 
 # misc
+/dist
 /coverage
 .DS_Store
 lerna-debug.log
