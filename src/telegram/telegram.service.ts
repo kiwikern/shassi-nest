@@ -1,4 +1,4 @@
-import { ConflictException, Inject, Injectable, Logger, NotFoundException, OnModuleInit } from '@nestjs/common';
+import { BadRequestException, ConflictException, Inject, Injectable, Logger, NotFoundException, OnModuleInit } from '@nestjs/common';
 import Telegraf, { ContextMessageUpdate, Markup } from 'telegraf';
 import * as session from 'telegraf/session';
 import { ProductsService } from '../products/products.service';
@@ -94,10 +94,10 @@ export class TelegramService implements OnModuleInit {
   }
 
   private handleProductAddErrors(err, ctx: ContextMessageUpdate) {
-    this.logger.log('Could not add product: ' + err.message);
+    this.logger.log({message: 'Could not add product: ', error: err});
     if (err instanceof ConflictException) {
       ctx.reply('Product has already been added.');
-    } else if (JSON.stringify(err).includes('Unknown store')) {
+    } else if (err instanceof BadRequestException) {
       ctx.reply('Invalid URL. Is store supported?');
     } else if (err instanceof NotFoundException) {
       ctx.reply('Product does not exist. Check URL.');
