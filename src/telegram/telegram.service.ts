@@ -95,15 +95,16 @@ export class TelegramService implements OnModuleInit {
   }
 
   private handleProductAddErrors(err, ctx: ContextMessageUpdate) {
-    this.logger.log({message: 'Could not add product: ', error: err});
     if (err instanceof ConflictException) {
       ctx.reply('Product has already been added.');
     } else if (err instanceof BadRequestException) {
       ctx.reply('Invalid URL. Is store supported?');
     } else if (err instanceof NotFoundException) {
       ctx.reply('Product does not exist. Check URL.');
+      this.logger.warn(err.message);
     } else {
       ctx.reply('Internal error. Could not add product.');
+      this.logger.error(err.message, err.stack);
     }
   }
 
