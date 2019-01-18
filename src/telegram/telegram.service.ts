@@ -153,9 +153,9 @@ export class TelegramService implements OnModuleInit {
     if (isValid) {
       try {
         await this.telegramIdService.saveTelegramId(userId, ctx.from.id);
-        ctx.session.userId = userId;
         ctx.reply(`Welcome! Your account was successfully connected.`);
         ctx.reply('You can add a product by sending its URL to this chat.');
+        return this.authSession(ctx, next);
       } catch (err) {
         ctx.reply(`Could not connect Telegram account. Already linked to different shassi user account.`);
       }

@@ -312,6 +312,7 @@ describe('TelegramService', () => {
       reply: jest.fn(),
     }))();
     const next = () => 'next was called';
+    telegramUserIdService.findUserId.mockReturnValue('userId');
     tokenService.checkToken.mockReturnValue(true);
     expect(await service.startCommand(ctx, next)).toBe('next was called');
     expect((ctx as any).session.userId).toBe('userId');
