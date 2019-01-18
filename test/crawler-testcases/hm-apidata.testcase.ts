@@ -5,16 +5,16 @@ export const hmApiDataTestCase = {
   crawlerType: HmCrawler,
 
   sizes: [
-    { id: 'option-variant-08723-J-01', isAvailable: true, name: 'XS' },
-    { id: 'option-variant-08723-J-02', isAvailable: true, name: 'S' },
-    { id: 'option-variant-08723-J-03', isAvailable: true, name: 'M' },
-    { id: 'option-variant-08723-J-04', isAvailable: true, name: 'L' },
-    { id: 'option-variant-08723-J-05', isAvailable: true, name: 'XL' },
-    { id: 'option-variant-08723-J-06', isAvailable: true, name: 'XXL' },
+    { id: 'option-variant-08723-J-003', isAvailable: true, name: 'XS' },
+    { id: 'option-variant-08723-J-004', isAvailable: true, name: 'S' },
+    { id: 'option-variant-08723-J-005', isAvailable: true, name: 'M' },
+    { id: 'option-variant-08723-J-006', isAvailable: true, name: 'L' },
+    { id: 'option-variant-08723-J-007', isAvailable: true, name: 'XL' },
+    { id: 'option-variant-08723-J-008', isAvailable: true, name: 'XXL' },
   ],
 
   sizeChecks: [
-    { size: 'option-variant-08723-J-01', isAvailable: true },
+    { size: 'option-variant-08723-J-003', isAvailable: true },
     { size: 'sizedoesnotexist', isAvailable: false },
   ],
 

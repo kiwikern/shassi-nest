@@ -42,7 +42,7 @@ export class HmCrawler implements Crawler {
       if (sizeId) {
         const foundSize = Object.keys(this.apiData.currentArticle.variants)
           .map(key => this.apiData.currentArticle.variants[key])
-          .find(variant => 'option-variant-' + variant.variantCode === sizeId);
+          .find(variant => `option-variant-${this.apiData.currentArticle.code}-${variant.size.id}` === sizeId);
         if (foundSize) {
           return parseFloat(foundSize.price.priceWithoutCurrency);
         } else {
@@ -65,8 +65,11 @@ export class HmCrawler implements Crawler {
     if (this.apiData) {
       return Object.keys(this.apiData.currentArticle.variants)
         .map(key => this.apiData.currentArticle.variants[key])
-        .map(variant => ({id: 'option-variant-' + variant.variantCode,
-        name: variant.size.name, isAvailable: variant.availableForPurchase}));
+        .map(variant => ({
+          id: `option-variant-${this.apiData.currentArticle.code}-${variant.size.id}`,
+          name: variant.size.name,
+          isAvailable: variant.availableForPurchase,
+        }));
     }
     const variants = this.document.getElementById('options-variants');
     if (!variants) {
