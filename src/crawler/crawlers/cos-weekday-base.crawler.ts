@@ -2,6 +2,7 @@ import { Crawler } from '../crawler.interface';
 import { BadRequestException, HttpService, Logger } from '@nestjs/common';
 import { ProductSizeAvailability } from '../product-size.interface';
 import { JSDOM } from 'jsdom';
+import * as util from 'util';
 
 export abstract class CosWeekdayBaseCrawler implements Crawler {
   url: string;
@@ -19,7 +20,7 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
       'Cookie': 'HMCORP_locale=de_DE;HMCORP_currency=EUR;',
     };
     const response = await this.httpService.get(this.url, { headers }).toPromise();
-    this.logger.log(response);
+    this.logger.log(util.inspect(response.data));
     this.document = new JSDOM(response.data).window.document;
     try {
       const productDataString = this.document.getElementsByClassName('product parbase')[0]
