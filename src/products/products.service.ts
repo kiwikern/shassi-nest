@@ -45,7 +45,7 @@ export class ProductsService {
    * @param product
    */
   async addProduct(userId: ObjectID, product: CreateProductDto): Promise<ProductEntity> {
-    const duplicateSearchOptions = { 'url': product.url, 'size.id': product.size.id };
+    const duplicateSearchOptions = { 'url': product.url, 'size.id': product.size.id, userId };
     if (!!await this.productRepository.findOne(duplicateSearchOptions)) {
       throw new ConflictException('This product has already been added in the given size.');
     }
