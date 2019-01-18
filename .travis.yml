@@ -16,6 +16,7 @@ jobs:
         - mongodb
       before_script: mongo shassi_ci --eval 'db.createUser({user:"admin", pwd:"admin", roles:["readWrite"]});'
     - stage: "Sonarcloud"
+      name: "Sonarcloud"
       script:
         - npm run test:cov
         - sonar-scanner
@@ -24,6 +25,7 @@ jobs:
           organization: "kiwikern-github"
           token: $SONAR_TOKEN
     - stage: "Deployment"
+      name: "Deployment"
       addons:
         ssh_known_hosts: $DEPLOY_SSH_HOST
         apt:
