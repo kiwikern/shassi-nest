@@ -24,7 +24,8 @@ export class ProductsService {
    * @param userId
    */
   async getProducts(userId: ObjectID): Promise<ProductEntity[]> {
-    return this.productRepository.find({ userId });
+    // TODO: order should be accepted by type
+    return this.productRepository.find({ userId, order: {_id: 'DESC'} } as any);
   }
 
   /**
