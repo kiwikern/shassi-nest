@@ -23,7 +23,7 @@ jobs:
         sonarcloud:
           organization: "kiwikern-github"
           token: $SONAR_TOKEN
-    stage: "Deployment"
+    - stage: "Deployment"
       skip_cleanup: true
       provider: script
       script: sshpass -p $DEPLOY_SSH_PASSWORD ssh -o StrictHostKeyChecking=no $DEPLOY_SSH_USER@$DEPLOY_SSH_HOST -t "$DEPLOY_SSH_PATH/deployment.sh"
