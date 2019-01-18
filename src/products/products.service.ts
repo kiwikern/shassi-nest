@@ -7,6 +7,8 @@ import { CrawlerService } from '../crawler/crawler.service';
 import { ObjectID } from 'mongodb';
 import { ProductSizeAvailability } from '../crawler/product-size.interface';
 import { ProductAttributeChange, ProductAvailabilityChange, ProductChange, ProductPriceChange } from './dtos/product-change.interface';
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 @Injectable()
 export class ProductsService {
@@ -25,7 +27,7 @@ export class ProductsService {
    */
   async getProducts(userId: ObjectID): Promise<ProductEntity[]> {
     // TODO: order should be accepted by type
-    return this.productRepository.find({ userId, order: {_id: 'DESC'} } as any);
+    return this.productRepository.find({ userId, order: { _id: 'DESC' } } as any);
   }
 
   /**
@@ -58,15 +60,25 @@ export class ProductsService {
   async updateAllProducts(): Promise<ProductChange[]> {
     const products: ProductEntity[] = await this.productRepository.find({ isActive: true });
     // TODO: Use concurrency control
-    const updatedProducts = (await Promise.all(products
-      .map(product => this.updateProduct(product))))
-      .filter(updatedProduct => !!updatedProduct);
+    // const updatedProducts = (await Promise.all(products
+    //   .map(product => this.updateProduct(product))))
+    //   .filter(updatedProduct => !!updatedProduct);
+    const updatedProducts = [];
+    for (const product of products) {
+      const update = await this.updateProduct(product);
+      if (update) {
+        updatedProducts.push(update);
+      }
+      await of('').pipe(delay(200)).toPromise();
+    }
+
     return updatedProducts;
   }
 
   private async updateProduct(product: ProductEntity): Promise<ProductChange | null> {
     try {
-      const latestUpdate = await this.crawlerService.getUpdateData(product.url, product.size.id);
+      const sizeId = product.size ? product.size.id : null;
+      const latestUpdate = await this.crawlerService.getUpdateData(product.url, sizeId);
       const productAttributeChanges: Array<ProductAttributeChange<boolean | number>> = [];
       if (product.price !== latestUpdate.price) {
         productAttributeChanges.push(new ProductPriceChange({
