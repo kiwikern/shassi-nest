@@ -8,8 +8,9 @@ import { TelegramUserIdService } from './telegram-user-id.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TelegramTokenEntity } from './telegram-token.entity';
 import { TelegramUserIdEntity } from './telegram-user-id.entity';
-import Telegraf from 'telegraf';
 import { CommonModule } from '../common/common.module';
+import { TelegramController } from './telegram.controller';
+import Telegraf from 'telegraf';
 
 @Module({
   providers: [
@@ -33,6 +34,7 @@ import { CommonModule } from '../common/common.module';
   exports: [
     TelegramService,
   ],
+  controllers: [TelegramController],
 })
 export class TelegramModule {
 }
