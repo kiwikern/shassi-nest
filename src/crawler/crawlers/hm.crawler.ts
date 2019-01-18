@@ -21,7 +21,6 @@ export class HmCrawler implements Crawler {
     };
     const response = await this.httpService.get(this.url, { headers }).toPromise();
     if (response.data && response.data.pdp) {
-      this.logger.log('Using API data.');
       this.apiData = response.data.pdp;
       return;
     }

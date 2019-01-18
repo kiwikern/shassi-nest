@@ -91,7 +91,7 @@ export class ProductsService {
         product.isActive = false;
         await this.productRepository.save(product);
       } else {
-        this.logger.error({ message: 'Failed to update product.', error: error.toString(), product });
+        this.logger.error({ message: 'Failed to update product.', error: error.toString(), product }, error.stack);
       }
     }
   }

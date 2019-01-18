@@ -382,15 +382,11 @@ describe('TelegramService', () => {
     expect((telegraf.telegram as any).sendMessage).toHaveBeenCalledWith('telegramId', 'text', { parse_mode: 'Markdown' });
   });
 
-  it('should throw when user to be notified has no linked account', async () => {
+  it('should skip when user to be notified has no linked account', async () => {
     telegramUserIdService.findTelegramId.mockReturnValue(null);
-    try {
-      await service.notifyAboutUpdate('userId', 'text');
-      fail('Should have thrown an error.');
-    } catch (e) {
-      expect(e.message).toBe('User has telegram notification activated, but no account is linked.');
-    }
+    await service.notifyAboutUpdate('userId', 'text');
     expect(telegramUserIdService.findTelegramId).toHaveBeenCalledWith('userId');
+    expect((telegraf.telegram as any).sendMessage).not.toHaveBeenCalled();
   });
 
   it('should perform setup and start polling', async () => {

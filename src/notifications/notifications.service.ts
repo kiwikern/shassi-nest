@@ -25,10 +25,10 @@ export class NotificationsService implements OnModuleInit {
   }
 
   async sendNotificationsPerUser() {
+    this.logger.log('Updating all products');
     const changes = await this.productsService.updateAllProducts();
     const changesPerUser = new Map<string, ProductChange[]>();
     for (const change of changes) {
-      this.logger.log({ message: 'Processing change:', change });
       const userChanges = changesPerUser.get(change.product.userId) || [];
       userChanges.push(change);
       changesPerUser.set(change.product.userId, userChanges);
@@ -50,8 +50,7 @@ export class NotificationsService implements OnModuleInit {
           try {
             await this.telegramService.notifyAboutUpdate(userId, text);
           } catch (e) {
-            this.logger.error({ message: 'Update failed.', userId });
-            this.logger.error(e.message, e.stack);
+            this.logger.error({ message: e.message, userId }, e.stack);
           }
         });
     }

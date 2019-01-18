@@ -36,7 +36,8 @@ export class TelegramService implements OnModuleInit {
   async notifyAboutUpdate(userId, text) {
     const telegramId = await this.telegramIdService.findTelegramId(userId);
     if (!telegramId) {
-      throw new Error('User has telegram notification activated, but no account is linked.');
+      this.logger.log(`User ${userId} has telegram notification activated, but no account is linked.`);
+      return;
     }
 
     this.telegraf.telegram.sendMessage(telegramId, text, { parse_mode: 'Markdown' } as any);
