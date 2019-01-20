@@ -97,7 +97,7 @@ export class HmCrawler implements Crawler {
   }
 
   isSizeAvailable(id?: string): boolean {
-    if (id === 'ONESIZE') {
+    if (!id || id === 'ONESIZE') {
       return true;
     }
 
@@ -106,6 +106,7 @@ export class HmCrawler implements Crawler {
       const foundSize = sizes.find(s => s.id === id);
       if (!foundSize) {
         this.logger.warn({message: 'size not found (api)', url: this.url, sizeId: id});
+        return true;
       }
       return !!foundSize && foundSize.isAvailable;
     }
@@ -113,7 +114,7 @@ export class HmCrawler implements Crawler {
     const sizeEl = this.document.getElementById(id);
     if (!sizeEl || !sizeEl.className) {
       this.logger.warn({message: 'size not found (dom)', url: this.url, sizeId: id});
-      return false;
+      return true;
     }
 
     return !sizeEl.className.includes('soldOut');

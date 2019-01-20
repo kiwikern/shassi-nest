@@ -16,7 +16,7 @@ export const hmMultiSizesTestCase = {
   sizeChecks: [
     { size: 'option-variant-59876-E-007', isAvailable: true },
     { size: 'option-variant-59876-E-003', isAvailable: false },
-    { size: 'sizedoesnotexist', isAvailable: false },
+    { size: 'sizedoesnotexist', isAvailable: true },
   ],
 
   name: 'Rollkragenpullover',

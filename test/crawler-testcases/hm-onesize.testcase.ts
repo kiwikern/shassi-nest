@@ -10,7 +10,7 @@ export const hmOneSizeTestCase = {
 
   sizeChecks: [
     { size: 'ONESIZE', isAvailable: true },
-    { size: 'sizedoesnotexist', isAvailable: false },
+    { size: 'sizedoesnotexist', isAvailable: true },
   ],
 
   name: 'Schmuckschatulle aus Klarglas',

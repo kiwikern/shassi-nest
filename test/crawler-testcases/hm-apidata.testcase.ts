@@ -15,7 +15,7 @@ export const hmApiDataTestCase = {
 
   sizeChecks: [
     { size: 'option-variant-08723-J-003', isAvailable: true },
-    { size: 'sizedoesnotexist', isAvailable: false },
+    { size: 'sizedoesnotexist', isAvailable: true },
   ],
 
   name: 'Hoodiejacke Regular Fit',
