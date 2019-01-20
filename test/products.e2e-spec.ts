@@ -42,6 +42,11 @@ describe('ProductsController (e2e)', () => {
       name: 'Asos',
       expectedPrice: 49.19,
     },
+    {
+      url: 'https://en.zalando.de/burberry-sunglasses-grey-bu752k007-c11.html',
+      name: 'Zalando',
+      expectedPrice: 214.95,
+    },
   ];
   let app: INestApplication;
   let token: string;
