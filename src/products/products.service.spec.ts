@@ -128,14 +128,14 @@ describe('ProductsService', () => {
         price: 90,
         isAvailable: true,
       };
-      const productMockWithAvailabilityUpdate = {
+      const productMockWithInternalError = {
         url: 'error',
         updates: [],
         size: { id: '' },
         price: 100,
         isAvailable: false,
       };
-      const productMockWithoutUpdate = {
+      const productMockWithNotFoundError = {
         url: 'notfound',
         updates: [],
         size: { id: '' },
@@ -143,16 +143,16 @@ describe('ProductsService', () => {
         isAvailable: true,
       };
       repositoryMock.find.mockReturnValue([
-        productMockWithoutUpdate,
+        productMockWithNotFoundError,
         productMockWithPriceUpdate,
-        productMockWithAvailabilityUpdate,
+        productMockWithInternalError,
       ]);
       crawlerServiceMock.getUpdateData.mockImplementation(url => {
         if (url === 'error') {
           throw new InternalServerErrorException();
         }
         if (url === 'notfound') {
-          throw new NotFoundException();
+          throw new NotFoundException('Request failed with status code 404');
         }
         return { price: 100, isAvailable: true };
       });

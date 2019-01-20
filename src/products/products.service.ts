@@ -108,7 +108,7 @@ export class ProductsService {
         return { product: updatedProduct, productAttributeChanges };
       }
     } catch (error) {
-      if (error instanceof NotFoundException) {
+      if (error instanceof NotFoundException || error.toString().includes('404')) {
         product.isActive = false;
         await this.productRepository.save(product);
       } else {
