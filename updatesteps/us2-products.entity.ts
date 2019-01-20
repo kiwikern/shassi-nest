@@ -24,7 +24,7 @@ export class UsProductEntity {
   @ApiModelProperty()
   name: string;
 
-  @Column('text')
+  @Column()
   @Transform((value) => value ? value.toString() : null, { toPlainOnly: true })
   @ApiModelProperty()
   userId: ObjectID;

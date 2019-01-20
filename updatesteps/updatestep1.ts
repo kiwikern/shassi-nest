@@ -6,7 +6,8 @@ import { Logger } from '@nestjs/common';
 async function run() {
   const connection = await new DatabaseConnector().connect();
   const productRepository = connection.getRepository(ProductEntity);
-  const productsWithStringUserId = await productRepository.find({ userId: { $type: 'string' } } as any);
+  // $type 2 = 'string', type aliases not supported by production db
+  const productsWithStringUserId = await productRepository.find({ userId: { $type: 2 } } as any);
   productsWithStringUserId.forEach(product => product.userId = new ObjectID(product.userId));
   return productRepository.save(productsWithStringUserId)
     .then(entities => Array.isArray(entities) ? entities.length : 0);
