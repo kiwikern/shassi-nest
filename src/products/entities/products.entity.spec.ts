@@ -23,7 +23,7 @@ describe('Product Entity', () => {
     const entity = getProductEntity([]);
     expect(entity.price).toBe(null);
     expect(entity.isAvailable).toBe(false);
-    expect(entity.createdAt).toEqual(date);
+    expect(entity.getCreatedAt()).toEqual(date);
     expect(entity.updatedAt).toEqual(date);
     expect(entity.sizeName).toBe('');
     expect(entity.store).toBe('');
@@ -34,7 +34,7 @@ describe('Product Entity', () => {
     const entity = getProductEntity([{ price: 100, createdAt: updateDate, isAvailable: true }], { id: 'id', name: 'name' });
     expect(entity.price).toBe(100);
     expect(entity.isAvailable).toBe(true);
-    expect(entity.createdAt).toEqual(date);
+    expect(entity.getCreatedAt()).toEqual(date);
     expect(entity.updatedAt).toEqual(updateDate);
     expect(entity.sizeName).toBe('name');
     expect(entity.store).toBe('');
@@ -52,7 +52,7 @@ describe('Product Entity', () => {
     const entity = getProductEntity(updates);
     expect(entity.price).toBe(10);
     expect(entity.isAvailable).toBe(false);
-    expect(entity.createdAt).toEqual(date);
+    expect(entity.getCreatedAt()).toEqual(date);
     expect(entity.updatedAt).toEqual(oldUpdateDate);
     expect(entity.store).toBe('');
   });

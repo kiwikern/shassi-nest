@@ -63,15 +63,16 @@ export class ProductEntity {
 
   @Expose({ name: 'createdAt' })
   @ApiModelProperty()
-  get createdAt(): Date {
-    return this._id.getTimestamp();
+  // Cannot be getter due to https://github.com/typeorm/typeorm/issues/3466
+  getCreatedAt(): Date {
+    return this._id ? this._id.getTimestamp() : null;
   }
 
   @Expose({ name: 'updatedAt' })
   @ApiModelProperty()
   get updatedAt(): Date {
     const latestUpdate = this.getLatestUpdate();
-    return latestUpdate ? latestUpdate.createdAt : this.createdAt;
+    return latestUpdate ? latestUpdate.createdAt : this.getCreatedAt();
   }
 
   @Expose({ name: 'sizeName' })
@@ -95,6 +96,8 @@ export class ProductEntity {
       return 'ABOUT YOU';
     } else if (this.url.includes('amazon')) {
       return 'Amazon';
+    } else if (this.url.includes('zalando')) {
+      return 'Zalando';
     } else {
       Logger.warn('Could not find store for URL', this.url);
       return '';
