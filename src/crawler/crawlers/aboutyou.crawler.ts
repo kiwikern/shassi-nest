@@ -59,7 +59,7 @@ export class AboutyouCrawler implements Crawler {
   }
 
   isInCatalog(): boolean {
-    return !this.body.errors;
+    return !this.body.errors && this.body.data.attributes.isActive;
   }
 
   isSizeAvailable(sizeId?: string): boolean {
