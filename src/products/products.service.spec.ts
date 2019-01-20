@@ -167,6 +167,28 @@ describe('ProductsService', () => {
 
   });
 
+  it('should update a single product', async () => {
+    const productMockWithoutUpdate = {
+      url: 'notfound',
+      updates: [],
+      size: { id: '' },
+      price: 100,
+      isAvailable: true,
+    };
+    repositoryMock.findOne.mockReturnValue(productMockWithoutUpdate);
+    crawlerServiceMock.getUpdateData.mockReturnValue({ price: 100, isAvailable: true });
+    expect(await service.updateSingleProduct(null, null)).toEqual(productMockWithoutUpdate);
+  });
+
+  it('should throw on updateSingleProduct not found product', async () => {
+    try {
+      await service.updateSingleProduct(ObjectID.createFromTime(0), ObjectID.createFromTime(0));
+      fail('Should have thrown an exception.');
+    } catch (e) {
+      expect(e).toBeInstanceOf(NotFoundException);
+    }
+  });
+
   it('should mark a product as read', async () => {
     repositoryMock.findOne.mockReturnValue({ id: 1 });
     const product = await service.markRead(ObjectID.createFromTime(0), ObjectID.createFromTime(0));

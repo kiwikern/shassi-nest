@@ -48,6 +48,12 @@ export class ProductsController {
     return this.productsService.markRead(user._id, new ObjectID(productId));
   }
 
+  @Post('/:id/update')
+  @ApiCreatedResponse({ description: 'Returns the updated product.' })
+  updateProduct(@User() user: UserEntity, @Param('id') productId: string): Promise<ProductEntity> {
+    return this.productsService.updateSingleProduct(user._id, new ObjectID(productId));
+  }
+
   @Delete('/:id')
   @ApiOkResponse({ description: 'Returns success state.' })
   async deleteProduct(@User() user: UserEntity, @Param('id') productId: ObjectID) {

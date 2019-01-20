@@ -75,6 +75,15 @@ export class ProductsService {
     return updatedProducts;
   }
 
+  async updateSingleProduct(userId: ObjectID, productId: ObjectID): Promise<ProductEntity> {
+    const product: any = await this.productRepository.findOne({ _id: productId, userId });
+    if (!product) {
+      throw new NotFoundException('Product not found.');
+    }
+    await this.updateProduct(product);
+    return this.productRepository.findOne(productId);
+  }
+
   private async updateProduct(product: ProductEntity): Promise<ProductChange | null> {
     try {
       const sizeId = product.size ? product.size.id : null;

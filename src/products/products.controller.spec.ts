@@ -13,6 +13,7 @@ describe('Product Controller', () => {
       getProducts: jest.fn(),
       initializeProduct: jest.fn(),
       addProduct: jest.fn(),
+      updateSingleProduct: jest.fn(),
       markRead: jest.fn(),
       deleteProduct: jest.fn(() => Promise.resolve(true)),
     })))();
@@ -41,13 +42,19 @@ describe('Product Controller', () => {
     expect(productsServiceMock.addProduct).toHaveBeenCalledWith('id', 'product');
   });
 
-  it('should return all products', async () => {
+  it('should mark a product as read', async () => {
     const productId = new ObjectID.createFromTime(0);
     await controller.markRead({ _id: 'id' } as any, productId.toString());
     expect(productsServiceMock.markRead).toHaveBeenCalledWith('id', productId);
   });
 
-  it('should return all products', async () => {
+  it('should update a product', async () => {
+    const productId = new ObjectID.createFromTime(0);
+    await controller.updateProduct({ _id: 'id' } as any, productId.toString());
+    expect(productsServiceMock.updateSingleProduct).toHaveBeenCalledWith('id', productId);
+  });
+
+  it('should delete a product', async () => {
     const productId = new ObjectID.createFromTime(0);
     const result = await controller.deleteProduct({ _id: 'id' } as any, productId.toString());
     expect(result.success).toBe(true);
