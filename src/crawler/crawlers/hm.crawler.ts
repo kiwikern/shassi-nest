@@ -104,11 +104,15 @@ export class HmCrawler implements Crawler {
     if (this.apiData) {
       const sizes = this.getSizes();
       const foundSize = sizes.find(s => s.id === id);
+      if (!foundSize) {
+        this.logger.warn({message: 'size not found (api)', url: this.url, sizeId: id});
+      }
       return !!foundSize && foundSize.isAvailable;
     }
 
     const sizeEl = this.document.getElementById(id);
     if (!sizeEl || !sizeEl.className) {
+      this.logger.warn({message: 'size not found (dom)', url: this.url, sizeId: id});
       return false;
     }
 
