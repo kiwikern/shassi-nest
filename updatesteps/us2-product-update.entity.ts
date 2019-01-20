@@ -11,5 +11,6 @@ export class UsProductUpdate {
   isAvailable: boolean;
 
   @Column('string')
+    // tslint:disable-next-line:variable-name
   _id: ObjectID;
 }
