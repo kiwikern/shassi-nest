@@ -7,6 +7,7 @@ import { TelegramTokenService } from './telegram-token.service';
 import { TelegramUserIdService } from './telegram-user-id.service';
 import { InitializeProductDto } from '../products/dtos/initialize-product.dto';
 import { CronJobService } from '../common/cron-job.service';
+import { ObjectID } from 'mongodb';
 
 @Injectable()
 export class TelegramService implements OnModuleInit {
@@ -149,7 +150,7 @@ export class TelegramService implements OnModuleInit {
   async startCommand(ctx, next) {
     const message = ctx.message.text.replace('/start ', '');
     const params = message.split('---');
-    const userId = params[0];
+    const userId = ObjectID.isValid(params[0]) ? new ObjectID(params[0]) : null;
     const token = params.length > 1 ? params[1] : null;
     const isValid = await this.tokenService.checkToken(userId, token);
     if (isValid) {

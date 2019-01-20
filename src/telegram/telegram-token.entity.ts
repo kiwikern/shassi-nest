@@ -11,7 +11,7 @@ export class TelegramTokenEntity {
   token: string;
 
   @Index({ unique: true })
-  @Column('text')
+  @Column()
   userId: ObjectID;
 
   @Column({ default: new Date() })

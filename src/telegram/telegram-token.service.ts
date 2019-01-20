@@ -30,11 +30,10 @@ export class TelegramTokenService implements OnModuleInit {
     return `${userId.toString()}---${token}`;
   }
 
-  async checkToken(userIdString: string, token: string): Promise<boolean> {
-    if (!userIdString || !token) {
+  async checkToken(userId: ObjectID, token: string): Promise<boolean> {
+    if (!userId || !token) {
       return false;
     }
-    const userId = new ObjectID(userIdString);
     const dbToken = await this.tokenRepository.findOne({ userId });
     return dbToken && dbToken.token === token;
   }

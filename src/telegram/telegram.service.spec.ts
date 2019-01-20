@@ -8,6 +8,7 @@ import { ConfigService } from '../config/config.service';
 import { BadRequestException, ConflictException, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { CronJobService } from '../common/cron-job.service';
 import { MockType } from '../../test/mock.type';
+import { ObjectID } from 'mongodb';
 
 describe('TelegramService', () => {
   let service: TelegramService;
@@ -308,16 +309,16 @@ describe('TelegramService', () => {
     const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
       session: {},
       from: { id: 'telegramId' },
-      message: { text: '/start userId---token' },
+      message: { text: `/start ${ObjectID.createFromTime(0)}---token` },
       reply: jest.fn(),
     }))();
     const next = () => 'next was called';
-    telegramUserIdService.findUserId.mockReturnValue('userId');
+    telegramUserIdService.findUserId.mockReturnValue(ObjectID.createFromTime(0));
     tokenService.checkToken.mockReturnValue(true);
     expect(await service.startCommand(ctx, next)).toBe('next was called');
-    expect((ctx as any).session.userId).toBe('userId');
-    expect(tokenService.checkToken).toHaveBeenCalledWith('userId', 'token');
-    expect(telegramUserIdService.saveTelegramId).toHaveBeenCalledWith('userId', 'telegramId');
+    expect((ctx as any).session.userId).toEqual(ObjectID.createFromTime(0));
+    expect(tokenService.checkToken).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'token');
+    expect(telegramUserIdService.saveTelegramId).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'telegramId');
     expect(ctx.reply).toHaveBeenCalledWith(`Welcome! Your account was successfully connected.`);
     expect(ctx.reply).toHaveBeenCalledWith('You can add a product by sending its URL to this chat.');
   });
@@ -326,7 +327,7 @@ describe('TelegramService', () => {
     const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
       session: {},
       from: { id: 'telegramId' },
-      message: { text: '/start userId---token' },
+      message: { text: `/start ${ObjectID.createFromTime(0)}---token` },
       reply: jest.fn(),
     }))();
     const next = () => 'next was called';
@@ -336,8 +337,8 @@ describe('TelegramService', () => {
     });
     expect(await service.startCommand(ctx, next)).toBe('next was called');
     expect((ctx as any).session.userId).toBe(undefined);
-    expect(tokenService.checkToken).toHaveBeenCalledWith('userId', 'token');
-    expect(telegramUserIdService.saveTelegramId).toHaveBeenCalledWith('userId', 'telegramId');
+    expect(tokenService.checkToken).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'token');
+    expect(telegramUserIdService.saveTelegramId).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'telegramId');
     expect(ctx.reply).toHaveBeenCalledWith(`Could not connect Telegram account. Already linked to different shassi user account.`);
   });
 
@@ -345,14 +346,14 @@ describe('TelegramService', () => {
     const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
       session: {},
       from: { id: 'telegramId' },
-      message: { text: '/start userId---token' },
+      message: { text: `/start ${ObjectID.createFromTime(0)}---token` },
       reply: jest.fn(),
     }))();
     const next = () => 'next was called';
     tokenService.checkToken.mockReturnValue(false);
     expect(await service.startCommand(ctx, next)).toBe('next was called');
     expect((ctx as any).session.userId).toBe(undefined);
-    expect(tokenService.checkToken).toHaveBeenCalledWith('userId', 'token');
+    expect(tokenService.checkToken).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'token');
     expect(telegramUserIdService.saveTelegramId).not.toHaveBeenCalled();
     expect(ctx.reply).toHaveBeenCalledWith('Given token was invalid. Try again');
     expect(ctx.reply).toHaveBeenCalledWith('You need to link your shassi account first. Go to domain?action=createTelegramToken');
