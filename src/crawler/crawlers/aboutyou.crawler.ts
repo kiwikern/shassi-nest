@@ -1,7 +1,6 @@
 import { Crawler } from '../crawler.interface';
 import { BadRequestException, HttpService, Injectable, Logger } from '@nestjs/common';
 import { ProductSizeAvailability } from '../product-size.interface';
-import { JSDOM } from 'jsdom';
 
 @Injectable()
 export class AboutyouCrawler implements Crawler {
@@ -32,9 +31,15 @@ export class AboutyouCrawler implements Crawler {
   getPrice(sizeId): number {
     const size = this.body.included[sizeId];
     if (size) {
+      if (size.attributes.campaignPrice.current > 0) {
+        return size.attributes.campaignPrice.current / 100;
+      }
       return size.attributes.price.current / 100;
     } else {
       this.logger.warn({message: 'Could not find given size', sizeId, productId: this.productId});
+      if (this.body.data.attributes.campaignPrice.min > 0) {
+        return this.body.data.attributes.campaignPrice.min / 100;
+      }
       return this.body.data.attributes.price.min / 100;
     }
   }
