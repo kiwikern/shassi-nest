@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { BadRequestException, HttpService, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { Crawler } from './crawler.interface';
 import { HmCrawler } from './crawlers/hm.crawler';
 import { ProductUpdate } from '../products/entities/product-update.entity';
@@ -13,13 +13,7 @@ export class CrawlerService {
 
   private readonly logger: Logger = new Logger(CrawlerService.name);
 
-  constructor(private hmCrawler: HmCrawler,
-              private aboutyouCrawler: AboutyouCrawler,
-              private amazonCrawler: AmazonCrawler,
-              private cosCrawler: CosCrawler,
-              private weekdayCrawler: WeekdayCrawler,
-              private asosCrawler: AsosCrawler,
-              ) {
+  constructor(private httpService: HttpService) {
   }
 
   async getInitData(url: string) {
@@ -54,17 +48,17 @@ export class CrawlerService {
     }
 
     if (url.includes('hm.com')) {
-      crawler = this.hmCrawler;
+      crawler = new HmCrawler(this.httpService);
     } else if (url.includes('asos.')) {
-      crawler = this.asosCrawler;
+      crawler = new AsosCrawler(this.httpService);
     } else if (url.includes('weekday.')) {
-      crawler = this.weekdayCrawler;
+      crawler = new WeekdayCrawler(this.httpService);
     } else if (url.includes('cosstores.')) {
-      crawler = this.cosCrawler;
+      crawler = new CosCrawler(this.httpService);
     } else if (url.includes('aboutyou.de')) {
-      crawler = this.aboutyouCrawler;
+      crawler = new AboutyouCrawler(this.httpService);
     } else if (url.includes('amazon.de')) {
-      crawler = this.amazonCrawler;
+      crawler = new AmazonCrawler(this.httpService);
     } else {
       this.logger.error('No crawler found for given url.',  url);
       throw new BadRequestException('Unknown store');

@@ -1,49 +1,44 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CrawlerService } from './crawler.service';
-import { HmCrawler } from './crawlers/hm.crawler';
-import { AboutyouCrawler } from './crawlers/aboutyou.crawler';
-import { AmazonCrawler } from './crawlers/amazon.crawler';
-import { Crawler } from './crawler.interface';
-import { ProductSizeAvailability } from './product-size.interface';
-import { BadRequestException, NotFoundException } from '@nestjs/common';
-import { CosCrawler } from './crawlers/cos.crawler';
-import { WeekdayCrawler } from './crawlers/weekday.crawler';
-import { AsosCrawler } from './crawlers/asos.crawler';
+import { BadRequestException, HttpService, NotFoundException } from '@nestjs/common';
 
-class CrawlerMock implements Crawler {
-  url;
-  constructor(public name: string) {
-  }
+let savedUrl;
 
-  getName() {
-    return this.name;
-  }
+function crawlerMock(name) {
+  return jest.fn(() => {
+    return {
+      url: 'null',
 
-  getPrice() {
-    return 0;
-  }
+      getName: () => {
+        return name;
+      },
 
-  getSizes(): ProductSizeAvailability[] {
-    return [];
-  }
+      getPrice: () => 0,
 
-  getUrl(): string {
-    return '';
-  }
+      getSizes: () => [],
 
-  init(url): Promise<any> {
-    this.url = url;
-    return Promise.resolve();
-  }
+      getUrl: () => savedUrl,
 
-  isInCatalog(): boolean {
-    return !this.url.includes('not in catalog');
-  }
+      init: url => {
+        savedUrl = url;
+        return Promise.resolve();
+      },
 
-  isSizeAvailable(sizeId?: string): boolean {
-    return false;
-  }
+      isInCatalog(): boolean {
+        return !savedUrl.includes('not in catalog');
+      },
+
+      isSizeAvailable: () => false,
+    };
+  });
 }
+
+jest.mock('./crawlers/hm.crawler', () => ({ HmCrawler: crawlerMock('H&M') }));
+jest.mock('./crawlers/aboutyou.crawler', () => ({ AboutyouCrawler: crawlerMock('Aboutyou') }));
+jest.mock('./crawlers/amazon.crawler', () => ({ AmazonCrawler: crawlerMock('Amazon') }));
+jest.mock('./crawlers/cos.crawler', () => ({ CosCrawler: crawlerMock('COS') }));
+jest.mock('./crawlers/weekday.crawler', () => ({ WeekdayCrawler: crawlerMock('Weekday') }));
+jest.mock('./crawlers/asos.crawler', () => ({ AsosCrawler: crawlerMock('Asos') }));
 
 describe('CrawlerService', () => {
   let service: CrawlerService;
@@ -52,12 +47,7 @@ describe('CrawlerService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         CrawlerService,
-        { provide: HmCrawler, useValue: new CrawlerMock('H&M') },
-        { provide: AboutyouCrawler, useValue: new CrawlerMock('Aboutyou') },
-        { provide: AmazonCrawler, useValue: new CrawlerMock('Amazon') },
-        { provide: CosCrawler, useValue: new CrawlerMock('COS') },
-        { provide: WeekdayCrawler, useValue: new CrawlerMock('Weekday') },
-        { provide: AsosCrawler, useValue: new CrawlerMock('Asos') },
+        { provide: HttpService, useValue: null },
       ],
     }).compile();
     service = module.get<CrawlerService>(CrawlerService);
