@@ -24,6 +24,7 @@ describe('ConfigService', () => {
       service.mailServer &&
       service.mailUsername &&
       service.port &&
-      service.telegramToken).toBeTruthy();
+      service.telegramToken &&
+      !service.isProduction).toBeTruthy();
   });
 });

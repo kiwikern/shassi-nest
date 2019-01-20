@@ -10,9 +10,11 @@ export interface EnvConfig {
 @Injectable()
 export class ConfigService {
   private readonly envConfig: EnvConfig;
+  public readonly isProduction: boolean;
 
   constructor() {
     const config = dotenv.parse(fs.readFileSync(`${process.env.NODE_ENV}.env`));
+    this.isProduction = process.env.NODE_ENV === 'production';
     this.envConfig = this.validateInput(config);
   }
 
