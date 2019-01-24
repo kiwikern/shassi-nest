@@ -4,19 +4,15 @@ import { ProductSizeAvailability } from '../product-size.interface';
 import { JSDOM, VirtualConsole } from 'jsdom';
 
 interface HmProductData {
-  description: string;
-  name: string;
-  product_info: {
-    price: string;
-    availability: boolean;
-  };
+  sizes: [{ sizeCode: string, size: string, name: string }];
+  whitePriceValue: string;
+  altName: string;
 }
 
 @Injectable()
 export class HmCrawler implements Crawler {
   url: string;
-  apiData: HmProductData;
-  productData: { sizes: [{ sizeCode: string, size: string, name: string }], whitePriceValue: string, altName: string };
+  productData: HmProductData;
   document: Document;
   availability: string[];
   logger: Logger = new Logger(HmCrawler.name);
@@ -31,6 +27,12 @@ export class HmCrawler implements Crawler {
     }
     this.url = url;
 
+    const productIdMatches = /.*\.(\d+)\.html.*/.exec(url);
+    if (!productIdMatches || !productIdMatches[1]) {
+      this.logger.error('Could not find productId');
+      throw new BadRequestException('Invalid url: ' + url);
+    }
+
     const headers = {
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
       'Cookie': 'HMCORP_locale=de_DE;HMCORP_currency=EUR;',
@@ -38,7 +40,7 @@ export class HmCrawler implements Crawler {
     const response = await this.httpService.get(this.url, { headers }).toPromise();
     const virtualConsole = new VirtualConsole();
     virtualConsole.on('error', (...data) => null);
-    this.document = new JSDOM(response.data, {virtualConsole}).window.document;
+    this.document = new JSDOM(response.data, { virtualConsole }).window.document;
 
     const productDataString = this.document.getElementsByClassName('product parbase')[0]
       .getElementsByTagName('script')[0].innerHTML
@@ -52,11 +54,6 @@ export class HmCrawler implements Crawler {
       .replace(/\,(?!\s*?[\{\[\"\'\w])/g, '')
       .replace(/;$/, '');
 
-    const productIdMatches = /.*\.(\d+)\.html.*/.exec(url);
-    if (!productIdMatches || !productIdMatches[1]) {
-      this.logger.error('Could not find productId');
-      throw new BadRequestException('Invalid url: ' + url);
-    }
     const productId = productIdMatches[1];
 
     const productData = JSON.parse(productDataString);
@@ -72,29 +69,22 @@ export class HmCrawler implements Crawler {
       }
     }
 
-    const apiResponse = await this.httpService.get(this.getApiUrl(productId)).toPromise();
-    if (apiResponse.data && apiResponse.data.data && apiResponse.data.metaData && apiResponse.data.metaData.code === 200) {
-      this.apiData = apiResponse.data.data;
-    } else {
-      this.logger.warn({ message: 'Could not fetch product data from api', url });
-    }
-
     const sizes = this.productData.sizes.map(s => s.sizeCode);
     const availabilityResponse = await this.httpService.get(this.getAvailabilityUrl(sizes)).toPromise();
     if (availabilityResponse.data && availabilityResponse.data.availability) {
       this.availability = availabilityResponse.data.availability;
     } else {
-      this.logger.warn({ message: 'Could not fetch product availability from api', url });
+      this.logger.error({ message: 'Could not fetch product availability from api', url, availabilityResponse });
     }
 
   }
 
   getName(): string {
-    return this.apiData ? this.apiData.name : this.productData.altName;
+    return this.productData.altName;
   }
 
   getPrice(sizeId?: string): number {
-    const priceText = this.apiData ? this.apiData.product_info.price : this.productData.whitePriceValue;
+    const priceText = this.productData.whitePriceValue;
     return parseFloat(priceText);
   }
 
@@ -102,26 +92,20 @@ export class HmCrawler implements Crawler {
     return this.productData.sizes.map(size => ({
       id: size.sizeCode,
       name: size.name,
-      isAvailable: this.availability.indexOf(size.sizeCode) !== -1,
+      isAvailable: this.isSizeAvailable(size.sizeCode),
     }));
   }
 
   isInCatalog(): boolean {
-    return !!this.apiData || !!this.productData;
+    return !!this.productData;
   }
 
   isSizeAvailable(id?: string): boolean {
     return !!this.availability && this.availability.indexOf(id) !== -1;
-    }
+  }
 
   getUrl(): string {
     return this.url;
-  }
-
-  private getApiUrl(productId): string {
-    const baseUrl = `https://photorankapi-a.akamaihd.net`;
-    const authToken = `b4169ec57e5e6ce3595c6a4041ad2cd2dcd77a5c3b32348e066525fa7efe2d92`;
-    return `${baseUrl}/customers/218792/streams/bytag/${productId}/?version=v2.2&auth_token=${authToken}`;
   }
 
   private getAvailabilityUrl(sizes: string[]) {

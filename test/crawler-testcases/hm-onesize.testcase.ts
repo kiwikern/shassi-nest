@@ -22,12 +22,7 @@ export const hmOneSizeTestCase = {
     { size: 'nonexist', price: 7.99 },
   ],
 
-  thirdResponse: { availability: ['0736967002003'], fewPieceLeft: [] },
-
-  secondResponse: {
-    metadata: { code: 404, message: 'Not Found', version: 'v2.0' },
-    data: { message: 'No entity of type [stream] was found using [tag_based_key=hmat-0736967002].' },
-  },
+  secondResponse: { availability: ['0736967002003'], fewPieceLeft: [] },
 
   testResponse: `<!DOCTYPE HTML>
 <html lang="de" class="no-js de-de">

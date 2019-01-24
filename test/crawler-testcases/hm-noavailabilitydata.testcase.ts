@@ -1,21 +1,21 @@
 /* tslint:disable */
 import { HmCrawler } from '../../src/crawler/crawlers/hm.crawler';
 
-export const hmMultisizesTestcase = {
+export const hmNoAvailabilityDataTestcase = {
   crawlerType: HmCrawler,
 
   sizes: [
     { id: '0669091022001', isAvailable: false, name: 'XS' },
-    { id: '0669091022002', isAvailable: true, name: 'S' },
-    { id: '0669091022003', isAvailable: true, name: 'M' },
-    { id: '0669091022004', isAvailable: true, name: 'L' },
-    { id: '0669091022005', isAvailable: true, name: 'XL' },
-    { id: '0669091022006', isAvailable: true, name: 'XXL' },
+    { id: '0669091022002', isAvailable: false, name: 'S' },
+    { id: '0669091022003', isAvailable: false, name: 'M' },
+    { id: '0669091022004', isAvailable: false, name: 'L' },
+    { id: '0669091022005', isAvailable: false, name: 'XL' },
+    { id: '0669091022006', isAvailable: false, name: 'XXL' },
   ],
 
   sizeChecks: [
     { size: '0669091022001', isAvailable: false },
-    { size: '0669091022002', isAvailable: true },
+    { size: '0669091022002', isAvailable: false },
     { size: 'sizedoesnotexist', isAvailable: false },
   ],
 
@@ -28,10 +28,7 @@ export const hmMultisizesTestcase = {
 
   url: 'https://www2.hm.com/de_de/productpage.0669091022.html',
 
-  secondResponse: {
-    'availability': ['0669091001001', '0669091001002', '0669091001003', '0669091001004', '0669091001005', '0669091001006', '0669091003001', '0669091003002', '0669091003003', '0669091003004', '0669091003005', '0669091003006', '0669091004001', '0669091004002', '0669091004004', '0669091004005', '0669091004006', '0669091005002', '0669091005004', '0669091007002', '0669091007003', '0669091007004', '0669091007005', '0669091007006', '0669091018001', '0669091018002', '0669091018003', '0669091018004', '0669091018005', '0669091018006', '0669091021001', '0669091021002', '0669091021003', '0669091021004', '0669091021005', '0669091021006', '0669091022002', '0669091022003', '0669091022004', '0669091022005', '0669091022006'],
-    'fewPieceLeft': [],
-  },
+  secondResponse: {},
 
   testResponse: `<!DOCTYPE HTML>
 <html lang="de" class="no-js de-de">
