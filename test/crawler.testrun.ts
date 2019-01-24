@@ -3,25 +3,33 @@ import { Observable, of } from 'rxjs';
 import { Crawler } from '../src/crawler/crawler.interface';
 import { Type } from '@nestjs/common';
 
-export const crawlerTestRun = ({ crawlerType, testResponse, sizes, sizeChecks, name, priceChecks, url = 'my-url', secondResponse = null }: {
-  crawlerType: Type<Crawler>,
-  testResponse: string | object,
-  sizes: ProductSizeAvailability[],
-  sizeChecks: Array<{ size: string; isAvailable: boolean }>,
-  name: string, priceChecks: Array<{ size: string; price: number }>,
-  url?: string,
-  secondResponse?: string | object,
-}) => {
+export const crawlerTestRun = (
+  {
+    crawlerType, testResponse, sizes, sizeChecks, name, priceChecks, url = 'my-url', secondResponse = null, thirdResponse = null,
+  }: {
+    crawlerType: Type<Crawler>,
+    testResponse: string | object,
+    sizes: ProductSizeAvailability[],
+    sizeChecks: Array<{ size: string; isAvailable: boolean }>,
+    name: string, priceChecks: Array<{ size: string; price: number }>,
+    url?: string,
+    secondResponse?: string | object,
+    thirdResponse?: string | object,
+  }) => {
 
   class HttpServiceMock {
     calls = 0;
 
     get(): Observable<any> {
       this.calls++;
-      if (this.calls === 1) {
+      if (this.calls === 1 && testResponse) {
         return of({ data: testResponse });
-      } else {
+      } else if (this.calls === 2 && secondResponse) {
         return of({ data: secondResponse });
+      } else if (this.calls === 3 && thirdResponse) {
+        return of({ data: thirdResponse });
+      } else {
+        throw new Error(`Unexpected http request (request number ${this.calls})`);
       }
     }
   }

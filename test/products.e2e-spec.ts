@@ -13,7 +13,7 @@ describe('ProductsController (e2e)', () => {
   jest.setTimeout(10_000);
   const testCases = [
     {
-      url: 'https://www.hm.com/de/product/08723?article=08723-J',
+      url: 'https://www2.hm.com/de_de/productpage.0669091022.html',
       name: 'H&M',
       expectedPrice: 19.99,
     },
