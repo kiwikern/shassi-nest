@@ -1,7 +1,7 @@
 import { Crawler } from '../crawler.interface';
 import { BadRequestException, HttpService, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { ProductSizeAvailability } from '../product-size.interface';
-import { JSDOM } from 'jsdom';
+import { JSDOM, VirtualConsole } from 'jsdom';
 
 interface HmProductData {
   description: string;
@@ -36,7 +36,9 @@ export class HmCrawler implements Crawler {
       'Cookie': 'HMCORP_locale=de_DE;HMCORP_currency=EUR;',
     };
     const response = await this.httpService.get(this.url, { headers }).toPromise();
-    this.document = new JSDOM(response.data).window.document;
+    const virtualConsole = new VirtualConsole();
+    virtualConsole.on('error', (...data) => null);
+    this.document = new JSDOM(response.data, {virtualConsole}).window.document;
 
     const productDataString = this.document.getElementsByClassName('product parbase')[0]
       .getElementsByTagName('script')[0].innerHTML
