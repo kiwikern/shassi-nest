@@ -1,5 +1,5 @@
 import { Crawler } from '../crawler.interface';
-import { BadRequestException, HttpService, Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, HttpService, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { ProductSizeAvailability } from '../product-size.interface';
 import { JSDOM } from 'jsdom';
 
@@ -25,6 +25,10 @@ export class HmCrawler implements Crawler {
   }
 
   async init(url: string) {
+    if (!url.includes('www2.')) {
+      // TODO: Get redirect url and continue with that.
+      throw new InternalServerErrorException('Not yet implemented');
+    }
     this.url = url;
 
     const headers = {
