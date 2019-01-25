@@ -44,9 +44,9 @@ export class HmCrawler implements Crawler {
 
     const productDataString = this.document.getElementsByClassName('product parbase')[0]
       .getElementsByTagName('script')[0].innerHTML
-      .replace(/\n/g, '')
       .replace(/'/g, '"')
       .replace(/isDesktop \? ".*" :/g, '')
+      .replace(/\n/g, '')
       .replace(/var.*productArticleDetails = /, '')
       // trailing slashes
       .replace(/\/$/gm, ',')
@@ -61,11 +61,10 @@ export class HmCrawler implements Crawler {
       if (!productData.hasOwnProperty(prop)) {
         continue;
       }
-      if (prop.startsWith(productId.substr(0, 5))) {
+      if (prop === productId || (this.productData === undefined && prop.startsWith(productId.substr(0, 5)))) {
         this.productData = productData[prop];
         const altName = productData.alternate.replace(/ - {a.*/, '');
         this.productData.altName = altName;
-        break;
       }
     }
 

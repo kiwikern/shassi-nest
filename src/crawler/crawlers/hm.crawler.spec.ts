@@ -4,8 +4,9 @@ import { hmMultisizesTestcase } from '../../../test/crawler-testcases/hm-multisi
 import { BadRequestException, InternalServerErrorException } from '@nestjs/common';
 import { HmCrawler } from './hm.crawler';
 import { hmNoAvailabilityDataTestcase } from '../../../test/crawler-testcases/hm-noavailabilitydata.testcase';
+import { hmMultiVariantsTestcase } from '../../../test/crawler-testcases/hm-multivariants.testcase';
 
-const testCases = [hmOneSizeTestCase, hmMultisizesTestcase, hmNoAvailabilityDataTestcase];
+const testCases = [hmOneSizeTestCase, hmMultisizesTestcase, hmNoAvailabilityDataTestcase, hmMultiVariantsTestcase];
 
 describe('H&M',
   () => {
