@@ -9,7 +9,7 @@ export interface EnvConfig {
 
 @Injectable()
 export class ConfigService {
-  private readonly envConfig: EnvConfig;
+  private readonly envConfig: EnvConfig = {};
   public readonly isProduction: boolean;
   private readonly logger: Logger = new Logger(ConfigService.name);
 
@@ -23,11 +23,11 @@ export class ConfigService {
     }
     if (process.env.MONGODB_URI) {
       const matches = /mongodb:\/\/(\w+):(\w+)@((?:\w|\.)+):(\d+)\/(\w+)/.exec(process.env.MONGODB_URI);
-      process.env.DATABASE_USER = matches[1];
-      process.env.DATABASE_PASSWORD = matches[2];
-      process.env.DATABASE_HOST = matches[3];
-      process.env.DATABASE_PORT = matches[4];
-      process.env.DATABASE_NAME = matches[5];
+      this.envConfig.DATABASE_USER = matches[1];
+      this.envConfig.DATABASE_PASSWORD = matches[2];
+      this.envConfig.DATABASE_HOST = matches[3];
+      this.envConfig.DATABASE_PORT = matches[4];
+      this.envConfig.DATABASE_NAME = matches[5];
     }
   }
 
@@ -56,7 +56,7 @@ export class ConfigService {
   }
 
   get jwtExpiresIn(): number {
-    return Number(process.env.JWT_EXPIRES_IN) || Number(this.envConfig.JWT_EXPIRES_IN);
+    return Number(process.env.JWT_EXPIRES_IN) || Number(this.envConfig.JWT_EXPIRES_IN) || 30 * 24 * 60 * 60;
   }
 
   get mailServer(): string {
