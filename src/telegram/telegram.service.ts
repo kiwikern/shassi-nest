@@ -128,7 +128,6 @@ export class TelegramService implements OnModuleInit {
       ctx.session.productData = new Map();
       const job = this.cronJobService.create('0 0 3 * * *', () => this.cleanUpSessionData(ctx));
       job.start();
-      this.logger.log('Product CronJob started, next execution: ' + new Date(job.nextDates()).toString());
       return next(ctx);
     }
 
