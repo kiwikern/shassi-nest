@@ -21,6 +21,14 @@ export class ConfigService {
     } catch (e) {
       this.logger.warn('No .env file was found. Falling back to process.env');
     }
+    if (process.env.MONGODB_URI) {
+      const matches = /mongodb:\/\/(\w+):(\w+)@(\w+):(\d+)\/(\w+)/.exec(process.env.MONGODB_URI);
+      process.env.DATABASE_USER = matches[1];
+      process.env.DATABASE_PASSWORD = matches[2];
+      process.env.DATABASE_HOST = matches[3];
+      process.env.DATABASE_PORT = matches[4];
+      process.env.DATABASE_NAME = matches[5];
+    }
   }
 
   get databaseHost(): string {
