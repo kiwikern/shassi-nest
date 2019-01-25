@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as Joi from 'joi';
@@ -11,63 +11,68 @@ export interface EnvConfig {
 export class ConfigService {
   private readonly envConfig: EnvConfig;
   public readonly isProduction: boolean;
+  private readonly logger: Logger = new Logger(ConfigService.name);
 
   constructor() {
-    const config = dotenv.parse(fs.readFileSync(`${process.env.NODE_ENV}.env`));
     this.isProduction = process.env.NODE_ENV === 'production';
-    this.envConfig = this.validateInput(config);
+    try {
+      const config = dotenv.parse(fs.readFileSync(`${process.env.NODE_ENV}.env`));
+      this.envConfig = this.validateInput(config);
+    } catch (e) {
+      this.logger.warn('No .env file was found. Falling back to process.env');
+    }
   }
 
   get databaseHost(): string {
-    return this.envConfig.DATABASE_HOST;
+    return process.env.DATABASE_HOST || this.envConfig.DATABASE_HOST;
   }
 
   get databaseName(): string {
-    return this.envConfig.DATABASE_NAME;
+    return process.env.DATABASE_NAME || this.envConfig.DATABASE_NAME;
   }
 
   get databaseUsername(): string {
-    return this.envConfig.DATABASE_USERNAME;
+    return process.env.DATABASE_USERNAME || this.envConfig.DATABASE_USERNAME;
   }
 
   get databasePassword(): string {
-    return this.envConfig.DATABASE_PASSWORD;
+    return process.env.DATABASE_PASSWORD || this.envConfig.DATABASE_PASSWORD;
   }
 
   get databasePort(): number {
-    return Number(this.envConfig.DATABASE_PORT);
+    return Number(process.env.DATABASE_PORT) || Number(this.envConfig.DATABASE_PORT);
   }
 
   get jwtSecret(): string {
-    return this.envConfig.JWT_SECRET;
+    return process.env.JWT_SECRET || this.envConfig.JWT_SECRET;
   }
 
   get jwtExpiresIn(): number {
-    return Number(this.envConfig.JWT_EXPIRES_IN);
+    return Number(process.env.JWT_EXPIRES_IN) || Number(this.envConfig.JWT_EXPIRES_IN);
   }
 
   get mailServer(): string {
-    return this.envConfig.MAIL_SERVER;
+    return process.env.MAIL_SERVER || this.envConfig.MAIL_SERVER;
   }
 
   get mailUsername(): string {
-    return this.envConfig.MAIL_USERNAME;
+    return process.env.MAIL_USERNAME || this.envConfig.MAIL_USERNAME;
   }
 
   get mailPassword(): string {
-    return this.envConfig.MAIL_PASSWORD;
+    return process.env.MAIL_PASSWORD || this.envConfig.MAIL_PASSWORD;
   }
 
   get telegramToken(): string {
-    return this.envConfig.TELEGRAM_TOKEN;
+    return process.env.TELEGRAM_TOKEN || this.envConfig.TELEGRAM_TOKEN;
   }
 
   get frontendDomain(): string {
-    return this.envConfig.FRONTEND_DOMAIN;
+    return process.env.FRONTEND_DOMAIN || this.envConfig.FRONTEND_DOMAIN;
   }
 
   get port(): string {
-    return this.envConfig.PORT;
+    return process.env.PORT || this.envConfig.PORT;
   }
 
   private validateInput(envConfig: EnvConfig): EnvConfig {
