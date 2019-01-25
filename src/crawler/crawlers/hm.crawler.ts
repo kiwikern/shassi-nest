@@ -33,14 +33,20 @@ export class HmCrawler implements Crawler {
       throw new BadRequestException('Invalid url: ' + url);
     }
 
-    const headers = {
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-      'Cookie': 'HMCORP_locale=de_DE;HMCORP_currency=EUR;',
-    };
-    const response = await this.httpService.get(this.url, { headers }).toPromise();
-    const virtualConsole = new VirtualConsole();
-    virtualConsole.on('error', (...data) => null);
-    this.document = new JSDOM(response.data, { virtualConsole }).window.document;
+    try {
+      const headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        'Cookie': 'HMCORP_locale=de_DE;HMCORP_currency=EUR;',
+      };
+      const response = await this.httpService.get(this.url, { headers }).toPromise();
+      const virtualConsole = new VirtualConsole();
+      virtualConsole.on('error', (...data) => null);
+      this.document = new JSDOM(response.data, { virtualConsole }).window.document;
+    } catch (e) {
+      this.logger.error({message: 'failed to request product data', response: e.response.data || e.response});
+      this.logger.error(e.message, e.stack);
+      throw new InternalServerErrorException('Failed to request data');
+    }
 
     const productDataString = this.document.getElementsByClassName('product parbase')[0]
       .getElementsByTagName('script')[0].innerHTML
@@ -69,7 +75,14 @@ export class HmCrawler implements Crawler {
     }
 
     const sizes = this.productData.sizes.map(s => s.sizeCode);
-    const availabilityResponse = await this.httpService.get(this.getAvailabilityUrl(sizes)).toPromise();
+    let availabilityResponse;
+    try {
+      availabilityResponse = await this.httpService.get(this.getAvailabilityUrl(sizes)).toPromise();
+    } catch (e) {
+      availabilityResponse = {};
+      this.logger.error({message: 'failed to request product availability', response: e.response.data || e.response});
+      this.logger.error(e.message, e.stack);
+    }
     if (availabilityResponse.data && availabilityResponse.data.availability) {
       this.availability = availabilityResponse.data.availability;
     } else {
