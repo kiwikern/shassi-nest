@@ -23,7 +23,7 @@ export class ConfigService {
     }
     if (process.env.MONGODB_URI) {
       const matches = /mongodb:\/\/(\w+):(\w+)@((?:\w|\.)+):(\d+)\/(\w+)/.exec(process.env.MONGODB_URI);
-      this.envConfig.DATABASE_USER = matches[1];
+      this.envConfig.DATABASE_USERNAME = matches[1];
       this.envConfig.DATABASE_PASSWORD = matches[2];
       this.envConfig.DATABASE_HOST = matches[3];
       this.envConfig.DATABASE_PORT = matches[4];
