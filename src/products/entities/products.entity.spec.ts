@@ -76,6 +76,9 @@ describe('Product Entity', () => {
 
     entity.url = 'amazon';
     expect(entity.store).toBe('Amazon');
+
+    entity.url = 'zalando';
+    expect(entity.store).toBe('Zalando');
   });
 
   it('should transform ObjectId to string', () => {
