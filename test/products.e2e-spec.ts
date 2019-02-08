@@ -8,9 +8,10 @@ import { AuthService } from '../src/auth/auth.service';
 import { CreateProductDto } from '../src/products/dtos/create-product.dto';
 import Telegraf from 'telegraf';
 import { TelegrafMock } from './mocks/telegraf.mock';
+import { ProductEntity } from '../src/products/entities/products.entity';
 
 describe('ProductsController (e2e)', () => {
-  jest.setTimeout(10_000);
+  jest.setTimeout(15_000);
   const testCases = [
     {
       url: 'https://www2.hm.com/de_de/productpage.0669091022.html',
@@ -40,7 +41,7 @@ describe('ProductsController (e2e)', () => {
     {
       url: 'https://www.asos.de/river-island/river-island-schwarze-steppjacke-mit-kapuze/prd/10697359?clr=schwarz',
       name: 'Asos',
-      expectedPrice: 49.19,
+      expectedPrice: 40.49,
     },
     {
       url: 'https://en.zalando.de/burberry-sunglasses-grey-bu752k007-c11.html',
@@ -49,13 +50,14 @@ describe('ProductsController (e2e)', () => {
     },
   ];
   let app: INestApplication;
-  let token: string;
+  let tokenUser1: string;
+  let latestProduct: ProductEntity;
 
-  async function createLogin() {
+  async function createLogin(username = 'kiwi'): Promise<string> {
     const userService = app.get(UsersService);
     const authService = app.get(AuthService);
-    await userService.createUser({ username: 'kiwi', password: '123456', email: 'mail@mail.local' });
-    token = (await authService.login({ username: 'kiwi', password: '123456' })).jwt;
+    await userService.createUser({ username, password: '123456' });
+    return (await authService.login({ username, password: '123456' })).jwt;
   }
 
   beforeAll(async () => {
@@ -69,7 +71,7 @@ describe('ProductsController (e2e)', () => {
     // drop database
     await getConnection().synchronize(true);
 
-    await createLogin();
+    tokenUser1 = await createLogin();
   });
 
   afterAll(async () => {
@@ -83,7 +85,7 @@ describe('ProductsController (e2e)', () => {
       it(`should init a product and then create it.`, async () => {
         const initData = (await request(app.getHttpServer())
           .post('/products/init')
-          .set('Authorization', 'Bearer ' + token)
+          .set('Authorization', `Bearer ${tokenUser1}`)
           .send({ url })
           .expect(201)
           .expect(res => expect(res.body.name)
@@ -95,16 +97,61 @@ describe('ProductsController (e2e)', () => {
           name: initData.name,
           size: initData.sizes[0],
         };
-        await request(app.getHttpServer())
-          .post('/products')
-          .set('Authorization', 'Bearer ' + token)
-          .send(createData)
-          .expect(201)
-          .expect(res => expect(res.body.price)
-            .toBe(expectedPrice));
+
+        latestProduct = (await request(app.getHttpServer())
+            .post('/products')
+            .set('Authorization', 'Bearer ' + tokenUser1)
+            .send(createData)
+            .expect(201)
+            .expect(res => expect(res.body.price)
+              .toBe(expectedPrice))
+        ).body;
 
       });
     });
+  });
+
+  describe('product list', () => {
+    it('should contain products after they were added', async () => {
+      await request(app.getHttpServer())
+        .get('/products')
+        .set('Authorization', `Bearer ${tokenUser1}`)
+        .expect(200)
+        .expect(res => expect(res.body)
+          .toHaveLength(testCases.length));
+    });
+  });
+
+  describe('second user', () => {
+    let tokenOtherUser: string;
+
+    beforeAll(async () =>
+      tokenOtherUser = await createLogin('otheruser'));
+
+    it('should not access products of other users', async () => {
+      await request(app.getHttpServer())
+        .get('/products')
+        .set('Authorization', `Bearer ${tokenOtherUser}`)
+        .expect(200)
+        .expect(res => expect(res.body)
+          .toEqual([]));
+    });
+
+    // TODO: Wait until https://github.com/typeorm/typeorm/pull/3526 is merged
+    xit('should not mark product of other user as read', async () => {
+      await request(app.getHttpServer())
+        .post(`/products/${latestProduct._id}/markread`)
+        .set('Authorization', 'Bearer ' + tokenOtherUser)
+        .expect(404);
+    });
+
+    xit('should not update product of other user', async () => {
+      await request(app.getHttpServer())
+        .post(`/products/${latestProduct._id}/update`)
+        .set('Authorization', `Bearer ${tokenOtherUser}`)
+        .expect(404);
+    });
+
   });
 
 });
