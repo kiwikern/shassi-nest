@@ -9,6 +9,7 @@ import { InitializeProductDto } from './dtos/initialize-product.dto';
 import { ObjectID } from 'mongodb';
 import { ApiBearerAuth, ApiOkResponse, ApiUseTags, ApiForbiddenResponse, ApiCreatedResponse } from '@nestjs/swagger';
 import { ProductSizeAvailability } from '../crawler/product-size.interface';
+import { ObjectIdPipe } from '../common/object-id.pipe';
 
 @Controller('products')
 @UseGuards(AuthGuard('jwt'))
@@ -44,20 +45,20 @@ export class ProductsController {
 
   @Post('/:id/markread')
   @ApiCreatedResponse({ description: 'Returns the updated product.' })
-  markRead(@User() user: UserEntity, @Param('id') productId: string): Promise<ProductEntity> {
-    return this.productsService.markRead(user._id, new ObjectID(productId));
+  markRead(@User() user: UserEntity, @Param('id', ObjectIdPipe) productId: ObjectID): Promise<ProductEntity> {
+    return this.productsService.markRead(user._id, productId);
   }
 
   @Post('/:id/update')
   @ApiCreatedResponse({ description: 'Returns the updated product.' })
-  updateProduct(@User() user: UserEntity, @Param('id') productId: string): Promise<ProductEntity> {
-    return this.productsService.updateSingleProduct(user._id, new ObjectID(productId));
+  updateProduct(@User() user: UserEntity, @Param('id', ObjectIdPipe) productId: ObjectID): Promise<ProductEntity> {
+    return this.productsService.updateSingleProduct(user._id, productId);
   }
 
   @Delete('/:id')
   @ApiOkResponse({ description: 'Returns success state.' })
-  async deleteProduct(@User() user: UserEntity, @Param('id') productId: ObjectID) {
-    return { success: await this.productsService.deleteProduct(user._id, new ObjectID(productId)) };
+  async deleteProduct(@User() user: UserEntity, @Param('id', ObjectIdPipe) productId: ObjectID) {
+    return { success: await this.productsService.deleteProduct(user._id, productId) };
   }
 
 }
