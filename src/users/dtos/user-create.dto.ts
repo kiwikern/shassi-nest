@@ -10,7 +10,7 @@ export class UserCreateDto {
   @IsEmail()
   @IsOptional()
   @ApiModelProperty()
-  email: string;
+  email?: string;
 
   @IsString()
   @MinLength(6)

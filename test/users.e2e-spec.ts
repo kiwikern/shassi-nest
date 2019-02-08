@@ -17,7 +17,9 @@ describe('UsersController (e2e)', () => {
       .compile();
     app = moduleFixture.createNestApplication();
     await app.init();
+  });
 
+  beforeEach(async () => {
     // drop database
     await getConnection().synchronize(true);
   });
@@ -66,4 +68,19 @@ describe('UsersController (e2e)', () => {
       .expect(res => expect(res.body.notificationTypes)
         .toMatchObject({ telegram: true, email: true }));
   });
+
+  it('should refuse to create user with same username.', async () => {
+    const newUser: UserCreateDto = { username: 'kiwi', password: '123456' };
+
+    await request(app.getHttpServer())
+      .post('/users')
+      .send(newUser)
+      .expect(201);
+
+    await request(app.getHttpServer())
+      .post('/users')
+      .send(newUser)
+      .expect(400);
+  });
+
 });

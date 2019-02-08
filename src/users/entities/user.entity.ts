@@ -1,4 +1,4 @@
-import { Column, Entity, ObjectIdColumn } from 'typeorm';
+import { Column, Entity, Index, ObjectIdColumn } from 'typeorm';
 import { Exclude, Transform } from 'class-transformer';
 import { NotificationType } from './notification-type.entity';
 import { ObjectID } from 'mongodb';
@@ -13,6 +13,7 @@ export class UserEntity {
   _id: ObjectID;
 
   @Column()
+  @Index({unique: true})
   @ApiModelProperty()
   username: string;
 
