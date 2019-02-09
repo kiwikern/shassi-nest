@@ -2,29 +2,23 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ProductsController } from './products.controller';
 import { ProductsService } from './products.service';
 import { ObjectID } from 'mongodb';
+import { MockType } from '../../test/mock.type';
+import { productsServiceFactory } from '../../test/mocks/jest-mocks';
 
 describe('Product Controller', () => {
   let module: TestingModule;
-  let productsServiceMock;
+  let productsServiceMock: MockType<ProductsService>;
   let controller: ProductsController;
 
   beforeEach(async () => {
-    productsServiceMock = new (jest.fn(() => ({
-      getProducts: jest.fn(),
-      initializeProduct: jest.fn(),
-      addProduct: jest.fn(),
-      updateSingleProduct: jest.fn(),
-      markRead: jest.fn(),
-      deleteProduct: jest.fn(() => Promise.resolve(true)),
-    })))();
-
     module = await Test.createTestingModule({
       controllers: [ProductsController],
       providers: [
-        { provide: ProductsService, useValue: productsServiceMock },
+        { provide: ProductsService, useFactory: productsServiceFactory },
       ],
     }).compile();
     controller = module.get<ProductsController>(ProductsController);
+    productsServiceMock = module.get(ProductsService);
   });
 
   it('should return all products', async () => {
@@ -56,6 +50,7 @@ describe('Product Controller', () => {
 
   it('should delete a product', async () => {
     const productId = new ObjectID.createFromTime(0);
+    productsServiceMock.deleteProduct.mockImplementation(() => Promise.resolve(true));
     const result = await controller.deleteProduct({ _id: 'id' } as any, productId);
     expect(result.success).toBe(true);
     expect(productsServiceMock.deleteProduct).toHaveBeenCalledWith('id', productId);

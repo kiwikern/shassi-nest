@@ -4,27 +4,23 @@ import { TelegramUserIdEntity } from './telegram-user-id.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { ObjectID } from 'mongodb';
 import { BadRequestException } from '@nestjs/common';
+import { repositoryMockFactory } from '../../test/mocks/jest-mocks';
+import { MockType } from '../../test/mock.type';
+import { Repository } from 'typeorm';
 
 describe('TelegramUserIdService', () => {
   let service: TelegramUserIdService;
-  let repositoryMock;
+  let repositoryMock: MockType<Repository<TelegramUserIdEntity>>;
 
   beforeEach(async () => {
-    repositoryMock = new (jest.fn(() => ({
-      find: jest.fn(),
-      findOne: jest.fn(),
-      create: jest.fn(entity => entity),
-      save: jest.fn(entity => entity),
-      delete: jest.fn(() => Promise.resolve()),
-    })))();
-
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         TelegramUserIdService,
-        { provide: getRepositoryToken(TelegramUserIdEntity), useValue: repositoryMock },
+        { provide: getRepositoryToken(TelegramUserIdEntity), useFactory: repositoryMockFactory },
       ],
     }).compile();
     service = module.get<TelegramUserIdService>(TelegramUserIdService);
+    repositoryMock = module.get(getRepositoryToken(TelegramUserIdEntity));
   });
 
   it('should create a token', async () => {

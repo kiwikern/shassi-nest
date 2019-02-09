@@ -7,6 +7,7 @@ import { MockType } from '../../test/mock.type';
 import { Repository } from 'typeorm';
 import { BcryptService } from '../common/bcrypt.service';
 import { BadRequestException } from '@nestjs/common';
+import { bcryptServiceFactory, repositoryMockFactory } from '../../test/mocks/jest-mocks';
 
 describe('UsersService', () => {
   let service: UsersService;
@@ -14,26 +15,16 @@ describe('UsersService', () => {
   let bcryptService: MockType<BcryptService>;
 
   beforeEach(async () => {
-    repositoryMock = new (jest.fn(() => ({
-      find: jest.fn(),
-      findOne: jest.fn(),
-      create: jest.fn(user => user),
-      save: jest.fn(entity => entity),
-      delete: jest.fn(() => Promise.resolve()),
-    })))();
-    bcryptService = new (jest.fn(() => ({
-      hash: jest.fn(),
-      checkEncryptedData: jest.fn(),
-    })))();
-
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         UsersService,
-        { provide: getRepositoryToken(UserEntity), useValue: repositoryMock },
-        { provide: BcryptService, useValue: bcryptService },
+        { provide: getRepositoryToken(UserEntity), useFactory: repositoryMockFactory },
+        { provide: BcryptService, useFactory: bcryptServiceFactory },
       ],
     }).compile();
     service = module.get<UsersService>(UsersService);
+    repositoryMock = module.get(getRepositoryToken(UserEntity));
+    bcryptService = module.get(BcryptService);
   });
 
   it('should create a user', async () => {
@@ -83,9 +74,9 @@ describe('UsersService', () => {
   });
 
   it('should update a user', async () => {
-    repositoryMock.findOne.mockReturnValue({email: 'old'});
-    expect(await service.updateUser('user', {email: 'new'}))
-      .toEqual({email: 'new'});
+    repositoryMock.findOne.mockReturnValue({ email: 'old' });
+    expect(await service.updateUser('user', { email: 'new' }))
+      .toEqual({ email: 'new' });
   });
 
 });

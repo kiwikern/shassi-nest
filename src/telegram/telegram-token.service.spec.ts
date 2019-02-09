@@ -2,33 +2,27 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { TelegramTokenService } from './telegram-token.service';
 import { ObjectID } from 'mongodb';
 import { TelegramTokenEntity } from './telegram-token.entity';
-import { getRepositoryToken, getEntityManagerToken } from '@nestjs/typeorm';
+import { getEntityManagerToken, getRepositoryToken } from '@nestjs/typeorm';
+import { entityManagerMockFactory, repositoryMockFactory } from '../../test/mocks/jest-mocks';
+import { MockType } from '../../test/mock.type';
+import { MongoEntityManager, Repository } from 'typeorm';
 
 describe('TelegramTokenService', () => {
   let service: TelegramTokenService;
-  let repositoryMock;
-  let entityManagerMock;
+  let repositoryMock: MockType<Repository<TelegramTokenEntity>>;
+  let entityManagerMock: MockType<MongoEntityManager>;
 
   beforeEach(async () => {
-    repositoryMock = new (jest.fn(() => ({
-      find: jest.fn(),
-      findOne: jest.fn(),
-      create: jest.fn(() => ({})),
-      save: jest.fn(entity => entity),
-      delete: jest.fn(() => Promise.resolve()),
-    })))();
-    entityManagerMock = new (jest.fn(() => ({
-      createCollectionIndex: jest.fn(),
-    })))();
-
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         TelegramTokenService,
-        { provide: getEntityManagerToken(), useValue: entityManagerMock },
-        { provide: getRepositoryToken(TelegramTokenEntity), useValue: repositoryMock },
+        { provide: getEntityManagerToken(), useFactory: entityManagerMockFactory },
+        { provide: getRepositoryToken(TelegramTokenEntity), useFactory: repositoryMockFactory },
       ],
     }).compile();
     service = module.get<TelegramTokenService>(TelegramTokenService);
+    repositoryMock = module.get(getRepositoryToken(TelegramTokenEntity));
+    entityManagerMock = module.get(getEntityManagerToken());
   });
 
   it('should create the index', () => {
@@ -60,14 +54,14 @@ describe('TelegramTokenService', () => {
   it('should accept the correct token for a user', async () => {
     const userId = ObjectID.createFromTime(0);
     const token = 'my-token';
-    repositoryMock.findOne.mockReturnValue({token});
+    repositoryMock.findOne.mockReturnValue({ token });
     expect(await service.checkToken(userId, token)).toBe(true);
   });
 
   it('should reject a wrong token for a user', async () => {
     const userId = ObjectID.createFromTime(0);
     const token = 'my-token';
-    repositoryMock.findOne.mockReturnValue({token: 'other'});
+    repositoryMock.findOne.mockReturnValue({ token: 'other' });
     expect(await service.checkToken(userId, token)).toBe(false);
   });
 
@@ -80,7 +74,7 @@ describe('TelegramTokenService', () => {
   it('should reject without a user', async () => {
     const userId = null;
     const token = 'my-token';
-    repositoryMock.findOne.mockReturnValue({token});
+    repositoryMock.findOne.mockReturnValue({ token });
     expect(await service.checkToken(userId, token)).toBe(false);
   });
 });

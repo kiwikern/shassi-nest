@@ -7,38 +7,30 @@ import { CronJobService } from '../common/cron-job.service';
 import { MockType } from '../../test/mock.type';
 import { ProductsService } from '../products/products.service';
 import { InternalServerErrorException } from '@nestjs/common';
+import { cronJobServiceFactory, productsServiceFactory, telegramServiceFactory } from '../../test/mocks/jest-mocks';
 
 describe('NotificationsService', () => {
   let service: NotificationsService;
-  let cronJobService: MockType<CronJobService>;
   let productsService: MockType<ProductsService>;
+  let cronJobService: MockType<CronJobService>;
   let telegramService: MockType<TelegramService>;
 
   beforeAll(async () => {
     const configService = { frontendDomain: 'domain' };
-    cronJobService = new (jest.fn(() => ({
-      create: jest.fn(() => ({
-        start: () => null,
-        nextDates: () => new Date(),
-      })),
-    })))();
-    productsService = jest.fn(() => ({
-      updateAllProducts: jest.fn(),
-    }))();
-    telegramService = jest.fn(() => ({
-      notifyAboutUpdate: jest.fn(),
-    }))();
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         NotificationsService,
-        { provide: TelegramService, useValue: telegramService },
-        { provide: ProductsService, useValue: productsService },
+        { provide: TelegramService, useFactory: telegramServiceFactory },
+        { provide: ProductsService, useFactory: productsServiceFactory },
         { provide: ConfigService, useValue: configService },
-        { provide: CronJobService, useValue: cronJobService },
+        { provide: CronJobService, useFactory: cronJobServiceFactory },
       ],
     }).compile();
     service = module.get<NotificationsService>(NotificationsService);
+    productsService = module.get(ProductsService);
+    cronJobService = module.get(CronJobService);
+    telegramService = module.get(TelegramService);
   });
 
   it('should be defined', () => {

@@ -10,34 +10,25 @@ import { useAsPath } from 'tslint/lib/configuration';
 import { CronJobService } from '../common/cron-job.service';
 import { MockType } from '../../test/mock.type';
 import { CronJob } from 'cron';
+import { Repository } from 'typeorm';
+import { crawlerServiceFactory, repositoryMockFactory } from '../../test/mocks/jest-mocks';
 
 describe('ProductsService', () => {
   let service: ProductsService;
-  let repositoryMock;
-  let crawlerServiceMock;
+  let repositoryMock: MockType<Repository<ProductEntity>>;
+  let crawlerServiceMock: MockType<CrawlerService>;
 
   beforeEach(async () => {
-    repositoryMock = new (jest.fn(() => ({
-      find: jest.fn(),
-      findOne: jest.fn(),
-      create: jest.fn(entity => entity),
-      save: jest.fn(entity => entity),
-      delete: jest.fn(() => Promise.resolve()),
-    })))();
-
-    crawlerServiceMock = new (jest.fn(() => ({
-      getInitData: jest.fn(),
-      getUpdateData: jest.fn(),
-    })))();
-
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         ProductsService,
-        { provide: getRepositoryToken(ProductEntity), useValue: repositoryMock },
-        { provide: CrawlerService, useValue: crawlerServiceMock },
+        { provide: getRepositoryToken(ProductEntity), useFactory: repositoryMockFactory },
+        { provide: CrawlerService, useFactory: crawlerServiceFactory },
       ],
     }).compile();
     service = module.get<ProductsService>(ProductsService);
+    repositoryMock = module.get(getRepositoryToken(ProductEntity));
+    crawlerServiceMock = module.get(CrawlerService);
   });
 
   it('should get products', async () => {
