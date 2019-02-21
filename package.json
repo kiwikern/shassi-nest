@@ -11,6 +11,7 @@
     "start": "cross-env NODE_ENV=development ts-node -r tsconfig-paths/register src/main.ts",
     "start:dev": "nodemon",
     "start:debug": "nodemon --config nodemon-debug.json",
+    "prestart:prod": "npm run build",
     "start:prod": "cross-env NODE_ENV=production node dist/main.js",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",
@@ -18,7 +19,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json --runInBand --forceExit",
-    "updatestep": "cross-env NODE_ENV=development ts-node ./updatesteps/updatestep3.ts"
+    "updatestep": "cross-env NODE_ENV=development ts-node ./updatesteps/updatestep3.ts",
+    "heroku-postbuild": "echo Skip builds on Heroku"
   },
   "dependencies": {
     "@nestjs/common": "^5.7.3",
