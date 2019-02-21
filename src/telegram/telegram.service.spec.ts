@@ -400,4 +400,48 @@ describe('TelegramService', () => {
     service.handleErrors(new Error('Message'));
   });
 
+  describe('evenlySplitArray', () => {
+
+    it('should handle null', () => {
+      expect(service.evenlySplitArray(null))
+        .toEqual([[]]);
+    });
+
+    it('should handle empty array', () => {
+      expect(service.evenlySplitArray([]))
+        .toEqual([[]]);
+    });
+
+    it('should handle one element', () => {
+      expect(service.evenlySplitArray([0]))
+        .toEqual([[0]]);
+    });
+
+    it('should handle four elements', () => {
+      expect(service.evenlySplitArray([0, 1, 2, 3]))
+        .toEqual([[0, 1], [2, 3]]);
+    });
+
+    it('should handle five elements', () => {
+      expect(service.evenlySplitArray([0, 1, 2, 3, 4]))
+        .toEqual([[0, 1, 2], [3, 4]]);
+    });
+
+    it('should handle seven elements', () => {
+      expect(service.evenlySplitArray([0, 1, 2, 3, 4, 5, 6]))
+        .toEqual([[0, 1], [2, 3], [4, 5, 6]]);
+    });
+
+    it('should handle eight elements', () => {
+      expect(service.evenlySplitArray([0, 1, 2, 3, 4, 5, 6, 7]))
+        .toEqual([[0, 1, 2], [3, 4, 5], [6, 7]]);
+    });
+
+    it('should handle nine elements', () => {
+      expect(service.evenlySplitArray([0, 1, 2, 3, 4, 5, 6, 7, 8]))
+        .toEqual([[0, 1, 2], [3, 4, 5], [6, 7, 8]]);
+    });
+
+  });
+
 });

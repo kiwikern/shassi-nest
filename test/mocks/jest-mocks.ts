@@ -30,6 +30,7 @@ export const telegramServiceFactory: () => MockType<TelegramService> = jest.fn((
   startCommand: jest.fn(),
   updateProductOnSizeChosen: jest.fn(),
   cleanUpSessionData: jest.fn(),
+  evenlySplitArray: jest.fn(),
 }));
 
 export const cronJobServiceFactory: () => MockType<CronJobService> = jest.fn(() => ({

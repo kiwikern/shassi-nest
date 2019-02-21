@@ -8,6 +8,7 @@ import { TelegramUserIdService } from './telegram-user-id.service';
 import { InitializeProductDto } from '../products/dtos/initialize-product.dto';
 import { CronJobService } from '../common/cron-job.service';
 import { ObjectID } from 'mongodb';
+import { ProductSizeAvailability } from '../crawler/product-size.interface';
 
 @Injectable()
 export class TelegramService implements OnModuleInit {
@@ -109,11 +110,37 @@ export class TelegramService implements OnModuleInit {
     }
   }
 
-  private createKeyboard(sizes, productId) {
-    return Markup
-      .inlineKeyboard(sizes.map(s =>
-        Markup.callbackButton(`${s.name}${s.isAvailable ? '' : ' (n/a)'}`,
-          `${s.name}|-|${s.id}|-|${productId}`)));
+  private createKeyboard(sizes: ProductSizeAvailability[], productId: number) {
+    const callbackButtons = sizes.map(s => {
+      const buttonText = `${s.name}${s.isAvailable ? '' : ' (n/a)'}`;
+      const callbackData = `${s.name}|-|${s.id}|-|${productId}`;
+      return Markup.callbackButton(buttonText, callbackData);
+    });
+    const callbackButtonRows = this.evenlySplitArray(callbackButtons);
+    return Markup.inlineKeyboard(callbackButtonRows);
+  }
+
+  evenlySplitArray<T>(arrayToSplit: T[]): T[][] {
+    if (!Array.isArray(arrayToSplit)) {
+      return [[]];
+    }
+
+    const splitInHalfLength = Math.round(arrayToSplit.length / 2);
+    const splitInThirdLength = Math.round(arrayToSplit.length / 3);
+    if (arrayToSplit.length > 6) {
+      return [
+        arrayToSplit.slice(0, splitInThirdLength),
+        arrayToSplit.slice(splitInThirdLength, splitInThirdLength * 2),
+        arrayToSplit.slice(splitInThirdLength * 2),
+      ];
+    } else if (arrayToSplit.length > 3) {
+      return [
+        arrayToSplit.slice(0, splitInHalfLength),
+        arrayToSplit.slice(splitInHalfLength),
+      ];
+    } else {
+      return [arrayToSplit];
+    }
   }
 
   async authSession(ctx, next) {
