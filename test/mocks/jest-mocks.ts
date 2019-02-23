@@ -64,7 +64,7 @@ export const tokenServiceFactory: () => MockType<TelegramTokenService> = jest.fn
   onModuleInit: jest.fn(),
 }));
 
-// @ts-ignore TODO: Partial should work
+// @ts-ignore
 export const telegrafFactory: () => MockType<Telegraf<any>> = jest.fn(() => ({
   telegram: { sendMessage: jest.fn() },
   catch: jest.fn(),

@@ -34,7 +34,6 @@ export class UsProductEntity {
   @Type(() => UsProductSize)
   size: UsProductSize;
 
-  // TODO: Why does default value not work?
   @Column({ default: true})
   @ApiModelProperty()
   isActive: boolean = true;

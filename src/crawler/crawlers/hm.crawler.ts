@@ -22,8 +22,7 @@ export class HmCrawler implements Crawler {
 
   async init(url: string) {
     if (!url.includes('www2.')) {
-      // TODO: Get redirect url and continue with that.
-      throw new InternalServerErrorException('Not yet implemented');
+      throw new BadRequestException('Old urls are not supported.');
     }
     this.url = url;
 
