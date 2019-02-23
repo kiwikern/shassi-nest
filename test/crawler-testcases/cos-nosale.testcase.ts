@@ -4,7 +4,7 @@ import { CosCrawler } from '../../src/crawler/crawlers/cos.crawler';
 export const cosTestCase = {
   crawlerType: CosCrawler,
 
-  url: 'cosstores-0722148001.html',
+  url: 'https://www.cosstores.com/en_eur/men/menswear/coats-jackets/product.wool-blend-bomber-jacket-green.0722148001.html?utm_source=newsletter&utm_medium=email&utm_campaign=2019_SUN_W07_EU&utm_content=re_actives',
 
   sizes: [
     { id: '0722148001001', isAvailable: false, name: 'XS' },

@@ -34,7 +34,7 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
         .replace(/\,(?!\s*?[\{\[\"\'\w])/g, '');
       const data = JSON.parse(productDataString);
 
-      const productId = /(\d+).html$/.exec(url)[1];
+      const productId = /(\d+).html.*$/.exec(url)[1];
       this.productData = data[productId];
       const apiUrl = this.getBaseUrl() + '/en_eur/getAvailability?format=json&variants=';
       const variants = this.productData.variants.map(v => v.variantCode).join(',');
