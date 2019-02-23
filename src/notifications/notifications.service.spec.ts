@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { NotificationsService } from './notifications.service';
-import { ProductAvailabilityChange, ProductChange, ProductPriceChange } from '../products/dtos/product-change.interface';
+import { ProductChange } from '../products/dtos/product-change.interface';
 import { TelegramService } from '../telegram/telegram.service';
 import { ConfigService } from '../config/config.service';
 import { CronJobService } from '../common/cron-job.service';
@@ -38,31 +38,64 @@ describe('NotificationsService', () => {
   it('should send only relevant notifications', async () => {
     const changes: ProductChange[] = [
       {
-        product: { userId: 'userId', name: 'name', isAvailable: true } as any,
-        productAttributeChanges: [new ProductPriceChange({ newValue: 100, oldValue: 90 })] as any,
+        product: { userId: 'userId', name: 'name', _id: 'id', isAvailable: true } as any,
+        productAttributeChanges: {
+          hasAnyChange: true,
+          hasAvailabilityChange: false,
+          hasNeverBeenAvailableBefore: false,
+          hasPriceChange: true,
+          newPriceValue: 100,
+          oldPriceValue: 90,
+        },
       },
       {
         product: { userId: 'userId', isAvailable: true } as any,
-        productAttributeChanges: [
-          new ProductAvailabilityChange({ newValue: true, oldValue: false }),
-          new ProductPriceChange({ newValue: 90, oldValue: 100 }),
-        ] as any,
+        productAttributeChanges: {
+          hasAnyChange: true,
+          hasAvailabilityChange: true,
+          hasNeverBeenAvailableBefore: false,
+          hasPriceChange: true,
+          newPriceValue: 90,
+          oldPriceValue: 100,
+        },
       },
       {
         product: { userId: 'userId', isAvailable: false } as any,
-        productAttributeChanges: [new ProductPriceChange({ newValue: 90, oldValue: 100 })] as any,
+        productAttributeChanges: {
+          hasAnyChange: true,
+          hasAvailabilityChange: false,
+          hasNeverBeenAvailableBefore: false,
+          hasPriceChange: true,
+          newPriceValue: 100,
+          oldPriceValue: 90,
+        },
       },
       {
         product: { userId: 'userId', isAvailable: true } as any,
-        productAttributeChanges: [new ProductAvailabilityChange({ newValue: true, oldValue: false })] as any,
+        productAttributeChanges: {
+          hasAnyChange: true,
+          hasAvailabilityChange: true,
+          hasNeverBeenAvailableBefore: false,
+          hasPriceChange: false,
+        } as any,
       },
       {
         product: { userId: 'userId', isAvailable: true } as any,
-        productAttributeChanges: [new ProductAvailabilityChange({ newValue: true, oldValue: false, hasNeverBeenAvailable: true })] as any,
+        productAttributeChanges: {
+          hasAnyChange: true,
+          hasAvailabilityChange: true,
+          hasNeverBeenAvailableBefore: true,
+          hasPriceChange: false,
+        } as any,
       },
       {
         product: { userId: 'userId', isAvailable: true } as any,
-        productAttributeChanges: [{attributeName: 'attribute', newValue: 'new', oldValue: 'old' }] as any,
+        productAttributeChanges: {
+          hasAnyChange: true,
+          hasAvailabilityChange: false,
+          hasNeverBeenAvailableBefore: true,
+          hasPriceChange: false,
+        } as any,
       },
     ];
     telegramService.notifyAboutUpdate.mockImplementation(() => {
@@ -72,38 +105,14 @@ describe('NotificationsService', () => {
     await service.sendNotificationsPerUser();
     expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
       'userId',
-      'Your product [name](domain/products/undefined) is now at 100.00€ (+10.00€).');
+      'Your product [name](domain/products/id) is now at 100.00€ (+10.00€).');
     expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(2,
       'userId',
       'Your product [undefined](domain/products/undefined) is now at 90.00€ (-10.00€).');
     expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(3,
       'userId',
       'Your product [undefined](domain/products/undefined) is available again.');
-    expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(4,
-      'userId',
-      'Your product [undefined](domain/products/undefined) has changed attribute from old to new.');
-    expect(telegramService.notifyAboutUpdate).toHaveBeenCalledTimes(4);
-  });
-
-  it('should formulate update text for price decrease', () => {
-    const update = new ProductPriceChange({ oldValue: 100, newValue: 90 });
-    const product: any = { _id: 'id', name: 'name' };
-    const updateText = 'Your product [name](domain/products/id) is now at 90.00€ (-10.00€).';
-    expect(service.getMarkdownUpdateText(update, product)).toBe(updateText);
-  });
-
-  it('should formulate update text for price increase', () => {
-    const update = new ProductPriceChange({ oldValue: 100, newValue: 110 });
-    const product: any = { _id: 'id', name: 'name' };
-    const updateText = 'Your product [name](domain/products/id) is now at 110.00€ (+10.00€).';
-    expect(service.getMarkdownUpdateText(update, product)).toBe(updateText);
-  });
-
-  it('should formulate text for availability change', () => {
-    const update = new ProductAvailabilityChange({ oldValue: false, newValue: true });
-    const product: any = { _id: 'id', name: 'name' };
-    const updateText = 'Your product [name](domain/products/id) is available again.';
-    expect(service.getMarkdownUpdateText(update, product)).toBe(updateText);
+    expect(telegramService.notifyAboutUpdate).toHaveBeenCalledTimes(3);
   });
 
   it('should setup the cronjob', async () => {

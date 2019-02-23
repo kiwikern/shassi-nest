@@ -6,7 +6,10 @@ import { Repository } from 'typeorm';
 import { CrawlerService } from '../crawler/crawler.service';
 import { ObjectID } from 'mongodb';
 import { ProductSizeAvailability } from '../crawler/product-size.interface';
-import { ProductAttributeChange, ProductAvailabilityChange, ProductChange, ProductPriceChange } from './dtos/product-change.interface';
+import {
+  ProductAttributeChangesBuilder,
+  ProductChange,
+} from './dtos/product-change.interface';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
@@ -88,31 +91,29 @@ export class ProductsService {
       const sizeId = product.size ? product.size.id : null;
       const newUpdate = await this.crawlerService.getUpdateData(product.url, sizeId);
       const latestUpdateWhenAvailable = product.updates.slice().reverse().find(p => p.isAvailable);
-      const productAttributeChanges: Array<ProductAttributeChange<boolean | number>> = [];
+      const changesBuilder = new ProductAttributeChangesBuilder();
+
       if (product.price !== newUpdate.price) {
-        productAttributeChanges.push(new ProductPriceChange({
+        changesBuilder.setPriceChange({
           oldValue: product.price,
           newValue: newUpdate.price,
-        }));
+        });
       }
       if (product.isAvailable !== newUpdate.isAvailable) {
-        productAttributeChanges.push(new ProductAvailabilityChange({
-          oldValue: product.isAvailable,
-          newValue: newUpdate.isAvailable,
-          hasNeverBeenAvailable: !latestUpdateWhenAvailable,
-        }));
+        changesBuilder.setAvailabilityChange(!latestUpdateWhenAvailable);
         if (latestUpdateWhenAvailable && latestUpdateWhenAvailable.price !== newUpdate.price) {
-          productAttributeChanges.push(new ProductPriceChange({
+          changesBuilder.setPriceChange({
             oldValue: latestUpdateWhenAvailable.price,
             newValue: newUpdate.price,
-          }));
+          });
         }
       }
-      if (productAttributeChanges.length > 0) {
+      const productAttributeChanges = changesBuilder.build();
+      if (productAttributeChanges.hasAnyChange) {
         product.updates.push(newUpdate);
         product.hasUnreadUpdate = true;
         const updatedProduct = await this.productRepository.save(product);
-        return { product: updatedProduct, productAttributeChanges };
+        return { product: updatedProduct,  productAttributeChanges };
       }
     } catch (error) {
       if (error instanceof NotFoundException || error.toString().includes('404')) {

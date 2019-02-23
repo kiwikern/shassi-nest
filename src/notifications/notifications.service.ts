@@ -1,7 +1,6 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
-import { ProductAttributeChange, ProductAvailabilityChange, ProductChange, ProductPriceChange } from '../products/dtos/product-change.interface';
+import { ProductChange } from '../products/dtos/product-change.interface';
 import { ConfigService } from '../config/config.service';
-import { ProductEntity } from '../products/entities/products.entity';
 import { TelegramService } from '../telegram/telegram.service';
 import { CronJobService } from '../common/cron-job.service';
 import { ProductsService } from '../products/products.service';
@@ -37,22 +36,12 @@ export class NotificationsService implements OnModuleInit {
     this.sendNotifications(changesPerUser);
   }
 
-  sendNotifications(changesPerUser: Map<string, ProductChange[]>) {
+  private sendNotifications(changesPerUser: Map<string, ProductChange[]>) {
     for (const userId of changesPerUser.keys()) {
-      const changes = changesPerUser.get(userId);
-      changes
-        .filter(change => change.product.isAvailable)
-        .filter(change => {
-          const attributeChange = change.productAttributeChanges[0];
-          return change.productAttributeChanges.length !== 1
-            || !(attributeChange instanceof ProductAvailabilityChange)
-            || attributeChange.hasNeverBeenAvailable;
-        })
-        .map(change => ({
-          product: change.product,
-          update: this.getRelevantAttributeChange(change.productAttributeChanges),
-        }))
-        .map(change => this.getMarkdownUpdateText(change.update, change.product))
+      changesPerUser.get(userId)
+        .filter(update => this.isRelevantChange(update))
+        .map(update => this.getMarkdownUpdateText(update))
+        .filter(text => !!text)
         .forEach(async text => {
           try {
             await this.telegramService.notifyAboutUpdate(userId, text);
@@ -63,28 +52,27 @@ export class NotificationsService implements OnModuleInit {
     }
   }
 
-  getMarkdownUpdateText(update: ProductAttributeChange<boolean | number>, product: ProductEntity) {
+  private isRelevantChange(update: ProductChange) {
+    const changes = update.productAttributeChanges;
+    return update.product.isAvailable
+      && (changes.hasPriceChange || changes.hasNeverBeenAvailableBefore);
+  }
+
+  private getMarkdownUpdateText(update: ProductChange) {
+    const changes = update.productAttributeChanges;
     let updateText;
-    if (update instanceof ProductPriceChange) {
-      const prefix = update.priceDelta > 0 ? '+' : '';
-      updateText = `is now at ${update.newValue.toFixed(2)}€ (${prefix}${update.priceDelta.toFixed(2)}€)`;
-    } else if (update instanceof ProductAvailabilityChange) {
+    if (changes.hasPriceChange) {
+      const priceDelta = changes.newPriceValue - changes.oldPriceValue;
+      const prefix = priceDelta > 0 ? '+' : '';
+      updateText = `is now at ${changes.newPriceValue.toFixed(2)}€ (${prefix}${priceDelta.toFixed(2)}€)`;
+    } else if (changes.hasAvailabilityChange) {
       updateText = `is available again`;
     } else {
-      this.logger.warn({ message: 'Unknown product attribute change.', update });
-      updateText = `has changed ${update.attributeName} from ${update.oldValue} to ${update.newValue}`;
+      this.logger.error({ message: 'Unknown product attribute change.', changes, product: update.product });
+      return null;
     }
-    const nameLink = `[${product.name}](${this.configService.frontendDomain}/products/${product._id})`;
+    const nameLink = `[${update.product.name}](${this.configService.frontendDomain}/products/${update.product._id})`;
     return `Your product ${nameLink} ${updateText}.`;
   }
 
-  private getRelevantAttributeChange(productAttributeChanges: Array<ProductAttributeChange<number | boolean>>)
-    : ProductAttributeChange<number | boolean> | null {
-    const priceChange = productAttributeChanges.find(p => p instanceof ProductPriceChange);
-    if (priceChange) {
-      return priceChange;
-    } else {
-      return productAttributeChanges[0];
-    }
-  }
 }

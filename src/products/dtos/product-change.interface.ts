@@ -3,37 +3,48 @@ import { ProductEntity } from '../entities/products.entity';
 
 export interface ProductChange {
   product: ProductEntity;
-  productAttributeChanges: Array<ProductAttributeChange<number | boolean>>;
+  productAttributeChanges: ProductAttributeChanges;
 }
 
-export interface ProductAttributeChange<AttributeType> {
-  attributeName: string;
-  oldValue: AttributeType;
-  newValue: AttributeType;
+export interface ProductAttributeChanges {
+  readonly hasAnyChange: boolean;
+  readonly hasPriceChange: boolean;
+  readonly oldPriceValue: number;
+  readonly newPriceValue: number;
+  readonly hasAvailabilityChange: boolean;
+  readonly hasNeverBeenAvailableBefore: boolean;
 }
 
-export class ProductPriceChange implements ProductAttributeChange<number> {
-  attributeName = 'price';
-  newValue: number;
-  oldValue: number;
-  priceDelta: number;
+export class ProductAttributeChangesBuilder {
+  private hasAnyChange: boolean = false;
+  private hasPriceChange: boolean = false;
+  private oldPriceValue: number;
+  private newPriceValue: number;
+  private hasAvailabilityChange: boolean = false;
+  private hasNeverBeenAvailableBefore: boolean = false;
 
-  constructor({ oldValue, newValue }) {
-    this.oldValue = oldValue;
-    this.newValue = newValue;
-    this.priceDelta = this.newValue - this.oldValue;
+  setPriceChange({ oldValue, newValue }: { oldValue: number, newValue: number }) {
+    this.hasAnyChange = true;
+    this.hasPriceChange = true;
+    this.oldPriceValue = oldValue;
+    this.newPriceValue = newValue;
   }
-}
 
-export class ProductAvailabilityChange implements ProductAttributeChange<boolean> {
-  attributeName = 'isAvailable';
-  newValue: boolean;
-  oldValue: boolean;
-  hasNeverBeenAvailable: boolean;
-
-  constructor({ oldValue, newValue, hasNeverBeenAvailable = false }) {
-    this.oldValue = oldValue;
-    this.newValue = newValue;
-    this.hasNeverBeenAvailable = hasNeverBeenAvailable;
+  setAvailabilityChange(hasNeverBeenAvailableBefore: boolean) {
+    this.hasAnyChange = true;
+    this.hasAvailabilityChange = true;
+    this.hasNeverBeenAvailableBefore = hasNeverBeenAvailableBefore;
   }
+
+  build(): ProductAttributeChanges {
+    return {
+      hasAnyChange: this.hasAnyChange,
+      hasPriceChange: this.hasPriceChange,
+      oldPriceValue: this.oldPriceValue,
+      newPriceValue: this.newPriceValue,
+      hasAvailabilityChange: this.hasAvailabilityChange,
+      hasNeverBeenAvailableBefore: this.hasNeverBeenAvailableBefore,
+    };
+  }
+
 }

@@ -130,14 +130,25 @@ describe('ProductsService', () => {
 
       expect(updatedProducts.length).toBe(4);
       expect(updatedProducts[0]).toMatchObject({
-        productAttributeChanges: [{ attributeName: 'price', oldValue: 90, newValue: 100 }],
+        productAttributeChanges: {
+          hasAnyChange: true,
+          hasAvailabilityChange: false,
+          hasNeverBeenAvailableBefore: false,
+          hasPriceChange: true,
+          newPriceValue: 100,
+          oldPriceValue: 90,
+        },
         product: { updates: [{ price: 100, isAvailable: true }] },
       });
       expect(updatedProducts[1]).toMatchObject({
-        productAttributeChanges: [
-          { attributeName: 'isAvailable', oldValue: false, newValue: true, hasNeverBeenAvailable: false },
-          { attributeName: 'price', oldValue: 90, newValue: 100 },
-        ],
+        productAttributeChanges: {
+          hasAnyChange: true,
+          hasAvailabilityChange: true,
+          hasNeverBeenAvailableBefore: false,
+          hasPriceChange: true,
+          newPriceValue: 100,
+          oldPriceValue: 90,
+        },
         product: {
           updates: [
             { price: 90, isAvailable: true },
@@ -147,7 +158,12 @@ describe('ProductsService', () => {
         },
       });
       expect(updatedProducts[2]).toMatchObject({
-        productAttributeChanges: [{ attributeName: 'isAvailable', oldValue: false, newValue: true, hasNeverBeenAvailable: false }],
+        productAttributeChanges: {
+          hasAnyChange: true,
+          hasAvailabilityChange: true,
+          hasNeverBeenAvailableBefore: false,
+          hasPriceChange: false,
+        },
         product: {
           updates: [
             { price: 100, isAvailable: true },
@@ -157,7 +173,12 @@ describe('ProductsService', () => {
         },
       });
       expect(updatedProducts[3]).toMatchObject({
-        productAttributeChanges: [{ attributeName: 'isAvailable', oldValue: false, newValue: true, hasNeverBeenAvailable: true }],
+        productAttributeChanges: {
+          hasAnyChange: true,
+          hasAvailabilityChange: true,
+          hasNeverBeenAvailableBefore: true,
+          hasPriceChange: false,
+        },
         product: { updates: [{ price: 100, isAvailable: false }, { price: 100, isAvailable: true }] },
       });
     });
@@ -201,7 +222,14 @@ describe('ProductsService', () => {
       const updatedProducts = await service.updateAllProducts();
       expect(updatedProducts.length).toBe(1);
       expect(updatedProducts[0]).toMatchObject({
-        productAttributeChanges: [{ attributeName: 'price', oldValue: 90, newValue: 100 }],
+          productAttributeChanges: {
+            hasAnyChange: true,
+            hasAvailabilityChange: false,
+            hasNeverBeenAvailableBefore: false,
+            hasPriceChange: true,
+            newPriceValue: 100,
+            oldPriceValue: 90,
+          },
         product: { updates: [{ price: 100, isAvailable: true }] },
       });
       expect(repositoryMock.save).toBeCalledWith(expect.objectContaining({ isActive: false }));
