@@ -14,6 +14,7 @@
     "prestart:prod": "npm run build",
     "start:prod": "cross-env NODE_ENV=production node dist/main.js",
     "webpack": "rimraf dist && webpack --config webpack.config.js",
+    "post:webpack": "rimraf dist",
     "start:hmr": "cross-env NODE_ENV=development node dist/server",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",

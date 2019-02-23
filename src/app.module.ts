@@ -9,11 +9,10 @@ import { CrawlerModule } from './crawler/crawler.module';
 import { TelegramModule } from './telegram/telegram.module';
 import { CommonModule } from './common/common.module';
 import { NotificationsModule } from './notifications/notifications.module';
-
-// needed to load entities for webpack hmr
-const entityContext = require && (require as any).context
-  ? (require as any).context('.', true, /\.entity\.ts$/)
-  : null;
+import { UserEntity } from './users/entities/user.entity';
+import { TelegramTokenEntity } from './telegram/telegram-token.entity';
+import { TelegramUserIdEntity } from './telegram/telegram-user-id.entity';
+import { ProductEntity } from './products/entities/products.entity';
 
 @Module({
   imports: [
@@ -27,15 +26,12 @@ const entityContext = require && (require as any).context
           username: configService.databaseUsername,
           password: configService.databasePassword,
           database: configService.databaseName,
-          entities: configService.isProduction || !entityContext
-            ? [__dirname + '/**/*.entity{.ts,.js}']
-            : [
-              ...entityContext.keys().map(id => {
-                const entityModule = entityContext(id);
-                const [entity] = Object.values(entityModule);
-                return entity;
-              }),
-            ],
+          entities: [
+            UserEntity,
+            ProductEntity,
+            TelegramTokenEntity,
+            TelegramUserIdEntity,
+          ],
           synchronize: true,
           keepConnectionAlive: true,
         });
