@@ -35,8 +35,7 @@ describe('NotificationsService', () => {
     telegramService = module.get(TelegramService);
   });
 
-  it('should be defined', () => {
-    // TODO: Write tests for missing methods
+  it('should send only relevant notifications', async () => {
     const changes: ProductChange[] = [
       {
         product: { userId: 'userId', name: 'name', isAvailable: true } as any,
@@ -50,25 +49,40 @@ describe('NotificationsService', () => {
         ] as any,
       },
       {
+        product: { userId: 'userId', isAvailable: false } as any,
+        productAttributeChanges: [new ProductPriceChange({ newValue: 90, oldValue: 100 })] as any,
+      },
+      {
         product: { userId: 'userId', isAvailable: true } as any,
         productAttributeChanges: [new ProductAvailabilityChange({ newValue: true, oldValue: false })] as any,
       },
       {
         product: { userId: 'userId', isAvailable: true } as any,
-        productAttributeChanges: [new ProductAvailabilityChange({ newValue: false, oldValue: true })] as any,
+        productAttributeChanges: [new ProductAvailabilityChange({ newValue: true, oldValue: false, hasNeverBeenAvailable: true })] as any,
       },
       {
         product: { userId: 'userId', isAvailable: true } as any,
-        productAttributeChanges: [{ newValue: 'new', oldValue: 'old' }] as any,
+        productAttributeChanges: [{attributeName: 'attribute', newValue: 'new', oldValue: 'old' }] as any,
       },
     ];
     telegramService.notifyAboutUpdate.mockImplementation(() => {
       throw new InternalServerErrorException();
     });
     productsService.updateAllProducts.mockReturnValue(changes);
-    expect(service.sendNotificationsPerUser()).toBeDefined();
-    // expect(telegramService.notifyAboutUpdate).toBeCalledWith('userId',
-    //   'Your product [name](domain/products/id) is now at 90.00€ (-10.00€).');
+    await service.sendNotificationsPerUser();
+    expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
+      'userId',
+      'Your product [name](domain/products/undefined) is now at 100.00€ (+10.00€).');
+    expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(2,
+      'userId',
+      'Your product [undefined](domain/products/undefined) is now at 90.00€ (-10.00€).');
+    expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(3,
+      'userId',
+      'Your product [undefined](domain/products/undefined) is available again.');
+    expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(4,
+      'userId',
+      'Your product [undefined](domain/products/undefined) has changed attribute from old to new.');
+    expect(telegramService.notifyAboutUpdate).toHaveBeenCalledTimes(4);
   });
 
   it('should formulate update text for price decrease', () => {

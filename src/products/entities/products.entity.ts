@@ -15,7 +15,6 @@ export class ProductEntity {
     // tslint:disable-next-line:variable-name
   _id: ObjectID;
 
-  // @Index({unique: true})
   @Column()
   @ApiModelProperty()
   url: string;

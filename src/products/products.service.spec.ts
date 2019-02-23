@@ -76,43 +76,89 @@ describe('ProductsService', () => {
     it('should return all updated products', async () => {
 
       const productMockWithPriceUpdate = {
-        url: 'hasUpdate',
+        url: 'hasPriceUpdate',
         updates: [],
         size: { id: '' },
         price: 90,
         isAvailable: true,
       };
+      const productMockWithDeferredPriceUpdate = {
+        url: 'hasDeferredPriceUpdate',
+        updates: [
+          { price: 90, isAvailable: true },
+          { price: 100, isAvailable: false },
+        ],
+        size: { id: '' },
+        price: 100,
+        isAvailable: false,
+      };
       const productMockWithAvailabilityUpdate = {
-        url: 'hasUpdate',
-        updates: [],
+        url: 'hasAvailabilityUpdate',
+        updates: [
+          { price: 100, isAvailable: true },
+          { price: 90, isAvailable: false },
+        ],
+        size: { id: '' },
+        price: 100,
+        isAvailable: false,
+      };
+      const productMockWithFirstAvailabilityUpdate = {
+        url: 'firstTimeAvailable',
+        updates: [{ price: 100, isAvailable: false }],
         size: { id: '' },
         price: 100,
         isAvailable: false,
       };
       const productMockWithoutUpdate = {
         url: 'hasNoUpdate',
-        updates: [],
+        updates: [{ price: 100, isAvailable: false }],
         size: { id: '' },
         price: 100,
         isAvailable: true,
       };
 
       repositoryMock.find.mockReturnValue([
-        productMockWithoutUpdate,
         productMockWithPriceUpdate,
+        productMockWithDeferredPriceUpdate,
         productMockWithAvailabilityUpdate,
+        productMockWithFirstAvailabilityUpdate,
+        productMockWithoutUpdate,
       ]);
       crawlerServiceMock.getUpdateData.mockReturnValue({ price: 100, isAvailable: true });
 
       const updatedProducts = await service.updateAllProducts();
-      expect(updatedProducts.length).toBe(2);
+
+      expect(updatedProducts.length).toBe(4);
       expect(updatedProducts[0]).toMatchObject({
         productAttributeChanges: [{ attributeName: 'price', oldValue: 90, newValue: 100 }],
         product: { updates: [{ price: 100, isAvailable: true }] },
       });
       expect(updatedProducts[1]).toMatchObject({
-        productAttributeChanges: [{ attributeName: 'isAvailable', oldValue: false, newValue: true }],
-        product: { updates: [{ price: 100, isAvailable: true }] },
+        productAttributeChanges: [
+          { attributeName: 'isAvailable', oldValue: false, newValue: true, hasNeverBeenAvailable: false },
+          { attributeName: 'price', oldValue: 90, newValue: 100 },
+        ],
+        product: {
+          updates: [
+            { price: 90, isAvailable: true },
+            { price: 100, isAvailable: false },
+            { price: 100, isAvailable: true },
+          ],
+        },
+      });
+      expect(updatedProducts[2]).toMatchObject({
+        productAttributeChanges: [{ attributeName: 'isAvailable', oldValue: false, newValue: true, hasNeverBeenAvailable: false }],
+        product: {
+          updates: [
+            { price: 100, isAvailable: true },
+            { price: 90, isAvailable: false },
+            { price: 100, isAvailable: true },
+          ],
+        },
+      });
+      expect(updatedProducts[3]).toMatchObject({
+        productAttributeChanges: [{ attributeName: 'isAvailable', oldValue: false, newValue: true, hasNeverBeenAvailable: true }],
+        product: { updates: [{ price: 100, isAvailable: false }, { price: 100, isAvailable: true }] },
       });
     });
 

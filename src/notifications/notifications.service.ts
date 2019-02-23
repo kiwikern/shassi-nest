@@ -42,6 +42,12 @@ export class NotificationsService implements OnModuleInit {
       const changes = changesPerUser.get(userId);
       changes
         .filter(change => change.product.isAvailable)
+        .filter(change => {
+          const attributeChange = change.productAttributeChanges[0];
+          return change.productAttributeChanges.length !== 1
+            || !(attributeChange instanceof ProductAvailabilityChange)
+            || attributeChange.hasNeverBeenAvailable;
+        })
         .map(change => ({
           product: change.product,
           update: this.getRelevantAttributeChange(change.productAttributeChanges),
@@ -66,7 +72,7 @@ export class NotificationsService implements OnModuleInit {
       updateText = `is available again`;
     } else {
       this.logger.warn({ message: 'Unknown product attribute change.', update });
-      return '';
+      updateText = `has changed ${update.attributeName} from ${update.oldValue} to ${update.newValue}`;
     }
     const nameLink = `[${product.name}](${this.configService.frontendDomain}/products/${product._id})`;
     return `Your product ${nameLink} ${updateText}.`;

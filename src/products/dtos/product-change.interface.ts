@@ -29,9 +29,11 @@ export class ProductAvailabilityChange implements ProductAttributeChange<boolean
   attributeName = 'isAvailable';
   newValue: boolean;
   oldValue: boolean;
+  hasNeverBeenAvailable: boolean;
 
-  constructor({ oldValue, newValue }) {
+  constructor({ oldValue, newValue, hasNeverBeenAvailable = false }) {
     this.oldValue = oldValue;
     this.newValue = newValue;
+    this.hasNeverBeenAvailable = hasNeverBeenAvailable;
   }
 }
