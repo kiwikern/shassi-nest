@@ -137,15 +137,14 @@ describe('ProductsController (e2e)', () => {
           .toEqual([]));
     });
 
-    // TODO: Wait until https://github.com/typeorm/typeorm/pull/3526 is merged
-    xit('should not mark product of other user as read', async () => {
+    it('should not mark product of other user as read', async () => {
       await request(app.getHttpServer())
         .post(`/products/${latestProduct._id}/markread`)
         .set('Authorization', 'Bearer ' + tokenOtherUser)
         .expect(404);
     });
 
-    xit('should not update product of other user', async () => {
+    it('should not update product of other user', async () => {
       await request(app.getHttpServer())
         .post(`/products/${latestProduct._id}/update`)
         .set('Authorization', `Bearer ${tokenOtherUser}`)
