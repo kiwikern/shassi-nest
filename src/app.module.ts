@@ -10,20 +10,36 @@ import { TelegramModule } from './telegram/telegram.module';
 import { CommonModule } from './common/common.module';
 import { NotificationsModule } from './notifications/notifications.module';
 
+// needed to load entities for webpack hmr
+const entityContext = require && (require as any).context
+  ? (require as any).context('.', true, /\.entity\.ts$/)
+  : null;
+
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        type: 'mongodb',
-        host: configService.databaseHost,
-        port: configService.databasePort,
-        username: configService.databaseUsername,
-        password: configService.databasePassword,
-        database: configService.databaseName,
-        entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true,
-      }),
+      useFactory: (configService: ConfigService) => {
+        return ({
+          type: 'mongodb',
+          host: configService.databaseHost,
+          port: configService.databasePort,
+          username: configService.databaseUsername,
+          password: configService.databasePassword,
+          database: configService.databaseName,
+          entities: configService.isProduction || !entityContext
+            ? [__dirname + '/**/*.entity{.ts,.js}']
+            : [
+              ...entityContext.keys().map(id => {
+                const entityModule = entityContext(id);
+                const [entity] = Object.values(entityModule);
+                return entity;
+              }),
+            ],
+          synchronize: true,
+          keepConnectionAlive: true,
+        });
+      },
       inject: [ConfigService],
     }),
     ProductsModule,
