@@ -8,6 +8,7 @@ import { Repository } from 'typeorm';
 import { BcryptService } from '../common/bcrypt.service';
 import { BadRequestException } from '@nestjs/common';
 import { bcryptServiceFactory, repositoryMockFactory } from '../../test/mocks/jest-mocks';
+import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
 describe('UsersService', () => {
   let service: UsersService;
@@ -22,6 +23,7 @@ describe('UsersService', () => {
         { provide: BcryptService, useFactory: bcryptServiceFactory },
       ],
     }).compile();
+    module.useLogger(new NoOpLogger());
     service = module.get<UsersService>(UsersService);
     repositoryMock = module.get(getRepositoryToken(UserEntity));
     bcryptService = module.get(BcryptService);

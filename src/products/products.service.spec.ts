@@ -12,6 +12,7 @@ import { MockType } from '../../test/mock.type';
 import { CronJob } from 'cron';
 import { Repository } from 'typeorm';
 import { crawlerServiceFactory, repositoryMockFactory } from '../../test/mocks/jest-mocks';
+import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
 describe('ProductsService', () => {
   let service: ProductsService;
@@ -26,6 +27,7 @@ describe('ProductsService', () => {
         { provide: CrawlerService, useFactory: crawlerServiceFactory },
       ],
     }).compile();
+    module.useLogger(new NoOpLogger());
     service = module.get<ProductsService>(ProductsService);
     repositoryMock = module.get(getRepositoryToken(ProductEntity));
     crawlerServiceMock = module.get(CrawlerService);
@@ -72,6 +74,7 @@ describe('ProductsService', () => {
     });
 
     it('should return all updated products', async () => {
+
       const productMockWithPriceUpdate = {
         url: 'hasUpdate',
         updates: [],
@@ -93,12 +96,14 @@ describe('ProductsService', () => {
         price: 100,
         isAvailable: true,
       };
+
       repositoryMock.find.mockReturnValue([
         productMockWithoutUpdate,
         productMockWithPriceUpdate,
         productMockWithAvailabilityUpdate,
       ]);
       crawlerServiceMock.getUpdateData.mockReturnValue({ price: 100, isAvailable: true });
+
       const updatedProducts = await service.updateAllProducts();
       expect(updatedProducts.length).toBe(2);
       expect(updatedProducts[0]).toMatchObject({

@@ -4,6 +4,7 @@ import { ProductsService } from './products.service';
 import { ObjectID } from 'mongodb';
 import { MockType } from '../../test/mock.type';
 import { productsServiceFactory } from '../../test/mocks/jest-mocks';
+import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
 describe('Product Controller', () => {
   let module: TestingModule;
@@ -17,6 +18,7 @@ describe('Product Controller', () => {
         { provide: ProductsService, useFactory: productsServiceFactory },
       ],
     }).compile();
+    module.useLogger(new NoOpLogger());
     controller = module.get<ProductsController>(ProductsController);
     productsServiceMock = module.get(ProductsService);
   });

@@ -6,6 +6,7 @@ import { getEntityManagerToken, getRepositoryToken } from '@nestjs/typeorm';
 import { entityManagerMockFactory, repositoryMockFactory } from '../../test/mocks/jest-mocks';
 import { MockType } from '../../test/mock.type';
 import { MongoEntityManager, Repository } from 'typeorm';
+import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
 describe('TelegramTokenService', () => {
   let service: TelegramTokenService;
@@ -20,6 +21,7 @@ describe('TelegramTokenService', () => {
         { provide: getRepositoryToken(TelegramTokenEntity), useFactory: repositoryMockFactory },
       ],
     }).compile();
+    module.useLogger(new NoOpLogger());
     service = module.get<TelegramTokenService>(TelegramTokenService);
     repositoryMock = module.get(getRepositoryToken(TelegramTokenEntity));
     entityManagerMock = module.get(getEntityManagerToken());

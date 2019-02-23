@@ -8,6 +8,7 @@ import { MockType } from '../../test/mock.type';
 import { ProductsService } from '../products/products.service';
 import { InternalServerErrorException } from '@nestjs/common';
 import { cronJobServiceFactory, productsServiceFactory, telegramServiceFactory } from '../../test/mocks/jest-mocks';
+import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
 describe('NotificationsService', () => {
   let service: NotificationsService;
@@ -27,6 +28,7 @@ describe('NotificationsService', () => {
         { provide: CronJobService, useFactory: cronJobServiceFactory },
       ],
     }).compile();
+    module.useLogger(new NoOpLogger());
     service = module.get<NotificationsService>(NotificationsService);
     productsService = module.get(ProductsService);
     cronJobService = module.get(CronJobService);

@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { UserEntity } from './entities/user.entity';
+import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
 class UserServiceMock {
   findOneByUsername(userName) {
@@ -29,6 +30,7 @@ describe('Users Controller', () => {
         { provide: UsersService, useClass: UserServiceMock },
       ],
     }).compile();
+    module.useLogger(new NoOpLogger());
     controller = module.get<UsersController>(UsersController);
   });
 

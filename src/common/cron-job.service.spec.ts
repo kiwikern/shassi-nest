@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CronJobService } from './cron-job.service';
+import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
 describe('CronJobService', () => {
   let service: CronJobService;
@@ -8,6 +9,7 @@ describe('CronJobService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [CronJobService],
     }).compile();
+    module.useLogger(new NoOpLogger());
     service = module.get<CronJobService>(CronJobService);
   });
   it('should be defined', () => {

@@ -10,6 +10,7 @@ import { CronJobService } from '../common/cron-job.service';
 import { MockType } from '../../test/mock.type';
 import { ObjectID } from 'mongodb';
 import { productsServiceFactory, telegrafFactory, telegramUserIdServiceFactory, tokenServiceFactory } from '../../test/mocks/jest-mocks';
+import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
 describe('TelegramService', () => {
   let service: TelegramService;
@@ -38,6 +39,7 @@ describe('TelegramService', () => {
         { provide: CronJobService, useValue: cronJobService },
       ],
     }).compile();
+    module.useLogger(new NoOpLogger());
     service = module.get<TelegramService>(TelegramService);
     productsService = module.get(ProductsService);
     telegraf = module.get(Telegraf);

@@ -86,22 +86,30 @@ export class ProductsService {
   private async updateProduct(product: ProductEntity): Promise<ProductChange | null> {
     try {
       const sizeId = product.size ? product.size.id : null;
-      const latestUpdate = await this.crawlerService.getUpdateData(product.url, sizeId);
+      const newUpdate = await this.crawlerService.getUpdateData(product.url, sizeId);
+      const latestUpdateWhenAvailable = product.updates.slice().reverse().find(p => p.isAvailable);
       const productAttributeChanges: Array<ProductAttributeChange<boolean | number>> = [];
-      if (product.price !== latestUpdate.price) {
+      if (product.price !== newUpdate.price) {
         productAttributeChanges.push(new ProductPriceChange({
           oldValue: product.price,
-          newValue: latestUpdate.price,
+          newValue: newUpdate.price,
         }));
       }
-      if (product.isAvailable !== latestUpdate.isAvailable) {
+      if (product.isAvailable !== newUpdate.isAvailable) {
         productAttributeChanges.push(new ProductAvailabilityChange({
           oldValue: product.isAvailable,
-          newValue: latestUpdate.isAvailable,
+          newValue: newUpdate.isAvailable,
+          hasNeverBeenAvailable: !latestUpdateWhenAvailable,
         }));
+        if (latestUpdateWhenAvailable && latestUpdateWhenAvailable.price !== newUpdate.price) {
+          productAttributeChanges.push(new ProductPriceChange({
+            oldValue: latestUpdateWhenAvailable.price,
+            newValue: newUpdate.price,
+          }));
+        }
       }
       if (productAttributeChanges.length > 0) {
-        product.updates.push(latestUpdate);
+        product.updates.push(newUpdate);
         product.hasUnreadUpdate = true;
         const updatedProduct = await this.productRepository.save(product);
         return { product: updatedProduct, productAttributeChanges };

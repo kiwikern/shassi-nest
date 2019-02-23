@@ -7,6 +7,7 @@ import { ObjectID } from 'mongodb';
 import { BcryptService } from '../common/bcrypt.service';
 import { MockType } from '../../test/mock.type';
 import { bcryptServiceFactory, jwtServiceFactory, userServiceFactory } from '../../test/mocks/jest-mocks';
+import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -23,6 +24,7 @@ describe('AuthService', () => {
         { provide: BcryptService, useFactory: bcryptServiceFactory },
       ],
     }).compile();
+    module.useLogger(new NoOpLogger());
     service = module.get<AuthService>(AuthService);
     bcryptService = module.get(BcryptService);
     userService = module.get(UsersService);

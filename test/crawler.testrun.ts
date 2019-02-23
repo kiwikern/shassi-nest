@@ -1,7 +1,8 @@
 import { ProductSizeAvailability } from '../src/crawler/product-size.interface';
 import { Observable, of } from 'rxjs';
 import { Crawler } from '../src/crawler/crawler.interface';
-import { Type } from '@nestjs/common';
+import { Logger, Type } from '@nestjs/common';
+import { NoOpLogger } from './mocks/no-op-logger';
 
 export const crawlerTestRun = (
   {
@@ -39,6 +40,7 @@ export const crawlerTestRun = (
 
     beforeAll(async () => {
       crawler = new crawlerType(new HttpServiceMock());
+      Logger.overrideLogger(new NoOpLogger());
       await crawler.init(url);
     });
 

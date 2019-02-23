@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigService } from './config.service';
+import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
 describe('ConfigService', () => {
   let service: ConfigService;
@@ -8,6 +9,7 @@ describe('ConfigService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [ConfigService],
     }).compile();
+    module.useLogger(new NoOpLogger());
     service = module.get<ConfigService>(ConfigService);
   });
 

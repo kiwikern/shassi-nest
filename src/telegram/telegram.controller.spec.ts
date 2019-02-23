@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TelegramController } from './telegram.controller';
 import { TelegramTokenService } from './telegram-token.service';
+import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
 describe('Telegram Controller', () => {
   let module: TestingModule;
@@ -14,6 +15,7 @@ describe('Telegram Controller', () => {
         { provide: TelegramTokenService, useValue: tokenServiceMock },
       ],
     }).compile();
+    module.useLogger(new NoOpLogger());
     controller = module.get<TelegramController>(TelegramController);
   });
 

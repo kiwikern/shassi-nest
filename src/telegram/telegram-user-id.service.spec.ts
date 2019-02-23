@@ -7,6 +7,7 @@ import { BadRequestException } from '@nestjs/common';
 import { repositoryMockFactory } from '../../test/mocks/jest-mocks';
 import { MockType } from '../../test/mock.type';
 import { Repository } from 'typeorm';
+import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
 describe('TelegramUserIdService', () => {
   let service: TelegramUserIdService;
@@ -19,6 +20,7 @@ describe('TelegramUserIdService', () => {
         { provide: getRepositoryToken(TelegramUserIdEntity), useFactory: repositoryMockFactory },
       ],
     }).compile();
+    module.useLogger(new NoOpLogger());
     service = module.get<TelegramUserIdService>(TelegramUserIdService);
     repositoryMock = module.get(getRepositoryToken(TelegramUserIdEntity));
   });

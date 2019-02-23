@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CrawlerService } from './crawler.service';
 import { BadRequestException, HttpService, NotFoundException } from '@nestjs/common';
+import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
 let savedUrl;
 
@@ -51,6 +52,7 @@ describe('CrawlerService', () => {
         { provide: HttpService, useValue: null },
       ],
     }).compile();
+    module.useLogger(new NoOpLogger());
     service = module.get<CrawlerService>(CrawlerService);
   });
 
