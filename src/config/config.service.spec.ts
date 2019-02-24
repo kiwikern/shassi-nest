@@ -52,6 +52,7 @@ describe('ConfigService', () => {
         DATABASE_HOST=dbhost
         DATABASE_PORT=123456
         JWT_SECRET=jwtsecret
+        JWT_EXPIRES_IN=1000
         MAIL_SERVER=mailserver
         MAIL_USERNAME=mailuser
         MAIL_PASSWORD=mailpassword

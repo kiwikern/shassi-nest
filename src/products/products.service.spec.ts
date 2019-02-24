@@ -98,7 +98,7 @@ describe('ProductsService', () => {
           { price: 100, isAvailable: true },
           { price: 90, isAvailable: false },
         ],
-        size: { id: '' },
+        size: null,
         price: 100,
         isAvailable: false,
       };

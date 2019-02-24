@@ -19,6 +19,18 @@ function getProductEntity(updates: ProductUpdate[], size?: ProductSize): Product
 
 describe('Product Entity', () => {
 
+  it('should handle null updates', async () => {
+    const entity = new ProductEntity();
+    expect(entity.getCreatedAt()).toEqual(null);
+    expect(entity.updatedAt).toEqual(null);
+  });
+
+  it('should handle null id', async () => {
+    const entity = getProductEntity(null);
+    expect(entity.getCreatedAt()).toEqual(date);
+    expect(entity.updatedAt).toEqual(date);
+  });
+
   it('should handle empty updates', async () => {
     const entity = getProductEntity([]);
     expect(entity.price).toBe(null);

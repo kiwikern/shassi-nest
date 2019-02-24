@@ -25,7 +25,8 @@ export class ProductEntity {
   name: string;
 
   @Column()
-  @Transform((value) => value ? value.toString() : null, { toPlainOnly: true })
+  @Transform(toStringSafe, { toPlainOnly: true })
+  @Transform(toObjectId, { toClassOnly: true })
   @ApiModelProperty()
   userId: ObjectID;
 
