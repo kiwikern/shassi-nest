@@ -2,6 +2,7 @@ import { IsEmail, IsOptional, IsString, ValidateNested } from 'class-validator';
 import { NotificationType } from '../entities/notification-type.entity';
 import { Type } from 'class-transformer';
 import { ApiModelProperty } from '@nestjs/swagger';
+import { typeFn } from '../../common/utils';
 
 export class UserUpdateDto {
   @IsOptional()
@@ -16,7 +17,7 @@ export class UserUpdateDto {
 
   @IsOptional()
   @ValidateNested()
-  @Type(() => NotificationType)
+  @Type(typeFn(NotificationType))
   @ApiModelProperty()
   notificationTypes?: NotificationType;
 }

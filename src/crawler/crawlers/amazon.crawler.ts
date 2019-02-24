@@ -50,14 +50,6 @@ export class AmazonCrawler implements Crawler {
       }
     }
 
-    const salePrice = this.document.getElementById('priceblock_saleprice');
-    if (salePrice) {
-      const price = this.formatPrice(salePrice.innerHTML);
-      if (price) {
-        return price;
-      }
-    }
-
     const dealPrice = this.document.getElementById('priceblock_dealprice');
     if (dealPrice) {
       const price = this.formatPrice(dealPrice.innerHTML);

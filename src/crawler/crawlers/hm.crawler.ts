@@ -42,7 +42,10 @@ export class HmCrawler implements Crawler {
       virtualConsole.on('error', (...data) => null);
       this.document = new JSDOM(response.data, { virtualConsole }).window.document;
     } catch (e) {
-      this.logger.error({message: 'failed to request product data', response: e.response.data || e.response});
+      this.logger.error({
+        message: 'failed to request product data',
+        response: e.response ? e.response.data || e.response : '',
+      });
       this.logger.error(e.message, e.stack);
       throw new InternalServerErrorException('Failed to request data');
     }
@@ -64,6 +67,7 @@ export class HmCrawler implements Crawler {
     const productData = JSON.parse(productDataString);
     for (const prop in productData) {
       if (!productData.hasOwnProperty(prop)) {
+        console.log('SKIPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP')
         continue;
       }
       if (prop === productId || (this.productData === undefined && prop.startsWith(productId.substr(0, 5)))) {
@@ -78,14 +82,18 @@ export class HmCrawler implements Crawler {
     try {
       availabilityResponse = await this.httpService.get(this.getAvailabilityUrl(sizes)).toPromise();
     } catch (e) {
-      availabilityResponse = {};
-      this.logger.error({message: 'failed to request product availability', response: e.response.data || e.response});
+      this.logger.error({
+        message: 'failed to request product availability',
+        response: e.response ? e.response.data || e.response : '',
+      });
       this.logger.error(e.message, e.stack);
+      throw new InternalServerErrorException('Unable to fetch availability from API.');
     }
-    if (availabilityResponse.data && availabilityResponse.data.availability) {
+    if (availabilityResponse.data && Array.isArray(availabilityResponse.data.availability)) {
       this.availability = availabilityResponse.data.availability;
     } else {
-      this.logger.error({ message: 'Could not fetch product availability from api', url, availabilityResponse });
+      this.logger.error({ message: 'Unexpected product availability format from API', url, availabilityResponse });
+      throw new InternalServerErrorException('Invalid availability format from API.');
     }
 
   }

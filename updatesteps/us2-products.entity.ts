@@ -5,12 +5,13 @@ import { UsProductUpdate } from './us2-product-update.entity';
 import { ObjectID } from 'mongodb';
 import { Logger } from '@nestjs/common';
 import { ApiModelProperty } from '@nestjs/swagger';
+import { toObjectId, toStringSafe } from '../src/common/utils';
 
 @Entity({ name: 'products' })
 export class UsProductEntity {
   @ObjectIdColumn()
-  @Transform((value) => value.toString(), { toPlainOnly: true })
-  @Transform((value) => typeof value === 'string' ? new ObjectID(value) : value, { toClassOnly: true })
+  @Transform(toStringSafe, { toPlainOnly: true })
+  @Transform(toObjectId, { toClassOnly: true })
   @ApiModelProperty()
     // tslint:disable-next-line:variable-name
   _id: ObjectID;

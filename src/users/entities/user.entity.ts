@@ -3,11 +3,13 @@ import { Exclude, Transform } from 'class-transformer';
 import { NotificationType } from './notification-type.entity';
 import { ObjectID } from 'mongodb';
 import { ApiModelProperty } from '@nestjs/swagger';
+import { toObjectId, toStringSafe, typeFn } from '../../common/utils';
 
 @Entity({ name: 'users' })
 export class UserEntity {
   @ObjectIdColumn()
-  @Transform((value) => value.toString(), { toPlainOnly: true })
+  @Transform(toStringSafe, { toPlainOnly: true })
+  @Transform(toObjectId, { toClassOnly: true })
   @ApiModelProperty({type: 'string'})
     // tslint:disable-next-line:variable-name
   _id: ObjectID;
@@ -25,7 +27,7 @@ export class UserEntity {
   @Column()
   password: string;
 
-  @Column(() => NotificationType)
+  @Column(typeFn(NotificationType))
   @ApiModelProperty()
   notificationTypes: NotificationType = {telegram: true, email: false};
 }

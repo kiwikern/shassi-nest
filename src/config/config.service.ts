@@ -15,11 +15,14 @@ export class ConfigService {
 
   constructor() {
     this.isProduction = process.env.NODE_ENV === 'production';
+    let config;
     try {
-      const config = dotenv.parse(fs.readFileSync(`${process.env.NODE_ENV}.env`));
-      this.envConfig = this.validateInput(config);
+      config = dotenv.parse(fs.readFileSync(`${process.env.NODE_ENV}.env`));
     } catch (e) {
       this.logger.warn('No .env file was found. Falling back to process.env');
+    }
+    if (config) {
+      this.envConfig = this.validateInput(config);
     }
     if (process.env.MONGODB_URI) {
       const matches = /mongodb:\/\/(\w+):(\w+)@((?:\w|\.)+):(\d+)\/(\w+)/.exec(process.env.MONGODB_URI);

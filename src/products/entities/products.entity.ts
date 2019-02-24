@@ -5,12 +5,13 @@ import { ProductUpdate } from './product-update.entity';
 import { ObjectID } from 'mongodb';
 import { Logger } from '@nestjs/common';
 import { ApiModelProperty } from '@nestjs/swagger';
+import { toObjectId, toStringSafe, typeFn } from '../../common/utils';
 
 @Entity({ name: 'products' })
 export class ProductEntity {
   @ObjectIdColumn()
-  @Transform((value) => value.toString(), { toPlainOnly: true })
-  @Transform((value) => typeof value === 'string' ? new ObjectID(value) : value, { toClassOnly: true })
+  @Transform(toStringSafe, { toPlainOnly: true })
+  @Transform(toObjectId, { toClassOnly: true })
   @ApiModelProperty()
     // tslint:disable-next-line:variable-name
   _id: ObjectID;
@@ -29,8 +30,8 @@ export class ProductEntity {
   userId: ObjectID;
 
   @Exclude({toPlainOnly: true})
-  @Column(() => ProductSize)
-  @Type(() => ProductSize)
+  @Column(typeFn(ProductSize))
+  @Type(typeFn(ProductSize))
   size: ProductSize;
 
   // TODO: Why does default value not work?
@@ -42,7 +43,7 @@ export class ProductEntity {
   @ApiModelProperty()
   hasUnreadUpdate: boolean = false;
 
-  @Column(() => ProductUpdate)
+  @Column(typeFn(ProductUpdate))
   @ApiModelProperty()
   updates: ProductUpdate[];
 
