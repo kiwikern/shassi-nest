@@ -27,7 +27,7 @@ describe('ConfigService', () => {
 
     const service = new ConfigService();
 
-    expect(fs.readFileSync).toHaveBeenCalledWith('test.env');
+    expect(fs.readFileSync).toHaveBeenCalledWith(`${process.env.NODE_ENV}.env`);
     expect(service.jwtSecret).toEqual('jwtsecret');
     expect(service.jwtExpiresIn).toEqual(30 * 24 * 60 * 60);
     expect(service.databaseName).toEqual('dbname');

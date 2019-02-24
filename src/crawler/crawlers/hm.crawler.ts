@@ -67,7 +67,6 @@ export class HmCrawler implements Crawler {
     const productData = JSON.parse(productDataString);
     for (const prop in productData) {
       if (!productData.hasOwnProperty(prop)) {
-        console.log('SKIPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP')
         continue;
       }
       if (prop === productId || (this.productData === undefined && prop.startsWith(productId.substr(0, 5)))) {
