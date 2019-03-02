@@ -125,22 +125,20 @@ export class TelegramService implements OnModuleInit {
       return [[]];
     }
 
-    const splitInHalfLength = Math.round(arrayToSplit.length / 2);
-    const splitInThirdLength = Math.round(arrayToSplit.length / 3);
-    if (arrayToSplit.length > 6) {
-      return [
-        arrayToSplit.slice(0, splitInThirdLength),
-        arrayToSplit.slice(splitInThirdLength, splitInThirdLength * 2),
-        arrayToSplit.slice(splitInThirdLength * 2),
-      ];
-    } else if (arrayToSplit.length > 3) {
-      return [
-        arrayToSplit.slice(0, splitInHalfLength),
-        arrayToSplit.slice(splitInHalfLength),
-      ];
-    } else {
-      return [arrayToSplit];
+    const length = arrayToSplit.length;
+    // Last row can contain one element more.
+    const maxElementsPerRow = length < 12 ? 3 : 5;
+    const numberOfRows = Math.ceil(length / maxElementsPerRow);
+    const elementsPerRow = Math.round(length / numberOfRows);
+
+    const result = [];
+    for (let i = 0; i < numberOfRows; i++) {
+      // Add remainder to last row
+      const end = i === numberOfRows - 1 ? length : (i + 1) * elementsPerRow;
+      const split = arrayToSplit.slice(i * elementsPerRow, end);
+      result.push(split);
     }
+    return result;
   }
 
   async authSession(ctx, next) {

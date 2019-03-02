@@ -411,7 +411,7 @@ describe('TelegramService', () => {
 
     it('should handle empty array', () => {
       expect(service.evenlySplitArray([]))
-        .toEqual([[]]);
+        .toEqual([]);
     });
 
     it('should handle one element', () => {
@@ -442,6 +442,21 @@ describe('TelegramService', () => {
     it('should handle nine elements', () => {
       expect(service.evenlySplitArray([0, 1, 2, 3, 4, 5, 6, 7, 8]))
         .toEqual([[0, 1, 2], [3, 4, 5], [6, 7, 8]]);
+    });
+
+    it('should handle 15 elements', () => {
+      expect(service.evenlySplitArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]))
+        .toEqual([[0, 1, 2, 3, 4], [5, 6, 7, 8, 9], [10, 11, 12, 13, 14]]);
+    });
+
+    it('should handle 18 elements', () => {
+      expect(service.evenlySplitArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]))
+        .toEqual([[0, 1, 2, 3, 4], [5, 6, 7, 8, 9], [10, 11, 12, 13, 14], [15, 16, 17]]);
+    });
+
+    it('should handle 19 elements', () => {
+      expect(service.evenlySplitArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]))
+        .toEqual([[0, 1, 2, 3, 4], [5, 6, 7, 8, 9], [10, 11, 12, 13, 14], [15, 16, 17, 18]]);
     });
 
   });
