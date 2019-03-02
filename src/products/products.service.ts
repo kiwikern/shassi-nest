@@ -2,7 +2,7 @@ import { ConflictException, Injectable, Logger, NotFoundException } from '@nestj
 import { CreateProductDto } from './dtos/create-product.dto';
 import { ProductEntity } from './entities/products.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, ObjectID as TObjectID } from 'typeorm';
 import { CrawlerService } from '../crawler/crawler.service';
 import { ObjectID } from 'mongodb';
 import { ProductSizeAvailability } from '../crawler/product-size.interface';
@@ -83,7 +83,7 @@ export class ProductsService {
       throw new NotFoundException('Product not found.');
     }
     await this.updateProduct(product);
-    return this.productRepository.findOne(productId);
+    return this.productRepository.findOne(productId as TObjectID);
   }
 
   private async updateProduct(product: ProductEntity): Promise<ProductChange | null> {

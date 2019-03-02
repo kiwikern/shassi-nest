@@ -12,7 +12,7 @@ import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
 describe('UsersService', () => {
   let service: UsersService;
-  let repositoryMock: MockType<Partial<Repository<UserEntity>>>;
+  let repositoryMock: MockType<Repository<UserEntity>>;
   let bcryptService: MockType<BcryptService>;
 
   beforeEach(async () => {
@@ -77,7 +77,7 @@ describe('UsersService', () => {
 
   it('should update a user', async () => {
     repositoryMock.findOne.mockReturnValue({ email: 'old' });
-    expect(await service.updateUser('user', { email: 'new' }))
+    expect(await service.updateUser(null, { email: 'new' }))
       .toEqual({ email: 'new' });
   });
 

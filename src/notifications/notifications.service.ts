@@ -4,6 +4,7 @@ import { ConfigService } from '../config/config.service';
 import { TelegramService } from '../telegram/telegram.service';
 import { CronJobService } from '../common/cron-job.service';
 import { ProductsService } from '../products/products.service';
+import { ObjectID } from 'mongodb';
 
 @Injectable()
 export class NotificationsService implements OnModuleInit {
@@ -27,7 +28,7 @@ export class NotificationsService implements OnModuleInit {
   async sendNotificationsPerUser() {
     this.logger.log('Updating all products');
     const changes = await this.productsService.updateAllProducts();
-    const changesPerUser = new Map<string, ProductChange[]>();
+    const changesPerUser = new Map<ObjectID, ProductChange[]>();
     for (const change of changes) {
       const userChanges = changesPerUser.get(change.product.userId) || [];
       userChanges.push(change);
@@ -36,7 +37,7 @@ export class NotificationsService implements OnModuleInit {
     this.sendNotifications(changesPerUser);
   }
 
-  private sendNotifications(changesPerUser: Map<string, ProductChange[]>) {
+  private sendNotifications(changesPerUser: Map<ObjectID, ProductChange[]>) {
     for (const userId of changesPerUser.keys()) {
       changesPerUser.get(userId)
         .filter(update => this.isRelevantChange(update))

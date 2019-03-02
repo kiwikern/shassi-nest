@@ -28,18 +28,18 @@ describe('Telegram Controller', () => {
 
   it('should return connection status', async () => {
     userIdServiceMock.findTelegramId.mockReturnValueOnce(null);
-    expect(await controller.getConnectionStatus({ _id: '' } as UserEntity))
+    expect(await controller.getConnectionStatus({ _id: '' } as any))
       .toEqual({ isConnectedToTelegram: false });
   });
 
   it('should return connection status', async () => {
     userIdServiceMock.findTelegramId.mockReturnValueOnce('89341298');
-    expect(await controller.getConnectionStatus({ _id: '' } as UserEntity))
+    expect(await controller.getConnectionStatus({ _id: '' } as any))
       .toEqual({ isConnectedToTelegram: true });
   });
 
   it('should create a new token', async () => {
-    expect(await controller.createToken({ _id: '' } as UserEntity))
+    expect(await controller.createToken({ _id: '' } as any))
       .toEqual({ token: 'token' });
   });
 

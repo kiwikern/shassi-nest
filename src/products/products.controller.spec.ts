@@ -39,19 +39,19 @@ describe('Product Controller', () => {
   });
 
   it('should mark a product as read', async () => {
-    const productId = new ObjectID.createFromTime(0);
+    const productId = ObjectID.createFromTime(0);
     await controller.markRead({ _id: 'id' } as any, productId);
     expect(productsServiceMock.markRead).toHaveBeenCalledWith('id', productId);
   });
 
   it('should update a product', async () => {
-    const productId = new ObjectID.createFromTime(0);
+    const productId = ObjectID.createFromTime(0);
     await controller.updateProduct({ _id: 'id' } as any, productId);
     expect(productsServiceMock.updateSingleProduct).toHaveBeenCalledWith('id', productId);
   });
 
   it('should delete a product', async () => {
-    const productId = new ObjectID.createFromTime(0);
+    const productId = ObjectID.createFromTime(0);
     productsServiceMock.deleteProduct.mockImplementation(() => Promise.resolve(true));
     const result = await controller.deleteProduct({ _id: 'id' } as any, productId);
     expect(result.success).toBe(true);
