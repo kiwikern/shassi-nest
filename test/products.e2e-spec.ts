@@ -21,7 +21,7 @@ describe('ProductsController (e2e)', () => {
     {
       url: 'https://www.aboutyou.de/p/only-und-sons/jeans-loom-blue-jog-pk-8472-noos-3774568',
       name: 'Aboutyou',
-      expectedPrice: 39.99,
+      expectedPrice: 39.9,
     },
     {
       url: 'https://www.amazon.de/Die-Argonauten-Maggie-Nelson-ebook/dp/B071FCV5KW/ref=tmm_kin_swatch_0?_encoding=UTF8&qid=&sr=',
