@@ -6,7 +6,7 @@ import { NoOpLogger } from './mocks/no-op-logger';
 
 export const crawlerTestRun = (
   {
-    crawlerType, testResponse, sizes, sizeChecks, name, priceChecks, url = 'my-url', secondResponse = null, thirdResponse = null,
+    crawlerType, testResponse, sizes, sizeChecks, name, priceChecks, url = 'my-url', expectedUrl = null, secondResponse = null, thirdResponse = null,
   }: {
     crawlerType: Type<Crawler>,
     testResponse: string | object,
@@ -14,6 +14,7 @@ export const crawlerTestRun = (
     sizeChecks: Array<{ size: string; isAvailable: boolean }>,
     name: string, priceChecks: Array<{ size: string; price: number }>,
     url?: string,
+    expectedUrl?: string,
     secondResponse?: string | object,
     thirdResponse?: string | object,
   }) => {
@@ -65,7 +66,7 @@ export const crawlerTestRun = (
     });
 
     it('should return the url', async () => {
-      expect(crawler.getUrl()).toEqual(url);
+      expect(crawler.getUrl()).toEqual(expectedUrl || url);
     });
 
     it('should check if product is in catalog', async () => {

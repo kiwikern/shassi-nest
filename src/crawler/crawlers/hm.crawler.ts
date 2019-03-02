@@ -21,10 +21,16 @@ export class HmCrawler implements Crawler {
   }
 
   async init(url: string) {
-    if (!url.includes('www2.')) {
+    if (!(url.includes('www2.') || url.includes('m2.hm'))) {
       throw new BadRequestException('Old urls are not supported.');
     }
-    this.url = url;
+
+    if (url.includes('m2.hm.com')) {
+      this.url = url.replace('m2.hm', 'www2.hm')
+        .replace('com/m/de_de', 'com/de_de');
+    } else {
+      this.url = url;
+    }
 
     const productIdMatches = /.*\.(\d+)\.html.*/.exec(url);
     if (!productIdMatches || !productIdMatches[1]) {

@@ -15,7 +15,8 @@ export const hmOneSizeTestCase = {
 
   name: 'Feinstrickmütze',
 
-  url: 'https://www2.hm.com/de_de/productpage.0736967002.html',
+  url: 'https://m2.hm.com/m/de_de/productpage.0736967002.html',
+  expectedUrl: 'https://www2.hm.com/de_de/productpage.0736967002.html',
 
   priceChecks: [
     { size: '0736967002003', price: 7.99 },
