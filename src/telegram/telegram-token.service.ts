@@ -10,10 +10,12 @@ export class TelegramTokenService implements OnModuleInit {
               @InjectRepository(TelegramTokenEntity) private tokenRepository: Repository<TelegramTokenEntity>) {
   }
 
+  public static readonly expireAfterSeconds = 5 * 60;
+
   onModuleInit() {
     // Telegram auth tokens should only be valid for 5 minutes.
     this.entityManager.createCollectionIndex(TelegramTokenEntity,
-      'createdAt', { expireAfterSeconds: 5 * 60 });
+      'createdAt', { expireAfterSeconds: TelegramTokenService.expireAfterSeconds });
   }
 
   async createToken(userId: ObjectID): Promise<string> {

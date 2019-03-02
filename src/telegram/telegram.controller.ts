@@ -1,6 +1,6 @@
 import { ClassSerializerInterceptor, Controller, Get, Post, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiBearerAuth, ApiCreatedResponse, ApiForbiddenResponse, ApiOkResponse, ApiUseTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiCreatedResponse, ApiForbiddenResponse, ApiOkResponse, ApiUseTags, ApiOperation } from '@nestjs/swagger';
 import { User } from '../auth/user.decorator';
 import { UserEntity } from '../users/entities/user.entity';
 import { TelegramTokenService } from './telegram-token.service';
@@ -18,6 +18,7 @@ export class TelegramController {
               private telegramUserIdService: TelegramUserIdService) {
   }
 
+  @ApiOperation({ title: 'Connection status', description: 'Returns whether the logged in user is connected to a telegram account.' })
   @ApiOkResponse({
     description: 'Returns whether user is connected to telegram bot.',
     type: { isConnectedToTelegram: Boolean },
@@ -28,8 +29,13 @@ export class TelegramController {
     return { isConnectedToTelegram: !!telegramId };
   }
 
+  @ApiOperation({
+    title: 'Create temporary token',
+    description: `Creates a temporary token (expires after ${TelegramTokenService.expireAfterSeconds / 60}`
+      + ` minutes) with which a telegram account can be linked to the logged in user.`,
+  })
   @ApiCreatedResponse({
-    description: 'Creates a temporary telegram token.',
+    description: 'Returns the temporary telegram token.',
     type: { token: String },
   })
   @Post()
