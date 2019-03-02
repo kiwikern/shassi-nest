@@ -2,14 +2,11 @@ import { ConflictException, Injectable, Logger, NotFoundException } from '@nestj
 import { CreateProductDto } from './dtos/create-product.dto';
 import { ProductEntity } from './entities/products.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, ObjectID as TObjectID } from 'typeorm';
+import { ObjectID as TObjectID, Repository } from 'typeorm';
 import { CrawlerService } from '../crawler/crawler.service';
 import { ObjectID } from 'mongodb';
 import { ProductSizeAvailability } from '../crawler/product-size.interface';
-import {
-  ProductAttributeChangesBuilder,
-  ProductChange,
-} from './dtos/product-change.interface';
+import { ProductAttributeChangesBuilder, ProductChange } from './dtos/product-change.interface';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
@@ -113,14 +110,14 @@ export class ProductsService {
         product.updates.push(newUpdate);
         product.hasUnreadUpdate = true;
         const updatedProduct = await this.productRepository.save(product);
-        return { product: updatedProduct,  productAttributeChanges };
+        return { product: updatedProduct, productAttributeChanges };
       }
     } catch (error) {
       if (error instanceof NotFoundException || error.toString().includes('404')) {
         product.isActive = false;
         await this.productRepository.save(product);
       } else {
-        this.logger.error({ message: 'Failed to update product.', error: error.toString(), product }, error.stack);
+        this.logger.error({ message: 'Failed to update product.', error: error.message, product }, error.stack);
       }
     }
   }
