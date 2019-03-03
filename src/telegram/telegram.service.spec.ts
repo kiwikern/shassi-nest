@@ -64,7 +64,7 @@ describe('TelegramService', () => {
     await service.addProductOnURLSent(ctx, 'url');
     expect((ctx as any).session.productData.set).toHaveBeenCalledWith(expect.any(Number),
       { name: 'name', url: 'url' });
-    expect(ctx.reply).toHaveBeenCalledWith('Which size do you want?',
+    expect(ctx.reply).toHaveBeenLastCalledWith('Which size do you want? 📏',
       { reply_markup: expect.anything(), reply_to_message_id: 'id' });
   });
 
@@ -84,7 +84,7 @@ describe('TelegramService', () => {
     await service.addProductOnURLSent(ctx, 'url');
     expect(productsService.addProduct).toHaveBeenLastCalledWith(
       'userId', expect.objectContaining({ size: expect.objectContaining({ id: 's1' }) }));
-    expect(ctx.reply).toHaveBeenCalledWith('Product name for 10.00€ at store H&M was added.');
+    expect(ctx.reply).toHaveBeenLastCalledWith('Product name for 10.00€ at store H&M was added. 🛍️');
   });
 
   it('should handle rejection when product already added', async () => {
@@ -158,14 +158,14 @@ describe('TelegramService', () => {
     productsService.addProduct.mockReturnValue({ name: 'name', price: 10, store: 'H&M' });
 
     await service.updateProductOnSizeChosen(ctx);
-    expect(productsService.addProduct).toHaveBeenCalledWith(
+    expect(productsService.addProduct).toHaveBeenLastCalledWith(
       'userId', { url: 'url', size: { id: 'sizeId', name: 'sizeName' } });
-    expect(ctx.answerCbQuery).toHaveBeenCalledWith('You chose sizeName.');
+    expect(ctx.answerCbQuery).toHaveBeenLastCalledWith('You chose sizeName. 📐');
     expect(ctx.editMessageReplyMarkup).toHaveBeenCalledWith();
-    expect(ctx.reply).toHaveBeenCalledWith(
-      'Your product name for 10.00€ at store H&M with size sizeName was added successfully.',
+    expect(ctx.reply).toHaveBeenLastCalledWith(
+      'Your product name for 10.00€ at store H&M with size sizeName was added successfully. 🛍️',
       { reply_to_message_id: 'mId' });
-    expect((ctx as any).session.productData.delete).toHaveBeenCalledWith(expect.any(Number));
+    expect((ctx as any).session.productData.delete).toHaveBeenLastCalledWith(expect.any(Number));
   });
 
   it('should handle when init data in session has been deleted.', async () => {
@@ -181,10 +181,10 @@ describe('TelegramService', () => {
     (ctx as any).session.productData.get.mockReturnValue(null);
 
     await service.updateProductOnSizeChosen(ctx);
-    expect(ctx.answerCbQuery).toHaveBeenCalledWith('You chose sizeName.');
+    expect(ctx.answerCbQuery).toHaveBeenLastCalledWith('You chose sizeName. 📐');
     expect(ctx.editMessageReplyMarkup).toHaveBeenCalledWith();
-    expect(ctx.reply).toHaveBeenCalledWith(
-      'Your request timed out. Please add the product again.',
+    expect(ctx.reply).toHaveBeenLastCalledWith(
+      'Your request timed out. Please add the product again. ⌛',
       { reply_to_message_id: 'mId' });
   });
 
@@ -204,25 +204,25 @@ describe('TelegramService', () => {
       throw new ConflictException();
     });
     await service.updateProductOnSizeChosen(ctx);
-    expect(ctx.reply).toHaveBeenCalledWith('Product has already been added.');
+    expect(ctx.reply).toHaveBeenLastCalledWith( 'Product has already been added. 💁‍♂️');
 
     productsService.addProduct.mockImplementation(() => {
       throw new NotFoundException();
     });
     await service.updateProductOnSizeChosen(ctx);
-    expect(ctx.reply).toHaveBeenCalledWith('Product does not exist. Check URL.');
+    expect(ctx.reply).toHaveBeenLastCalledWith('Product does not exist. Check URL. 🤷‍♀️');
 
     productsService.addProduct.mockImplementation(() => {
       throw new BadRequestException('Unknown store');
     });
     await service.updateProductOnSizeChosen(ctx);
-    expect(ctx.reply).toHaveBeenCalledWith('Product does not exist. Check URL.');
+    expect(ctx.reply).toHaveBeenLastCalledWith('Invalid URL. Is store supported? 🤔');
 
     productsService.addProduct.mockImplementation(() => {
       throw new InternalServerErrorException();
     });
     await service.updateProductOnSizeChosen(ctx);
-    expect(ctx.reply).toHaveBeenCalledWith('Internal error. Could not add product.');
+    expect(ctx.reply).toHaveBeenLastCalledWith('Internal error. Could not add product. 🤦‍♂️');
   });
 
   it('should return the userId if already in session', async () => {
@@ -262,7 +262,7 @@ describe('TelegramService', () => {
     // there must be no userId associated to the session
     expect((ctx as any).session.userId).toBe(undefined);
     expect(ctx.reply).toHaveBeenCalledWith(
-      `You need to link your shassi account first. Go to domain?action=createTelegramToken`);
+      `You need to link your shassi account first. 🔗 Go to domain?action=createTelegramToken`);
   });
 
   it('should not do anything when /start is running', async () => {
@@ -319,8 +319,8 @@ describe('TelegramService', () => {
     expect((ctx as any).session.userId).toEqual(ObjectID.createFromTime(0));
     expect(tokenService.checkToken).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'token');
     expect(telegramUserIdService.saveTelegramId).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'telegramId');
-    expect(ctx.reply).toHaveBeenCalledWith(`Welcome! Your account was successfully connected.`);
-    expect(ctx.reply).toHaveBeenCalledWith('You can add a product by sending its URL to this chat.');
+    expect(ctx.reply).toHaveBeenNthCalledWith(1, `Welcome! 👋 Your account was successfully connected.`);
+    expect(ctx.reply).toHaveBeenNthCalledWith(2, 'You can add a product by sending its URL to this chat.');
   });
 
   it('should not link telegram account if already in use', async () => {
@@ -340,7 +340,7 @@ describe('TelegramService', () => {
     expect((ctx as any).session.userId).toBe(undefined);
     expect(tokenService.checkToken).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'token');
     expect(telegramUserIdService.saveTelegramId).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'telegramId');
-    expect(ctx.reply).toHaveBeenCalledWith(`Could not connect Telegram account. Already linked to different shassi user account.`);
+    expect(ctx.reply).toHaveBeenCalledWith(`Could not connect Telegram account. Already linked to different shassi user account. 🙌`);
   });
 
   it('should not link telegram if token invalid', async () => {
@@ -357,8 +357,8 @@ describe('TelegramService', () => {
     expect((ctx as any).session.userId).toBe(undefined);
     expect(tokenService.checkToken).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'token');
     expect(telegramUserIdService.saveTelegramId).not.toHaveBeenCalled();
-    expect(ctx.reply).toHaveBeenCalledWith('Given token was invalid. Try again');
-    expect(ctx.reply).toHaveBeenCalledWith('You need to link your shassi account first. Go to domain?action=createTelegramToken');
+    expect(ctx.reply).toHaveBeenNthCalledWith(1, 'Given token was invalid. Try again! 🙇');
+    expect(ctx.reply).toHaveBeenNthCalledWith(2, 'Hi! 👋 You need to link your shassi account first. Go to domain?action=createTelegramToken');
   });
 
   it('should not link telegram if token format invalid', async () => {
@@ -375,8 +375,8 @@ describe('TelegramService', () => {
     expect((ctx as any).session.userId).toBe(undefined);
     expect(tokenService.checkToken).toHaveBeenCalled();
     expect(telegramUserIdService.saveTelegramId).not.toHaveBeenCalled();
-    expect(ctx.reply).toHaveBeenCalledWith('Given token was invalid. Try again');
-    expect(ctx.reply).toHaveBeenCalledWith('You need to link your shassi account first. Go to domain?action=createTelegramToken');
+    expect(ctx.reply).toHaveBeenNthCalledWith(1, 'Given token was invalid. Try again! 🙇');
+    expect(ctx.reply).toHaveBeenNthCalledWith(2, 'Hi! 👋 You need to link your shassi account first. Go to domain?action=createTelegramToken');
   });
 
   it('should notify about an update', async () => {

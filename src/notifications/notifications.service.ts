@@ -84,7 +84,7 @@ export class NotificationsService implements OnModuleInit {
     }
     const url = `${this.configService.frontendDomain}/products/${update.product._id}`;
     const nameLink = `[${update.product.name}](${url})`;
-    return `Your product ${nameLink} ${updateText}.`;
+    return `Your product ${nameLink} ${updateText}. 👚`;
   }
 
 }

@@ -73,7 +73,7 @@ export class TelegramService implements OnModuleInit {
       if (product.sizes && product.sizes.length > 1) {
         const productId = Date.now();
         ctx.session.productData.set(productId, { url: product.url, name: product.name });
-        ctx.reply('Which size do you want?', {
+        ctx.reply('Which size do you want? 📏', {
           reply_markup: this.createKeyboard(product.sizes, productId),
           reply_to_message_id: ctx.message.message_id,
         });
@@ -83,7 +83,7 @@ export class TelegramService implements OnModuleInit {
           Object.assign(productUpdate, { size: product.sizes[0] });
         }
         const newProduct = await this.productsService.addProduct(userId, productUpdate);
-        ctx.reply(`Product ${newProduct.name} for ${newProduct.price.toFixed(2)}€ at store ${newProduct.store} was added.`);
+        ctx.reply(`Product ${newProduct.name} for ${newProduct.price.toFixed(2)}€ at store ${newProduct.store} was added. 🛍️`);
       }
     } catch (err) {
       this.handleProductAddErrors(err, ctx);
@@ -95,17 +95,17 @@ export class TelegramService implements OnModuleInit {
       const answer = ctx.match[0].split('|-|');
       const size = { name: answer[0], id: answer[1] };
       const productId = parseInt(answer[2], 10);
-      ctx.answerCbQuery(`You chose ${size.name}.`);
+      ctx.answerCbQuery(`You chose ${size.name}. 📐`);
       ctx.editMessageReplyMarkup();
       const productData = ctx.session.productData.get(productId);
       if (!productData) {
-        return ctx.reply('Your request timed out. Please add the product again.',
+        return ctx.reply('Your request timed out. Please add the product again. ⌛',
           { reply_to_message_id: ctx.callbackQuery.message.reply_to_message.message_id });
       }
       ctx.session.productData.delete(productId);
       Object.assign(productData, { size });
       const p = await this.productsService.addProduct(ctx.session.userId, productData);
-      ctx.reply(`Your product ${p.name} for ${p.price.toFixed(2)}€ at store ${p.store} with size ${size.name} was added successfully.`,
+      ctx.reply(`Your product ${p.name} for ${p.price.toFixed(2)}€ at store ${p.store} with size ${size.name} was added successfully. 🛍️`,
         { reply_to_message_id: ctx.callbackQuery.message.reply_to_message.message_id });
     } catch (err) {
       this.handleProductAddErrors(err, ctx);
@@ -114,14 +114,14 @@ export class TelegramService implements OnModuleInit {
 
   private handleProductAddErrors(err, ctx: ContextMessageUpdate) {
     if (err instanceof ConflictException) {
-      ctx.reply('Product has already been added.');
+      ctx.reply('Product has already been added. 💁‍♂️');
     } else if (err instanceof BadRequestException) {
-      ctx.reply('Invalid URL. Is store supported?');
+      ctx.reply('Invalid URL. Is store supported? 🤔');
     } else if (err instanceof NotFoundException) {
-      ctx.reply('Product does not exist. Check URL.');
+      ctx.reply('Product does not exist. Check URL. 🤷‍♀️');
       this.logger.warn(err.message);
     } else {
-      ctx.reply('Internal error. Could not add product.');
+      ctx.reply('Internal error. Could not add product. 🤦‍♂️');
       this.logger.error(err.message, err.stack);
     }
   }
@@ -173,7 +173,7 @@ export class TelegramService implements OnModuleInit {
     }
 
     if (ctx.message.text && !ctx.message.text.includes('/start')) {
-      ctx.reply(`You need to link your shassi account first. Go to ${this.configService.frontendDomain}?action=createTelegramToken`);
+      ctx.reply(`You need to link your shassi account first. 🔗 Go to ${this.configService.frontendDomain}?action=createTelegramToken`);
     }
     // Do not call next() without account.
   }
@@ -196,15 +196,15 @@ export class TelegramService implements OnModuleInit {
     if (isValid) {
       try {
         await this.telegramIdService.saveTelegramId(userId, ctx.from.id);
-        ctx.reply(`Welcome! Your account was successfully connected.`);
+        ctx.reply(`Welcome! 👋 Your account was successfully connected.`);
         ctx.reply('You can add a product by sending its URL to this chat.');
         return this.authSession(ctx, next);
       } catch (err) {
-        ctx.reply(`Could not connect Telegram account. Already linked to different shassi user account.`);
+        ctx.reply(`Could not connect Telegram account. Already linked to different shassi user account. 🙌`);
       }
     } else {
-      ctx.reply('Given token was invalid. Try again');
-      ctx.reply(`You need to link your shassi account first. Go to ${this.configService.frontendDomain}?action=createTelegramToken`);
+      ctx.reply('Given token was invalid. Try again! 🙇');
+      ctx.reply(`Hi! 👋 You need to link your shassi account first. Go to ${this.configService.frontendDomain}?action=createTelegramToken`);
     }
     return next(ctx);
   }
