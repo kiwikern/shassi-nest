@@ -9,8 +9,8 @@ export const amazonEchoTaseCase = {
   ],
 
   sizeChecks: [
-    { size: 'ONESIZE', isAvailable: true },
-    { size: 'any', isAvailable: true },
+    { size: 'ONESIZE', isAvailable: true, isLowInStock: false },
+    { size: 'any', isAvailable: true, isLowInStock: false },
   ],
 
   name: 'Echo Input (Schwarz) – Bringen Sie Alexa auf Ihren Lautsprecher – Externer Lautsprecher mit 3,5-mm-Audioeingang oder Bluetooth erforderlich',

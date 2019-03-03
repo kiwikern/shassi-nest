@@ -43,7 +43,7 @@ describe('Product Entity', () => {
 
   it('should handle one update', async () => {
     const updateDate = new Date();
-    const entity = getProductEntity([{ price: 100, createdAt: updateDate, isAvailable: true }], { id: 'id', name: 'name' });
+    const entity = getProductEntity([{ price: 100, createdAt: updateDate, isAvailable: true, isLowInStock: true }], { id: 'id', name: 'name' });
     expect(entity.price).toBe(100);
     expect(entity.isAvailable).toBe(true);
     expect(entity.getCreatedAt()).toEqual(date);
@@ -58,8 +58,8 @@ describe('Product Entity', () => {
     const oldUpdateDate = new Date();
     oldUpdateDate.setFullYear(2009);
     const updates = [
-      { price: 100, createdAt: updateDate, isAvailable: true },
-      { price: 10, createdAt: oldUpdateDate, isAvailable: false },
+      { price: 100, createdAt: updateDate, isAvailable: true, isLowInStock: true },
+      { price: 10, createdAt: oldUpdateDate, isAvailable: false, isLowInStock: false },
     ];
     const entity = getProductEntity(updates);
     expect(entity.price).toBe(10);

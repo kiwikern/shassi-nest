@@ -9,4 +9,7 @@ export class ProductUpdate {
 
   @Column('boolean')
   isAvailable: boolean;
+
+  @Column('boolean')
+  isLowInStock: boolean;
 }

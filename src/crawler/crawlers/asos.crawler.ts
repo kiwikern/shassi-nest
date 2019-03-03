@@ -86,6 +86,11 @@ export class AsosCrawler implements Crawler {
     return !!size && size.isInStock;
   }
 
+  isLowInStock(sizeId?: string): boolean {
+    const size = this.apiData.variants.find(v => v.variantId + '' === sizeId);
+    return this.isSizeAvailable(sizeId) && !!size && size.isLowInStock;
+  }
+
   getUrl(): string {
     return this.url;
   }

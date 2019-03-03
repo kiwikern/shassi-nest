@@ -63,8 +63,16 @@ export class AboutyouCrawler implements Crawler {
   }
 
   isSizeAvailable(sizeId?: string): boolean {
+    return this.getQuantity(sizeId) > 0;
+  }
+
+  isLowInStock(sizeId?: string): boolean {
+    return this.isSizeAvailable(sizeId) && this.getQuantity(sizeId) <= 3;
+  }
+
+  private getQuantity(sizeId: string) {
     const size = this.body.included[sizeId];
-    return !!size && size.attributes.quantity > 0;
+    return !!size && size.attributes.quantity;
   }
 
   getUrl(): string {

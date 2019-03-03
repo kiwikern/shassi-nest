@@ -13,6 +13,7 @@ export interface ProductAttributeChanges {
   readonly newPriceValue: number;
   readonly hasAvailabilityChange: boolean;
   readonly hasNeverBeenAvailableBefore: boolean;
+  readonly hasLowInStockChange: boolean;
 }
 
 export class ProductAttributeChangesBuilder {
@@ -22,6 +23,7 @@ export class ProductAttributeChangesBuilder {
   private newPriceValue: number;
   private hasAvailabilityChange: boolean = false;
   private hasNeverBeenAvailableBefore: boolean = false;
+  private hasLowInStockChange: boolean = false;
 
   setPriceChange({ oldValue, newValue }: { oldValue: number, newValue: number }) {
     this.hasAnyChange = true;
@@ -36,6 +38,11 @@ export class ProductAttributeChangesBuilder {
     this.hasNeverBeenAvailableBefore = hasNeverBeenAvailableBefore;
   }
 
+  setLowInStockChange() {
+    this.hasAnyChange = true;
+    this.hasLowInStockChange = true;
+  }
+
   build(): ProductAttributeChanges {
     return {
       hasAnyChange: this.hasAnyChange,
@@ -44,6 +51,7 @@ export class ProductAttributeChangesBuilder {
       newPriceValue: this.newPriceValue,
       hasAvailabilityChange: this.hasAvailabilityChange,
       hasNeverBeenAvailableBefore: this.hasNeverBeenAvailableBefore,
+      hasLowInStockChange: this.hasLowInStockChange,
     };
   }
 

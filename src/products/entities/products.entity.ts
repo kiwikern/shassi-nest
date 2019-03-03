@@ -1,4 +1,4 @@
-import { Column, Entity, Index, ObjectIdColumn } from 'typeorm';
+import { Column, Entity, ObjectIdColumn } from 'typeorm';
 import { Exclude, Expose, Transform, Type } from 'class-transformer';
 import { ProductSize } from './product-size.entity';
 import { ProductUpdate } from './product-update.entity';
@@ -30,13 +30,13 @@ export class ProductEntity {
   @ApiModelProperty()
   userId: ObjectID;
 
-  @Exclude({toPlainOnly: true})
+  @Exclude({ toPlainOnly: true })
   @Column(typeFn(ProductSize))
   @Type(typeFn(ProductSize))
   size: ProductSize;
 
   // TODO: Why does default value not work?
-  @Column({ default: true})
+  @Column({ default: true })
   @ApiModelProperty()
   isActive: boolean = true;
 
@@ -60,6 +60,13 @@ export class ProductEntity {
   get isAvailable(): boolean {
     const latestUpdate = this.getLatestUpdate();
     return latestUpdate ? latestUpdate.isAvailable : false;
+  }
+
+  @Expose({ name: 'isLowInStock' })
+  @ApiModelProperty()
+  get isLowInStock(): boolean {
+    const latestUpdate = this.getLatestUpdate();
+    return latestUpdate ? latestUpdate.isLowInStock === true : false;
   }
 
   @Expose({ name: 'createdAt' })

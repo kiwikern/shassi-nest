@@ -57,6 +57,12 @@ export class ZalandoCrawler implements Crawler {
     return !!size && size.isAvailable;
   }
 
+  isLowInStock(sizeId?: string): boolean {
+    const size = this.articleData.units
+      .find(unit => unit.id === sizeId);
+    return this.isSizeAvailable(sizeId) && !!size && size.stock <= 3;
+  }
+
   getUrl(): string {
     return this.url;
   }

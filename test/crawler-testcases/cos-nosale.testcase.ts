@@ -16,9 +16,10 @@ export const cosTestCase = {
   ],
 
   sizeChecks: [
-    { size: '0722148001002', isAvailable: true },
-    { size: '0722148001001', isAvailable: false },
-    { size: 'sizedoesnotexist', isAvailable: false },
+    { size: '0722148001002', isAvailable: true, isLowInStock: true },
+    { size: '0722148001001', isAvailable: false, isLowInStock: false },
+    { size: '0722148001003', isAvailable: true, isLowInStock: false },
+    { size: 'sizedoesnotexist', isAvailable: false, isLowInStock: false },
   ],
 
   name: 'RIBBED LONG-SLEEVED T-SHIRT',
@@ -29,7 +30,7 @@ export const cosTestCase = {
     { size: 'unknown-size', price: 49 },
   ],
 
-  secondResponse: { availability: ['0722148001005', '0722148001003', '0722148001004', '0722148001002'], fewPieceLeft: [] },
+  secondResponse: { availability: ['0722148001005', '0722148001003', '0722148001004', '0722148001002'], fewPieceLeft: ['0722148001002'] },
 
   testResponse: `<!DOCTYPE HTML>
 <html class="no-js">

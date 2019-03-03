@@ -15,9 +15,10 @@ export const zalandoTestCase = {
   ],
 
   sizeChecks: [
-    { size: 'JAM22E004-C110031032', isAvailable: false },
-    { size: 'JAM22E004-C110032034', isAvailable: true },
-    { size: 'sizedoesnotexist', isAvailable: false },
+    { size: 'JAM22E004-C110031032', isAvailable: false, isLowInStock: false },
+    { size: 'JAM22E004-C110032034', isAvailable: true, isLowInStock: false },
+    { size: 'JAM22E004-C110032032', isAvailable: true, isLowInStock: true },
+    { size: 'sizedoesnotexist', isAvailable: false, isLowInStock: false },
   ],
 
   name: 'JJIMARCO JJSANDY MELANGE - Chinos - grey melange',

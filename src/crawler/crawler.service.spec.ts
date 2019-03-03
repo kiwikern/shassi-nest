@@ -30,6 +30,8 @@ function crawlerMock(name) {
       },
 
       isSizeAvailable: () => false,
+
+      isLowInStock: () => false,
     };
   });
 }

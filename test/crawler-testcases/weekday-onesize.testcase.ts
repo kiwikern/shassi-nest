@@ -11,8 +11,8 @@ export const weekdayOneSizeTestCase = {
   ],
 
   sizeChecks: [
-    { size: '0622708001001', isAvailable: true },
-    { size: 'sizedoesnotexist', isAvailable: false },
+    { size: '0622708001001', isAvailable: true, isLowInStock: false },
+    { size: 'sizedoesnotexist', isAvailable: false, isLowInStock: false },
   ],
 
   name: 'Eye Webbing Key Ring',

@@ -15,6 +15,7 @@ export class HmCrawler implements Crawler {
   productData: HmProductData;
   document: Document;
   availability: string[];
+  lowInStock: string[];
   logger: Logger = new Logger(HmCrawler.name);
 
   constructor(private httpService: HttpService) {
@@ -77,8 +78,7 @@ export class HmCrawler implements Crawler {
       }
       if (prop === productId || (this.productData === undefined && prop.startsWith(productId.substr(0, 5)))) {
         this.productData = productData[prop];
-        const altName = productData.alternate.replace(/ - {a.*/, '');
-        this.productData.altName = altName;
+        this.productData.altName = productData.alternate.replace(/ - {a.*/, '');
       }
     }
 
@@ -96,6 +96,7 @@ export class HmCrawler implements Crawler {
     }
     if (availabilityResponse.data && Array.isArray(availabilityResponse.data.availability)) {
       this.availability = availabilityResponse.data.availability;
+      this.lowInStock = availabilityResponse.data.fewPieceLeft;
     } else {
       this.logger.error({ message: 'Unexpected product availability format from API', url, availabilityResponse });
       throw new InternalServerErrorException('Invalid availability format from API.');
@@ -118,6 +119,10 @@ export class HmCrawler implements Crawler {
       name: size.name,
       isAvailable: this.isSizeAvailable(size.sizeCode),
     }));
+  }
+
+  isLowInStock(sizeId?: string): boolean {
+    return this.isSizeAvailable(sizeId) && this.lowInStock.indexOf(sizeId) !== -1;
   }
 
   isInCatalog(): boolean {

@@ -16,9 +16,10 @@ export const hmMultiVariantsTestcase = {
   ],
 
   sizeChecks: [
-    { size: '0538358019003', isAvailable: false },
-    { size: '0538358019010', isAvailable: true },
-    { size: 'sizedoesnotexist', isAvailable: false },
+    { size: '0538358019003', isAvailable: false, isLowInStock: false },
+    { size: '0538358019010', isAvailable: true, isLowInStock: false },
+    { size: '0538358019005', isAvailable: true, isLowInStock: true },
+    { size: 'sizedoesnotexist', isAvailable: false, isLowInStock: false },
   ],
 
   name: 'Sneaker',
@@ -32,7 +33,7 @@ export const hmMultiVariantsTestcase = {
 
   secondResponse: {
     'availability': ['0538358001006', '0538358001008', '0538358001010', '0538358010004', '0538358010005', '0538358010006', '0538358010007', '0538358010008', '0538358010009', '0538358013005', '0538358013006', '0538358013007', '0538358013008', '0538358013009', '0538358018004', '0538358018005', '0538358018006', '0538358018007', '0538358018008', '0538358018009', '0538358019004', '0538358019005', '0538358019006', '0538358019007', '0538358019008', '0538358019009', '0538358019010'],
-    'fewPieceLeft': [],
+    'fewPieceLeft': ['0538358019005'],
   },
 
   testResponse: `<!DOCTYPE HTML>

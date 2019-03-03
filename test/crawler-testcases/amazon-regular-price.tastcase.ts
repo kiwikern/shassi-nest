@@ -9,7 +9,7 @@ export const amazonRegularPriceTaseCase = {
   ],
 
   sizeChecks: [
-    { size: 'ONESIZE', isAvailable: true },
+    { size: 'ONESIZE', isAvailable: true, isLowInStock: false },
   ],
 
   name: 'WINOMO Kleiderhaken Klappbar Wand-Kleiderständer',

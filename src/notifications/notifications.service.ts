@@ -56,7 +56,9 @@ export class NotificationsService implements OnModuleInit {
   private isRelevantChange(update: ProductChange) {
     const changes = update.productAttributeChanges;
     return update.product.isAvailable
-      && (changes.hasPriceChange || changes.hasNeverBeenAvailableBefore);
+      && (changes.hasPriceChange
+        || changes.hasNeverBeenAvailableBefore
+        || changes.hasLowInStockChange && update.product.isLowInStock);
   }
 
   private getMarkdownUpdateText(update: ProductChange) {
@@ -65,14 +67,23 @@ export class NotificationsService implements OnModuleInit {
     if (changes.hasPriceChange) {
       const priceDelta = changes.newPriceValue - changes.oldPriceValue;
       const prefix = priceDelta > 0 ? '+' : '';
-      updateText = `is now at ${changes.newPriceValue.toFixed(2)}€ (${prefix}${priceDelta.toFixed(2)}€)`;
+      const lowInStockText = update.product.isLowInStock ? ', low in stock' : '';
+      const newPrice = changes.newPriceValue.toFixed(2);
+      const priceDeltaText = `${prefix}${priceDelta.toFixed(2)}`;
+      updateText = `is now at ${newPrice}€ (${priceDeltaText}€${lowInStockText})`;
     } else if (changes.hasAvailabilityChange) {
-      updateText = `is available again`;
+      const lowInStockText = update.product.isLowInStock ? ' and low in stock' : '';
+      updateText = `is available again${lowInStockText}`;
+    } else if (changes.hasLowInStockChange) {
+      updateText = `is now low in stock`;
     } else {
-      this.logger.error({ message: 'Unknown product attribute change.', changes, product: update.product });
+      this.logger.error({
+        message: 'Unknown product attribute change.', changes, product: update.product,
+      });
       return null;
     }
-    const nameLink = `[${update.product.name}](${this.configService.frontendDomain}/products/${update.product._id})`;
+    const url = `${this.configService.frontendDomain}/products/${update.product._id}`;
+    const nameLink = `[${update.product.name}](${url})`;
     return `Your product ${nameLink} ${updateText}.`;
   }
 

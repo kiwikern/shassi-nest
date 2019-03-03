@@ -14,9 +14,9 @@ export const hmMultisizesTestcase = {
   ],
 
   sizeChecks: [
-    { size: '0669091022001', isAvailable: false },
-    { size: '0669091022002', isAvailable: true },
-    { size: 'sizedoesnotexist', isAvailable: false },
+    { size: '0669091022001', isAvailable: false, isLowInStock: false },
+    { size: '0669091022002', isAvailable: true, isLowInStock: false },
+    { size: 'sizedoesnotexist', isAvailable: false, isLowInStock: false },
   ],
 
   name: 'Hoodiejacke Regular Fit',

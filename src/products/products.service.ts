@@ -6,9 +6,10 @@ import { ObjectID as TObjectID, Repository } from 'typeorm';
 import { CrawlerService } from '../crawler/crawler.service';
 import { ObjectID } from 'mongodb';
 import { ProductSizeAvailability } from '../crawler/product-size.interface';
-import { ProductAttributeChangesBuilder, ProductChange } from './dtos/product-change.interface';
+import { ProductAttributeChanges, ProductAttributeChangesBuilder, ProductChange } from './dtos/product-change.interface';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { ProductUpdate } from './entities/product-update.entity';
 
 @Injectable()
 export class ProductsService {
@@ -87,25 +88,7 @@ export class ProductsService {
     try {
       const sizeId = product.size ? product.size.id : null;
       const newUpdate = await this.crawlerService.getUpdateData(product.url, sizeId);
-      const latestUpdateWhenAvailable = product.updates.slice().reverse().find(p => p.isAvailable);
-      const changesBuilder = new ProductAttributeChangesBuilder();
-
-      if (product.price !== newUpdate.price) {
-        changesBuilder.setPriceChange({
-          oldValue: product.price,
-          newValue: newUpdate.price,
-        });
-      }
-      if (product.isAvailable !== newUpdate.isAvailable) {
-        changesBuilder.setAvailabilityChange(!latestUpdateWhenAvailable);
-        if (latestUpdateWhenAvailable && latestUpdateWhenAvailable.price !== newUpdate.price) {
-          changesBuilder.setPriceChange({
-            oldValue: latestUpdateWhenAvailable.price,
-            newValue: newUpdate.price,
-          });
-        }
-      }
-      const productAttributeChanges = changesBuilder.build();
+      const productAttributeChanges = this.getProductAttributeChanges(product, newUpdate);
       if (productAttributeChanges.hasAnyChange) {
         product.updates.push(newUpdate);
         product.hasUnreadUpdate = true;
@@ -120,6 +103,35 @@ export class ProductsService {
         this.logger.error({ message: 'Failed to update product.', error: error.message, product }, error.stack);
       }
     }
+  }
+
+  private getProductAttributeChanges(product: ProductEntity, update: ProductUpdate): ProductAttributeChanges {
+    const latestUpdateWhenAvailable = product.updates.slice().reverse().find(p => p.isAvailable);
+
+    const changesBuilder = new ProductAttributeChangesBuilder();
+
+    if (product.price !== update.price) {
+      changesBuilder.setPriceChange({
+        oldValue: product.price,
+        newValue: update.price,
+      });
+    }
+
+    if (product.isAvailable !== update.isAvailable) {
+      changesBuilder.setAvailabilityChange(!latestUpdateWhenAvailable);
+      if (latestUpdateWhenAvailable && latestUpdateWhenAvailable.price !== update.price) {
+        changesBuilder.setPriceChange({
+          oldValue: latestUpdateWhenAvailable.price,
+          newValue: update.price,
+        });
+      }
+    }
+
+    if (product.isLowInStock !== update.isLowInStock) {
+      changesBuilder.setLowInStockChange();
+    }
+
+    return changesBuilder.build();
   }
 
   async markRead(userId: ObjectID, productId: ObjectID): Promise<ProductEntity> {

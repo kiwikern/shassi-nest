@@ -9,8 +9,8 @@ export const amazonBookTaseCase = {
   ],
 
   sizeChecks: [
-    { size: 'ONESIZE', isAvailable: true },
-    { size: 'any', isAvailable: true },
+    { size: 'ONESIZE', isAvailable: true, isLowInStock: false },
+    { size: 'any', isAvailable: true, isLowInStock: false },
   ],
 
   name: 'Tiamat\'s Wrath: Book 8 of the Expanse (now a major TV series on Netflix)',

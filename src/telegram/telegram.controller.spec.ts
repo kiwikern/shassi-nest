@@ -4,7 +4,6 @@ import { TelegramTokenService } from './telegram-token.service';
 import { NoOpLogger } from '../../test/mocks/no-op-logger';
 import { TelegramUserIdService } from './telegram-user-id.service';
 import { telegramUserIdServiceFactory } from '../../test/mocks/jest-mocks';
-import { UserEntity } from '../users/entities/user.entity';
 import { MockType } from '../../test/mock.type';
 
 describe('Telegram Controller', () => {

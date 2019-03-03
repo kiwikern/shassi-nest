@@ -11,8 +11,8 @@ export const cosOneSizeTestCase = {
   ],
 
   sizeChecks: [
-    { size: '0695515001001', isAvailable: true },
-    { size: 'sizedoesnotexist', isAvailable: false },
+    { size: '0695515001001', isAvailable: true, isLowInStock: false },
+    { size: 'sizedoesnotexist', isAvailable: false, isLowInStock: false },
   ],
 
   name: 'CURVED HAIR COMB',

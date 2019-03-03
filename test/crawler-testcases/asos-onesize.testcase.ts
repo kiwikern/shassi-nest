@@ -11,8 +11,8 @@ export const asosOneSizeTestCase = {
   ],
 
   sizeChecks: [
-    { size: '11493211', isAvailable: true },
-    { size: 'sizedoesnotexist', isAvailable: false },
+    { size: '11493211', isAvailable: true, isLowInStock: false },
+    { size: 'sizedoesnotexist', isAvailable: false, isLowInStock: false },
   ],
 
   name: 'Feminist Manifesto In Fifteen Suggestions – Buch',

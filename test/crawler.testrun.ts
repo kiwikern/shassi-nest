@@ -6,12 +6,23 @@ import { NoOpLogger } from './mocks/no-op-logger';
 
 export const crawlerTestRun = (
   {
-    crawlerType, testResponse, sizes, sizeChecks, name, priceChecks, url = 'my-url', expectedUrl = null, secondResponse = null, thirdResponse = null,
+    crawlerType,
+    testResponse,
+    sizes,
+    sizeChecks,
+    name,
+    priceChecks,
+    url = 'my-url',
+    expectedUrl = null,
+    secondResponse = null,
+    thirdResponse = null,
   }: {
     crawlerType: Type<Crawler>,
     testResponse: string | object,
     sizes: ProductSizeAvailability[],
-    sizeChecks: Array<{ size: string; isAvailable: boolean }>,
+    sizeChecks: Array<{
+      isLowInStock: boolean;
+      size: string; isAvailable: boolean }>,
     name: string, priceChecks: Array<{ size: string; price: number }>,
     url?: string,
     expectedUrl?: string,
@@ -52,6 +63,7 @@ export const crawlerTestRun = (
     sizeChecks.forEach(sizeCheck => {
       it('should return if a size is available', async () => {
         expect(crawler.isSizeAvailable(sizeCheck.size)).toBe(sizeCheck.isAvailable);
+        expect(crawler.isLowInStock(sizeCheck.size)).toBe(sizeCheck.isLowInStock);
       });
     });
 
@@ -72,6 +84,5 @@ export const crawlerTestRun = (
     it('should check if product is in catalog', async () => {
       expect(crawler.isInCatalog()).toEqual(true);
     });
-
   });
 };

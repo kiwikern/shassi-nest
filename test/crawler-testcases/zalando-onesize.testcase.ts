@@ -9,8 +9,8 @@ export const zalandoOneSizeTestCase = {
   ],
 
   sizeChecks: [
-    { size: 'BU752K007-C110052000', isAvailable: true },
-    { size: 'sizedoesnotexist', isAvailable: false },
+    { size: 'BU752K007-C110052000', isAvailable: true, isLowInStock: false },
+    { size: 'sizedoesnotexist', isAvailable: false, isLowInStock: false },
   ],
 
   name: 'Sunglasses - grey',

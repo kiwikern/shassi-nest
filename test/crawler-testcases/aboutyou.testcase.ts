@@ -15,9 +15,10 @@ export const aboutyouTestCase = {
   ],
 
   sizeChecks: [
-    { size: 'variants:35293185', isAvailable: true },
-    { size: 'variants:35293188', isAvailable: false },
-    { size: 'sizedoesnotexist', isAvailable: false },
+    { size: 'variants:35293185', isAvailable: true, isLowInStock: false },
+    { size: 'variants:35293188', isAvailable: false, isLowInStock: false },
+    { size: 'variants:35293187', isAvailable: true, isLowInStock: true },
+    { size: 'sizedoesnotexist', isAvailable: false, isLowInStock: false },
   ],
 
   name: 'Hoodie',

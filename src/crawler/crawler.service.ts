@@ -37,6 +37,7 @@ export class CrawlerService {
     return {
       price: crawler.getPrice(sizeId),
       isAvailable: crawler.isSizeAvailable(sizeId),
+      isLowInStock: crawler.isLowInStock(sizeId),
       createdAt: new Date(),
     };
   }

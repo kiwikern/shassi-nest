@@ -18,7 +18,7 @@ export class AmazonCrawler implements Crawler {
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
       'Cookie': 'HMCORP_locale=de_DE;HMCORP_currency=EUR;',
     };
-    const response = await this.httpService.get(this.url, {headers}).toPromise();
+    const response = await this.httpService.get(this.url, { headers }).toPromise();
     this.document = new JSDOM(response.data).window.document;
   }
 
@@ -80,6 +80,10 @@ export class AmazonCrawler implements Crawler {
 
   isSizeAvailable(id?: string): boolean {
     return true;
+  }
+
+  isLowInStock(sizeId?: string): boolean {
+    return false;
   }
 
   getUrl(): string {

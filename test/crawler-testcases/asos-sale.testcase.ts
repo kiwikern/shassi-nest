@@ -18,9 +18,10 @@ export const asosTestCase = {
   ],
 
   sizeChecks: [
-    { size: '10697534', isAvailable: true },
-    { size: '10697616', isAvailable: false },
-    { size: 'sizedoesnotexist', isAvailable: false },
+    { size: '10697534', isAvailable: true, isLowInStock: false },
+    { size: '10697561', isAvailable: true, isLowInStock: true },
+    { size: '10697616', isAvailable: false, isLowInStock: false },
+    { size: 'sizedoesnotexist', isAvailable: false, isLowInStock: false },
   ],
 
   name: 'River Island – Schwarze Steppjacke mit Kapuze',
@@ -103,7 +104,7 @@ export const asosTestCase = {
       variantId: 10697561,
       sku: '7786179',
       isInStock: true,
-      isLowInStock: false,
+      isLowInStock: true,
       price: {
         current: { value: 49.19, text: '49,19 €' },
         previous: { value: 81.99, text: '81,99 €' },

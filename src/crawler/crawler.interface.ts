@@ -9,6 +9,8 @@ export interface Crawler {
 
   isSizeAvailable(sizeId?: string): boolean;
 
+  isLowInStock(sizeId: string): boolean;
+
   getPrice(sizeId?: string): number;
 
   getName(): string;

@@ -9,6 +9,7 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
   document: Document;
   private productData;
   private availability = [];
+  lowInStock: string[];
 
   protected abstract logger: Logger;
   protected abstract httpService: HttpService;
@@ -40,6 +41,7 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
       const variants = this.productData.variants.map(v => v.variantCode).join(',');
       const availabilityResponse = await this.httpService.get(apiUrl + variants, { headers }).toPromise();
       this.availability = availabilityResponse.data.availability;
+      this.lowInStock = availabilityResponse.data.fewPieceLeft;
     } catch (e) {
       this.logger.error(`Could not parse product data for ${url}, error: ${e.message}`, e.stack);
       throw new BadRequestException('The url could not be processed. Was this a proper product url?');
@@ -70,6 +72,10 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
 
   isSizeAvailable(id?: string): boolean {
     return this.availability.indexOf(id) !== -1;
+  }
+
+  isLowInStock(sizeId?: string): boolean {
+    return this.isSizeAvailable(sizeId) && this.lowInStock.indexOf(sizeId) !== -1;
   }
 
   getUrl(): string {

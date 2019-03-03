@@ -15,9 +15,9 @@ export const aboutyouExtrasaleTestCase = {
   ],
 
   sizeChecks: [
-    { size: 'variants:35449710', isAvailable: false },
-    { size: 'variants:34748787', isAvailable: true },
-    { size: 'sizedoesnotexist', isAvailable: false },
+    { size: 'variants:35449710', isAvailable: false, isLowInStock: false },
+    { size: 'variants:34748787', isAvailable: true, isLowInStock: true },
+    { size: 'sizedoesnotexist', isAvailable: false, isLowInStock: false },
   ],
 
   name: 'T-Shirt',

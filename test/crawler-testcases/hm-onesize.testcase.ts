@@ -9,8 +9,8 @@ export const hmOneSizeTestCase = {
   ],
 
   sizeChecks: [
-    { size: '0736967002003', isAvailable: true },
-    { size: 'sizedoesnotexist', isAvailable: false },
+    { size: '0736967002003', isAvailable: true, isLowInStock: false },
+    { size: 'sizedoesnotexist', isAvailable: false, isLowInStock: false },
   ],
 
   name: 'Feinstrickmütze',

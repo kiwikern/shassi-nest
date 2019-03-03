@@ -14,8 +14,9 @@ export const weekdayTestCase = {
   ],
 
   sizeChecks: [
-    { size: '0566155004002', isAvailable: true },
-    { size: 'sizedoesnotexist', isAvailable: false },
+    { size: '0566155004002', isAvailable: true, isLowInStock: false },
+    { size: '0566155004004', isAvailable: true, isLowInStock: true },
+    { size: 'sizedoesnotexist', isAvailable: false, isLowInStock: false },
   ],
 
   name: 'Spit Velvet Shirt',
@@ -25,7 +26,7 @@ export const weekdayTestCase = {
     { size: 'unknown-size', price: 30 },
   ],
 
-  secondResponse: {availability: ['0566155004003', '0566155005004', '0566155004002', '0566155005003', '0566155005002', '0566155004005', '0566155004004', '0566155005005'], fewPieceLeft: []},
+  secondResponse: {availability: ['0566155004003', '0566155005004', '0566155004002', '0566155005003', '0566155005002', '0566155004005', '0566155004004', '0566155005005'], fewPieceLeft: ['0566155004004']},
 
   testResponse: `<!DOCTYPE HTML>
 <html class="no-js">

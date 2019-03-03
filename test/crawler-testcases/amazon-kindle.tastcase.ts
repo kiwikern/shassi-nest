@@ -8,8 +8,8 @@ export const amazonKindleTaseCase = {
   ],
 
   sizeChecks: [
-    { size: 'ONESIZE', isAvailable: true },
-    { size: 'any', isAvailable: true },
+    { size: 'ONESIZE', isAvailable: true, isLowInStock: false },
+    { size: 'any', isAvailable: true, isLowInStock: false },
   ],
 
   name: 'Die Argonauten',

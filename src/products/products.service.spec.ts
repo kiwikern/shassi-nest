@@ -6,10 +6,7 @@ import { ProductEntity } from './entities/products.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { ObjectID } from 'mongodb';
 import { ConflictException, InternalServerErrorException, NotFoundException } from '@nestjs/common';
-import { useAsPath } from 'tslint/lib/configuration';
-import { CronJobService } from '../common/cron-job.service';
 import { MockType } from '../../test/mock.type';
-import { CronJob } from 'cron';
 import { Repository } from 'typeorm';
 import { crawlerServiceFactory, repositoryMockFactory } from '../../test/mocks/jest-mocks';
 import { NoOpLogger } from '../../test/mocks/no-op-logger';
@@ -81,33 +78,45 @@ describe('ProductsService', () => {
         size: { id: '' },
         price: 90,
         isAvailable: true,
+        isLowInStock: false,
       };
       const productMockWithDeferredPriceUpdate = {
         url: 'hasDeferredPriceUpdate',
         updates: [
-          { price: 90, isAvailable: true },
-          { price: 100, isAvailable: false },
+          { price: 90, isAvailable: true, isLowInStock: false },
+          { price: 100, isAvailable: false, isLowInStock: false },
         ],
         size: { id: '' },
         price: 100,
         isAvailable: false,
+        isLowInStock: false,
       };
       const productMockWithAvailabilityUpdate = {
         url: 'hasAvailabilityUpdate',
         updates: [
-          { price: 100, isAvailable: true },
-          { price: 90, isAvailable: false },
+          { price: 100, isAvailable: true, isLowInStock: false },
+          { price: 90, isAvailable: false, isLowInStock: false },
         ],
         size: null,
         price: 100,
         isAvailable: false,
+        isLowInStock: false,
       };
       const productMockWithFirstAvailabilityUpdate = {
         url: 'firstTimeAvailable',
-        updates: [{ price: 100, isAvailable: false }],
+        updates: [{ price: 100, isAvailable: false, isLowInStock: false }],
         size: { id: '' },
         price: 100,
         isAvailable: false,
+        isLowInStock: false,
+      };
+      const productMockWithLowInStockUpdate = {
+        url: 'hasLowInStockUpdate',
+        updates: [{ price: 100, isAvailable: true, isLowInStock: true }],
+        size: { id: '' },
+        price: 100,
+        isAvailable: true,
+        isLowInStock: true,
       };
       const productMockWithoutUpdate = {
         url: 'hasNoUpdate',
@@ -115,6 +124,7 @@ describe('ProductsService', () => {
         size: { id: '' },
         price: 100,
         isAvailable: true,
+        isLowInStock: false,
       };
 
       repositoryMock.find.mockReturnValue([
@@ -122,13 +132,16 @@ describe('ProductsService', () => {
         productMockWithDeferredPriceUpdate,
         productMockWithAvailabilityUpdate,
         productMockWithFirstAvailabilityUpdate,
+        productMockWithLowInStockUpdate,
         productMockWithoutUpdate,
       ]);
-      crawlerServiceMock.getUpdateData.mockReturnValue({ price: 100, isAvailable: true });
+      crawlerServiceMock.getUpdateData.mockReturnValue({
+        price: 100, isAvailable: true, isLowInStock: false,
+      });
 
       const updatedProducts = await service.updateAllProducts();
 
-      expect(updatedProducts.length).toBe(4);
+      expect(updatedProducts.length).toBe(5);
       expect(updatedProducts[0]).toMatchObject({
         productAttributeChanges: {
           hasAnyChange: true,
@@ -137,8 +150,9 @@ describe('ProductsService', () => {
           hasPriceChange: true,
           newPriceValue: 100,
           oldPriceValue: 90,
+          hasLowInStockChange: false,
         },
-        product: { updates: [{ price: 100, isAvailable: true }] },
+        product: { updates: [{ price: 100, isAvailable: true, isLowInStock: false  }] },
       });
       expect(updatedProducts[1]).toMatchObject({
         productAttributeChanges: {
@@ -148,12 +162,13 @@ describe('ProductsService', () => {
           hasPriceChange: true,
           newPriceValue: 100,
           oldPriceValue: 90,
+          hasLowInStockChange: false,
         },
         product: {
           updates: [
-            { price: 90, isAvailable: true },
-            { price: 100, isAvailable: false },
-            { price: 100, isAvailable: true },
+            { price: 90, isAvailable: true, isLowInStock: false  },
+            { price: 100, isAvailable: false, isLowInStock: false  },
+            { price: 100, isAvailable: true, isLowInStock: false  },
           ],
         },
       });
@@ -163,12 +178,13 @@ describe('ProductsService', () => {
           hasAvailabilityChange: true,
           hasNeverBeenAvailableBefore: false,
           hasPriceChange: false,
+          hasLowInStockChange: false,
         },
         product: {
           updates: [
-            { price: 100, isAvailable: true },
-            { price: 90, isAvailable: false },
-            { price: 100, isAvailable: true },
+            { price: 100, isAvailable: true, isLowInStock: false  },
+            { price: 90, isAvailable: false, isLowInStock: false  },
+            { price: 100, isAvailable: true, isLowInStock: false  },
           ],
         },
       });
@@ -178,8 +194,24 @@ describe('ProductsService', () => {
           hasAvailabilityChange: true,
           hasNeverBeenAvailableBefore: true,
           hasPriceChange: false,
+          hasLowInStockChange: false,
         },
         product: { updates: [{ price: 100, isAvailable: false }, { price: 100, isAvailable: true }] },
+      });
+      expect(updatedProducts[4]).toMatchObject({
+        productAttributeChanges: {
+          hasAnyChange: true,
+          hasAvailabilityChange: false,
+          hasNeverBeenAvailableBefore: false,
+          hasPriceChange: false,
+          hasLowInStockChange: true,
+        },
+        product: {
+          updates: [
+            { price: 100, isAvailable: true, isLowInStock: true },
+            { price: 100, isAvailable: true, isLowInStock: false },
+          ],
+        },
       });
     });
 
@@ -222,14 +254,14 @@ describe('ProductsService', () => {
       const updatedProducts = await service.updateAllProducts();
       expect(updatedProducts.length).toBe(1);
       expect(updatedProducts[0]).toMatchObject({
-          productAttributeChanges: {
-            hasAnyChange: true,
-            hasAvailabilityChange: false,
-            hasNeverBeenAvailableBefore: false,
-            hasPriceChange: true,
-            newPriceValue: 100,
-            oldPriceValue: 90,
-          },
+        productAttributeChanges: {
+          hasAnyChange: true,
+          hasAvailabilityChange: false,
+          hasNeverBeenAvailableBefore: false,
+          hasPriceChange: true,
+          newPriceValue: 100,
+          oldPriceValue: 90,
+        },
         product: { updates: [{ price: 100, isAvailable: true }] },
       });
       expect(repositoryMock.save).toBeCalledWith(expect.objectContaining({ isActive: false }));
