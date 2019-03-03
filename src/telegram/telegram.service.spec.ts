@@ -61,7 +61,7 @@ describe('TelegramService', () => {
       reply: jest.fn(),
     }))();
     productsService.initializeProduct.mockReturnValue({ name: 'name', url: 'url', sizes });
-    await service.addProductOnURLSent(ctx);
+    await service.addProductOnURLSent(ctx, 'url');
     expect((ctx as any).session.productData.set).toHaveBeenCalledWith(expect.any(Number),
       { name: 'name', url: 'url' });
     expect(ctx.reply).toHaveBeenCalledWith('Which size do you want?',
@@ -81,8 +81,8 @@ describe('TelegramService', () => {
     }))();
     productsService.initializeProduct.mockReturnValue({ name: 'name', url: 'url', sizes });
     productsService.addProduct.mockReturnValue({ name: 'name', price: 10, store: 'H&M' });
-    await service.addProductOnURLSent(ctx);
-    expect(productsService.addProduct).toHaveBeenCalledWith(
+    await service.addProductOnURLSent(ctx, 'url');
+    expect(productsService.addProduct).toHaveBeenLastCalledWith(
       'userId', expect.objectContaining({ size: expect.objectContaining({ id: 's1' }) }));
     expect(ctx.reply).toHaveBeenCalledWith('Product name for 10.00€ at store H&M was added.');
   });
@@ -98,8 +98,8 @@ describe('TelegramService', () => {
     productsService.addProduct.mockImplementation(() => {
       throw new ConflictException();
     });
-    await service.addProductOnURLSent(ctx);
-    expect(ctx.reply).toHaveBeenCalledWith('Product has already been added.');
+    await service.addProductOnURLSent(ctx, 'url');
+    expect(ctx.reply).toHaveBeenLastCalledWith('Product has already been added. 💁‍♂️');
   });
 
   it('should handle rejection on unknown store', async () => {
@@ -112,8 +112,8 @@ describe('TelegramService', () => {
     productsService.initializeProduct.mockImplementation(() => {
       throw new BadRequestException('Unknown store');
     });
-    await service.addProductOnURLSent(ctx);
-    expect(ctx.reply).toHaveBeenCalledWith('Invalid URL. Is store supported?');
+    await service.addProductOnURLSent(ctx, 'url');
+    expect(ctx.reply).toHaveBeenLastCalledWith('Invalid URL. Is store supported? 🤔');
   });
 
   it('should handle rejection on invalid url', async () => {
@@ -126,8 +126,8 @@ describe('TelegramService', () => {
     productsService.initializeProduct.mockImplementation(() => {
       throw new NotFoundException();
     });
-    await service.addProductOnURLSent(ctx);
-    expect(ctx.reply).toHaveBeenCalledWith('Product does not exist. Check URL.');
+    await service.addProductOnURLSent(ctx, 'url');
+    expect(ctx.reply).toHaveBeenLastCalledWith('Product does not exist. Check URL. 🤷‍♀️');
   });
 
   it('should handle rejection on internal error', async () => {
@@ -140,8 +140,8 @@ describe('TelegramService', () => {
     productsService.initializeProduct.mockImplementation(() => {
       throw new InternalServerErrorException();
     });
-    await service.addProductOnURLSent(ctx);
-    expect(ctx.reply).toHaveBeenCalledWith('Internal error. Could not add product.');
+    await service.addProductOnURLSent(ctx, 'url');
+    expect(ctx.reply).toHaveBeenLastCalledWith('Internal error. Could not add product. 🤦‍♂️');
   });
 
   it('should update the product when a size was chosen', async () => {
@@ -400,6 +400,49 @@ describe('TelegramService', () => {
 
   it('should handle errors', () => {
     service.handleErrors(new Error('Message'));
+  });
+
+  it('should hanlde messages without urls', async () => {
+    // @ts-ignore
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
+      message: { text: 'any text' },
+      reply: jest.fn(),
+    }))();
+    await service.handleMessageWithoutUrl(ctx as any);
+    expect(ctx.reply)
+      .toHaveBeenCalledWith('I did not understand. 🤷‍♀️ Please, send a URL to a product. 🔗' +
+        '\nOften, you can just use the share menu from your store\'s website.');
+  });
+
+  describe('handleReceivedPhoto', () => {
+
+    it('should ignore captions without urls and call next middleware', async () => {
+      // @ts-ignore
+      const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
+        message: { caption: 'any text' },
+      }))();
+      const next = jest.fn();
+      await service.handleReceivedPhoto(ctx as any, next);
+      expect(next).toHaveBeenCalled();
+      expect(productsService.addProduct).not.toHaveBeenCalled();
+    });
+
+    it('should add a url to ', async () => {
+      // @ts-ignore
+      const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
+        session: { userId: 'userId' },
+        message: { caption: 'https://myurl' },
+        reply: jest.fn(),
+      }))();
+      productsService.initializeProduct.mockImplementationOnce(() => {
+        throw new Error();
+      });
+      const next = jest.fn();
+      await service.handleReceivedPhoto(ctx as any, next);
+      expect(productsService.initializeProduct).toHaveBeenCalledWith('https://myurl');
+      expect(next).not.toHaveBeenCalled();
+    });
+
   });
 
   describe('evenlySplitArray', () => {

@@ -30,9 +30,26 @@ export class TelegramService implements OnModuleInit {
     this.telegraf.use(session());
     this.telegraf.command('start', (ctx, next) => this.startCommand(ctx, next));
     this.telegraf.use((ctx, next) => this.authSession(ctx, next));
-    this.telegraf.hears(TelegramService.LINK_REGEX, ctx => this.addProductOnURLSent(ctx));
+    this.telegraf.hears(TelegramService.LINK_REGEX, ctx => this.addProductOnURLSent(ctx, ctx.match[1]));
+    this.telegraf.on('photo', (ctx: ContextMessageUpdate, next) => this.handleReceivedPhoto(ctx, next));
+    this.telegraf.on('message', (ctx: ContextMessageUpdate) => this.handleMessageWithoutUrl(ctx));
     (this.telegraf as any).action(/.+/, async ctx => this.updateProductOnSizeChosen(ctx));
     this.telegraf.startPolling();
+  }
+
+  handleMessageWithoutUrl(ctx: ContextMessageUpdate) {
+    this.logger.log({ message: 'Received message without url', telegramMessage: ctx.message });
+    return ctx.reply('I did not understand. 🤷‍♀️ Please, send a URL to a product. 🔗' +
+      '\nOften, you can just use the share menu from your store\'s website.');
+  }
+
+  handleReceivedPhoto(ctx: ContextMessageUpdate, next) {
+    const matches = TelegramService.LINK_REGEX.exec(ctx.message.caption);
+    if (matches && matches[1]) {
+      return this.addProductOnURLSent(ctx, matches[1]);
+    } else {
+      return next();
+    }
   }
 
   async notifyAboutUpdate(userId, text) {
@@ -49,9 +66,8 @@ export class TelegramService implements OnModuleInit {
     this.logger.error(err.message, err.stack);
   }
 
-  async addProductOnURLSent(ctx) {
+  async addProductOnURLSent(ctx, url: string) {
     try {
-      const url = ctx.match[1];
       const userId = ctx.session.userId;
       const product = await this.productsService.initializeProduct(url);
       if (product.sizes && product.sizes.length > 1) {

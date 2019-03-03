@@ -29,4 +29,8 @@ export class TelegrafMock {
   startPolling() {
     this.logger.log('startPolling');
   }
+
+  on() {
+    this.logger.log('on');
+  }
 }
