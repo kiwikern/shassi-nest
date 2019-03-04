@@ -21,7 +21,6 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
       'Cookie': 'HMCORP_locale=de_DE;HMCORP_currency=EUR;',
     };
     const response = await this.httpService.get(this.url, { headers }).toPromise();
-    this.logger.log(util.inspect(response.data).substr(0, 200));
     this.document = new JSDOM(response.data).window.document;
     try {
       const productDataString = this.document.getElementsByClassName('product parbase')[0]
