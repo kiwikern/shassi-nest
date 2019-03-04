@@ -8,6 +8,7 @@ import { CosCrawler } from './crawlers/cos.crawler';
 import { WeekdayCrawler } from './crawlers/weekday.crawler';
 import { AsosCrawler } from './crawlers/asos.crawler';
 import { ZalandoCrawler } from './crawlers/zalando.crawler';
+import { ProductSizeAvailability } from './product-size.interface';
 
 @Injectable()
 export class CrawlerService {
@@ -17,7 +18,7 @@ export class CrawlerService {
   constructor(private httpService: HttpService) {
   }
 
-  async getInitData(url: string) {
+  async getInitData(url: string): Promise<{ name: string, sizes: ProductSizeAvailability[], url: string }> {
     const crawler = await this.getCrawler(url);
     if (!crawler.isInCatalog()) {
       throw new NotFoundException('Product does not exist.');
@@ -64,7 +65,7 @@ export class CrawlerService {
     } else if (url.includes('zalando.de')) {
       crawler = new ZalandoCrawler(this.httpService);
     } else {
-      this.logger.error('No crawler found for given url.',  url);
+      this.logger.error('No crawler found for given url.', url);
       throw new BadRequestException('Unknown store');
     }
 
