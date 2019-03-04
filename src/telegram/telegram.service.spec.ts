@@ -204,7 +204,7 @@ describe('TelegramService', () => {
       throw new ConflictException();
     });
     await service.updateProductOnSizeChosen(ctx);
-    expect(ctx.reply).toHaveBeenLastCalledWith( 'Product has already been added. 💁‍♂️');
+    expect(ctx.reply).toHaveBeenLastCalledWith('Product has already been added. 💁‍♂️');
 
     productsService.addProduct.mockImplementation(() => {
       throw new NotFoundException();
@@ -402,16 +402,30 @@ describe('TelegramService', () => {
     service.handleErrors(new Error('Message'));
   });
 
-  it('should hanlde messages without urls', async () => {
-    // @ts-ignore
-    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
-      message: { text: 'any text' },
-      reply: jest.fn(),
-    }))();
-    await service.handleMessageWithoutUrl(ctx as any);
-    expect(ctx.reply)
-      .toHaveBeenCalledWith('I did not understand. 🤷‍♀️ Please, send a URL to a product. 🔗' +
-        '\nOften, you can just use the share menu from your store\'s website.');
+  describe('handleMessageWithoutUrl', () => {
+
+    it('should handle messages without urls', async () => {
+      // @ts-ignore
+      const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
+        message: { text: 'any text' },
+        reply: jest.fn(),
+      }))();
+      await service.handleMessageWithoutUrl(ctx as any);
+      expect(ctx.reply)
+        .toHaveBeenCalledWith('I did not understand. 🤷‍♀️ Please, send a URL to a product. 🔗' +
+          '\nOften, you can just use the share menu from your store\'s website.');
+    });
+
+    it('should ignore /start commands', async () => {
+      // @ts-ignore
+      const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
+        message: { text: '/start token' },
+        reply: jest.fn(),
+      }))();
+      await service.handleMessageWithoutUrl(ctx as any);
+      expect(ctx.reply).not.toHaveBeenCalled();
+    });
+
   });
 
   describe('handleReceivedPhoto', () => {

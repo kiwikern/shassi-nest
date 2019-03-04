@@ -38,6 +38,9 @@ export class TelegramService implements OnModuleInit {
   }
 
   handleMessageWithoutUrl(ctx: ContextMessageUpdate) {
+    if (ctx.message.text && ctx.message.text.startsWith('/start')) {
+      return;
+    }
     this.logger.log({ message: 'Received message without url', telegramMessage: ctx.message });
     return ctx.reply('I did not understand. 🤷‍♀️ Please, send a URL to a product. 🔗' +
       '\nOften, you can just use the share menu from your store\'s website.');
