@@ -9,7 +9,13 @@ import { BadRequestException, ConflictException, InternalServerErrorException, N
 import { CronJobService } from '../common/cron-job.service';
 import { MockType } from '../../test/mock.type';
 import { ObjectID } from 'mongodb';
-import { productsServiceFactory, telegrafFactory, telegramUserIdServiceFactory, tokenServiceFactory } from '../../test/mocks/jest-mocks';
+import {
+  cronJobServiceFactory,
+  productsServiceFactory,
+  telegrafFactory,
+  telegramUserIdServiceFactory,
+  tokenServiceFactory,
+} from '../../test/mocks/jest-mocks';
 import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
 describe('TelegramService', () => {
@@ -21,12 +27,6 @@ describe('TelegramService', () => {
 
   beforeEach(async () => {
     const configService: Partial<ConfigService> = { frontendDomain: 'domain' };
-    const cronJobService: CronJobService = {
-      create: () => ({
-        start: () => null,
-        nextDates: () => new Date(),
-      }) as any,
-    };
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -36,7 +36,7 @@ describe('TelegramService', () => {
         { provide: TelegramTokenService, useFactory: tokenServiceFactory },
         { provide: TelegramUserIdService, useFactory: telegramUserIdServiceFactory },
         { provide: ConfigService, useValue: configService },
-        { provide: CronJobService, useValue: cronJobService },
+        { provide: CronJobService, useFactory: cronJobServiceFactory },
       ],
     }).compile();
     module.useLogger(new NoOpLogger());
@@ -396,6 +396,11 @@ describe('TelegramService', () => {
   it('should perform setup and start polling', async () => {
     service.onModuleInit();
     expect(telegraf.startPolling).toHaveBeenCalled();
+  });
+
+  it('should stop the bot on server shutdown', async () => {
+    service.onModuleDestroy();
+    expect(telegraf.stop).toHaveBeenCalled();
   });
 
   it('should handle errors', () => {

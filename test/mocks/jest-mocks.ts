@@ -24,6 +24,7 @@ export const productsServiceFactory: () => MockType<ProductsService> = jest.fn((
 export const telegramServiceFactory: () => MockType<TelegramService> = jest.fn(() => ({
   notifyAboutUpdate: jest.fn(),
   onModuleInit: jest.fn(),
+  onModuleDestroy: jest.fn(),
   handleErrors: jest.fn(),
   addProductOnURLSent: jest.fn(),
   authSession: jest.fn(),
@@ -75,6 +76,7 @@ export const telegrafFactory: () => MockType<Telegraf<any>> = jest.fn(() => ({
   command: jest.fn(),
   hears: jest.fn(),
   action: jest.fn(),
+  stop: jest.fn(),
   startPolling: jest.fn(),
 }));
 

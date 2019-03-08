@@ -1,4 +1,4 @@
-import { BadRequestException, ConflictException, Inject, Injectable, Logger, NotFoundException, OnModuleInit } from '@nestjs/common';
+import { BadRequestException, ConflictException, Inject, Injectable, Logger, NotFoundException, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 import Telegraf, { ContextMessageUpdate, Markup } from 'telegraf';
 import * as session from 'telegraf/session';
 import { ProductsService } from '../products/products.service';
@@ -9,13 +9,15 @@ import { InitializeProductDto } from '../products/dtos/initialize-product.dto';
 import { CronJobService } from '../common/cron-job.service';
 import { ObjectID } from 'mongodb';
 import { ProductSizeAvailability } from '../crawler/product-size.interface';
+import { CronJob } from 'cron';
 
 @Injectable()
-export class TelegramService implements OnModuleInit {
+export class TelegramService implements OnModuleInit, OnModuleDestroy {
 
   private static readonly ONE_DAY_MS = 1000 * 60 * 60 * 24;
   private static readonly LINK_REGEX = /^(?!\/).*((?:(?:http)|(?:www))\S+)/m;
   private logger: Logger = new Logger(TelegramService.name);
+  private jobs: CronJob[] = [];
 
   constructor(@Inject('Telegraf') private telegraf: Telegraf<any>,
               private productsService: ProductsService,
@@ -35,6 +37,11 @@ export class TelegramService implements OnModuleInit {
     this.telegraf.on('message', (ctx: ContextMessageUpdate) => this.handleMessageWithoutUrl(ctx));
     (this.telegraf as any).action(/.+/, async ctx => this.updateProductOnSizeChosen(ctx));
     this.telegraf.startPolling();
+  }
+
+  onModuleDestroy() {
+    this.telegraf.stop();
+    this.jobs.forEach(job => job.stop());
   }
 
   handleMessageWithoutUrl(ctx: ContextMessageUpdate) {
@@ -108,7 +115,8 @@ export class TelegramService implements OnModuleInit {
       ctx.session.productData.delete(productId);
       Object.assign(productData, { size });
       const p = await this.productsService.addProduct(ctx.session.userId, productData);
-      ctx.reply(`Your product ${p.name} for ${p.price.toFixed(2)}€ at store ${p.store} with size ${size.name} was added successfully. 🛍️`,
+      const text = `Your product ${p.name} for ${p.price.toFixed(2)}€ at store ${p.store} with size ${size.name} was added successfully. 🛍️`;
+      ctx.reply(text,
         { reply_to_message_id: ctx.callbackQuery.message.reply_to_message.message_id });
     } catch (err) {
       this.handleProductAddErrors(err, ctx);
@@ -172,6 +180,7 @@ export class TelegramService implements OnModuleInit {
       ctx.session.productData = new Map();
       const job = this.cronJobService.create('0 0 3 * * *', () => this.cleanUpSessionData(ctx));
       job.start();
+      this.jobs.push(job);
       return next(ctx);
     }
 

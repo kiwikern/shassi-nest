@@ -14,7 +14,7 @@ export class TelegramUserIdService {
       throw new BadRequestException('Has to provide userId and telegramId.');
     }
     const newTelegramId = this.telegramUserIdRepository.create({ userId, telegramId });
-    return await this.telegramUserIdRepository.save(newTelegramId);
+    return this.telegramUserIdRepository.save(newTelegramId);
   }
 
   async findTelegramId(userId: ObjectID): Promise<number> {
