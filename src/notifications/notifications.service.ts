@@ -1,13 +1,14 @@
-import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
+import { Injectable, Logger, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 import { ProductChange } from '../products/dtos/product-change.interface';
 import { ConfigService } from '../config/config.service';
 import { TelegramService } from '../telegram/telegram.service';
 import { CronJobService } from '../common/cron-job.service';
 import { ProductsService } from '../products/products.service';
 import { ObjectID } from 'mongodb';
+import { CronJob } from 'cron';
 
 @Injectable()
-export class NotificationsService implements OnModuleInit {
+export class NotificationsService implements OnModuleInit, OnModuleDestroy {
 
   logger: Logger = new Logger(NotificationsService.name);
 
@@ -17,12 +18,19 @@ export class NotificationsService implements OnModuleInit {
               private telegramService: TelegramService) {
   }
 
+  private job: CronJob;
+
   onModuleInit() {
     // if (!this.configService.isProduction) this.sendNotificationsPerUser();
-    const job = this.cronJobService.create('00 00 8,14,18 * * *', () => this.sendNotificationsPerUser());
-    job.start();
-    this.logger.log('Product CronJob started, next execution: ' + new Date(job.nextDates()).toString())
-    ;
+    this.job = this.cronJobService.create('00 00 8,14,18 * * *', () => this.sendNotificationsPerUser());
+    this.job.start();
+    this.logger.log('Product CronJob started, next execution: ' + this.job.nextDates());
+  }
+
+  onModuleDestroy() {
+    if (this.job) {
+      this.job.stop();
+    }
   }
 
   async sendNotificationsPerUser() {

@@ -316,9 +316,18 @@ describe('NotificationsService', () => {
 
   });
 
-  it('should setup the cronjob', async () => {
-    service.onModuleInit();
-    expect(cronJobService.create).toHaveBeenCalled();
+  describe('CronJob', () => {
+
+    it('should start and stop the cron job', async () => {
+      service.onModuleInit();
+      expect(cronJobService.create).toHaveBeenCalled();
+      service.onModuleDestroy();
+    });
+
+    it('should handle cleanup of not-started cron job', async () => {
+      expect(() => service.onModuleDestroy()).not.toThrow();
+    });
+
   });
 
 });

@@ -40,6 +40,7 @@ export const cronJobServiceFactory: () => MockType<CronJobService> = jest.fn(() 
   create: jest.fn(() => ({
     start: () => null,
     nextDates: () => new Date(),
+    stop: jest.fn(),
   })),
 }));
 
