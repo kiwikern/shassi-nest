@@ -18,9 +18,7 @@ import Telegraf from 'telegraf';
     TelegramTokenService,
     {
       provide: Telegraf,
-      useFactory: async (configService: ConfigService) => {
-        return new Telegraf(configService.telegramToken);
-      },
+      useFactory: async (configService: ConfigService) => new Telegraf(configService.telegramToken),
       inject: [ConfigService],
     },
     TelegramUserIdService,

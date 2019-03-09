@@ -10,6 +10,7 @@ import { BcryptService } from '../../src/common/bcrypt.service';
 import { UsersService } from '../../src/users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { CrawlerService } from '../../src/crawler/crawler.service';
+import { AuthService } from '../../src/auth/auth.service';
 
 export const productsServiceFactory: () => MockType<ProductsService> = jest.fn(() => ({
   updateAllProducts: jest.fn(),
@@ -109,4 +110,9 @@ export const jwtServiceFactory: () => MockType<JwtService> = jest.fn(() => ({
 export const crawlerServiceFactory: () => MockType<CrawlerService> = jest.fn(() => ({
   getInitData: jest.fn(),
   getUpdateData: jest.fn(),
+}));
+
+export const authServiceFactory: () => MockType<AuthService> = jest.fn(() => ({
+  validateUser: jest.fn(),
+  login: jest.fn(),
 }));
