@@ -45,7 +45,7 @@ export class CrawlerService {
 
   private async getCrawler(url: string): Promise<Crawler> {
     let crawler: Crawler;
-    url = url.replace('http', 'https');
+    url = url.replace('http://', 'https://');
     if (!url.startsWith('https')) {
       url = 'https://' + url;
     }
