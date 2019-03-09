@@ -6,6 +6,7 @@ import { JSDOM, VirtualConsole } from 'jsdom';
 interface HmProductData {
   sizes: [{ sizeCode: string, size: string, name: string }];
   whitePriceValue: string;
+  priceClubValue: string;
   altName: string;
 }
 
@@ -109,7 +110,7 @@ export class HmCrawler implements Crawler {
   }
 
   getPrice(sizeId?: string): number {
-    const priceText = this.productData.whitePriceValue;
+    const priceText = this.productData.priceClubValue || this.productData.whitePriceValue;
     return parseFloat(priceText);
   }
 

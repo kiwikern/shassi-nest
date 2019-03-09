@@ -5,11 +5,13 @@ import { BadRequestException, InternalServerErrorException } from '@nestjs/commo
 import { HmCrawler } from './hm.crawler';
 import { hmMultiVariantsTestcase } from '../../../test/crawler-testcases/hm-multivariants.testcase';
 import { of } from 'rxjs';
+import { hmClubPriceTestcase } from '../../../test/crawler-testcases/hm-clubprice.testcase';
 
 const testCases = [
   hmOneSizeTestCase,
   hmMultisizesTestcase,
   hmMultiVariantsTestcase,
+  hmClubPriceTestcase,
 ];
 
 describe('H&M',
@@ -75,7 +77,7 @@ describe('H&M',
       </div>
       `,
       }));
-      httpMock.get.mockReturnValueOnce(of({data: {availability: 'no-array'}}));
+      httpMock.get.mockReturnValueOnce(of({ data: { availability: 'no-array' } }));
       const crawler = new HmCrawler(httpMock as any);
       await expect(crawler.init('https://www2.hm.com/de_de/productpage.0594303002.html'))
         .rejects
