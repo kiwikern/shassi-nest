@@ -42,6 +42,7 @@ describe('ConfigService', () => {
     expect(service.port).toEqual(3000);
     expect(service.telegramToken).toEqual('telegramToken');
     expect(service.isProduction).toEqual(false);
+    expect(service.keepConnectionAlive).toEqual(false);
   });
 
   it('should parse mongodb variables for heroku', async () => {

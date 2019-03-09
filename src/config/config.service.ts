@@ -86,6 +86,10 @@ export class ConfigService {
     return process.env.PORT || this.envConfig.PORT;
   }
 
+  get keepConnectionAlive(): boolean {
+    return process.env.DB_KEEP_CONNECTION_ALIVE === 'true';
+  }
+
   private validateInput(envConfig: EnvConfig): EnvConfig {
     const envVarsSchema: Joi.ObjectSchema = Joi.object({
       DATABASE_NAME: Joi.string().required(),

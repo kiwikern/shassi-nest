@@ -33,7 +33,7 @@ import { ProductEntity } from './products/entities/products.entity';
             TelegramUserIdEntity,
           ],
           synchronize: true,
-          keepConnectionAlive: true,
+          keepConnectionAlive: !configService.isProduction && configService.keepConnectionAlive,
         });
       },
       inject: [ConfigService],
