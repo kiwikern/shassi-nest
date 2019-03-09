@@ -10,7 +10,7 @@ import { CronJob } from 'cron';
 @Injectable()
 export class NotificationsService implements OnModuleInit, OnModuleDestroy {
 
-  logger: Logger = new Logger(NotificationsService.name);
+  private logger: Logger = new Logger(NotificationsService.name);
 
   constructor(private configService: ConfigService,
               private cronJobService: CronJobService,
