@@ -33,4 +33,8 @@ export class TelegrafMock {
   on() {
     this.logger.log('on');
   }
+
+  stop() {
+    this.logger.log('stop');
+  }
 }
