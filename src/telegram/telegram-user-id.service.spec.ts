@@ -27,14 +27,14 @@ describe('TelegramUserIdService', () => {
 
   it('should create a token', async () => {
     const userId = ObjectID.createFromTime(0);
-    const telegramId = 'telegramId';
+    const telegramId = 123456;
     expect(await service.saveTelegramId(userId, telegramId)).toEqual({userId, telegramId});
     expect(repositoryMock.save).toHaveBeenCalledWith({userId, telegramId});
   });
 
   it('should not create a token without userId', async () => {
     const userId = null;
-    const telegramId = 'telegramId';
+    const telegramId = 123456;
     try {
       await service.saveTelegramId(userId, telegramId);
       fail('Should have thrown an error.');
@@ -67,13 +67,13 @@ describe('TelegramUserIdService', () => {
   });
 
   it('should find the userId for a telegramId', async () => {
-    const telegramId = 'telegramId';
+    const telegramId = 123456;
     repositoryMock.findOne.mockReturnValue({userId: 'id'});
     expect(await service.findUserId(telegramId)).toEqual('id');
   });
 
   it('should return null if no userId is found for the telegramId', async () => {
-    const telegramId = 'telegramId';
+    const telegramId = 123456;
     repositoryMock.findOne.mockReturnValue(null);
     expect(await service.findUserId(telegramId)).toEqual(null);
   });

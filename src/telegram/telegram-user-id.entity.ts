@@ -9,7 +9,7 @@ export class TelegramUserIdEntity {
 
   @Index({unique: true})
   @Column()
-  telegramId: string;
+  telegramId: number;
 
   @Index({ unique: true })
   @Column()
