@@ -29,7 +29,8 @@ export class UsersService {
   }
 
   async findOneByUsername(username: string): Promise<UserEntity> {
-    const usernameRegExp = new RegExp(`^${username}$`, 'i');
+    const escapedUsername = username.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const usernameRegExp = new RegExp(`^${escapedUsername}$`, 'i');
     return this.userRepository.findOne(
       {
         username: {

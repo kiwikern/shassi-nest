@@ -33,7 +33,7 @@ describe('UsersController (e2e)', () => {
   it('should reject login', () => {
     return request(app.getHttpServer())
       .post('/auth/login')
-      .send({ userName: 'kiwi', password: '123456' })
+      .send({ username: 'kiwi', password: '123456' })
       .expect(401)
       .expect(res => res.body.message === 'Unknown user');
   });
@@ -41,7 +41,7 @@ describe('UsersController (e2e)', () => {
   it('should reject unauthorized calls', () => {
     return request(app.getHttpServer())
       .put('/users')
-      .send({ userName: 'kiwi', password: '123456' })
+      .send({ username: 'kiwi', password: '123456' })
       .expect(401);
   });
 
