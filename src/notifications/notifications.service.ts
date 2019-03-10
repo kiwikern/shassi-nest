@@ -91,8 +91,9 @@ export class NotificationsService implements OnModuleInit, OnModuleDestroy {
       return null;
     }
     const url = `${this.configService.frontendDomain}/products/${update.product._id}`;
+    const shassiLink = `[product](${update.product.url})`;
     const nameLink = `[${update.product.name}](${url})`;
-    return `Your product ${nameLink} ${updateText}. 👚`;
+    return `Your ${shassiLink} ${nameLink} ${updateText}. 👚`;
   }
 
 }

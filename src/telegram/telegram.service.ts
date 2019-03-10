@@ -69,7 +69,7 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
       return;
     }
 
-    this.telegraf.telegram.sendMessage(telegramId, text, { parse_mode: 'Markdown' } as any);
+    this.telegraf.telegram.sendMessage(telegramId, text, { parse_mode: 'Markdown' });
   }
 
   handleErrors(err) {

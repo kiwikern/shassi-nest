@@ -40,7 +40,7 @@ describe('NotificationsService', () => {
     it('should notify about a price increase with low stock', async () => {
       const changes: ProductChange[] = [
         {
-          product: { userId: 'userId', name: 'name', _id: 'id', isAvailable: true, isLowInStock: true } as any,
+          product: { userId: 'userId', name: 'name', _id: 'id', isAvailable: true, isLowInStock: true, url: 'myurl' } as any,
           productAttributeChanges: {
             hasAnyChange: true,
             hasAvailabilityChange: false,
@@ -60,7 +60,7 @@ describe('NotificationsService', () => {
       await service.sendNotificationsPerUser();
       expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
         'userId',
-        'Your product [name](domain/products/id) is now at 100.00€ (+10.00€, low in stock). 👚');
+        'Your [product](myurl) [name](domain/products/id) is now at 100.00€ (+10.00€, low in stock). 👚');
       expect(telegramService.notifyAboutUpdate).toHaveBeenCalledTimes(1);
     });
 
@@ -86,7 +86,7 @@ describe('NotificationsService', () => {
       await service.sendNotificationsPerUser();
       expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
         'userId',
-        'Your product [undefined](domain/products/undefined) is now at 90.00€ (-10.00€). 👚');
+        'Your [product](undefined) [undefined](domain/products/undefined) is now at 90.00€ (-10.00€). 👚');
       expect(telegramService.notifyAboutUpdate).toHaveBeenCalledTimes(1);
     });
 
@@ -133,7 +133,7 @@ describe('NotificationsService', () => {
       await service.sendNotificationsPerUser();
       expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
         'userId',
-        'Your product [undefined](domain/products/undefined) is now low in stock. 👚');
+        'Your [product](undefined) [undefined](domain/products/undefined) is now low in stock. 👚');
       expect(telegramService.notifyAboutUpdate).toHaveBeenCalledTimes(1);
     });
 
@@ -178,7 +178,7 @@ describe('NotificationsService', () => {
       await service.sendNotificationsPerUser();
       expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
         'userId',
-        'Your product [undefined](domain/products/undefined) is available again and low in stock. 👚');
+        'Your [product](undefined) [undefined](domain/products/undefined) is available again and low in stock. 👚');
       expect(telegramService.notifyAboutUpdate).toHaveBeenCalledTimes(1);
     });
 
@@ -202,7 +202,7 @@ describe('NotificationsService', () => {
       await service.sendNotificationsPerUser();
       expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
         'userId',
-        'Your product [undefined](domain/products/undefined) is available again. 👚');
+        'Your [product](undefined) [undefined](domain/products/undefined) is available again. 👚');
       expect(telegramService.notifyAboutUpdate).toHaveBeenCalledTimes(1);
     });
 
@@ -226,7 +226,7 @@ describe('NotificationsService', () => {
       await service.sendNotificationsPerUser();
       expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
         'userId',
-        'Your product [undefined](domain/products/undefined) is now low in stock. 👚');
+        'Your [product](undefined) [undefined](domain/products/undefined) is now low in stock. 👚');
       expect(telegramService.notifyAboutUpdate).toHaveBeenCalledTimes(1);
     });
 
@@ -307,10 +307,10 @@ describe('NotificationsService', () => {
       await service.sendNotificationsPerUser();
       expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
         'userId',
-        'Your product [undefined](domain/products/undefined) is available again and low in stock. 👚');
+        'Your [product](undefined) [undefined](domain/products/undefined) is available again and low in stock. 👚');
       expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(2,
         'userId',
-        'Your product [undefined](domain/products/undefined) is available again. 👚');
+        'Your [product](undefined) [undefined](domain/products/undefined) is available again. 👚');
       expect(telegramService.notifyAboutUpdate).toHaveBeenCalledTimes(2);
     });
 
