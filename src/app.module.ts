@@ -32,6 +32,7 @@ import { ProductEntity } from './products/entities/products.entity';
             TelegramTokenEntity,
             TelegramUserIdEntity,
           ],
+          extra: {useNewUrlParser: true},
           synchronize: true,
           keepConnectionAlive: !configService.isProduction && configService.keepConnectionAlive,
         });
