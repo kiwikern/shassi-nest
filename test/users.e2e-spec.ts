@@ -56,7 +56,7 @@ describe('UsersController (e2e)', () => {
 
     const loginResponse = await request(app.getHttpServer())
       .post('/auth/login')
-      .send({ username: 'kiwi', password: '123456' })
+      .send({ username: 'kiWi', password: '123456' })
       .expect(201);
     const { jwt } = loginResponse.body;
 

@@ -29,7 +29,13 @@ export class UsersService {
   }
 
   async findOneByUsername(username: string): Promise<UserEntity> {
-    return this.userRepository.findOne({ username });
+    const usernameRegExp = new RegExp(`^${username}$`, 'i');
+    return this.userRepository.findOne(
+      {
+        username: {
+          $regex: usernameRegExp,
+        },
+      } as any);
   }
 
   async findOneByEmail(email: string): Promise<UserEntity> {
