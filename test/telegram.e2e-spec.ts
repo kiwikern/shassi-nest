@@ -14,8 +14,6 @@ import { TelegramUserIdService } from '../src/telegram/telegram-user-id.service'
 import { TelegramUserIdEntity } from '../src/telegram/telegram-user-id.entity';
 import { crawlerServiceFactory } from './mocks/jest-mocks';
 
-const wait = (ms = 100) => new Promise(resolve => setTimeout(resolve, ms));
-
 describe('TelegramBot (e2e)', () => {
   let app: INestApplication;
   const crawlerMock: MockType<CrawlerService> = crawlerServiceFactory();
@@ -75,14 +73,14 @@ describe('TelegramBot (e2e)', () => {
     // Start command sends invalid token
     const client = telegramServer.createUser();
     const chat = client.startBot(bot, '');
-    await wait();
+    await telegramServer.waitForNextMessages(2);
     expect(chat.history.length).toBe(3);
     expect(chat.history[1].message.text).toContain('token was invalid');
     expect(chat.history[2].message.text).toContain('need to link your shassi');
 
     // Posting random message without linked account
     chat.postMessage(client, { chat_id: chat.info.id, text: 'halloo' });
-    await wait();
+    await telegramServer.waitForNextMessages(1);
     expect(chat.history.length).toBe(5);
     expect(chat.history[4].message.text).toContain('need to link your shassi');
 
@@ -94,7 +92,7 @@ describe('TelegramBot (e2e)', () => {
         { offset: 0, length: 6, type: 'bot_command' },
       ],
     });
-    await wait();
+    await telegramServer.waitForNextMessages(2);
     expect(chat.history[6].message.text).toContain('successfully connected');
     expect(chat.history[7].message.text).toContain('add a product');
     expect(chat.history.length).toBe(8);
@@ -112,7 +110,7 @@ describe('TelegramBot (e2e)', () => {
       url,
     });
     chat.postMessage(client, { text: url });
-    await wait();
+    await telegramServer.waitForNextMessages(1);
     expect(crawlerMock.getInitData).toHaveBeenLastCalledWith(url);
     expect(chat.history[9].message.text).toContain('Which size do you want?');
     expect(chat.history.length).toBe(10);
@@ -127,7 +125,7 @@ describe('TelegramBot (e2e)', () => {
     });
     const replyMessage = Object.assign({}, chat.history[9].message, { reply_to_message: { message_id: chat.history[9].message.message_id } });
     chat.postCbQuery(client, replyMessage, chosenSize.callback_data);
-    await wait();
+    await telegramServer.waitForNextMessages(3);
     expect(chat.history.length).toBe(14);
     expect(chat.history[11].callback_query_answer.text).toContain('You chose S');
     // The inline keyboard is removed
@@ -141,7 +139,7 @@ describe('TelegramBot (e2e)', () => {
     const user = telegramServer.createUser();
     await linkTelegramAccountToNewUser(user.info.id);
     const chat2 = user.startBot(bot, '');
-    await wait();
+    await telegramServer.waitForNextMessages(2);
 
     // Start command sends invalid token
     expect(chat2.history.length).toBe(3);
@@ -164,7 +162,7 @@ describe('TelegramBot (e2e)', () => {
       createdAt: new Date(),
     });
     chat2.postMessage(user, { text: url });
-    await wait();
+    await telegramServer.waitForNextMessages(1);
     expect(chat2.history.length).toBe(5);
     expect(chat2.history[4].message.text).toContain('Product with one size for 20.00€');
     expect(crawlerMock.getUpdateData).toHaveBeenLastCalledWith(url, '1');

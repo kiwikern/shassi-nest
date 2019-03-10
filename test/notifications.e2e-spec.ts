@@ -14,8 +14,6 @@ import { crawlerServiceFactory } from './mocks/jest-mocks';
 import { ProductsService } from '../src/products/products.service';
 import { NotificationsService } from '../src/notifications/notifications.service';
 
-const wait = (ms = 500) => new Promise(resolve => setTimeout(resolve, ms));
-
 describe('Notifications (e2e)', () => {
   let app: INestApplication;
   const crawlerMock: MockType<CrawlerService> = crawlerServiceFactory();
@@ -83,7 +81,7 @@ describe('Notifications (e2e)', () => {
     // no update
     crawlerMock.getUpdateData.mockReturnValueOnce({ price: 100, isAvailable: true, isLowInStock: false });
     await notificationsService.sendNotificationsPerUser();
-    await wait();
+    await telegramServer.waitForNextMessages(2);
     expect(chat.history.length).toBe(5);
     expect(chat.history[3].message.text).toContain('-10.00€');
     expect(chat.history[3].message.text).toContain('low in stock');
