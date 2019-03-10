@@ -83,9 +83,12 @@ describe('Notifications (e2e)', () => {
     await notificationsService.sendNotificationsPerUser();
     await telegramServer.waitForNextMessages(2);
     expect(chat.history.length).toBe(5);
-    expect(chat.history[3].message.text).toContain('-10.00€');
-    expect(chat.history[3].message.text).toContain('low in stock');
-    expect(chat.history[4].message.text).toContain('now low in stock');
+    const notifications = [chat.history[3].message.text, chat.history[4].message.text];
+    // The order of the HTTP requests can differ
+    expect(notifications).toEqual(expect.arrayContaining([
+      expect.stringContaining('-10.00€, low in stock'),
+      expect.stringContaining('now low in stock'),
+    ]));
   });
 
 });
