@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, ValidationPipe } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductsModule } from './products/products.module';
 import { UsersModule } from './users/users.module';
@@ -13,6 +13,7 @@ import { UserEntity } from './users/entities/user.entity';
 import { TelegramTokenEntity } from './telegram/telegram-token.entity';
 import { TelegramUserIdEntity } from './telegram/telegram-user-id.entity';
 import { ProductEntity } from './products/entities/products.entity';
+import { APP_PIPE } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -32,7 +33,7 @@ import { ProductEntity } from './products/entities/products.entity';
             TelegramTokenEntity,
             TelegramUserIdEntity,
           ],
-          extra: {useNewUrlParser: true},
+          extra: { useNewUrlParser: true },
           synchronize: true,
           keepConnectionAlive: !configService.isProduction && configService.keepConnectionAlive,
         });
@@ -46,6 +47,9 @@ import { ProductEntity } from './products/entities/products.entity';
     TelegramModule,
     CommonModule,
     NotificationsModule,
+  ],
+  providers: [
+    { provide: APP_PIPE, useValue: new ValidationPipe() },
   ],
 })
 export class AppModule {
