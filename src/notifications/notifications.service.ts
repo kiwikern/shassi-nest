@@ -24,7 +24,7 @@ export class NotificationsService implements OnModuleInit, OnModuleDestroy {
     // if (!this.configService.isProduction) this.sendNotificationsPerUser();
     this.job = this.cronJobService.create('00 00 8,14,18 * * *', () => this.sendNotificationsPerUser());
     this.job.start();
-    this.logger.log('Product CronJob started, next execution: ' + this.job.nextDates());
+    this.logger.log('Product CronJob started, next execution: ' + this.job.nextDates().toString());
   }
 
   onModuleDestroy() {
