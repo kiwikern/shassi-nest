@@ -3,46 +3,38 @@ import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { UserEntity } from './entities/user.entity';
 import { NoOpLogger } from '../../test/mocks/no-op-logger';
-
-class UserServiceMock {
-  findOneByUsername(userName) {
-    return { userId: '100' };
-  }
-
-  createUser() {
-    return { userId: '100' };
-  }
-
-  updateUser() {
-    return { userId: '100' };
-  }
-}
+import { MockType } from '../../test/mock.type';
+import { userServiceFactory } from '../../test/mocks/jest-mocks';
 
 describe('Users Controller', () => {
   let module: TestingModule;
   let controller: UsersController;
+  let userServiceMock: MockType<UsersService>;
   const user: UserEntity = { _id: null, username: 'name', email: '', notificationTypes: null, password: '' };
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     module = await Test.createTestingModule({
       controllers: [UsersController],
       providers: [
-        { provide: UsersService, useClass: UserServiceMock },
+        { provide: UsersService, useFactory: userServiceFactory },
       ],
     }).compile();
     module.useLogger(new NoOpLogger());
     controller = module.get<UsersController>(UsersController);
+    userServiceMock = module.get(UsersService);
   });
 
   it('should return the user', async () => {
-    expect(controller.getUser(user)).toBeDefined();
+    await expect(controller.getUser(user)).toBe(user);
   });
 
-  it('should return the user', async () => {
-    expect(controller.createUser({ password: '', email: '', username: 'name' })).toBeDefined();
+  it('should create a user', async () => {
+    (userServiceMock.createUser).mockReturnValueOnce(user);
+    await expect(controller.createUser({ password: '', email: '', username: 'name' })).toBe(user);
   });
 
-  it('should return the user', async () => {
-    expect(controller.updateUser(user, { email: 'test' })).toBeDefined();
+  it('should update a user', async () => {
+    (userServiceMock.updateUser).mockReturnValueOnce(user);
+    await expect(controller.updateUser(user, { email: 'test' })).toBe(user);
   });
 });

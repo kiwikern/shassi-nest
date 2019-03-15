@@ -29,8 +29,8 @@ export class UsersController {
   @ApiOperation({ title: 'Logged in user', description: 'Get the logged in user' })
   @ApiOkResponse({ description: 'Returns the logged in user.', type: UserEntity })
   @ApiForbiddenResponse({ description: 'User must be logged in.' })
-  getUser(@User() user: UserEntity): Promise<UserEntity> {
-    return this.usersService.findOneByUsername(user.username);
+  getUser(@User() user: UserEntity): UserEntity {
+    return user;
   }
 
   @Post('/')
