@@ -17,7 +17,8 @@ describe('TelegramTokenService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         TelegramTokenService,
-        { provide: getEntityManagerToken(), useFactory: entityManagerMockFactory },
+        // TODO: Remove any https://github.com/nestjs/nest/issues/1747
+        { provide: getEntityManagerToken() as any, useFactory: entityManagerMockFactory },
         { provide: getRepositoryToken(TelegramTokenEntity), useFactory: repositoryMockFactory },
       ],
     }).compile();
