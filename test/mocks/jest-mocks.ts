@@ -11,6 +11,8 @@ import { UsersService } from '../../src/users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { CrawlerService } from '../../src/crawler/crawler.service';
 import { AuthService } from '../../src/auth/auth.service';
+import { Reflector } from '@nestjs/core';
+import { ExecutionContext } from '@nestjs/common';
 
 export const productsServiceFactory: () => MockType<ProductsService> = jest.fn(() => ({
   updateAllProducts: jest.fn(),
@@ -115,4 +117,19 @@ export const crawlerServiceFactory: () => MockType<CrawlerService> = jest.fn(() 
 export const authServiceFactory: () => MockType<AuthService> = jest.fn(() => ({
   validateUser: jest.fn(),
   login: jest.fn(),
+}));
+
+export const reflectorFactory: () => MockType<Reflector> = jest.fn(() => ({
+  get: jest.fn(),
+  getAll: jest.fn(),
+}));
+
+export const executionContextFactory: () => MockType<ExecutionContext> = jest.fn(() => ({
+  getClass: jest.fn(),
+  getHandler: jest.fn(),
+  switchToHttp: jest.fn(),
+  getArgs: jest.fn(),
+  getArgByIndex: jest.fn(),
+  switchToRpc: jest.fn(),
+  switchToWs: jest.fn(),
 }));
