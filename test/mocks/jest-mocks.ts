@@ -13,6 +13,7 @@ import { CrawlerService } from '../../src/crawler/crawler.service';
 import { AuthService } from '../../src/auth/auth.service';
 import { Reflector } from '@nestjs/core';
 import { ExecutionContext } from '@nestjs/common';
+import { AdminService } from '../../src/admin/admin.service';
 
 export const productsServiceFactory: () => MockType<ProductsService> = jest.fn(() => ({
   updateAllProducts: jest.fn(),
@@ -133,4 +134,8 @@ export const executionContextFactory: () => MockType<ExecutionContext> = jest.fn
   getArgByIndex: jest.fn(),
   switchToRpc: jest.fn(),
   switchToWs: jest.fn(),
+}));
+
+export const adminServiceFactory: () => MockType<AdminService> = jest.fn(() => ({
+  getUsersOverview: jest.fn(),
 }));

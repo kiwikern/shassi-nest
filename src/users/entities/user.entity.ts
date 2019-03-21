@@ -5,17 +5,21 @@ import { ObjectID } from 'mongodb';
 import { ApiModelProperty } from '@nestjs/swagger';
 import { toObjectId, toStringSafe, typeFn } from '../../common/utils';
 
+enum Role {
+  ADMIN = 'admin',
+}
+
 @Entity({ name: 'users' })
 export class UserEntity {
   @ObjectIdColumn()
   @Transform(toStringSafe, { toPlainOnly: true })
   @Transform(toObjectId, { toClassOnly: true })
-  @ApiModelProperty({type: 'string'})
+  @ApiModelProperty({ type: 'string' })
     // tslint:disable-next-line:variable-name
   _id: ObjectID;
 
   @Column()
-  @Index({unique: true})
+  @Index({ unique: true })
   @ApiModelProperty()
   username: string;
 
@@ -29,5 +33,9 @@ export class UserEntity {
 
   @Column(typeFn(NotificationType))
   @ApiModelProperty()
-  notificationTypes: NotificationType = {telegram: true, email: false};
+  notificationTypes: NotificationType = { telegram: true, email: false };
+
+  @Column({ type: 'enum', enum: Role })
+  @ApiModelProperty({ enum: Role, isArray: true })
+  roles?: Role[];
 }

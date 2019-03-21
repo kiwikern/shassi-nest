@@ -14,6 +14,7 @@ import { TelegramTokenEntity } from './telegram/telegram-token.entity';
 import { TelegramUserIdEntity } from './telegram/telegram-user-id.entity';
 import { ProductEntity } from './products/entities/products.entity';
 import { APP_PIPE } from '@nestjs/core';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -47,6 +48,7 @@ import { APP_PIPE } from '@nestjs/core';
     TelegramModule,
     CommonModule,
     NotificationsModule,
+    AdminModule,
   ],
   providers: [
     { provide: APP_PIPE, useValue: new ValidationPipe() },
