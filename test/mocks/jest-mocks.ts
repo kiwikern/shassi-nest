@@ -99,6 +99,7 @@ export const userServiceFactory: () => MockType<UsersService> = jest.fn(() => ({
   createUser: jest.fn(),
   updateUser: jest.fn(),
   findOneByEmail: jest.fn(),
+  getAllUsers: jest.fn(),
 }));
 
 export const jwtServiceFactory: () => MockType<JwtService> = jest.fn(() => ({

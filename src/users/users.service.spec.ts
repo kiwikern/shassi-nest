@@ -81,4 +81,9 @@ describe('UsersService', () => {
       .toEqual({ email: 'new' });
   });
 
+  it('should find all users', async () => {
+    repositoryMock.find.mockReturnValue([{}]);
+    expect(await service.getAllUsers()).toEqual([{}]);
+  });
+
 });
