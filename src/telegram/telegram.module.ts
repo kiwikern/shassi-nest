@@ -31,6 +31,7 @@ import Telegraf from 'telegraf';
   ],
   exports: [
     TelegramService,
+    TelegramUserIdService,
   ],
   controllers: [TelegramController],
 })

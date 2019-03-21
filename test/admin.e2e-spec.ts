@@ -75,13 +75,19 @@ describe('Admin (e2e)', () => {
       .expect(200)
       .expect(res => expect(res.body)
         .toMatchObject([
-          { username: 'admin', productCount: 0, userId: adminLogin.user._id },
+          {
+            username: 'admin',
+            productCount: 0,
+            userId: adminLogin.user._id,
+            isConnectedToTelegram: false,
+          },
           {
             username: 'user',
             productCount: 1,
             userId: userLogin.user._id,
             latestProductAddedDate: expect.stringContaining(new Date().getFullYear() + ''),
             latestProductUpdatedDate: expect.stringContaining(new Date().getFullYear() + ''),
+            isConnectedToTelegram: false,
           },
         ]));
   });

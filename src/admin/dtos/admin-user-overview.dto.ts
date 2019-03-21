@@ -4,4 +4,5 @@ export interface AdminUserOverviewDto {
   productCount: number;
   latestProductAddedDate?: Date;
   latestProductUpdatedDate?: Date;
+  isConnectedToTelegram: boolean;
 }
