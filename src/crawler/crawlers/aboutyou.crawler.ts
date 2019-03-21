@@ -36,7 +36,7 @@ export class AboutyouCrawler implements Crawler {
       }
       return size.attributes.price.current / 100;
     } else {
-      this.logger.warn({message: 'Could not find given size', sizeId, productId: this.productId});
+      this.logger.warn({ message: 'Could not find given size', sizeId, productId: this.productId });
       if (this.body.data.attributes.campaignPrice.min > 0) {
         return this.body.data.attributes.campaignPrice.min / 100;
       }
@@ -52,7 +52,7 @@ export class AboutyouCrawler implements Crawler {
         return {
           id: sizeId,
           isAvailable: size.quantity > 0,
-          name: size.sizes.shop,
+          name: size.sizes.shop + (size.sizes.length ? `/${size.sizes.length}` : ''),
         };
       });
 
