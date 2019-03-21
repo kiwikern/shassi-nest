@@ -14,7 +14,7 @@ export class AuthService {
               private readonly jwtService: JwtService) {
   }
 
-  async login(login: UserLoginDto): Promise<{jwt: string, user: {}}> {
+  async login(login: UserLoginDto): Promise<{ jwt: string, user: {} }> {
     const user = await this.usersService.findOneByUsername(login.username);
     if (!user) {
       throw new UnauthorizedException('Unknown user');
@@ -23,8 +23,12 @@ export class AuthService {
     if (!await this.bcryptService.checkEncryptedData(login.password, user.password)) {
       throw new UnauthorizedException('Wrong password');
     }
-    const payload: JwtPayload = { userId: user._id.toString(), username: user.username };
-    return {jwt: this.jwtService.sign(payload), user: classToPlain<UserEntity>(user)};
+    const payload: JwtPayload = {
+      userId: user._id.toString(),
+      username: user.username,
+      roles: user.roles || [],
+    };
+    return { jwt: this.jwtService.sign(payload), user: classToPlain<UserEntity>(user) };
   }
 
   async validateUser(payload: JwtPayload): Promise<UserEntity> {

@@ -7,7 +7,7 @@ import { authServiceFactory } from '../../test/mocks/jest-mocks';
 import { NoOpLogger } from '../../test/mocks/no-op-logger';
 import { JwtStrategy } from './jwt.strategy';
 import { ConfigService } from '../config/config.service';
-import { UserEntity } from '../users/entities/user.entity';
+import { Role, UserEntity } from '../users/entities/user.entity';
 
 describe('JwtStrategy', () => {
   let strategy: JwtStrategy;
@@ -27,14 +27,21 @@ describe('JwtStrategy', () => {
   });
 
   it('should return user if found', async () => {
-    const payload = { userId: 'id', username: 'name' };
+    const payload = { userId: 'id', username: 'name', roles: [Role.ADMIN] };
+    const user: UserEntity = { _id: '', email: '', password: '', notificationTypes: null, username: '', roles: [Role.ADMIN] };
+    authService.validateUser.mockReturnValueOnce(user);
+    await expect(strategy.validate(payload)).resolves.toBe(user);
+  });
+
+  it('should return user without roles', async () => {
+    const payload = { userId: 'id', username: 'name', roles: [] };
     const user: UserEntity = { _id: '', email: '', password: '', notificationTypes: null, username: '' };
     authService.validateUser.mockReturnValueOnce(user);
     await expect(strategy.validate(payload)).resolves.toBe(user);
   });
 
   it('should reject if no user is found', async () => {
-    const payload = { userId: 'id', username: 'name' };
+    const payload = { userId: 'id', username: 'name', roles: [] };
     authService.validateUser.mockReturnValueOnce(undefined);
     await expect(strategy.validate(payload)).rejects.toThrow(UnauthorizedException);
   });

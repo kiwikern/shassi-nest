@@ -5,7 +5,7 @@ import { ObjectID } from 'mongodb';
 import { ApiModelProperty } from '@nestjs/swagger';
 import { toObjectId, toStringSafe, typeFn } from '../../common/utils';
 
-enum Role {
+export enum Role {
   ADMIN = 'admin',
 }
 

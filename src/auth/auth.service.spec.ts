@@ -69,6 +69,6 @@ describe('AuthService', () => {
 
   it('should validate user', async () => {
     userService.findOneByUsername.mockReturnValue('user');
-    expect(await service.validateUser({ username: 'user', userId: 'id' })).toBe('user');
+    expect(await service.validateUser({ username: 'user', userId: 'id', roles: [] })).toBe('user');
   });
 });
