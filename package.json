@@ -1,6 +1,6 @@
 {
   "name": "shassi-nest",
-  "version": "2.8.1",
+  "version": "2.8.2",
   "description": "Shassi is a shopping assistant helping you to keep track of products you are interested and notifying you when price or availability change.",
   "author": "Kim Kern <shassi@kimkern.de>",
   "license": "MIT",
