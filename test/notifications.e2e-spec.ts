@@ -82,8 +82,8 @@ describe('Notifications (e2e)', () => {
     crawlerMock.getUpdateData.mockReturnValueOnce({ price: 100, isAvailable: true, isLowInStock: false });
     await notificationsService.sendNotificationsPerUser();
     await telegramServer.waitForNextMessages(2);
-    expect(chat.history.length).toBe(5);
-    const notifications = [chat.history[3].message.text, chat.history[4].message.text];
+    expect(chat.history.length).toBe(4);
+    const notifications = [chat.history[2].message.text, chat.history[3].message.text];
     // The order of the HTTP requests can differ
     expect(notifications).toEqual(expect.arrayContaining([
       expect.stringContaining('-10.00€, low in stock'),

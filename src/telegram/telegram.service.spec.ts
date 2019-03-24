@@ -358,7 +358,7 @@ describe('TelegramService', () => {
     expect(tokenService.checkToken).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'token');
     expect(telegramUserIdService.saveTelegramId).not.toHaveBeenCalled();
     expect(ctx.reply).toHaveBeenNthCalledWith(1, 'Given token was invalid. Try again! 🙇');
-    expect(ctx.reply).toHaveBeenNthCalledWith(2, 'Hi! 👋 You need to link your shassi account first. Go to domain?action=createTelegramToken');
+    expect(ctx.reply).toHaveBeenNthCalledWith(2, 'To create a new token, go to domain?action=createTelegramToken');
   });
 
   it('should not link telegram if token format invalid', async () => {
@@ -373,10 +373,27 @@ describe('TelegramService', () => {
     tokenService.checkToken.mockReturnValue(false);
     expect(await service.startCommand(ctx, next)).toBe('next was called');
     expect((ctx as any).session.userId).toBe(undefined);
-    expect(tokenService.checkToken).toHaveBeenCalled();
+    expect(tokenService.checkToken).not.toHaveBeenCalled();
     expect(telegramUserIdService.saveTelegramId).not.toHaveBeenCalled();
-    expect(ctx.reply).toHaveBeenNthCalledWith(1, 'Given token was invalid. Try again! 🙇');
-    expect(ctx.reply).toHaveBeenNthCalledWith(2, 'Hi! 👋 You need to link your shassi account first. Go to domain?action=createTelegramToken');
+    expect(ctx.reply).toHaveBeenNthCalledWith(1, 'Hi! 👋 You need to link your shassi account first. Go to domain?action=createTelegramToken');
+
+  });
+
+  it('should not link telegram if no token is given', async () => {
+    // @ts-ignore
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
+      session: {},
+      from: { id: 'telegramId' },
+      message: { text: '/start' },
+      reply: jest.fn(),
+    }))();
+    const next = () => 'next was called';
+    tokenService.checkToken.mockReturnValue(false);
+    expect(await service.startCommand(ctx, next)).toBe('next was called');
+    expect((ctx as any).session.userId).toBe(undefined);
+    expect(tokenService.checkToken).not.toHaveBeenCalled();
+    expect(telegramUserIdService.saveTelegramId).not.toHaveBeenCalled();
+    expect(ctx.reply).toHaveBeenNthCalledWith(1, 'Hi! 👋 You need to link your shassi account first. Go to domain?action=createTelegramToken');
   });
 
   it('should notify about an update', async () => {

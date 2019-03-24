@@ -204,6 +204,10 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
     const params = message.split('---');
     const userId = ObjectID.isValid(params[0]) ? new ObjectID(params[0]) : null;
     const token = params.length > 1 ? params[1] : null;
+    if (!token) {
+      ctx.reply(`Hi! 👋 You need to link your shassi account first. Go to ${this.configService.frontendDomain}?action=createTelegramToken`);
+      return next(ctx);
+    }
     const isValid = await this.tokenService.checkToken(userId, token);
     if (isValid) {
       try {
@@ -216,7 +220,7 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
       }
     } else {
       ctx.reply('Given token was invalid. Try again! 🙇');
-      ctx.reply(`Hi! 👋 You need to link your shassi account first. Go to ${this.configService.frontendDomain}?action=createTelegramToken`);
+      ctx.reply(`To create a new token, go to ${this.configService.frontendDomain}?action=createTelegramToken`);
     }
     return next(ctx);
   }

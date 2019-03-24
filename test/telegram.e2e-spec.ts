@@ -73,16 +73,15 @@ describe('TelegramBot (e2e)', () => {
     // Start command sends invalid token
     const client = telegramServer.createUser();
     const chat = client.startBot(bot, '');
-    await telegramServer.waitForNextMessages(2);
-    expect(chat.history.length).toBe(3);
-    expect(chat.history[1].message.text).toContain('token was invalid');
-    expect(chat.history[2].message.text).toContain('need to link your shassi');
+    await telegramServer.waitForNextMessages(1);
+    expect(chat.history.length).toBe(2);
+    expect(chat.history[1].message.text).toContain('need to link your shassi');
 
     // Posting random message without linked account
     chat.postMessage(client, { chat_id: chat.info.id, text: 'halloo' });
     await telegramServer.waitForNextMessages(1);
-    expect(chat.history.length).toBe(5);
-    expect(chat.history[4].message.text).toContain('need to link your shassi');
+    expect(chat.history.length).toBe(4);
+    expect(chat.history[3].message.text).toContain('need to link your shassi');
 
     // Link user account with a valid token
     const token = await createTelegramUserToken();
@@ -93,9 +92,9 @@ describe('TelegramBot (e2e)', () => {
       ],
     });
     await telegramServer.waitForNextMessages(2);
-    expect(chat.history[6].message.text).toContain('successfully connected');
-    expect(chat.history[7].message.text).toContain('add a product');
-    expect(chat.history.length).toBe(8);
+    expect(chat.history[5].message.text).toContain('successfully connected');
+    expect(chat.history[6].message.text).toContain('add a product');
+    expect(chat.history.length).toBe(7);
     // The user should be linked to their telegram account now
     expect(await getTelegramId()).toBe(client.info.id);
 
@@ -112,25 +111,25 @@ describe('TelegramBot (e2e)', () => {
     chat.postMessage(client, { text: url });
     await telegramServer.waitForNextMessages(1);
     expect(crawlerMock.getInitData).toHaveBeenLastCalledWith(url);
-    expect(chat.history[9].message.text).toContain('Which size do you want?');
-    expect(chat.history.length).toBe(10);
+    expect(chat.history[8].message.text).toContain('Which size do you want?');
+    expect(chat.history.length).toBe(9);
 
     // User chooses a size and the product is added
-    const chosenSize = chat.history[9].message.reply_markup.inline_keyboard[0][0];
+    const chosenSize = chat.history[8].message.reply_markup.inline_keyboard[0][0];
     crawlerMock.getUpdateData.mockReturnValueOnce({
       price: 20,
       isAvailable: true,
       isLowInStock: true,
       createdAt: new Date(),
     });
-    const replyMessage = Object.assign({}, chat.history[9].message, { reply_to_message: { message_id: chat.history[9].message.message_id } });
+    const replyMessage = Object.assign({}, chat.history[8].message, { reply_to_message: { message_id: chat.history[8].message.message_id } });
     chat.postCbQuery(client, replyMessage, chosenSize.callback_data);
     await telegramServer.waitForNextMessages(3);
-    expect(chat.history.length).toBe(14);
-    expect(chat.history[11].callback_query_answer.text).toContain('You chose S');
+    expect(chat.history.length).toBe(13);
+    expect(chat.history[10].callback_query_answer.text).toContain('You chose S');
     // The inline keyboard is removed
-    expect(chat.history[12].edit_message_reply_markup).toBeDefined();
-    expect(chat.history[13].message.text).toContain('Product with multiple sizes for 20.00€');
+    expect(chat.history[11].edit_message_reply_markup).toBeDefined();
+    expect(chat.history[12].message.text).toContain('Product with multiple sizes for 20.00€');
     expect(crawlerMock.getUpdateData).toHaveBeenLastCalledWith(url, '1');
   });
 
@@ -139,12 +138,11 @@ describe('TelegramBot (e2e)', () => {
     const user = telegramServer.createUser();
     await linkTelegramAccountToNewUser(user.info.id);
     const chat2 = user.startBot(bot, '');
-    await telegramServer.waitForNextMessages(2);
+    await telegramServer.waitForNextMessages(1);
 
     // Start command sends invalid token
-    expect(chat2.history.length).toBe(3);
-    expect(chat2.history[1].message.text).toContain('token was invalid');
-    expect(chat2.history[2].message.text).toContain('need to link your shassi');
+    expect(chat2.history.length).toBe(2);
+    expect(chat2.history[1].message.text).toContain('need to link your shassi');
 
     // Add a product with one size
     const url = 'https://hm.com';
@@ -163,8 +161,8 @@ describe('TelegramBot (e2e)', () => {
     });
     chat2.postMessage(user, { text: url });
     await telegramServer.waitForNextMessages(1);
-    expect(chat2.history.length).toBe(5);
-    expect(chat2.history[4].message.text).toContain('Product with one size for 20.00€');
+    expect(chat2.history.length).toBe(4);
+    expect(chat2.history[3].message.text).toContain('Product with one size for 20.00€');
     expect(crawlerMock.getUpdateData).toHaveBeenLastCalledWith(url, '1');
   });
 
