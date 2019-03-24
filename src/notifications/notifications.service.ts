@@ -66,7 +66,7 @@ export class NotificationsService implements OnModuleInit, OnModuleDestroy {
     return update.product.isAvailable
       && (changes.hasPriceChange
         || changes.hasNeverBeenAvailableBefore
-        || changes.hasLowInStockChange && update.product.isLowInStock);
+        || changes.hasLowInStockChange && update.product.isLowInStock && changes.hasNeverBeenLowInStockBefore);
   }
 
   private getMarkdownUpdateText(update: ProductChange) {

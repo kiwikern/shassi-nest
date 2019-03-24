@@ -106,7 +106,6 @@ export class ProductsService {
   }
 
   private getProductAttributeChanges(product: ProductEntity, update: ProductUpdate): ProductAttributeChanges {
-    const latestUpdateWhenAvailable = product.updates.slice().reverse().find(p => p.isAvailable);
 
     const changesBuilder = new ProductAttributeChangesBuilder();
 
@@ -118,6 +117,7 @@ export class ProductsService {
     }
 
     if (product.isAvailable !== update.isAvailable) {
+      const latestUpdateWhenAvailable = product.updates.slice().reverse().find(p => p.isAvailable);
       changesBuilder.setAvailabilityChange(!latestUpdateWhenAvailable);
       if (latestUpdateWhenAvailable && latestUpdateWhenAvailable.price !== update.price) {
         changesBuilder.setPriceChange({
@@ -128,7 +128,8 @@ export class ProductsService {
     }
 
     if (product.isLowInStock !== update.isLowInStock) {
-      changesBuilder.setLowInStockChange();
+      const latestUpdateWhenLowInStock = product.updates.find(p => p.isLowInStock);
+      changesBuilder.setLowInStockChange(!latestUpdateWhenLowInStock);
     }
 
     return changesBuilder.build();

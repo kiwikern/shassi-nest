@@ -70,7 +70,7 @@ describe('ProductsService', () => {
       expect(updatedProducts).toEqual([]);
     });
 
-    it('should return all updated products', async () => {
+    it('should return a price update', async () => {
 
       const productMockWithPriceUpdate = {
         url: 'hasPriceUpdate',
@@ -80,6 +80,32 @@ describe('ProductsService', () => {
         isAvailable: true,
         isLowInStock: false,
       };
+
+      repositoryMock.find.mockReturnValue([productMockWithPriceUpdate]);
+      crawlerServiceMock.getUpdateData.mockReturnValue({
+        price: 100, isAvailable: true, isLowInStock: false,
+      });
+
+      const updatedProducts = await service.updateAllProducts();
+
+      expect(updatedProducts.length).toBe(1);
+      expect(updatedProducts[0]).toMatchObject({
+        productAttributeChanges: {
+          hasAnyChange: true,
+          hasAvailabilityChange: false,
+          hasNeverBeenAvailableBefore: false,
+          hasPriceChange: true,
+          newPriceValue: 100,
+          oldPriceValue: 90,
+          hasLowInStockChange: false,
+          hasNeverBeenLowInStockBefore: false,
+        },
+        product: { updates: [{ price: 100, isAvailable: true, isLowInStock: false }] },
+      });
+    });
+
+    it('should return a deferred price update', async () => {
+
       const productMockWithDeferredPriceUpdate = {
         url: 'hasDeferredPriceUpdate',
         updates: [
@@ -91,6 +117,37 @@ describe('ProductsService', () => {
         isAvailable: false,
         isLowInStock: false,
       };
+      repositoryMock.find.mockReturnValue([productMockWithDeferredPriceUpdate]);
+      crawlerServiceMock.getUpdateData.mockReturnValue({
+        price: 100, isAvailable: true, isLowInStock: false,
+      });
+
+      const updatedProducts = await service.updateAllProducts();
+
+      expect(updatedProducts.length).toBe(1);
+      expect(updatedProducts[0]).toMatchObject({
+        productAttributeChanges: {
+          hasAnyChange: true,
+          hasAvailabilityChange: true,
+          hasNeverBeenAvailableBefore: false,
+          hasPriceChange: true,
+          newPriceValue: 100,
+          oldPriceValue: 90,
+          hasLowInStockChange: false,
+          hasNeverBeenLowInStockBefore: false,
+        },
+        product: {
+          updates: [
+            { price: 90, isAvailable: true, isLowInStock: false },
+            { price: 100, isAvailable: false, isLowInStock: false },
+            { price: 100, isAvailable: true, isLowInStock: false },
+          ],
+        },
+      });
+    });
+
+    it('should return availability updates', async () => {
+
       const productMockWithAvailabilityUpdate = {
         url: 'hasAvailabilityUpdate',
         updates: [
@@ -102,6 +159,7 @@ describe('ProductsService', () => {
         isAvailable: false,
         isLowInStock: false,
       };
+
       const productMockWithFirstAvailabilityUpdate = {
         url: 'firstTimeAvailable',
         updates: [{ price: 100, isAvailable: false, isLowInStock: false }],
@@ -110,30 +168,10 @@ describe('ProductsService', () => {
         isAvailable: false,
         isLowInStock: false,
       };
-      const productMockWithLowInStockUpdate = {
-        url: 'hasLowInStockUpdate',
-        updates: [{ price: 100, isAvailable: true, isLowInStock: true }],
-        size: { id: '' },
-        price: 100,
-        isAvailable: true,
-        isLowInStock: true,
-      };
-      const productMockWithoutUpdate = {
-        url: 'hasNoUpdate',
-        updates: [{ price: 100, isAvailable: false }],
-        size: { id: '' },
-        price: 100,
-        isAvailable: true,
-        isLowInStock: false,
-      };
 
       repositoryMock.find.mockReturnValue([
-        productMockWithPriceUpdate,
-        productMockWithDeferredPriceUpdate,
         productMockWithAvailabilityUpdate,
         productMockWithFirstAvailabilityUpdate,
-        productMockWithLowInStockUpdate,
-        productMockWithoutUpdate,
       ]);
       crawlerServiceMock.getUpdateData.mockReturnValue({
         price: 100, isAvailable: true, isLowInStock: false,
@@ -141,75 +179,114 @@ describe('ProductsService', () => {
 
       const updatedProducts = await service.updateAllProducts();
 
-      expect(updatedProducts.length).toBe(5);
+      expect(updatedProducts.length).toBe(2);
       expect(updatedProducts[0]).toMatchObject({
-        productAttributeChanges: {
-          hasAnyChange: true,
-          hasAvailabilityChange: false,
-          hasNeverBeenAvailableBefore: false,
-          hasPriceChange: true,
-          newPriceValue: 100,
-          oldPriceValue: 90,
-          hasLowInStockChange: false,
-        },
-        product: { updates: [{ price: 100, isAvailable: true, isLowInStock: false  }] },
-      });
-      expect(updatedProducts[1]).toMatchObject({
-        productAttributeChanges: {
-          hasAnyChange: true,
-          hasAvailabilityChange: true,
-          hasNeverBeenAvailableBefore: false,
-          hasPriceChange: true,
-          newPriceValue: 100,
-          oldPriceValue: 90,
-          hasLowInStockChange: false,
-        },
-        product: {
-          updates: [
-            { price: 90, isAvailable: true, isLowInStock: false  },
-            { price: 100, isAvailable: false, isLowInStock: false  },
-            { price: 100, isAvailable: true, isLowInStock: false  },
-          ],
-        },
-      });
-      expect(updatedProducts[2]).toMatchObject({
         productAttributeChanges: {
           hasAnyChange: true,
           hasAvailabilityChange: true,
           hasNeverBeenAvailableBefore: false,
           hasPriceChange: false,
           hasLowInStockChange: false,
+          hasNeverBeenLowInStockBefore: false,
         },
         product: {
           updates: [
-            { price: 100, isAvailable: true, isLowInStock: false  },
-            { price: 90, isAvailable: false, isLowInStock: false  },
-            { price: 100, isAvailable: true, isLowInStock: false  },
+            { price: 100, isAvailable: true, isLowInStock: false },
+            { price: 90, isAvailable: false, isLowInStock: false },
+            { price: 100, isAvailable: true, isLowInStock: false },
           ],
         },
       });
-      expect(updatedProducts[3]).toMatchObject({
+      expect(updatedProducts[1]).toMatchObject({
         productAttributeChanges: {
           hasAnyChange: true,
           hasAvailabilityChange: true,
           hasNeverBeenAvailableBefore: true,
           hasPriceChange: false,
           hasLowInStockChange: false,
+          hasNeverBeenLowInStockBefore: false,
         },
-        product: { updates: [{ price: 100, isAvailable: false }, { price: 100, isAvailable: true }] },
+        product: {
+          updates: [
+            { price: 100, isAvailable: false, isLowInStock: false },
+            { price: 100, isAvailable: true, isLowInStock: false },
+          ],
+        },
       });
-      expect(updatedProducts[4]).toMatchObject({
+    });
+
+    it('should return low in stock updates', async () => {
+
+      const productMockWithLowInStockUpdate = {
+        url: 'hasLowInStockUpdate',
+        updates: [
+          { price: 100, isAvailable: true, isLowInStock: true },
+          { price: 100, isAvailable: true, isLowInStock: false },
+        ],
+        size: { id: '' },
+        price: 100,
+        isAvailable: true,
+        isLowInStock: false,
+      };
+      const productMockWithFirstTimeLowInStockUpdate = {
+        url: 'hasLowInStockUpdate',
+        updates: [{ price: 100, isAvailable: true, isLowInStock: false }],
+        size: { id: '' },
+        price: 100,
+        isAvailable: true,
+        isLowInStock: false,
+      };
+      const productMockWithoutUpdate = {
+        url: 'hasNoUpdate',
+        updates: [{ price: 100, isAvailable: false, isLowInStock: true }],
+        size: { id: '' },
+        price: 100,
+        isAvailable: true,
+        isLowInStock: true,
+      };
+
+      repositoryMock.find.mockReturnValue([
+        productMockWithLowInStockUpdate,
+        productMockWithFirstTimeLowInStockUpdate,
+        productMockWithoutUpdate,
+      ]);
+      crawlerServiceMock.getUpdateData.mockReturnValue({
+        price: 100, isAvailable: true, isLowInStock: true,
+      });
+
+      const updatedProducts = await service.updateAllProducts();
+
+      expect(updatedProducts.length).toBe(2);
+      expect(updatedProducts[0]).toMatchObject({
         productAttributeChanges: {
           hasAnyChange: true,
           hasAvailabilityChange: false,
           hasNeverBeenAvailableBefore: false,
           hasPriceChange: false,
           hasLowInStockChange: true,
+          hasNeverBeenLowInStockBefore: false,
         },
         product: {
           updates: [
             { price: 100, isAvailable: true, isLowInStock: true },
             { price: 100, isAvailable: true, isLowInStock: false },
+            { price: 100, isAvailable: true, isLowInStock: true },
+          ],
+        },
+      });
+      expect(updatedProducts[1]).toMatchObject({
+        productAttributeChanges: {
+          hasAnyChange: true,
+          hasAvailabilityChange: false,
+          hasNeverBeenAvailableBefore: false,
+          hasPriceChange: false,
+          hasLowInStockChange: true,
+          hasNeverBeenLowInStockBefore: true,
+        },
+        product: {
+          updates: [
+            { price: 100, isAvailable: true, isLowInStock: false },
+            { price: 100, isAvailable: true, isLowInStock: true },
           ],
         },
       });

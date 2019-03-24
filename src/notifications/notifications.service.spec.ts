@@ -46,6 +46,7 @@ describe('NotificationsService', () => {
             hasAvailabilityChange: false,
             hasNeverBeenAvailableBefore: false,
             hasLowInStockChange: true,
+            hasNeverBeenLowInStockBefore: false,
             hasPriceChange: true,
             newPriceValue: 100,
             oldPriceValue: 90,
@@ -73,6 +74,7 @@ describe('NotificationsService', () => {
             hasAvailabilityChange: true,
             hasNeverBeenAvailableBefore: false,
             hasLowInStockChange: false,
+            hasNeverBeenLowInStockBefore: true,
             hasPriceChange: true,
             newPriceValue: 90,
             oldPriceValue: 100,
@@ -99,6 +101,7 @@ describe('NotificationsService', () => {
             hasAvailabilityChange: false,
             hasNeverBeenAvailableBefore: false,
             hasLowInStockChange: true,
+            hasNeverBeenLowInStockBefore: true,
             hasPriceChange: true,
             newPriceValue: 100,
             oldPriceValue: 90,
@@ -122,6 +125,7 @@ describe('NotificationsService', () => {
             hasAvailabilityChange: false,
             hasNeverBeenAvailableBefore: false,
             hasLowInStockChange: true,
+            hasNeverBeenLowInStockBefore: true,
             hasPriceChange: false,
           } as any,
         },
@@ -146,6 +150,29 @@ describe('NotificationsService', () => {
             hasAvailabilityChange: true,
             hasNeverBeenAvailableBefore: false,
             hasLowInStockChange: true,
+            hasNeverBeenLowInStockBefore: true,
+            hasPriceChange: false,
+          } as any,
+        },
+      ];
+      telegramService.notifyAboutUpdate.mockImplementation(() => {
+        throw new InternalServerErrorException();
+      });
+      productsService.updateAllProducts.mockReturnValue(changes);
+      await service.sendNotificationsPerUser();
+      expect(telegramService.notifyAboutUpdate).not.toHaveBeenCalled();
+    });
+
+    it('should not notify about low in stock change when it has already been low in stock before', async () => {
+      const changes: ProductChange[] = [
+        {
+          product: { userId: 'userId', isAvailable: true, isLowInStock: true } as any,
+          productAttributeChanges: {
+            hasAnyChange: true,
+            hasAvailabilityChange: true,
+            hasNeverBeenAvailableBefore: false,
+            hasLowInStockChange: true,
+            hasNeverBeenLowInStockBefore: false,
             hasPriceChange: false,
           } as any,
         },
@@ -167,6 +194,7 @@ describe('NotificationsService', () => {
             hasAvailabilityChange: true,
             hasNeverBeenAvailableBefore: true,
             hasLowInStockChange: true,
+            hasNeverBeenLowInStockBefore: true,
             hasPriceChange: false,
           } as any,
         },
@@ -191,6 +219,7 @@ describe('NotificationsService', () => {
             hasAvailabilityChange: true,
             hasNeverBeenAvailableBefore: true,
             hasLowInStockChange: false,
+            hasNeverBeenLowInStockBefore: true,
             hasPriceChange: false,
           } as any,
         },
@@ -215,6 +244,7 @@ describe('NotificationsService', () => {
             hasAvailabilityChange: false,
             hasNeverBeenAvailableBefore: false,
             hasLowInStockChange: true,
+            hasNeverBeenLowInStockBefore: true,
             hasPriceChange: false,
           } as any,
         },
@@ -239,6 +269,7 @@ describe('NotificationsService', () => {
             hasAvailabilityChange: false,
             hasNeverBeenAvailableBefore: false,
             hasLowInStockChange: true,
+            hasNeverBeenLowInStockBefore: true,
             hasPriceChange: false,
           } as any,
         },
@@ -260,6 +291,7 @@ describe('NotificationsService', () => {
             hasAvailabilityChange: false,
             hasNeverBeenAvailableBefore: true,
             hasPriceChange: false,
+            hasNeverBeenLowInStockBefore: true,
             hasLowInStockChange: false,
           } as any,
         },
@@ -287,6 +319,7 @@ describe('NotificationsService', () => {
             hasAvailabilityChange: true,
             hasNeverBeenAvailableBefore: true,
             hasLowInStockChange: true,
+            hasNeverBeenLowInStockBefore: true,
             hasPriceChange: false,
           } as any,
         },
@@ -296,6 +329,7 @@ describe('NotificationsService', () => {
             hasAnyChange: true,
             hasAvailabilityChange: true,
             hasNeverBeenAvailableBefore: true,
+            hasNeverBeenLowInStockBefore: true,
             hasLowInStockChange: true,
           } as any,
         },
