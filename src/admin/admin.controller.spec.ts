@@ -21,7 +21,7 @@ describe('Admin Controller', () => {
 
   it('should be defined', async () => {
     service.getUsersOverview.mockReturnValueOnce([]);
-    expect(await controller.get()).toEqual([]);
+    expect(await controller.getAdminUserOverview()).toEqual([]);
     expect(service.getUsersOverview).toHaveBeenCalledTimes(1);
   });
 
