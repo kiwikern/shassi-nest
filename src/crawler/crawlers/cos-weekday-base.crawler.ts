@@ -2,7 +2,6 @@ import { Crawler } from '../crawler.interface';
 import { BadRequestException, HttpService, Logger } from '@nestjs/common';
 import { ProductSizeAvailability } from '../product-size.interface';
 import { JSDOM } from 'jsdom';
-import * as util from 'util';
 
 export abstract class CosWeekdayBaseCrawler implements Crawler {
   url: string;
@@ -23,7 +22,7 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
     const response = await this.httpService.get(this.url, { headers }).toPromise();
     this.document = new JSDOM(response.data).window.document;
     try {
-      const productDataString = this.document.getElementsByClassName('product parbase')[0]
+      const productDataString = this.document.getElementsByClassName(this.getProductCssClasses())[0]
         .getElementsByTagName('script')[0].innerHTML
         .replace('};', '}')
         .replace('var productArticleDetails = ', '')
@@ -82,4 +81,8 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
   }
 
   abstract getBaseUrl(): string;
+
+  getProductCssClasses(): string {
+    return 'product parbase';
+  }
 }

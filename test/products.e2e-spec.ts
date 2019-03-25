@@ -48,6 +48,11 @@ describe('ProductsController (e2e)', () => {
       name: 'Zalando',
       expectedPrice: 214.95,
     },
+    {
+      url: 'https://www.stories.com/en_eur/clothing/tops/basics/product.classic-crewneck-tee-white.0622577001.html',
+      name: 'Stories',
+      expectedPrice: 25,
+    },
   ];
   let app: INestApplication;
   let tokenUser1: string;

@@ -106,6 +106,8 @@ export class ProductEntity {
       return 'Amazon';
     } else if (this.url.includes('zalando')) {
       return 'Zalando';
+    } else if (this.url.includes('stories')) {
+      return '& Other Stories';
     } else {
       Logger.warn('Could not find store for URL', this.url);
       return '';
