@@ -3,6 +3,8 @@ import { ProductEntity } from './products.entity';
 import { classToPlain, plainToClass } from 'class-transformer';
 import { ProductUpdate } from './product-update.entity';
 import { ProductSize } from './product-size.entity';
+import { Logger } from '@nestjs/common';
+import { NoOpLogger } from '../../../test/mocks/no-op-logger';
 
 const date = new Date();
 date.setMilliseconds(0);
@@ -18,6 +20,10 @@ function getProductEntity(updates: ProductUpdate[], size?: ProductSize): Product
 }
 
 describe('Product Entity', () => {
+
+  beforeAll(() => {
+    Logger.overrideLogger(new NoOpLogger());
+  });
 
   it('should handle null updates', async () => {
     const entity = new ProductEntity();

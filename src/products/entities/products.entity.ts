@@ -109,7 +109,7 @@ export class ProductEntity {
     } else if (this.url.includes('stories')) {
       return '& Other Stories';
     } else {
-      Logger.warn('Could not find store for URL', this.url);
+      new Logger(ProductEntity.name).warn('Could not find store for URL', this.url);
       return '';
     }
   }

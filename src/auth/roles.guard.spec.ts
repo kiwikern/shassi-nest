@@ -1,8 +1,9 @@
 import { RolesGuard } from './roles.guard';
 import { MockType } from '../../test/mock.type';
 import { Reflector } from '@nestjs/core';
-import { ExecutionContext } from '@nestjs/common';
+import { ExecutionContext, Logger } from '@nestjs/common';
 import { executionContextFactory, reflectorFactory } from '../../test/mocks/jest-mocks';
+import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
 describe('RolesGuard', () => {
 
@@ -12,6 +13,7 @@ describe('RolesGuard', () => {
   let requestMock;
 
   beforeEach(() => {
+    Logger.overrideLogger(new NoOpLogger());
     reflectorMock = reflectorFactory();
     rolesGuard = new RolesGuard(reflectorMock as Reflector);
     requestMock = {
