@@ -11,7 +11,7 @@
     "start": "cross-env NODE_ENV=development ts-node -r tsconfig-paths/register src/main.ts",
     "start:dev": "nodemon",
     "start:debug": "nodemon --config nodemon-debug.json",
-    "start:webstorm-debug": "cross-env NODE_ENV=development node %NODE_DEBUG_OPTION% -r tsconfig-paths/register -r ts-node/register src/main.ts",
+    "start:webstorm-debug": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true node %NODE_DEBUG_OPTION% -r tsconfig-paths/register -r ts-node/register src/main.ts --noEmit",
     "prestart:prod": "npm run build",
     "start:prod": "cross-env NODE_ENV=production node dist/main.js",
     "webpack": "rimraf dist && webpack --config webpack.config.js",
