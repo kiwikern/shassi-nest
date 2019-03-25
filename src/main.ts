@@ -7,6 +7,7 @@ declare const module: any;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const configService = app.get(ConfigService);
   const options = new DocumentBuilder()
     .setTitle('Shassi APIs')
     .setDescription('API docs for the shopping assistant')
@@ -15,10 +16,10 @@ async function bootstrap() {
     .addTag('products')
     .setContactEmail('shassi@kimkern.de')
     .addBearerAuth()
+    .setSchemes(configService.isProduction ? 'https' : 'http')
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
-  const configService = app.get(ConfigService);
   await app.listen(configService.port);
 
   if (module && module.hot) {
