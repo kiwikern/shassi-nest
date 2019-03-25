@@ -32,8 +32,9 @@ export class AsosCrawler implements Crawler {
       }
       const jsonString = script.innerHTML
         .replace(/\n/mg, '')
-        .replace(/.*view\('/mg, '')
-        .replace(/',.*/, '');
+        .replace(/.*view\('?/mg, '')
+        .replace(/',.*/, '')
+        .replace(/,\s*{"360".*/, '');
       this.productData = JSON.parse(jsonString);
       const productId = /\/prd\/(\d+)/.exec(url)[1];
       const apiUrl = 'https://www.asos.de/api/product/catalogue/v2/stockprice?currency=EUR&store=DE&productIds=';

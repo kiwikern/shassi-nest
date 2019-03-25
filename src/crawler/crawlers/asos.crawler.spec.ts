@@ -4,8 +4,9 @@ import { asosTestCase } from '../../../test/crawler-testcases/asos-sale.testcase
 import { of } from 'rxjs';
 import { AsosCrawler } from './asos.crawler';
 import { asosOneSizeTestCase } from '../../../test/crawler-testcases/asos-onesize.testcase';
+import { asosNoSaleTestCase } from '../../../test/crawler-testcases/asos-nosale.testcase';
 
-const testCases = [asosTestCase, asosOneSizeTestCase];
+const testCases = [asosTestCase, asosOneSizeTestCase, asosNoSaleTestCase];
 
 describe('Asos',
   () => {
