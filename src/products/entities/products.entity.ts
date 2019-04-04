@@ -90,7 +90,7 @@ export class ProductEntity {
   }
 
   @Expose({ name: 'store' })
-  @ApiModelProperty({ enum: ['H&M', 'ASOS', 'Weekday', 'ABOUT YOU', 'COS', 'Amazon'] })
+  @ApiModelProperty({ enum: ['H&M', 'ASOS', 'Weekday', 'COS', 'ABOUT YOU', 'Amazon', 'Zalando', '& Other Stories'] })
   get store(): string {
     if (this.url.includes('hm.com')) {
       return 'H&M';

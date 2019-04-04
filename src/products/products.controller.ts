@@ -24,7 +24,7 @@ export class ProductsController {
 
   @Get('/')
   @ApiOperation({title: 'List of products', description: 'Get the products for the logged in user'})
-  @ApiOkResponse({ isArray: true, description: 'Returns all the user\' products', type: [ProductEntity] })
+  @ApiOkResponse({ isArray: true, description: 'Returns all the user\' products', type: ProductEntity })
   getAllProducts(@User() user: UserEntity): Promise<ProductEntity[]> {
     return this.productsService.getProducts(user._id);
   }
