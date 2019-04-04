@@ -35,6 +35,11 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
 
       const productId = /(\d+).html.*$/.exec(url)[1];
       this.productData = data[productId];
+      if (!this.productData) {
+        // Product is not in catalog anymore
+        return;
+      }
+
       const apiUrl = this.getBaseUrl() + '/en_eur/getAvailability?format=json&variants=';
       const variants = this.productData.variants.map(v => v.variantCode).join(',');
       const availabilityResponse = await this.httpService.get(apiUrl + variants, { headers }).toPromise();
