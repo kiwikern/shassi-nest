@@ -9,7 +9,7 @@ export class UserCreateDto {
 
   @IsEmail()
   @IsOptional()
-  @ApiModelProperty()
+  @ApiModelProperty({ required: false })
   email?: string;
 
   @IsString()
