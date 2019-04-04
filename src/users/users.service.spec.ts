@@ -44,7 +44,7 @@ describe('UsersService', () => {
       fail('should throw error');
     } catch (e) {
       expect(e).toBeInstanceOf(BadRequestException);
-      expect(e.message.error).toContain('username');
+      expect(e.response.error).toContain('username');
     }
   });
 
@@ -57,7 +57,7 @@ describe('UsersService', () => {
       fail('should throw error');
     } catch (e) {
       expect(e).toBeInstanceOf(BadRequestException);
-      expect(e.message.error).toContain('email');
+      expect(e.response.error).toContain('email');
       expect(repositoryMock.findOne).toHaveBeenCalledTimes(2);
     }
   });
