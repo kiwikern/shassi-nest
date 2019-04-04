@@ -31,7 +31,7 @@ describe('ProductsController (e2e)', () => {
     {
       url: 'https://www.cosstores.com/en_eur/men/menswear/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html',
       name: 'COS',
-      expectedPrice: 25,
+      expectedPrice: 20,
     },
     {
       url: 'https://www.weekday.com/en_eur/men/categories/basics/product.alan-t-shirt-white.0410605002.html',
