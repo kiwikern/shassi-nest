@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ConfigService } from './config/config.service';
+import { version } from '../package.json';
 
 declare const module: any;
 
@@ -11,7 +12,7 @@ async function bootstrap() {
   const options = new DocumentBuilder()
     .setTitle('Shassi APIs')
     .setDescription('API docs for the shopping assistant')
-    .setVersion('1.0')
+    .setVersion(version)
     .addTag('users')
     .addTag('products')
     .setContactEmail('shassi@kimkern.de')
