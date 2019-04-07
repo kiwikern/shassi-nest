@@ -9,7 +9,7 @@ import { CronJob } from 'cron';
 export class CronJobService {
 
   create(cronTime: string, cronFunction: () => void): CronJob {
-    return new CronJob(cronTime, cronFunction);
+    return new CronJob({ cronTime, onTick: cronFunction, timeZone: 'Europe/Berlin' });
   }
 
 }

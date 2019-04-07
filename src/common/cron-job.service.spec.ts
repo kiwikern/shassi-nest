@@ -12,7 +12,11 @@ describe('CronJobService', () => {
     module.useLogger(new NoOpLogger());
     service = module.get<CronJobService>(CronJobService);
   });
+
   it('should be defined', () => {
-    expect(service.create('* * * * *', () => null)).toBeDefined();
+    const cronJob = service.create('00 00 8 * * *', () => null);
+    expect(cronJob.nextDate().format('z')).toMatch(/CEST|CST/);
+    expect(cronJob.nextDate().hour()).toBe(8);
   });
+
 });
