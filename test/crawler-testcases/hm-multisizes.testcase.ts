@@ -19,7 +19,7 @@ export const hmMultisizesTestcase = {
     { size: 'sizedoesnotexist', isAvailable: false, isLowInStock: false },
   ],
 
-  name: 'Hoodiejacke Regular Fit',
+  name: 'Hoodiejacke Regular Fit - Grünmeliert',
 
   priceChecks: [
     { size: '0669091022001', price: 19.99 },

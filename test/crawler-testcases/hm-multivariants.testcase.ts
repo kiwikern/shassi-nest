@@ -22,7 +22,7 @@ export const hmMultiVariantsTestcase = {
     { size: 'sizedoesnotexist', isAvailable: false, isLowInStock: false },
   ],
 
-  name: 'Sneaker',
+  name: 'Sneaker - Schwarz',
 
   priceChecks: [
     { size: '0669091022001', price: 59.99 },

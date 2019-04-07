@@ -13,7 +13,7 @@ export const hmClubPriceTestcase = {
     { size: 'sizedoesnotexist', isAvailable: false, isLowInStock: false },
   ],
 
-  name: 'Cap mit Applikation',
+  name: 'Cap mit Applikation - Hellgraumeliert',
 
   priceChecks: [
     { size: '0669091022001', price: 3.99 },

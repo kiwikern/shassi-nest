@@ -13,7 +13,7 @@ export const hmOneSizeTestCase = {
     { size: 'sizedoesnotexist', isAvailable: false, isLowInStock: false },
   ],
 
-  name: 'Feinstrickmütze',
+  name: 'Feinstrickmütze - Hellgraumeliert/NASA',
 
   url: 'https://m2.hm.com/m/de_de/productpage.0736967002.html',
   expectedUrl: 'https://www2.hm.com/de_de/productpage.0736967002.html',

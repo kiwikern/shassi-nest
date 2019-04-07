@@ -10,7 +10,7 @@ export class WeekdayCrawler extends CosWeekdayBaseCrawler {
   }
 
   getBaseUrl(): string {
-    return 'https://weekday.com';
+    return 'https://weekday.com/en_eur';
   }
 
 }

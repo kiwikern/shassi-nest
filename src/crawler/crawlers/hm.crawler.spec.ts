@@ -32,6 +32,30 @@ describe('H&M',
       expect(httpMock.get).toHaveBeenCalledTimes(1);
     });
 
+    it('should throw on faulty product response', async () => {
+      const httpMock = jest.fn(() => ({
+        get: jest.fn(),
+      }))();
+      // noinspection all
+      httpMock.get.mockReturnValueOnce(of({
+        data: `
+      <div class="product parbase">
+        <script>
+            var productArticleDetails = {
+              "0594303002": {"sizes": []},
+              "alternate": "";
+            }
+        </script>
+      </div>
+      `,
+      }));
+      const crawler = new HmCrawler(httpMock as any);
+      await expect(crawler.init('https://www2.hm.com/de_de/productpage.0594303002.html'))
+        .rejects
+        .toThrow(BadRequestException);
+      expect(httpMock.get).toHaveBeenCalledTimes(1);
+    });
+
     it('should throw on faulty availability response', async () => {
       const httpMock = jest.fn(() => ({
         get: jest.fn(),

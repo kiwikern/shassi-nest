@@ -10,7 +10,7 @@ export class StoriesCrawler extends CosWeekdayBaseCrawler {
   }
 
   getBaseUrl(): string {
-    return 'https://stories.com';
+    return 'https://stories.com/en_eur';
   }
 
   getProductCssClasses(): string {
