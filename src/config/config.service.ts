@@ -10,11 +10,9 @@ export interface EnvConfig {
 @Injectable()
 export class ConfigService {
   private readonly envConfig: EnvConfig = {};
-  public readonly isProduction: boolean;
   private readonly logger: Logger = new Logger(ConfigService.name);
 
   constructor() {
-    this.isProduction = process.env.NODE_ENV === 'production';
     let config;
     try {
       config = dotenv.parse(fs.readFileSync(`${process.env.NODE_ENV}.env`));
@@ -32,6 +30,10 @@ export class ConfigService {
       this.envConfig.DATABASE_PORT = matches[4];
       this.envConfig.DATABASE_NAME = matches[5];
     }
+  }
+
+  get isProduction(): boolean {
+    return process.env.NODE_ENV === 'production';
   }
 
   get databaseHost(): string {
