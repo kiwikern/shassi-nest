@@ -451,6 +451,14 @@ describe('ProductsService', () => {
       .toThrow(ForbiddenException);
   });
 
+  it('should allow to unset favorite when limit exceeded', async () => {
+    repositoryMock.findOne.mockReturnValue({ id: 1 });
+    repositoryMock.find.mockReturnValue([{ id: 1 }, {}, {}]);
+    const product = await service.setFavorite(objectId, objectId, false);
+    expect(product).toEqual({ id: 1, isFavorite: true });
+    expect(repositoryMock.save).toHaveBeenCalledTimes(1);
+  });
+
   it('should delete a product', async () => {
     repositoryMock.findOne.mockReturnValue({ id: 1 });
     const wasSuccessful = await service.deleteProduct(objectId, objectId);

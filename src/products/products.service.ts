@@ -175,7 +175,7 @@ export class ProductsService {
       throw new NotFoundException('Product not found.');
     }
     const favorites = await this.productRepository.find({ userId, isFavorite: true });
-    if (favorites.length >= 3) {
+    if (isFavorite && favorites.length >= 3) {
       throw new ForbiddenException('You have exceeded your favorites limit of three.');
     }
     product.isFavorite = isFavorite;
