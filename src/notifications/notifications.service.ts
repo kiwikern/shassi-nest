@@ -88,9 +88,11 @@ export class NotificationsService implements OnModuleInit, OnModuleDestroy {
       updateText = `is now at ${newPrice}€ (${priceDeltaText}€${lowInStockText})`;
     } else if (changes.hasAvailabilityChange) {
       const lowInStockText = update.product.isLowInStock ? ' and low in stock' : '';
-      updateText = `is available again${lowInStockText}`;
+      const priceText = update.product.price.toFixed(2);
+      updateText = `is available again${lowInStockText} (${priceText}€)`;
     } else if (changes.hasLowInStockChange) {
-      updateText = `is now low in stock`;
+      const priceText = update.product.price.toFixed(2);
+      updateText = `is now low in stock (${priceText}€)`;
     } else {
       this.logger.error({
         message: 'Unknown product attribute change.', changes, product: update.product,
