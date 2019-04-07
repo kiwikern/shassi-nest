@@ -19,7 +19,7 @@ export class ConfigService {
     try {
       config = dotenv.parse(fs.readFileSync(`${process.env.NODE_ENV}.env`));
     } catch (e) {
-      this.logger.warn('No .env file was found. Falling back to process.env');
+      this.logger.log('No .env file was found. Falling back to process.env');
     }
     if (config) {
       this.envConfig = this.validateInput(config);
