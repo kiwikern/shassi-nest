@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import { ConflictException, ForbiddenException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateProductDto } from './dtos/create-product.dto';
 import { ProductEntity } from './entities/products.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -23,7 +23,7 @@ export class ProductsService {
   }
 
   /**
-   * Get all active products for given user.
+   * Get all products for given user.
    * @param userId
    */
   async getProducts(userId: ObjectID): Promise<ProductEntity[]> {
@@ -59,6 +59,15 @@ export class ProductsService {
 
   async updateAllProducts(): Promise<ProductChange[]> {
     const products: ProductEntity[] = await this.productRepository.find({ isActive: true });
+    return this.updateProducts(products);
+  }
+
+  async updateAllFavorites(): Promise<ProductChange[]> {
+    const products: ProductEntity[] = await this.productRepository.find({ isActive: true, isFavorite: true });
+    return this.updateProducts(products);
+  }
+
+  private async updateProducts(products: ProductEntity[]) {
     // TODO: Use concurrency control
     // const updatedProducts = (await Promise.all(products
     //   .map(product => this.updateProduct(product))))
@@ -76,7 +85,7 @@ export class ProductsService {
   }
 
   async updateSingleProduct(userId: ObjectID, productId: ObjectID): Promise<ProductEntity> {
-    const product: any = await this.productRepository.findOne({ _id: productId, userId });
+    const product = await this.productRepository.findOne({ _id: productId, userId });
     if (!product) {
       throw new NotFoundException('Product not found.');
     }
@@ -152,7 +161,7 @@ export class ProductsService {
   }
 
   async markRead(userId: ObjectID, productId: ObjectID): Promise<ProductEntity> {
-    const product: any = await this.productRepository.findOne({ _id: productId, userId });
+    const product = await this.productRepository.findOne({ _id: productId, userId });
     if (!product) {
       throw new NotFoundException('Product not found.');
     }
@@ -160,13 +169,25 @@ export class ProductsService {
     return this.productRepository.save(product);
   }
 
+  async setFavorite(userId: ObjectID, productId: ObjectID, isFavorite: boolean) {
+    const product = await this.productRepository.findOne({ _id: productId, userId });
+    if (!product) {
+      throw new NotFoundException('Product not found.');
+    }
+    const favorites = await this.productRepository.find({ userId, isFavorite: true });
+    if (favorites.length >= 3) {
+      throw new ForbiddenException('You have exceeded your favorites limit of three.');
+    }
+    product.isFavorite = isFavorite;
+    return this.productRepository.save(product);
+  }
+
   async deleteProduct(userId: ObjectID, productId: ObjectID): Promise<boolean> {
-    const product: any = await this.productRepository.findOne({ _id: productId, userId });
+    const product = await this.productRepository.findOne({ _id: productId, userId });
     if (!product) {
       throw new NotFoundException('Product not found.');
     }
     return this.productRepository.delete({ _id: productId, userId })
       .then(() => true);
   }
-
 }

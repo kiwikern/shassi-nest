@@ -44,6 +44,12 @@ describe('Product Controller', () => {
     expect(productsServiceMock.markRead).toHaveBeenCalledWith('id', productId);
   });
 
+  it('should set a product as favorite', async () => {
+    const productId = ObjectID.createFromTime(0);
+    await controller.setFavorite({ _id: 'id' } as any, productId, {isFavorite: true});
+    expect(productsServiceMock.setFavorite).toHaveBeenCalledWith('id', productId, true);
+  });
+
   it('should update a product', async () => {
     const productId = ObjectID.createFromTime(0);
     await controller.updateProduct({ _id: 'id' } as any, productId);

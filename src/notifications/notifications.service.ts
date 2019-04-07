@@ -4,7 +4,6 @@ import { ConfigService } from '../config/config.service';
 import { TelegramService } from '../telegram/telegram.service';
 import { CronJobService } from '../common/cron-job.service';
 import { ProductsService } from '../products/products.service';
-import { ObjectID } from 'mongodb';
 import { CronJob } from 'cron';
 
 @Injectable()
@@ -19,61 +18,66 @@ export class NotificationsService implements OnModuleInit, OnModuleDestroy {
   }
 
   private job: CronJob;
+  private favoritesJob: CronJob;
 
   onModuleInit() {
-    // if (!this.configService.isProduction) this.sendNotificationsPerUser();
-    this.job = this.cronJobService.create('00 00 8,14,18 * * *', () => this.sendNotificationsPerUser());
+    // if (!this.configService.isProduction) this.sendAllNotifications();
+    // if (!this.configService.isProduction) this.sendFavoritesNotifications();
+    this.job = this.cronJobService.create('00 00 8,14,18 * * *', () => this.sendAllNotifications());
     this.job.start();
     this.logger.log('Product CronJob started, next execution: ' + this.job.nextDates().toString());
+
+    this.favoritesJob = this.cronJobService.create('00 00 6,10,12,16,20 * * *', () => this.sendFavoritesNotifications());
+    this.favoritesJob.start();
+    this.logger.log('Favorites CronJob started, next execution: ' + this.favoritesJob.nextDates().toString());
   }
 
   onModuleDestroy() {
     if (this.job) {
       this.job.stop();
     }
+    if (this.favoritesJob) {
+      this.favoritesJob.stop();
+    }
   }
 
-  async sendNotificationsPerUser() {
+  async sendAllNotifications() {
     this.logger.log('Updating all products');
     const changes = await this.productsService.updateAllProducts();
-    const changesPerUser = new Map<ObjectID, ProductChange[]>();
-    for (const change of changes) {
-      const userChanges = changesPerUser.get(change.product.userId) || [];
-      userChanges.push(change);
-      changesPerUser.set(change.product.userId, userChanges);
-    }
-    this.logger.log(`Found ${changes.length} updates for ${changesPerUser.size} users.`);
-    return this.sendNotifications(changesPerUser);
+    return this.sendNotifications(changes);
   }
 
-  private async sendNotifications(changesPerUser: Map<ObjectID, ProductChange[]>) {
-    let numberOfNotifications = 0;
-    const promises: Array<Promise<any>> = [];
-    for (const userId of changesPerUser.keys()) {
-      const perUserPromises: Array<Promise<any>> = changesPerUser.get(userId)
-        .filter(update => this.isRelevantChange(update))
-        .map(update => this.getMarkdownUpdateText(update))
-        .filter(text => !!text)
-        .map(async text => {
-          try {
-            numberOfNotifications++;
-            return await this.telegramService.notifyAboutUpdate(userId, text);
-          } catch (e) {
-            this.logger.error({ message: e.message, userId }, e.stack);
-          }
-        });
-      promises.concat(perUserPromises);
-    }
-    await Promise.all(promises);
-    this.logger.log(`Sent ${numberOfNotifications} notifications.`);
+  async sendFavoritesNotifications() {
+    this.logger.log('Updating all favorites');
+    const changes = await this.productsService.updateAllFavorites();
+    return this.sendNotifications(changes);
+  }
+
+  private async sendNotifications(changes: ProductChange[]) {
+    this.logger.log(`Found ${changes.length} updates.`);
+    const sentNotifications: Array<Promise<any>> = changes
+      .filter(update => this.isRelevantChange(update))
+      .map(update => ({userId: update.product.userId, text: this.getMarkdownUpdateText(update)}))
+      .filter(update => !!update.text)
+      .map(async update => {
+        try {
+          return await this.telegramService.notifyAboutUpdate(update.userId, update.text);
+        } catch (e) {
+          this.logger.error({ message: e.message, userId: update.userId }, e.stack);
+        }
+      });
+    await Promise.all(sentNotifications);
+    this.logger.log(`Sent ${sentNotifications.length} notifications.`);
   }
 
   private isRelevantChange(update: ProductChange) {
     const changes = update.productAttributeChanges;
-    return update.product.isAvailable
-      && (changes.hasPriceChange
-        || changes.hasNeverBeenAvailableBefore
-        || changes.hasLowInStockChange && update.product.isLowInStock && changes.hasNeverBeenLowInStockBefore);
+    const product = update.product;
+    const isRelevantChange = changes.hasPriceChange
+      || changes.hasNeverBeenAvailableBefore
+      || changes.hasAvailabilityChange && product.isFavorite
+      || changes.hasLowInStockChange && product.isLowInStock && (changes.hasNeverBeenLowInStockBefore || product.isFavorite);
+    return product.isAvailable && isRelevantChange;
   }
 
   private getMarkdownUpdateText(update: ProductChange) {

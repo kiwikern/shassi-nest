@@ -5,7 +5,7 @@ import { CrawlerService } from '../crawler/crawler.service';
 import { ProductEntity } from './entities/products.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { ObjectID } from 'mongodb';
-import { BadRequestException, ConflictException, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ConflictException, ForbiddenException, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { MockType } from '../../test/mock.type';
 import { Repository } from 'typeorm';
 import { crawlerServiceFactory, repositoryMockFactory } from '../../test/mocks/jest-mocks';
@@ -348,6 +348,11 @@ describe('ProductsService', () => {
       expect(repositoryMock.save).toBeCalledWith(expect.objectContaining({ isActive: false }));
     });
 
+    it('should update all favorites', async () => {
+      repositoryMock.find.mockReturnValue([]);
+      expect(await service.updateAllFavorites()).toEqual([]);
+    });
+
   });
 
   it('should update a single product and clear errors', async () => {
@@ -415,12 +420,35 @@ describe('ProductsService', () => {
     repositoryMock.findOne.mockReturnValue({ id: 1 });
     const product = await service.markRead(objectId, objectId);
     expect(product).toEqual({ id: 1, hasUnreadUpdate: false });
+    expect(repositoryMock.save).toHaveBeenCalledTimes(1);
   });
 
   it('should throw on markRead not found product', async () => {
     await expect(service.markRead(objectId, objectId))
       .rejects
       .toThrow(NotFoundException);
+  });
+
+  it('should set a product as favorite', async () => {
+    repositoryMock.findOne.mockReturnValue({ id: 1 });
+    repositoryMock.find.mockReturnValue([{}, {}]);
+    const product = await service.setFavorite(objectId, objectId, true);
+    expect(product).toEqual({ id: 1, isFavorite: true });
+    expect(repositoryMock.save).toHaveBeenCalledTimes(1);
+  });
+
+  it('should throw on setFavorite not found product', async () => {
+    await expect(service.setFavorite(objectId, objectId, true))
+      .rejects
+      .toThrow(NotFoundException);
+  });
+
+  it('should throw on favorite limit exceeded', async () => {
+    repositoryMock.findOne.mockReturnValue({ id: 1 });
+    repositoryMock.find.mockReturnValue([{}, {}, {}]);
+    await expect(service.setFavorite(objectId, objectId, true))
+      .rejects
+      .toThrow(ForbiddenException);
   });
 
   it('should delete a product', async () => {

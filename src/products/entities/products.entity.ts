@@ -51,6 +51,10 @@ export class ProductEntity {
   @Exclude()
   errors: string[] = [];
 
+  @Column({ default: false })
+  @ApiModelProperty()
+  isFavorite: boolean = false;
+
   @Expose({ name: 'price' })
   @ApiModelProperty()
   get price(): number {

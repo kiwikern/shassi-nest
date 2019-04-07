@@ -17,12 +17,14 @@ import { AdminService } from '../../src/admin/admin.service';
 
 export const productsServiceFactory: () => MockType<ProductsService> = jest.fn(() => ({
   updateAllProducts: jest.fn(),
+  updateAllFavorites: jest.fn(),
   getProducts: jest.fn(),
   initializeProduct: jest.fn(),
   addProduct: jest.fn(),
   deleteProduct: jest.fn(),
   updateSingleProduct: jest.fn(),
   markRead: jest.fn(),
+  setFavorite: jest.fn(),
 }));
 
 export const telegramServiceFactory: () => MockType<TelegramService> = jest.fn(() => ({

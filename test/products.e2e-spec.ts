@@ -127,6 +127,26 @@ describe('ProductsController (e2e)', () => {
     });
   });
 
+  describe('change product', () => {
+
+    it('should mark a product as read', async () => {
+      await request(app.getHttpServer())
+        .post(`/products/${latestProduct._id}/markread`)
+        .set('Authorization', 'Bearer ' + tokenUser1)
+        .expect(201);
+    });
+
+    it('should set a product as favorite', async () => {
+      await request(app.getHttpServer())
+        .post(`/products/${latestProduct._id}/favorite`)
+        .set('Authorization', 'Bearer ' + tokenUser1)
+        .send({ isFavorite: true })
+        .expect(201)
+        .expect(res => expect(res.body.isFavorite).toBe(true));
+    });
+
+  });
+
   describe('second user', () => {
     let tokenOtherUser: string;
 
@@ -153,6 +173,14 @@ describe('ProductsController (e2e)', () => {
       await request(app.getHttpServer())
         .post(`/products/${latestProduct._id}/update`)
         .set('Authorization', `Bearer ${tokenOtherUser}`)
+        .expect(404);
+    });
+
+    it('should not set product of other user as favorite', async () => {
+      await request(app.getHttpServer())
+        .post(`/products/${latestProduct._id}/favorite`)
+        .set('Authorization', `Bearer ${tokenOtherUser}`)
+        .send({ isFavorite: true })
         .expect(404);
     });
 

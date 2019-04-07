@@ -56,9 +56,9 @@ describe('NotificationsService', () => {
       telegramService.notifyAboutUpdate.mockImplementation(() => {
         throw new InternalServerErrorException();
       });
-      productsService.updateAllProducts.mockReturnValue(changes);
+      productsService.updateAllFavorites.mockReturnValue(changes);
 
-      await service.sendNotificationsPerUser();
+      await service.sendFavoritesNotifications();
       expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
         'userId',
         'Your [product](myurl) [name](domain/products/id) is now at 100.00€ (+10.00€, low in stock). 👚');
@@ -85,7 +85,7 @@ describe('NotificationsService', () => {
         throw new InternalServerErrorException();
       });
       productsService.updateAllProducts.mockReturnValue(changes);
-      await service.sendNotificationsPerUser();
+      await service.sendAllNotifications();
       expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
         'userId',
         'Your [product](undefined) [undefined](domain/products/undefined) is now at 90.00€ (-10.00€). 👚');
@@ -112,7 +112,7 @@ describe('NotificationsService', () => {
         throw new InternalServerErrorException();
       });
       productsService.updateAllProducts.mockReturnValue(changes);
-      await service.sendNotificationsPerUser();
+      await service.sendAllNotifications();
       expect(telegramService.notifyAboutUpdate).not.toHaveBeenCalled();
     });
 
@@ -136,7 +136,7 @@ describe('NotificationsService', () => {
         throw new InternalServerErrorException();
       });
       productsService.updateAllProducts.mockReturnValue(changes);
-      await service.sendNotificationsPerUser();
+      await service.sendAllNotifications();
       expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
         'userId',
         'Your [product](undefined) [undefined](domain/products/undefined) is now low in stock (10.00€). 👚');
@@ -163,7 +163,7 @@ describe('NotificationsService', () => {
         throw new InternalServerErrorException();
       });
       productsService.updateAllProducts.mockReturnValue(changes);
-      await service.sendNotificationsPerUser();
+      await service.sendAllNotifications();
       expect(telegramService.notifyAboutUpdate).not.toHaveBeenCalled();
     });
 
@@ -187,7 +187,7 @@ describe('NotificationsService', () => {
         throw new InternalServerErrorException();
       });
       productsService.updateAllProducts.mockReturnValue(changes);
-      await service.sendNotificationsPerUser();
+      await service.sendAllNotifications();
       expect(telegramService.notifyAboutUpdate).not.toHaveBeenCalled();
     });
 
@@ -211,7 +211,7 @@ describe('NotificationsService', () => {
         throw new InternalServerErrorException();
       });
       productsService.updateAllProducts.mockReturnValue(changes);
-      await service.sendNotificationsPerUser();
+      await service.sendAllNotifications();
       expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
         'userId',
         'Your [product](undefined) [undefined](domain/products/undefined) is available again and low in stock (5.50€). 👚');
@@ -238,7 +238,7 @@ describe('NotificationsService', () => {
         throw new InternalServerErrorException();
       });
       productsService.updateAllProducts.mockReturnValue(changes);
-      await service.sendNotificationsPerUser();
+      await service.sendAllNotifications();
       expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
         'userId',
         'Your [product](undefined) [undefined](domain/products/undefined) is available again (9.99€). 👚');
@@ -265,13 +265,115 @@ describe('NotificationsService', () => {
         throw new InternalServerErrorException();
       });
       productsService.updateAllProducts.mockReturnValue(changes);
-      await service.sendNotificationsPerUser();
+      await service.sendAllNotifications();
+      expect(telegramService.notifyAboutUpdate).not.toHaveBeenCalled();
+    });
+
+    it('should notify about favorites low in stock change when it has already been low in stock before', async () => {
+      const changes: ProductChange[] = [
+        {
+          product: { userId: 'userId', isAvailable: true, isLowInStock: true, isFavorite: true, price: 10 } as any,
+          productAttributeChanges: {
+            oldPriceValue: undefined,
+            newPriceValue: undefined,
+            hasAnyChange: true,
+            hasAvailabilityChange: false,
+            hasNeverBeenAvailableBefore: false,
+            hasLowInStockChange: true,
+            hasNeverBeenLowInStockBefore: false,
+            hasPriceChange: false,
+          },
+        },
+      ];
+      telegramService.notifyAboutUpdate.mockImplementation(() => {
+        throw new InternalServerErrorException();
+      });
+      productsService.updateAllProducts.mockReturnValue(changes);
+      await service.sendAllNotifications();
+      expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
+        'userId',
+        'Your [product](undefined) [undefined](domain/products/undefined) is now low in stock (10.00€). 👚');
+      expect(telegramService.notifyAboutUpdate).toHaveBeenCalledTimes(1);
+    });
+
+    it('should notify about favorites availability change when it has already been available before', async () => {
+      const changes: ProductChange[] = [
+        {
+          product: { userId: 'userId', isAvailable: true, isLowInStock: false, isFavorite: true, price: 10 } as any,
+          productAttributeChanges: {
+            oldPriceValue: undefined,
+            newPriceValue: undefined,
+            hasAnyChange: true,
+            hasAvailabilityChange: true,
+            hasNeverBeenAvailableBefore: false,
+            hasLowInStockChange: false,
+            hasNeverBeenLowInStockBefore: false,
+            hasPriceChange: false,
+          },
+        },
+      ];
+      telegramService.notifyAboutUpdate.mockImplementation(() => {
+        throw new InternalServerErrorException();
+      });
+      productsService.updateAllProducts.mockReturnValue(changes);
+      await service.sendAllNotifications();
+      expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
+        'userId',
+        'Your [product](undefined) [undefined](domain/products/undefined) is available again (10.00€). 👚');
+      expect(telegramService.notifyAboutUpdate).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not notify about favorites availability change when it is unavailable', async () => {
+      const changes: ProductChange[] = [
+        {
+          product: { userId: 'userId', isAvailable: false, isLowInStock: false, isFavorite: true, price: 10 } as any,
+          productAttributeChanges: {
+            oldPriceValue: undefined,
+            newPriceValue: undefined,
+            hasAnyChange: true,
+            hasAvailabilityChange: true,
+            hasNeverBeenAvailableBefore: false,
+            hasLowInStockChange: false,
+            hasNeverBeenLowInStockBefore: false,
+            hasPriceChange: false,
+          },
+        },
+      ];
+      telegramService.notifyAboutUpdate.mockImplementation(() => {
+        throw new InternalServerErrorException();
+      });
+      productsService.updateAllProducts.mockReturnValue(changes);
+      await service.sendAllNotifications();
+      expect(telegramService.notifyAboutUpdate).not.toHaveBeenCalled();
+    });
+
+    it('should not notify about favorites low in stock change when it is not low in stock', async () => {
+      const changes: ProductChange[] = [
+        {
+          product: { userId: 'userId', isAvailable: false, isLowInStock: false, isFavorite: true, price: 10 } as any,
+          productAttributeChanges: {
+            oldPriceValue: undefined,
+            newPriceValue: undefined,
+            hasAnyChange: true,
+            hasAvailabilityChange: false,
+            hasNeverBeenAvailableBefore: false,
+            hasLowInStockChange: true,
+            hasNeverBeenLowInStockBefore: true,
+            hasPriceChange: false,
+          },
+        },
+      ];
+      telegramService.notifyAboutUpdate.mockImplementation(() => {
+        throw new InternalServerErrorException();
+      });
+      productsService.updateAllProducts.mockReturnValue(changes);
+      await service.sendAllNotifications();
       expect(telegramService.notifyAboutUpdate).not.toHaveBeenCalled();
     });
 
     it('should handle empty changes', async () => {
       productsService.updateAllProducts.mockReturnValue([]);
-      await service.sendNotificationsPerUser();
+      await service.sendAllNotifications();
       expect(telegramService.notifyAboutUpdate).not.toHaveBeenCalled();
     });
 
@@ -308,7 +410,7 @@ describe('NotificationsService', () => {
         throw new InternalServerErrorException();
       });
       productsService.updateAllProducts.mockReturnValue(changes);
-      await service.sendNotificationsPerUser();
+      await service.sendAllNotifications();
       expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
         'userId',
         'Your [product](undefined) [undefined](domain/products/undefined) is available again and low in stock (10.00€). 👚');
@@ -322,13 +424,13 @@ describe('NotificationsService', () => {
 
   describe('CronJob', () => {
 
-    it('should start and stop the cron job', async () => {
+    it('should start and stop the cron jobs', async () => {
       service.onModuleInit();
-      expect(cronJobService.create).toHaveBeenCalled();
+      expect(cronJobService.create).toHaveBeenCalledTimes(2);
       service.onModuleDestroy();
     });
 
-    it('should handle cleanup of not-started cron job', async () => {
+    it('should handle cleanup of not-started cron jobs', async () => {
       expect(() => service.onModuleDestroy()).not.toThrow();
     });
 

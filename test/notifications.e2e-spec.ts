@@ -80,7 +80,7 @@ describe('Notifications (e2e)', () => {
     crawlerMock.getUpdateData.mockReturnValueOnce({ price: 100, isAvailable: true, isLowInStock: true });
     // no update
     crawlerMock.getUpdateData.mockReturnValueOnce({ price: 100, isAvailable: true, isLowInStock: false });
-    await notificationsService.sendNotificationsPerUser();
+    await notificationsService.sendAllNotifications();
     await telegramServer.waitForNextMessages(2);
     expect(chat.history.length).toBe(4);
     const notifications = [chat.history[2].message.text, chat.history[3].message.text];

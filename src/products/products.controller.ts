@@ -10,6 +10,7 @@ import { ObjectID } from 'mongodb';
 import { ApiBearerAuth, ApiOkResponse, ApiUseTags, ApiForbiddenResponse, ApiCreatedResponse, ApiOperation, ApiImplicitParam } from '@nestjs/swagger';
 import { ProductSizeAvailability } from '../crawler/product-size.interface';
 import { ObjectIdPipe } from '../common/object-id.pipe';
+import { FavoriteProductDto } from './dtos/favorite-product.dto';
 
 @Controller('products')
 @UseGuards(AuthGuard('jwt'))
@@ -52,6 +53,18 @@ export class ProductsController {
   @ApiImplicitParam({ name: 'id', type: String })
   markRead(@User() user: UserEntity, @Param('id', ObjectIdPipe) productId: ObjectID): Promise<ProductEntity> {
     return this.productsService.markRead(user._id, productId);
+  }
+
+  @Post('/:id/favorite')
+  @ApiOperation({
+    title: 'Sets a product as favorite',
+    description: 'You can set a maximum of three products as favorites.' +
+      ' They will get updated more frequently and trigger notifications for any changes.',
+  })
+  @ApiCreatedResponse({ description: 'Returns the updated product.' })
+  @ApiImplicitParam({ name: 'id', type: String })
+  setFavorite(@User() user: UserEntity, @Param('id', ObjectIdPipe) productId: ObjectID, @Body() update: FavoriteProductDto): Promise<ProductEntity> {
+    return this.productsService.setFavorite(user._id, productId, update.isFavorite);
   }
 
   @Post('/:id/update')
