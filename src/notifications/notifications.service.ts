@@ -42,23 +42,30 @@ export class NotificationsService implements OnModuleInit, OnModuleDestroy {
       userChanges.push(change);
       changesPerUser.set(change.product.userId, userChanges);
     }
-    this.sendNotifications(changesPerUser);
+    this.logger.log(`Found ${changes.length} updates for ${changesPerUser.size} users.`);
+    return this.sendNotifications(changesPerUser);
   }
 
-  private sendNotifications(changesPerUser: Map<ObjectID, ProductChange[]>) {
+  private async sendNotifications(changesPerUser: Map<ObjectID, ProductChange[]>) {
+    let numberOfNotifications = 0;
+    const promises: Array<Promise<any>> = [];
     for (const userId of changesPerUser.keys()) {
-      changesPerUser.get(userId)
+      const perUserPromises: Array<Promise<any>> = changesPerUser.get(userId)
         .filter(update => this.isRelevantChange(update))
         .map(update => this.getMarkdownUpdateText(update))
         .filter(text => !!text)
-        .forEach(async text => {
+        .map(async text => {
           try {
-            await this.telegramService.notifyAboutUpdate(userId, text);
+            numberOfNotifications++;
+            return await this.telegramService.notifyAboutUpdate(userId, text);
           } catch (e) {
             this.logger.error({ message: e.message, userId }, e.stack);
           }
         });
+      promises.concat(perUserPromises);
     }
+    await Promise.all(promises);
+    this.logger.log(`Sent ${numberOfNotifications} notifications.`);
   }
 
   private isRelevantChange(update: ProductChange) {
