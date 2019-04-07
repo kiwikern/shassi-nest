@@ -89,19 +89,35 @@ export class ProductsService {
       const sizeId = product.size ? product.size.id : null;
       const newUpdate = await this.crawlerService.getUpdateData(product.url, sizeId);
       const productAttributeChanges = this.getProductAttributeChanges(product, newUpdate);
+      product.errors = [];
       if (productAttributeChanges.hasAnyChange) {
         product.updates.push(newUpdate);
         product.hasUnreadUpdate = true;
         const updatedProduct = await this.productRepository.save(product);
         return { product: updatedProduct, productAttributeChanges };
+      } else {
+        // save empty error list
+        await this.productRepository.save(product);
       }
     } catch (error) {
-      if (error instanceof NotFoundException || error.toString().includes('404')) {
+      product.errors.push(error.message);
+      if (error instanceof NotFoundException) {
         product.isActive = false;
-        await this.productRepository.save(product);
+      } else if (product.errors.length >= 3) {
+        product.isActive = false;
+        this.logger.error({
+          message: 'Failed to update product more than 2 times. Set to inactive.',
+          error: error.message,
+          product,
+        }, error.stack);
       } else {
-        this.logger.error({ message: 'Failed to update product.', error: error.message, product }, error.stack);
+        this.logger.error({
+          message: 'Failed to update product.',
+          error: error.message,
+          product,
+        }, error.stack);
       }
+      await this.productRepository.save(product);
     }
   }
 

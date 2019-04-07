@@ -5,7 +5,7 @@ import { CrawlerService } from '../crawler/crawler.service';
 import { ProductEntity } from './entities/products.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { ObjectID } from 'mongodb';
-import { ConflictException, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ConflictException, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { MockType } from '../../test/mock.type';
 import { Repository } from 'typeorm';
 import { crawlerServiceFactory, repositoryMockFactory } from '../../test/mocks/jest-mocks';
@@ -15,6 +15,7 @@ describe('ProductsService', () => {
   let service: ProductsService;
   let repositoryMock: MockType<Repository<ProductEntity>>;
   let crawlerServiceMock: MockType<CrawlerService>;
+  const objectId = ObjectID.createFromTime(0);
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -32,7 +33,7 @@ describe('ProductsService', () => {
 
   it('should get products', async () => {
     repositoryMock.find.mockReturnValue([]);
-    const products = await service.getProducts(ObjectID.createFromTime(0));
+    const products = await service.getProducts(objectId);
     expect(products).toEqual([]);
   });
 
@@ -46,8 +47,8 @@ describe('ProductsService', () => {
     const productCreateDto = { size: { id: '', name: '' }, name: 'name', url: '' };
     repositoryMock.findOne.mockReturnValue(null);
     crawlerServiceMock.getUpdateData.mockReturnValue({ price: 2 });
-    const product = await service.addProduct(ObjectID.createFromTime(0), productCreateDto);
-    const expectedSavedProduct = Object.assign({ updates: [{ price: 2 }], userId: ObjectID.createFromTime(0) }, productCreateDto);
+    const product = await service.addProduct(objectId, productCreateDto);
+    const expectedSavedProduct = Object.assign({ updates: [{ price: 2 }], userId: objectId }, productCreateDto);
     expect(product).toEqual(expectedSavedProduct);
   });
 
@@ -55,7 +56,7 @@ describe('ProductsService', () => {
     repositoryMock.findOne.mockReturnValue('a product');
     const productCreateDto = { size: { id: '', name: '' }, name: 'name', url: '' };
     try {
-      await service.addProduct(ObjectID.createFromTime(0), productCreateDto);
+      await service.addProduct(objectId, productCreateDto);
       fail('Should not have added duplicate product');
     } catch (e) {
       expect(e).toBeInstanceOf(ConflictException);
@@ -299,6 +300,7 @@ describe('ProductsService', () => {
         size: { id: '' },
         price: 90,
         isAvailable: true,
+        errors: [],
       };
       const productMockWithInternalError = {
         url: 'error',
@@ -306,6 +308,7 @@ describe('ProductsService', () => {
         size: { id: '' },
         price: 100,
         isAvailable: false,
+        errors: [],
       };
       const productMockWithNotFoundError = {
         url: 'notfound',
@@ -313,6 +316,7 @@ describe('ProductsService', () => {
         size: { id: '' },
         price: 100,
         isAvailable: true,
+        errors: [],
       };
       repositoryMock.find.mockReturnValue([
         productMockWithNotFoundError,
@@ -346,57 +350,90 @@ describe('ProductsService', () => {
 
   });
 
-  it('should update a single product', async () => {
+  it('should update a single product and clear errors', async () => {
     const productMockWithoutUpdate = {
       url: 'notfound',
       updates: [],
+      errors: ['one error'],
       size: { id: '' },
       price: 100,
       isAvailable: true,
     };
     repositoryMock.findOne.mockReturnValue(productMockWithoutUpdate);
     crawlerServiceMock.getUpdateData.mockReturnValue({ price: 100, isAvailable: true });
-    expect(await service.updateSingleProduct(null, null)).toEqual(productMockWithoutUpdate);
+    // errors should be cleared on successful update
+    const updatedProduct = Object.assign(productMockWithoutUpdate, { errors: [] });
+    await service.updateSingleProduct(null, null);
+    expect(repositoryMock.save).toHaveBeenCalledTimes(1);
+    expect(repositoryMock.save).toHaveBeenCalledWith(updatedProduct);
+  });
+
+  it('should add an error', async () => {
+    const productMockWithoutErrors = {
+      url: 'notfound',
+      errors: [],
+      size: { id: '' },
+      price: 100,
+      isAvailable: true,
+    };
+    repositoryMock.findOne.mockReturnValue(productMockWithoutErrors);
+    crawlerServiceMock.getUpdateData.mockImplementation(() => {
+      throw new BadRequestException('Your bad request');
+    });
+    const updatedProduct = Object.assign(productMockWithoutErrors, { errors: ['Your bad request'] });
+    await service.updateSingleProduct(null, null);
+    expect(repositoryMock.save).toHaveBeenCalledTimes(1);
+    expect(repositoryMock.save).toHaveBeenCalledWith(updatedProduct);
+  });
+
+  it('should set to inactive on 3 errors', async () => {
+    const productMockWithoutErrors = {
+      url: 'notfound',
+      errors: ['first', 'second'],
+      size: { id: '' },
+      price: 100,
+      isAvailable: true,
+    };
+    repositoryMock.findOne.mockReturnValue(productMockWithoutErrors);
+    crawlerServiceMock.getUpdateData.mockImplementation(() => {
+      throw new BadRequestException('Your bad request');
+    });
+    const updatedProduct = Object.assign({}, productMockWithoutErrors,
+      { errors: ['first', 'second', 'Your bad request'], isActive: false });
+    await service.updateSingleProduct(null, null);
+    expect(repositoryMock.save).toHaveBeenCalledTimes(1);
+    expect(repositoryMock.save).toHaveBeenCalledWith(updatedProduct);
   });
 
   it('should throw on updateSingleProduct not found product', async () => {
-    try {
-      await service.updateSingleProduct(ObjectID.createFromTime(0), ObjectID.createFromTime(0));
-      fail('Should have thrown an exception.');
-    } catch (e) {
-      expect(e).toBeInstanceOf(NotFoundException);
-    }
+    await expect(service.updateSingleProduct(objectId, objectId))
+      .rejects
+      .toThrow(NotFoundException);
   });
 
   it('should mark a product as read', async () => {
     repositoryMock.findOne.mockReturnValue({ id: 1 });
-    const product = await service.markRead(ObjectID.createFromTime(0), ObjectID.createFromTime(0));
+    const product = await service.markRead(objectId, objectId);
     expect(product).toEqual({ id: 1, hasUnreadUpdate: false });
   });
 
   it('should throw on markRead not found product', async () => {
-    try {
-      await service.markRead(ObjectID.createFromTime(0), ObjectID.createFromTime(0));
-      fail('Should have thrown an exception.');
-    } catch (e) {
-      expect(e).toBeInstanceOf(NotFoundException);
-    }
+    await expect(service.markRead(objectId, objectId))
+      .rejects
+      .toThrow(NotFoundException);
   });
 
   it('should delete a product', async () => {
     repositoryMock.findOne.mockReturnValue({ id: 1 });
-    const wasSuccessful = await service.deleteProduct(ObjectID.createFromTime(0), ObjectID.createFromTime(0));
+    const wasSuccessful = await service.deleteProduct(objectId, objectId);
     expect(wasSuccessful).toBe(true);
     expect(repositoryMock.delete).toHaveBeenCalled();
   });
 
   it('should throw on not found product when deleting', async () => {
-    try {
-      await service.deleteProduct(ObjectID.createFromTime(0), ObjectID.createFromTime(0));
-      fail('Should have thrown an exception.');
-    } catch (e) {
-      expect(e).toBeInstanceOf(NotFoundException);
-    }
+    await expect(service.deleteProduct(objectId, objectId))
+      .rejects
+      .toThrow(NotFoundException);
   });
 
 });

@@ -35,7 +35,6 @@ export class ProductEntity {
   @Type(typeFn(ProductSize))
   size: ProductSize;
 
-  // TODO: Why does default value not work?
   @Column({ default: true })
   @ApiModelProperty()
   isActive: boolean = true;
@@ -47,6 +46,10 @@ export class ProductEntity {
   @Column(typeFn(ProductUpdate))
   @ApiModelProperty()
   updates: ProductUpdate[];
+
+  @Column({ default: [] })
+  @Exclude()
+  errors: string[] = [];
 
   @Expose({ name: 'price' })
   @ApiModelProperty()
