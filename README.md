@@ -6,7 +6,7 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/kiwikern/shassi-nest/badge.svg?branch=master)](https://coveralls.io/github/kiwikern/shassi-nest?branch=master)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=shassi-nest&metric=sqale_index)](https://sonarcloud.io/dashboard?id=shassi-nest)
-[![Lines Of Code](https://sonarcloud.io/api/project_badges/measure?project=shassi-nest&metric=ncloc)](https://sonarcloud.io/dashboard?id=shassi-nest)
+[![Lines Of Code](https://sonarcloud.io/api/project_badges/measure?project=shassi-nest&metric=ncloc)](https://sonarcloud.io/dashboard?id=shassi-nest) [![Greenkeeper badge](https://badges.greenkeeper.io/kiwikern/shassi-nest.svg)](https://greenkeeper.io/)
 
 
 
