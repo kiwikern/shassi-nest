@@ -8,7 +8,7 @@ jobs:
   include:
     - stage: "Tests"
       name: "Unit Tests"
-      script: jest --coverage --coverageReporters=text-lcov | coveralls
+      script: jest
     - script: npm run lint
       name: "Lint"
     - script: npm run test:e2e
@@ -16,7 +16,7 @@ jobs:
       services:
         - mongodb
       before_script: mongo shassi_ci --eval 'db.createUser({user:"admin", pwd:"admin", roles:["readWrite"]});'
-    - stage: "Sonarcloud"
+    - stage: "Code Quality"
       name: "Sonarcloud"
       script:
         - npm run test:cov
@@ -25,6 +25,8 @@ jobs:
         sonarcloud:
           organization: "kiwikern-github"
           token: $SONAR_TOKEN
+    - script: jest --coverage --coverageReporters=text-lcov | coveralls
+      name: "Coveralls"
     - stage: "Deployment"
       name: "Deployment"
       before_install: echo 'Skip...'
