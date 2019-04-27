@@ -454,8 +454,8 @@ describe('ProductsService', () => {
   it('should allow to unset favorite when limit exceeded', async () => {
     repositoryMock.findOne.mockReturnValue({ id: 1 });
     repositoryMock.find.mockReturnValue([{ id: 1 }, {}, {}]);
-    const product = await service.setFavorite(objectId, objectId, false);
-    expect(product).toEqual({ id: 1, isFavorite: true });
+    const updatedProduct = await service.setFavorite(objectId, objectId, false);
+    expect(updatedProduct).toEqual({ id: 1, isFavorite: false });
     expect(repositoryMock.save).toHaveBeenCalledTimes(1);
   });
 
