@@ -26,12 +26,12 @@ describe('ProductsController (e2e)', () => {
     {
       url: 'https://www.amazon.de/Die-Argonauten-Maggie-Nelson-ebook/dp/B071FCV5KW/ref=tmm_kin_swatch_0?_encoding=UTF8&qid=&sr=',
       name: 'Amazon',
-      expectedPrice: 15.99,
+      expectedPrice: 6.99,
     },
     {
-      url: 'https://www.cosstores.com/en_eur/men/menswear/tops/product.ribbed-long-sleeved-t-shirt-white.0722148001.html',
+      url: 'https://www.cosstores.com/en_eur/men/t-shirts/product.round-neck-t-shirt-white.0164609001.html',
       name: 'COS',
-      expectedPrice: 20,
+      expectedPrice: 17,
     },
     {
       url: 'https://www.weekday.com/en_eur/men/categories/basics/product.alan-t-shirt-white.0410605002.html',
