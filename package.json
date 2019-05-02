@@ -39,7 +39,7 @@
     "class-validator": "^0.9.1",
     "cron": "^1.7.0",
     "cross-env": "^5.2.0",
-    "dotenv": "^7.0.0",
+    "dotenv": "^8.0.0",
     "joi": "^14.3.1",
     "jsdom": "^15.0.0",
     "mongodb": "^3.2.2",
