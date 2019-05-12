@@ -109,20 +109,26 @@ export class ProductsService {
         await this.productRepository.save(product);
       }
     } catch (error) {
-      product.errors.push(error.message);
+      let message;
+      if (error && error.message && error.message.message) {
+        message = error.message.message;
+      } else {
+        message = error.message;
+      }
+      product.errors.push(message);
       if (error instanceof NotFoundException) {
         product.isActive = false;
       } else if (product.errors.length >= 3) {
         product.isActive = false;
         this.logger.error({
           message: 'Failed to update product more than 2 times. Set to inactive.',
-          error: error.message,
+          error: message,
           product,
         }, error.stack);
       } else {
         this.logger.error({
           message: 'Failed to update product.',
-          error: error.message,
+          error: message,
           product,
         }, error.stack);
       }
