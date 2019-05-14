@@ -97,7 +97,7 @@ export class ProductEntity {
   }
 
   @Expose({ name: 'store' })
-  @ApiModelProperty({ enum: ['H&M', 'ASOS', 'Weekday', 'COS', 'ABOUT YOU', 'Amazon', 'Zalando', '& Other Stories'] })
+  @ApiModelProperty({ enum: ['H&M', 'ASOS', 'Weekday', 'COS', 'ABOUT YOU', 'Amazon', 'Zalando', '& Other Stories', 'Snipes'] })
   get store(): string {
     if (this.url.includes('hm.com')) {
       return 'H&M';
@@ -115,6 +115,8 @@ export class ProductEntity {
       return 'Zalando';
     } else if (this.url.includes('stories')) {
       return '& Other Stories';
+    } else if (this.url.includes('snipes.com')) {
+      return 'Snipes';
     } else {
       new Logger(ProductEntity.name).warn('Could not find store for URL', this.url);
       return '';

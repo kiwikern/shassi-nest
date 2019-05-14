@@ -53,6 +53,11 @@ describe('ProductsController (e2e)', () => {
       name: 'Stories',
       expectedPrice: 25,
     },
+    {
+      url: 'https://m.snipes.com/null/nike/sportswear-black-black-white/prod-00013801526092',
+      name: 'Snipes',
+      expectedPrice: 19.99,
+    },
   ];
   let app: INestApplication;
   let tokenUser1: string;

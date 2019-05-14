@@ -10,6 +10,7 @@ import { AsosCrawler } from './crawlers/asos.crawler';
 import { ZalandoCrawler } from './crawlers/zalando.crawler';
 import { ProductSizeAvailability } from './product-size.interface';
 import { StoriesCrawler } from './crawlers/stories.crawler';
+import { SnipesCrawler } from './crawlers/snipes.crawler';
 
 @Injectable()
 export class CrawlerService {
@@ -67,6 +68,8 @@ export class CrawlerService {
       crawler = new ZalandoCrawler(this.httpService);
     } else if (url.includes('stories.com')) {
       crawler = new StoriesCrawler(this.httpService);
+    } else if (url.includes('snipes.com')) {
+      crawler = new SnipesCrawler(this.httpService);
     } else {
       this.logger.error('No crawler found for given url.', url);
       throw new BadRequestException('Unknown store');

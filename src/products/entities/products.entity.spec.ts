@@ -100,6 +100,9 @@ describe('Product Entity', () => {
 
     entity.url = 'stories';
     expect(entity.store).toBe('& Other Stories');
+
+    entity.url = 'snipes.com';
+    expect(entity.store).toBe('Snipes');
   });
 
   it('should transform ObjectId to string', () => {
