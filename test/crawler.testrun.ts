@@ -22,7 +22,8 @@ export const crawlerTestRun = (
     sizes: ProductSizeAvailability[],
     sizeChecks: Array<{
       isLowInStock: boolean;
-      size: string; isAvailable: boolean }>,
+      size: string; isAvailable: boolean
+    }>,
     name: string, priceChecks: Array<{ size: string; price: number }>,
     url?: string,
     expectedUrl?: string,
@@ -44,6 +45,10 @@ export const crawlerTestRun = (
       } else {
         throw new Error(`Unexpected http request (request number ${this.calls})`);
       }
+    }
+
+    post(): Observable<any> {
+      return of({ data: secondResponse });
     }
   }
 
