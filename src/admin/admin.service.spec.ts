@@ -32,7 +32,7 @@ describe('AdminService', () => {
     expect(await service.getUsersOverview()).toEqual([]);
   });
 
-  it('should work without any users', async () => {
+  it('should work without any products', async () => {
     usersService.getAllUsers.mockReturnValueOnce([{ _id: '123', username: 'user' }]);
     productsService.getProducts.mockReturnValueOnce([]);
     telegramUserIdService.findTelegramId.mockReturnValue(null);
@@ -41,7 +41,7 @@ describe('AdminService', () => {
     ]);
   });
 
-  it('should work without any users', async () => {
+  it('should work with one user', async () => {
     usersService.getAllUsers.mockReturnValueOnce([{ _id: '123', username: 'user' }]);
     telegramUserIdService.findTelegramId.mockReturnValue('321');
     const date = new Date();
@@ -54,6 +54,42 @@ describe('AdminService', () => {
         latestProductAddedDate: date,
         latestProductUpdatedDate: date,
         isConnectedToTelegram: true,
+      },
+    ]);
+  });
+
+  it('should work with multiple users and products', async () => {
+    usersService.getAllUsers.mockReturnValueOnce([{ _id: '1', username: 'user' }, { _id: '2', username: 'user2' }]);
+    telegramUserIdService.findTelegramId.mockReturnValueOnce('321');
+    telegramUserIdService.findTelegramId.mockReturnValueOnce(null);
+    const recentDate = new Date('2019');
+    const mediumDate = new Date('2015');
+    const olderDate = new Date('2010');
+    productsService.getProducts.mockReturnValueOnce([
+      { getCreatedAt: () => olderDate, updatedAt: recentDate },
+      { getCreatedAt: () => recentDate, updatedAt: olderDate },
+    ]);
+    productsService.getProducts.mockReturnValueOnce([
+      { getCreatedAt: () => mediumDate, updatedAt: mediumDate },
+      { getCreatedAt: () => recentDate, updatedAt: olderDate },
+      { getCreatedAt: () => recentDate, updatedAt: recentDate },
+    ]);
+    expect(await service.getUsersOverview()).toEqual([
+      {
+        userId: '1',
+        username: 'user',
+        productCount: 2,
+        latestProductAddedDate: recentDate,
+        latestProductUpdatedDate: recentDate,
+        isConnectedToTelegram: true,
+      },
+      {
+        userId: '2',
+        username: 'user2',
+        productCount: 3,
+        latestProductAddedDate: recentDate,
+        latestProductUpdatedDate: recentDate,
+        isConnectedToTelegram: false,
       },
     ]);
   });

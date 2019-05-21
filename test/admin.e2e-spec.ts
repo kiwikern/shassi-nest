@@ -36,9 +36,13 @@ describe('Admin (e2e)', () => {
     adminLogin = await createLogin('admin');
     userLogin = await createLogin('user');
 
-    crawlerServiceMock.getUpdateData.mockReturnValue(
+    crawlerServiceMock.getUpdateData.mockReturnValueOnce(
       { price: 100, isAvailable: true, isLowInStock: false, createdAt: new Date() },
     );
+    crawlerServiceMock.getUpdateData.mockReturnValueOnce(
+      { price: 100, isAvailable: true, isLowInStock: false, createdAt: new Date('2010') },
+    );
+    await createProduct();
     await createProduct();
   });
 
@@ -57,9 +61,10 @@ describe('Admin (e2e)', () => {
     return authService.login({ username, password: '123456' });
   }
 
+  let sizeId = 0;
   async function createProduct() {
     const productService = app.get(ProductsService);
-    return productService.addProduct(new ObjectID(userLogin.user._id), { name: 'Product', size: { name: 'S', id: '01' }, url: 'hm.com' });
+    return productService.addProduct(new ObjectID(userLogin.user._id), { name: 'Product', size: { name: 'S', id: sizeId++ + '' }, url: 'hm.com' });
   }
 
   it('should reject a user without admin role', async () => {
@@ -84,7 +89,7 @@ describe('Admin (e2e)', () => {
           },
           {
             username: 'user',
-            productCount: 1,
+            productCount: 2,
             userId: userLogin.user._id,
             latestProductAddedDate: expect.stringContaining(new Date().getFullYear() + ''),
             latestProductUpdatedDate: expect.stringContaining(new Date().getFullYear() + ''),
