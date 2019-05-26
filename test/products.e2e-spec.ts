@@ -94,7 +94,7 @@ describe('ProductsController (e2e)', () => {
     describe(name, () => {
       // TODO: Why does asos not run on CI?
       const conditionalIt =
-        process.env.NODE_ENV === 'travis' && url.includes('asos.de')
+        process.env.NODE_ENV === 'travis' && (url.includes('asos.de') || url.includes('zalando'))
           ? it.skip
           : it;
       if (conditionalIt === it.skip) {
@@ -132,7 +132,7 @@ describe('ProductsController (e2e)', () => {
 
   describe('product list', () => {
     it('should contain products after they were added', async () => {
-      const ignoredTests = process.env.NODE_ENV === 'travis' ? 1 : 0;
+      const ignoredTests = process.env.NODE_ENV === 'travis' ? 2 : 0;
       await request(app.getHttpServer())
         .get('/products')
         .set('Authorization', `Bearer ${tokenUser1}`)
