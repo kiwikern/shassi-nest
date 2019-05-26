@@ -14,7 +14,14 @@ export class ZalandoCrawler implements Crawler {
 
   async init(url: string) {
     this.url = url;
-    const response = await this.httpService.get(url).toPromise();
+    const headers = {
+      'accept': 'text/html,application/xhtml+xml,application/xmlq=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+      'accept-encoding': 'gzip, deflate, br',
+      'accept-language': 'en-US,en;q=0.9,de-DE;q=0.8,de;q=0.7',
+      'cache-control': 'no-cache',
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+    };
+    const response = await this.httpService.get(url, { headers }).toPromise();
     const document = new JSDOM(response.data).window.document;
     const jsonString = document.getElementById('z-vegas-pdp-props').innerHTML
       .replace('<![CDATA[', '')
