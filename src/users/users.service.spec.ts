@@ -5,6 +5,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { UserCreateDto } from './dtos/user-create.dto';
 import { MockType } from '../../test/mock.type';
 import { Repository } from 'typeorm';
+import { ObjectID } from 'mongodb';
 import { BcryptService } from '../common/bcrypt.service';
 import { BadRequestException } from '@nestjs/common';
 import { bcryptServiceFactory, repositoryMockFactory } from '../../test/mocks/jest-mocks';
@@ -70,9 +71,23 @@ describe('UsersService', () => {
     expect(repositoryMock.save).toHaveBeenCalledTimes(1);
   });
 
+  it('should accept a null password for Telegram login', async () => {
+    const user: UserCreateDto = { password: null, username: 'user' };
+    repositoryMock.findOne.mockReturnValueOnce(null);
+    await service.createUser(user);
+    expect(repositoryMock.findOne).toHaveBeenCalledTimes(1);
+    expect(repositoryMock.save).toHaveBeenCalledTimes(1);
+    expect(bcryptService.hash).not.toHaveBeenCalled();
+  });
+
   it('should find a user by name', async () => {
     repositoryMock.findOne.mockReturnValue('found');
     expect(await service.findOneByUsername('user')).toBe('found');
+  });
+
+  it('should find a user by id', async () => {
+    repositoryMock.findOne.mockReturnValue('found');
+    expect(await service.findOneById(ObjectID.createFromTime(0))).toBe('found');
   });
 
   it('should update a user', async () => {

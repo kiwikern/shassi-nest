@@ -19,7 +19,7 @@ import { CommonModule } from '../common/common.module';
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        secretOrPrivateKey: configService.jwtSecret,
+        secret: configService.jwtSecret,
         signOptions: {
           expiresIn: configService.jwtExpiresIn,
         },
@@ -31,6 +31,7 @@ import { CommonModule } from '../common/common.module';
     CommonModule,
   ],
   controllers: [AuthController],
+  exports: [AuthService],
 })
 export class AuthModule {
 }

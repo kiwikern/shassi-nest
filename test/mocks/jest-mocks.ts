@@ -14,6 +14,7 @@ import { AuthService } from '../../src/auth/auth.service';
 import { Reflector } from '@nestjs/core';
 import { ExecutionContext } from '@nestjs/common';
 import { AdminService } from '../../src/admin/admin.service';
+import { TelegramLoginService } from '../../src/telegram/telegram-login.service';
 
 export const productsServiceFactory: () => MockType<ProductsService> = jest.fn(() => ({
   updateAllProducts: jest.fn(),
@@ -54,6 +55,10 @@ export const telegramUserIdServiceFactory: () => MockType<TelegramUserIdService>
   findUserId: jest.fn(),
   findTelegramId: jest.fn(),
   saveTelegramId: jest.fn(),
+}));
+
+export const telegramLoginServiceFactory: () => MockType<TelegramLoginService> = jest.fn(() => ({
+  login: jest.fn(),
 }));
 
 // @ts-ignore
@@ -103,6 +108,7 @@ export const userServiceFactory: () => MockType<UsersService> = jest.fn(() => ({
   updateUser: jest.fn(),
   findOneByEmail: jest.fn(),
   getAllUsers: jest.fn(),
+  findOneById: jest.fn(),
 }));
 
 export const jwtServiceFactory: () => MockType<JwtService> = jest.fn(() => ({
@@ -121,6 +127,7 @@ export const crawlerServiceFactory: () => MockType<CrawlerService> = jest.fn(() 
 export const authServiceFactory: () => MockType<AuthService> = jest.fn(() => ({
   validateUser: jest.fn(),
   login: jest.fn(),
+  createToken: jest.fn(),
 }));
 
 export const reflectorFactory: () => MockType<Reflector> = jest.fn(() => ({

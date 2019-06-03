@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
-import { UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { ObjectID } from 'mongodb';
@@ -34,26 +34,26 @@ describe('AuthService', () => {
   it('should reject login if user not found', async () => {
     bcryptService.checkEncryptedData.mockReturnValue(false);
     userService.findOneByUsername.mockReturnValue(null);
-    try {
-      await service.login({ username: 'user', password: '' });
-      fail('Should not allow login');
-    } catch (e) {
-      expect(e).toBeInstanceOf(UnauthorizedException);
-    }
+    await expect(service.login({ username: 'user', password: '' }))
+      .rejects.toThrow(UnauthorizedException);
     expect(userService.findOneByUsername).toBeCalledWith('user');
   });
 
   it('should reject login if password is wrong', async () => {
     bcryptService.checkEncryptedData.mockReturnValue(false);
     userService.findOneByUsername.mockReturnValue({ username: 'user', password: 'encrypted' });
-    try {
-      await service.login({ username: 'user', password: 'password' });
-      fail('Should not allow login');
-    } catch (e) {
-      expect(e).toBeInstanceOf(UnauthorizedException);
-    }
+    await expect(service.login({ username: 'user', password: 'password' }))
+      .rejects.toThrow(UnauthorizedException);
     expect(userService.findOneByUsername).toBeCalledWith('user');
     expect(bcryptService.checkEncryptedData).toBeCalledWith('password', 'encrypted');
+  });
+
+  it('should reject login if non-password account', async () => {
+    bcryptService.checkEncryptedData.mockReturnValueOnce(false);
+    userService.findOneByUsername.mockReturnValueOnce({ username: 'user', password: null });
+    await expect(service.login({ username: 'user', password: 'password' }))
+      .rejects.toThrow(BadRequestException);
+    expect(userService.findOneByUsername).toBeCalledWith('user');
   });
 
   it('should accept login on correct credentials', async () => {
