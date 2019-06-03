@@ -343,6 +343,8 @@ describe('TelegramService', () => {
     expect(ctx.reply).toHaveBeenCalledWith(`Could not connect Telegram account. Already linked to different shassi user account. 🙌`);
   });
 
+  // TODO: test startCommand for isAlreadyLinked
+
   it('should not link telegram if token invalid', async () => {
     // @ts-ignore
     const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({

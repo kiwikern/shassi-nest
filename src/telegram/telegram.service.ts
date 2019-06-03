@@ -209,9 +209,12 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
       return next(ctx);
     }
     const isValid = await this.tokenService.checkToken(userId, token);
+    const isAlreadyConnected = (await this.telegramIdService.findTelegramId(userId)) === ctx.from.id;
     if (isValid) {
       try {
-        await this.telegramIdService.saveTelegramId(userId, ctx.from.id);
+        if (!isAlreadyConnected) {
+          await this.telegramIdService.saveTelegramId(userId, ctx.from.id);
+        }
         ctx.reply(`Welcome! 👋 Your account was successfully connected.`);
         ctx.reply('You can add a product by sending its URL to this chat.');
         return this.authSession(ctx, next);

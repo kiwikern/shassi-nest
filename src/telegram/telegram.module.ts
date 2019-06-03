@@ -10,6 +10,9 @@ import { TelegramTokenEntity } from './telegram-token.entity';
 import { TelegramUserIdEntity } from './telegram-user-id.entity';
 import { CommonModule } from '../common/common.module';
 import { TelegramController } from './telegram.controller';
+import { AuthModule } from '../auth/auth.module';
+import { UsersModule } from '../users/users.module';
+import { TelegramLoginService } from './telegram-login.service';
 import Telegraf from 'telegraf';
 
 @Module({
@@ -22,12 +25,15 @@ import Telegraf from 'telegraf';
       inject: [ConfigService],
     },
     TelegramUserIdService,
+    TelegramLoginService,
   ],
   imports: [
     CommonModule,
     ConfigModule,
     ProductsModule,
     TypeOrmModule.forFeature([TelegramTokenEntity, TelegramUserIdEntity]),
+    AuthModule,
+    UsersModule,
   ],
   exports: [
     TelegramService,

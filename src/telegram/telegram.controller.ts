@@ -1,23 +1,26 @@
-import { ClassSerializerInterceptor, Controller, Get, Post, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, ClassSerializerInterceptor, Controller, Get, Post, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiBearerAuth, ApiCreatedResponse, ApiForbiddenResponse, ApiOkResponse, ApiUseTags, ApiOperation } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiCreatedResponse, ApiForbiddenResponse, ApiOkResponse, ApiOperation, ApiUseTags } from '@nestjs/swagger';
 import { User } from '../auth/user.decorator';
 import { UserEntity } from '../users/entities/user.entity';
 import { TelegramTokenService } from './telegram-token.service';
 import { TelegramUserIdService } from './telegram-user-id.service';
+import { TelegramLoginData } from './telegram-login-data.dto';
+import { TelegramLoginService } from './telegram-login.service';
 
 @Controller('telegram')
-@UseGuards(AuthGuard('jwt'))
 @UseInterceptors(ClassSerializerInterceptor)
-@ApiBearerAuth()
 @ApiUseTags('telegram')
-@ApiForbiddenResponse({ description: 'User must be logged in.' })
 export class TelegramController {
 
   constructor(private telegramTokenService: TelegramTokenService,
-              private telegramUserIdService: TelegramUserIdService) {
+              private telegramUserIdService: TelegramUserIdService,
+              private telegramLoginService: TelegramLoginService) {
   }
 
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiForbiddenResponse({ description: 'User must be logged in.' })
   @ApiOperation({ title: 'Connection status', description: 'Returns whether the logged in user is connected to a telegram account.' })
   @ApiOkResponse({
     description: 'Returns whether user is connected to telegram bot.',
@@ -29,6 +32,9 @@ export class TelegramController {
     return { isConnectedToTelegram: !!telegramId };
   }
 
+  @UseGuards(AuthGuard('jwt'))
+  @ApiBearerAuth()
+  @ApiForbiddenResponse({ description: 'User must be logged in.' })
   @ApiOperation({
     title: 'Create temporary token',
     description: `Creates a temporary token (expires after ${TelegramTokenService.expireAfterSeconds / 60}`
@@ -41,6 +47,12 @@ export class TelegramController {
   @Post()
   async createToken(@User() user: UserEntity) {
     return { token: await this.telegramTokenService.createToken(user._id) };
+  }
+
+  // TODO: Add API docs
+  @Post('login')
+  async login(@Body() telegramLoginData: TelegramLoginData) {
+    return this.telegramLoginService.login(telegramLoginData);
   }
 
 }

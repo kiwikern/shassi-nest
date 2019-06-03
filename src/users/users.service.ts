@@ -22,7 +22,9 @@ export class UsersService {
       throw new BadRequestException('E-Mail already exists', 'email_already_exists');
     }
 
-    user.password = await this.bcryptService.hash(user.password);
+    if (user.password) {
+      user.password = await this.bcryptService.hash(user.password);
+    }
     const newUser = this.userRepository.create(user);
     await this.userRepository.save(newUser);
     return newUser;
@@ -53,4 +55,7 @@ export class UsersService {
     return this.userRepository.find();
   }
 
+  async findOneById(userId: ObjectID) {
+    return this.userRepository.findOne(userId);
+  }
 }

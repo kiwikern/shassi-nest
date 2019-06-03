@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './jwt-payload.interface';
@@ -20,9 +20,17 @@ export class AuthService {
       throw new UnauthorizedException('Unknown user');
     }
 
+    if (!user.password) {
+      throw new BadRequestException('Login only possible via Telegram button.', 'login-via-telegram-only');
+    }
+
     if (!await this.bcryptService.checkEncryptedData(login.password, user.password)) {
       throw new UnauthorizedException('Wrong password');
     }
+    return this.createToken(user);
+  }
+
+  async createToken(user: UserEntity) {
     const payload: JwtPayload = {
       userId: user._id.toString(),
       username: user.username,
