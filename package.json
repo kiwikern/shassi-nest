@@ -50,7 +50,7 @@
     "rxjs": "^6.5.2",
     "swagger-ui-express": "^4.0.5",
     "telegraf": "^3.29.0",
-    "typeorm": "0.2.16",
+    "typeorm": "0.2.18",
     "typescript": "^3.5.1"
   },
   "devDependencies": {
