@@ -82,7 +82,7 @@ username=${username}`;
 
   it('should create a new user', async () => {
     telegramUserIdService.findUserId.mockReturnValueOnce(null);
-    usersService.createUser.mockReturnValueOnce({ _id: 'userid' });
+    usersService.createUserWithUniqueName.mockReturnValueOnce({ _id: 'userid' });
     authService.createToken.mockReturnValueOnce({ token: 'token', user: { _id: 'userid' } });
     await expect(await service.login(createLoginData({})))
       .toEqual({ token: 'token', user: { _id: 'userid' } });

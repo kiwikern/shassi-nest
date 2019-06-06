@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { TelegramLoginData } from './telegram-login-data.dto';
 import { UserEntity } from '../users/entities/user.entity';
 import { TelegramUserIdService } from './telegram-user-id.service';
@@ -11,6 +11,8 @@ import { HashService } from '../common/hash.service';
 export class TelegramLoginService {
   private static readonly TEN_MINUTES = 10 * 60;
 
+  private logger: Logger = new Logger(TelegramLoginService.name);
+
   constructor(private telegramUserIdService: TelegramUserIdService,
               private authService: AuthService,
               private userService: UsersService,
@@ -20,18 +22,18 @@ export class TelegramLoginService {
 
   async login(telegramLoginData: TelegramLoginData) {
     if (!this.isValidHash(telegramLoginData)) {
+      this.logger.warn({ message: 'Invalid Telegram login hash', telegramLoginData });
       throw new UnauthorizedException('The provided hash is not valid.');
     }
     if (!this.isRecentDate(telegramLoginData)) {
+      this.logger.warn({ message: 'Telegram login data too old', telegramLoginData });
       throw new UnauthorizedException('Telegram auth data is too old. Please try again.');
     }
 
     const userId = await this.telegramUserIdService.findUserId(telegramLoginData.id);
     let user: UserEntity;
     if (!userId) {
-      // TODO: get non-existent username
-      const newUser = { username: telegramLoginData.username, password: null };
-      user = await this.userService.createUser(newUser);
+      user = await this.userService.createUserWithUniqueName(telegramLoginData.username);
       await this.telegramUserIdService.saveTelegramId(user._id, telegramLoginData.id);
     } else {
       user = await this.userService.findOneById(userId);
