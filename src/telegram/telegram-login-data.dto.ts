@@ -1,21 +1,25 @@
 /* tslint:disable:variable-name */
-import { IsNumber, IsString, IsUrl } from 'class-validator';
+import { IsNumber, IsOptional, IsString, IsUrl } from 'class-validator';
 
 export class TelegramLoginData {
   @IsNumber()
   id: number;
 
   @IsString()
-  first_name: string;
+  @IsOptional()
+  first_name?: string;
 
   @IsString()
-  last_name: string;
+  @IsOptional()
+  last_name?: string;
 
   @IsString()
-  username: string;
+  @IsOptional()
+  username?: string;
 
   @IsUrl()
-  photo_url: string;
+  @IsOptional()
+  photo_url?: string;
 
   @IsNumber()
   auth_date: number;

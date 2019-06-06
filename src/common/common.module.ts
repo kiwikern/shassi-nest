@@ -12,6 +12,7 @@ import { HashService } from './hash.service';
   exports: [
     BcryptService,
     CronJobService,
+    HashService,
   ],
 })
 export class CommonModule {

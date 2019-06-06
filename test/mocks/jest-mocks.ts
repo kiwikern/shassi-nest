@@ -105,6 +105,7 @@ export const bcryptServiceFactory: () => MockType<BcryptService> = jest.fn(() =>
 export const usersServiceFactory: () => MockType<UsersService> = jest.fn(() => ({
   findOneByUsername: jest.fn(),
   createUser: jest.fn(),
+  createUserWithUniqueName: jest.fn(),
   updateUser: jest.fn(),
   findOneByEmail: jest.fn(),
   getAllUsers: jest.fn(),

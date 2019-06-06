@@ -7,7 +7,7 @@ import { MockType } from '../../test/mock.type';
 import { Repository } from 'typeorm';
 import { ObjectID } from 'mongodb';
 import { BcryptService } from '../common/bcrypt.service';
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, InternalServerErrorException } from '@nestjs/common';
 import { bcryptServiceFactory, repositoryMockFactory } from '../../test/mocks/jest-mocks';
 import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
@@ -77,6 +77,40 @@ describe('UsersService', () => {
     await service.createUser(user);
     expect(repositoryMock.findOne).toHaveBeenCalledTimes(1);
     expect(repositoryMock.save).toHaveBeenCalledTimes(1);
+    expect(bcryptService.hash).not.toHaveBeenCalled();
+  });
+
+  it('should create a unique username for Telegram login', async () => {
+    repositoryMock.find.mockReturnValueOnce([{ username: 'amir' }, { username: 'mara' }]);
+    expect(await service.createUserWithUniqueName('mara')).toEqual(expect.objectContaining({ username: 'mara0' }));
+    expect(repositoryMock.find).toHaveBeenCalledTimes(1);
+    expect(repositoryMock.save).toHaveBeenCalledTimes(1);
+    expect(bcryptService.hash).not.toHaveBeenCalled();
+  });
+
+  it('should create a unique username with given username', async () => {
+    repositoryMock.find.mockReturnValueOnce([{ username: 'amir' }, { username: 'yannis' }]);
+    expect(await service.createUserWithUniqueName('mara')).toEqual(expect.objectContaining({ username: 'mara' }));
+    expect(repositoryMock.find).toHaveBeenCalledTimes(1);
+    expect(repositoryMock.save).toHaveBeenCalledTimes(1);
+    expect(bcryptService.hash).not.toHaveBeenCalled();
+  });
+
+  it('should create a unique username without given username', async () => {
+    repositoryMock.find.mockReturnValueOnce([{ username: 'amir' }, { username: 'yannis' }]);
+    await expect(await service.createUserWithUniqueName(null)).toEqual(expect.objectContaining({ username: expect.any(String) }));
+    expect(repositoryMock.find).toHaveBeenCalledTimes(1);
+    expect(repositoryMock.save).toHaveBeenCalledTimes(1);
+    expect(bcryptService.hash).not.toHaveBeenCalled();
+  });
+
+  it('should reject, if unique name could not be generated', async () => {
+    repositoryMock.find.mockReturnValueOnce(['', ...Array(100).keys()]
+      .map(i => ({ username: 'mara' + i })));
+    await expect(service.createUserWithUniqueName('mara'))
+      .rejects.toThrow(InternalServerErrorException);
+    expect(repositoryMock.find).toHaveBeenCalledTimes(1);
+    expect(repositoryMock.save).not.toHaveBeenCalled();
     expect(bcryptService.hash).not.toHaveBeenCalled();
   });
 

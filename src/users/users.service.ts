@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { UserCreateDto } from './dtos/user-create.dto';
 import { UserEntity } from './entities/user.entity';
 import { Repository } from 'typeorm';
@@ -6,6 +6,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserUpdateDto } from './dtos/user-update.dto';
 import { ObjectID } from 'mongodb';
 import { BcryptService } from '../common/bcrypt.service';
+import * as faker from 'faker';
 
 @Injectable()
 export class UsersService {
@@ -57,5 +58,25 @@ export class UsersService {
 
   async findOneById(userId: ObjectID) {
     return this.userRepository.findOne(userId);
+  }
+
+  /**
+   * When you register directly via Telegram, your username might already
+   * be taken. Then an available username is generated and the user is created.
+   * @param username
+   */
+  async createUserWithUniqueName(username: string | null) {
+    if (!username) {
+      username = faker.internet.userName();
+    }
+    const nameVariants = ['', ...Array(100).keys()]
+      .map(i => username + i);
+    const takenNames = await this.userRepository.find({ where: { username: { $in: nameVariants } } });
+    const availableNames = nameVariants.filter(n => !takenNames.map(u => u.username).includes(n));
+    if (availableNames.length > 0) {
+      return this.createUser({ username: availableNames[0], password: null });
+    } else {
+      throw new InternalServerErrorException('Username is not available.');
+    }
   }
 }
