@@ -6,7 +6,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ObjectID } from 'mongodb';
 import { BcryptService } from '../common/bcrypt.service';
 import { MockType } from '../../test/mock.type';
-import { bcryptServiceFactory, jwtServiceFactory, userServiceFactory } from '../../test/mocks/jest-mocks';
+import { bcryptServiceFactory, jwtServiceFactory, usersServiceFactory } from '../../test/mocks/jest-mocks';
 import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
 describe('AuthService', () => {
@@ -19,7 +19,7 @@ describe('AuthService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         AuthService,
-        { provide: UsersService, useFactory: userServiceFactory },
+        { provide: UsersService, useFactory: usersServiceFactory },
         { provide: JwtService, useFactory: jwtServiceFactory },
         { provide: BcryptService, useFactory: bcryptServiceFactory },
       ],

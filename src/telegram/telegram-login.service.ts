@@ -4,8 +4,8 @@ import { UserEntity } from '../users/entities/user.entity';
 import { TelegramUserIdService } from './telegram-user-id.service';
 import { AuthService } from '../auth/auth.service';
 import { UsersService } from '../users/users.service';
-import * as crypto from 'crypto';
 import { ConfigService } from '../config/config.service';
+import { HashService } from '../common/hash.service';
 
 @Injectable()
 export class TelegramLoginService {
@@ -14,7 +14,8 @@ export class TelegramLoginService {
   constructor(private telegramUserIdService: TelegramUserIdService,
               private authService: AuthService,
               private userService: UsersService,
-              private configService: ConfigService) {
+              private configService: ConfigService,
+              private hashService: HashService) {
   }
 
   async login(telegramLoginData: TelegramLoginData) {
@@ -39,15 +40,7 @@ export class TelegramLoginService {
   }
 
   private isValidHash(telegramLoginData: TelegramLoginData): boolean {
-    // TODO: Build facade for crypto
-    const secretKey = crypto.createHash('sha256')
-      .update(this.configService.telegramToken)
-      .digest();
-
-    const hash = crypto.createHmac('sha256', secretKey)
-      .update(this.getDataCheckString(telegramLoginData))
-      .digest('hex');
-
+    const hash = this.hashService.createHash(this.getDataCheckString(telegramLoginData), this.configService.telegramToken);
     return hash === telegramLoginData.hash;
   }
 
