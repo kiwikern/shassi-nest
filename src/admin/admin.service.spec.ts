@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AdminService } from './admin.service';
 import { UsersService } from '../users/users.service';
-import { productsServiceFactory, telegramUserIdServiceFactory, userServiceFactory } from '../../test/mocks/jest-mocks';
+import { productsServiceFactory, telegramUserIdServiceFactory, usersServiceFactory } from '../../test/mocks/jest-mocks';
 import { ProductsService } from '../products/products.service';
 import { MockType } from '../../test/mock.type';
 import { TelegramUserIdService } from '../telegram/telegram-user-id.service';
@@ -16,7 +16,7 @@ describe('AdminService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         AdminService,
-        { provide: UsersService, useFactory: userServiceFactory },
+        { provide: UsersService, useFactory: usersServiceFactory },
         { provide: ProductsService, useFactory: productsServiceFactory },
         { provide: TelegramUserIdService, useFactory: telegramUserIdServiceFactory },
       ],

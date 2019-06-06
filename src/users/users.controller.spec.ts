@@ -4,7 +4,7 @@ import { UsersService } from './users.service';
 import { UserEntity } from './entities/user.entity';
 import { NoOpLogger } from '../../test/mocks/no-op-logger';
 import { MockType } from '../../test/mock.type';
-import { userServiceFactory } from '../../test/mocks/jest-mocks';
+import { usersServiceFactory } from '../../test/mocks/jest-mocks';
 
 describe('Users Controller', () => {
   let module: TestingModule;
@@ -16,7 +16,7 @@ describe('Users Controller', () => {
     module = await Test.createTestingModule({
       controllers: [UsersController],
       providers: [
-        { provide: UsersService, useFactory: userServiceFactory },
+        { provide: UsersService, useFactory: usersServiceFactory },
       ],
     }).compile();
     module.useLogger(new NoOpLogger());
