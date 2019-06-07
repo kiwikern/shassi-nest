@@ -76,12 +76,12 @@ describe('CrawlerService', () => {
   });
 
   it('should get the Weekday crawler', async () => {
-    const initData = await service.getInitData('cosstores.com');
+    const initData = await service.getInitData('https://cosstores.com');
     expect(initData.name).toEqual('COS');
   });
 
   it('should get the COS crawler', async () => {
-    const initData = await service.getInitData('weekday.com');
+    const initData = await service.getInitData('http://weekday.com');
     expect(initData.name).toEqual('Weekday');
   });
 
