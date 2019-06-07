@@ -1,6 +1,14 @@
 import { Body, ClassSerializerInterceptor, Controller, Get, Post, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiBearerAuth, ApiCreatedResponse, ApiForbiddenResponse, ApiOkResponse, ApiOperation, ApiUseTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiForbiddenResponse,
+  ApiOkResponse,
+  ApiOperation,
+  ApiUnauthorizedResponse,
+  ApiUseTags,
+} from '@nestjs/swagger';
 import { User } from '../auth/user.decorator';
 import { UserEntity } from '../users/entities/user.entity';
 import { TelegramTokenService } from './telegram-token.service';
@@ -49,7 +57,19 @@ export class TelegramController {
     return { token: await this.telegramTokenService.createToken(user._id) };
   }
 
-  // TODO: Add API docs
+  @ApiOperation({
+    title: 'Login/Register via Telegram',
+    description: 'You can use Telegram seamless login to login into an existing account ' +
+      'that is linked to Telegram or to automatically create a new account.',
+  })
+  @ApiCreatedResponse({
+    description: 'Returns the jwt token for the logged in user.',
+    type: { jwt: String, user: UserEntity },
+  })
+  @ApiUnauthorizedResponse({
+    description: 'You cannot login when the given hash is invalid or the authentication ' +
+      'data is older than 10 minutes',
+  })
   @Post('login')
   async login(@Body() telegramLoginData: TelegramLoginData) {
     return this.telegramLoginService.login(telegramLoginData);
