@@ -343,7 +343,25 @@ describe('TelegramService', () => {
     expect(ctx.reply).toHaveBeenCalledWith(`Could not connect Telegram account. Already linked to different shassi user account. 🙌`);
   });
 
-  // TODO: test startCommand for isAlreadyLinked
+  it('should not error if telegram account already connected to same user', async () => {
+    // @ts-ignore
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
+      session: {},
+      from: { id: 'telegramId' },
+      message: { text: `/start ${ObjectID.createFromTime(0)}---token` },
+      reply: jest.fn(),
+    }))();
+    const next = () => 'next was called';
+    telegramUserIdService.findUserId.mockReturnValueOnce(ObjectID.createFromTime(0));
+    tokenService.checkToken.mockReturnValueOnce(true);
+    telegramUserIdService.findTelegramId.mockReturnValueOnce('telegramId');
+    expect(await service.startCommand(ctx, next)).toBe('next was called');
+    expect((ctx as any).session.userId).toEqual(ObjectID.createFromTime(0));
+    expect(tokenService.checkToken).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'token');
+    expect(telegramUserIdService.saveTelegramId).not.toHaveBeenCalled();
+    expect(ctx.reply).toHaveBeenNthCalledWith(1, `Welcome! 👋 Your account was successfully connected.`);
+    expect(ctx.reply).toHaveBeenNthCalledWith(2, 'You can add a product by sending its URL to this chat.');
+  });
 
   it('should not link telegram if token invalid', async () => {
     // @ts-ignore
