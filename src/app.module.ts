@@ -15,6 +15,8 @@ import { TelegramUserIdEntity } from './telegram/telegram-user-id.entity';
 import { ProductEntity } from './products/entities/products.entity';
 import { APP_PIPE } from '@nestjs/core';
 import { AdminModule } from './admin/admin.module';
+import { TerminusModule } from '@nestjs/terminus';
+import { TerminusOptionsService } from './common/terminus-options.service';
 
 @Module({
   imports: [
@@ -49,9 +51,11 @@ import { AdminModule } from './admin/admin.module';
     CommonModule,
     NotificationsModule,
     AdminModule,
+    TerminusModule.forRootAsync({ useClass: TerminusOptionsService }),
   ],
   providers: [
     { provide: APP_PIPE, useValue: new ValidationPipe() },
+    TerminusOptionsService,
   ],
 })
 export class AppModule {
