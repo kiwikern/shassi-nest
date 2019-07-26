@@ -16,7 +16,7 @@ describe('ProductsController (e2e)', () => {
     {
       url: 'https://www2.hm.com/de_de/productpage.0669091022.html',
       name: 'H&M',
-      expectedPrice: 19.99,
+      expectedPrice: 14.99,
     },
     {
       url: 'https://www.aboutyou.de/p/only-und-sons/jeans-loom-blue-jog-pk-8472-noos-3774568',
