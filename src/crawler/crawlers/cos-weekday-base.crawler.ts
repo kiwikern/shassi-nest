@@ -10,6 +10,7 @@ interface HmProductData {
   priceClubValue: string;
   priceValue: string;
   priceSaleValue: string;
+  redPriceValue: string;
   name: string;
   altName: string;
   title: string;
@@ -119,6 +120,7 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
   getPrice(): number {
     const priceText: string = this.productData.priceClubValue
       || this.productData.priceSaleValue
+      || this.productData.redPriceValue
       || this.productData.whitePriceValue
       || this.productData.priceValue;
     return parseFloat(priceText);
