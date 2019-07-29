@@ -37,4 +37,8 @@ export class TelegrafMock {
   stop() {
     this.logger.log('stop');
   }
+
+  help() {
+    this.logger.log('help');
+  }
 }
