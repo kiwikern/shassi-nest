@@ -315,7 +315,7 @@ describe('TelegramService', () => {
     const next = () => 'next was called';
     telegramUserIdService.findUserId.mockReturnValue(ObjectID.createFromTime(0));
     tokenService.checkToken.mockReturnValue(true);
-    expect(await service.startCommand(ctx, next)).toBe('next was called');
+    expect(await service.startCommand(ctx as any, next)).toBe('next was called');
     expect((ctx as any).session.userId).toEqual(ObjectID.createFromTime(0));
     expect(tokenService.checkToken).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'token');
     expect(telegramUserIdService.saveTelegramId).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'telegramId');
@@ -336,7 +336,7 @@ describe('TelegramService', () => {
     telegramUserIdService.saveTelegramId.mockImplementation(() => {
       throw new BadRequestException('User already linked with telegram Account');
     });
-    expect(await service.startCommand(ctx, next)).toBe('next was called');
+    expect(await service.startCommand(ctx as any, next)).toBe('next was called');
     expect((ctx as any).session.userId).toBe(undefined);
     expect(tokenService.checkToken).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'token');
     expect(telegramUserIdService.saveTelegramId).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'telegramId');
@@ -355,7 +355,7 @@ describe('TelegramService', () => {
     telegramUserIdService.findUserId.mockReturnValueOnce(ObjectID.createFromTime(0));
     tokenService.checkToken.mockReturnValueOnce(true);
     telegramUserIdService.findTelegramId.mockReturnValueOnce('telegramId');
-    expect(await service.startCommand(ctx, next)).toBe('next was called');
+    expect(await service.startCommand(ctx as any, next)).toBe('next was called');
     expect((ctx as any).session.userId).toEqual(ObjectID.createFromTime(0));
     expect(tokenService.checkToken).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'token');
     expect(telegramUserIdService.saveTelegramId).not.toHaveBeenCalled();
@@ -373,7 +373,7 @@ describe('TelegramService', () => {
     }))();
     const next = () => 'next was called';
     tokenService.checkToken.mockReturnValue(false);
-    expect(await service.startCommand(ctx, next)).toBe('next was called');
+    expect(await service.startCommand(ctx as any, next)).toBe('next was called');
     expect((ctx as any).session.userId).toBe(undefined);
     expect(tokenService.checkToken).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'token');
     expect(telegramUserIdService.saveTelegramId).not.toHaveBeenCalled();
@@ -391,7 +391,7 @@ describe('TelegramService', () => {
     }))();
     const next = () => 'next was called';
     tokenService.checkToken.mockReturnValue(false);
-    expect(await service.startCommand(ctx, next)).toBe('next was called');
+    expect(await service.startCommand(ctx as any, next)).toBe('next was called');
     expect((ctx as any).session.userId).toBe(undefined);
     expect(tokenService.checkToken).not.toHaveBeenCalled();
     expect(telegramUserIdService.saveTelegramId).not.toHaveBeenCalled();
@@ -409,11 +409,25 @@ describe('TelegramService', () => {
     }))();
     const next = () => 'next was called';
     tokenService.checkToken.mockReturnValue(false);
-    expect(await service.startCommand(ctx, next)).toBe('next was called');
+    expect(await service.startCommand(ctx as any, next)).toBe('next was called');
     expect((ctx as any).session.userId).toBe(undefined);
     expect(tokenService.checkToken).not.toHaveBeenCalled();
     expect(telegramUserIdService.saveTelegramId).not.toHaveBeenCalled();
     expect(ctx.reply).toHaveBeenNthCalledWith(1, 'Hi! 👋 You need to link your shassi account first. Go to domain?action=createTelegramToken');
+  });
+
+  it('should not link telegram if no token is given', async () => {
+    // @ts-ignore
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
+      session: {},
+      from: { id: 'telegramId' },
+      message: { text: '/help' },
+      replyWithMarkdown: jest.fn(),
+    }))();
+    const next = jest.fn();
+    await service.helpCommand(ctx as any, next);
+    expect(next).not.toBeCalled();
+    expect(ctx.replyWithMarkdown).toHaveBeenCalledTimes(1);
   });
 
   it('should notify about an update', async () => {

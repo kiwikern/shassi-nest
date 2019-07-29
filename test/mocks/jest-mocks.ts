@@ -41,6 +41,7 @@ export const telegramServiceFactory: () => MockType<TelegramService> = jest.fn((
   evenlySplitArray: jest.fn(),
   handleReceivedPhoto: jest.fn(),
   handleMessageWithoutUrl: jest.fn(),
+  helpCommand: jest.fn(),
 }));
 
 export const cronJobServiceFactory: () => MockType<CronJobService> = jest.fn(() => ({
@@ -90,6 +91,7 @@ export const telegrafFactory: () => MockType<Telegraf<any>> = jest.fn(() => ({
   action: jest.fn(),
   stop: jest.fn(),
   startPolling: jest.fn(),
+  help: jest.fn(),
 }));
 
 // @ts-ignore

@@ -31,6 +31,7 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
     this.telegraf.catch(err => this.handleErrors(err));
     this.telegraf.use(session());
     this.telegraf.command('start', (ctx, next) => this.startCommand(ctx, next));
+    this.telegraf.help( (ctx, next) => this.helpCommand(ctx, next));
     this.telegraf.use((ctx, next) => this.authSession(ctx, next));
     this.telegraf.hears(TelegramService.LINK_REGEX, ctx => this.addProductOnURLSent(ctx, ctx.match[1]));
     this.telegraf.on('photo', (ctx: ContextMessageUpdate, next) => this.handleReceivedPhoto(ctx, next));
@@ -199,7 +200,7 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
     }
   }
 
-  async startCommand(ctx, next) {
+  async startCommand(ctx: ContextMessageUpdate, next) {
     const message = ctx.message.text.replace('/start ', '');
     const params = message.split('---');
     const userId = ObjectID.isValid(params[0]) ? new ObjectID(params[0]) : null;
@@ -226,5 +227,16 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
       ctx.reply(`To create a new token, go to ${this.configService.frontendDomain}?action=createTelegramToken`);
     }
     return next(ctx);
+  }
+
+  helpCommand(ctx: ContextMessageUpdate, next) {
+    ctx.replyWithMarkdown(`*Shassi - Your Shopping Assistant 💁‍♂️*
+Shassi is a bot that helps you to buy products when they are on sale.
+
+After you have created an account, you can add products by sending the link of the product to shassi.
+It is now tracking your product and will notify you when its price or availability change. 📉
+
+💸 Happy Shopping! 💸
+`);
   }
 }
