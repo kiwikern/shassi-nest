@@ -123,7 +123,9 @@ describe('ProductsController (e2e)', () => {
             .send(createData)
             .expect(201)
             .expect(res => expect(res.body.price)
-              .toBe(expectedPrice))
+              .toBeGreaterThanOrEqual(expectedPrice * 0.5))
+            .expect(res => expect(res.body.price)
+              .toBeLessThanOrEqual(expectedPrice * 1.5))
         ).body;
 
       });
