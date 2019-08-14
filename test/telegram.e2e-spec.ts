@@ -14,6 +14,8 @@ import { TelegramUserIdService } from '../src/telegram/telegram-user-id.service'
 import { TelegramUserIdEntity } from '../src/telegram/telegram-user-id.entity';
 import { crawlerServiceFactory } from './mocks/jest-mocks';
 
+jest.setTimeout(10_000);
+
 describe('TelegramBot (e2e)', () => {
   let app: INestApplication;
   const crawlerMock: MockType<CrawlerService> = crawlerServiceFactory();

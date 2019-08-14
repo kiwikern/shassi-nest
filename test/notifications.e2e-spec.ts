@@ -14,6 +14,8 @@ import { crawlerServiceFactory } from './mocks/jest-mocks';
 import { ProductsService } from '../src/products/products.service';
 import { NotificationsService } from '../src/notifications/notifications.service';
 
+jest.setTimeout(10_000);
+
 describe('Notifications (e2e)', () => {
   let app: INestApplication;
   const crawlerMock: MockType<CrawlerService> = crawlerServiceFactory();
