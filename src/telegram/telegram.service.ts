@@ -117,8 +117,7 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
       Object.assign(productData, { size });
       const p = await this.productsService.addProduct(ctx.session.userId, productData);
       const text = `Your product ${p.name} for ${p.price.toFixed(2)}€ at store ${p.store} with size ${size.name} was added successfully. 🛍️`;
-      ctx.reply(text,
-        { reply_to_message_id: ctx.callbackQuery.message.reply_to_message.message_id });
+      ctx.editMessageText(text);
     } catch (err) {
       this.handleProductAddErrors(err, ctx);
     }

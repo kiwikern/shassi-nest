@@ -149,7 +149,7 @@ describe('TelegramService', () => {
     const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
       session: { productData: { get: jest.fn(), delete: jest.fn() }, userId: 'userId' },
       match: ['sizeName|-|sizeId|-|productSessionId'],
-      reply: jest.fn(),
+      editMessageText: jest.fn(),
       answerCbQuery: jest.fn(),
       editMessageReplyMarkup: jest.fn(),
       callbackQuery: { message: { reply_to_message: { message_id: 'mId' } } },
@@ -162,9 +162,8 @@ describe('TelegramService', () => {
       'userId', { url: 'url', size: { id: 'sizeId', name: 'sizeName' } });
     expect(ctx.answerCbQuery).toHaveBeenLastCalledWith('You chose sizeName. 📐');
     expect(ctx.editMessageReplyMarkup).toHaveBeenCalledWith();
-    expect(ctx.reply).toHaveBeenLastCalledWith(
-      'Your product name for 10.00€ at store H&M with size sizeName was added successfully. 🛍️',
-      { reply_to_message_id: 'mId' });
+    expect(ctx.editMessageText).toHaveBeenLastCalledWith(
+      'Your product name for 10.00€ at store H&M with size sizeName was added successfully. 🛍️');
     expect((ctx as any).session.productData.delete).toHaveBeenLastCalledWith(expect.any(Number));
   });
 

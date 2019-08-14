@@ -131,6 +131,7 @@ describe('TelegramBot (e2e)', () => {
     expect(chat.history[10].callback_query_answer.text).toContain('You chose S');
     // The inline keyboard is removed
     expect(chat.history[11].edit_message_reply_markup).toBeDefined();
+    // TODO: Add method: editMessageText should edit message 8 instead of adding new one
     expect(chat.history[12].message.text).toContain('Product with multiple sizes for 20.00€');
     expect(crawlerMock.getUpdateData).toHaveBeenLastCalledWith(url, '1');
   });
