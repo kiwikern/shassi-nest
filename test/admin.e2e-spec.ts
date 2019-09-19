@@ -20,7 +20,7 @@ describe('Admin (e2e)', () => {
   let userLogin: { jwt: string; user: UserEntity };
 
   beforeAll(async () => {
-    jest.setTimeout(10_000);
+    jest.setTimeout(15_000);
     const crawlerServiceMock = crawlerServiceFactory();
     const moduleFixture = await Test.createTestingModule({
       imports: [AppModule],
