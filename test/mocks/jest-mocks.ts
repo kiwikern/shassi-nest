@@ -144,6 +144,7 @@ export const executionContextFactory: () => MockType<ExecutionContext> = jest.fn
   switchToHttp: jest.fn(),
   getArgs: jest.fn(),
   getArgByIndex: jest.fn(),
+  getType: jest.fn(),
   switchToRpc: jest.fn(),
   switchToWs: jest.fn(),
 }));
