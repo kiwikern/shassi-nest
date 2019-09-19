@@ -37,7 +37,8 @@ export class AsosCrawler implements Crawler {
         .replace(/\n/mg, '')
         .replace(/.*view\('?/mg, '')
         .replace(/',.*/, '')
-        .replace(/,\s*{"360".*/, '');
+        .replace(/,\s*{"360".*/, '')
+        .replace(/,\s*{"pdp_breadcrumbs_search_results_for".*/, '');
       this.productData = JSON.parse(jsonString);
       const productId = /\/prd\/(\d+)/.exec(url)[1];
       const apiUrl = 'https://www.asos.de/api/product/catalogue/v2/stockprice?currency=EUR&store=DE&productIds=';
