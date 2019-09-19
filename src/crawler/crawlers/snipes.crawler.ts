@@ -8,17 +8,11 @@ export class SnipesCrawler implements Crawler {
   private logger: Logger = new Logger(SnipesCrawler.name);
   private url: string;
   private productData: { name: string, brand: { name: string }, offers: { price: string, availability: string } };
-  private availabilityData: {
-    anyAvailableOnline: boolean,
-    anyAvailableInAnyStore: boolean,
-    variants: [{
-      availableOnline: boolean,
-      inAnyStore: boolean,
-      stock2Show: number,
-      variantCode: string,
-      size: string,
-    }],
-  };
+  private availabilityData: Array<{
+    id: string,
+    displayValue: string,
+    isOrderable: boolean,
+  }>;
 
   constructor(private httpService: HttpService) {
   }
@@ -45,11 +39,11 @@ export class SnipesCrawler implements Crawler {
       this.logger.error({ message: 'Could not get product data', url });
       throw new InternalServerErrorException('Could not get product json');
     }
-    const productId = /\/prod-(\d+)/.exec(url)[1];
-    const apiUrl = 'https://m.snipes.com/getProductStock.html?checkStoreStock=true&code=';
+    const shortenedUrl = url.replace(/\.html.*/, '') + '.html';
+    const params = '?chosen=size&dwvar=&dwvar_0_color=&format=ajax';
     try {
-      const apiResponse = await this.httpService.post(apiUrl + productId, {}, { headers }).toPromise();
-      this.availabilityData = apiResponse.data;
+      const apiResponse = await this.httpService.get(shortenedUrl + params, { headers }).toPromise();
+      this.availabilityData = apiResponse.data.product.variationAttributes[0].values;
     } catch (e) {
       this.logger.error(`Could not parse product data for ${url}, error: ${e.message}`, e.stack);
       throw new BadRequestException('The url could not be processed. Was this a proper product url?');
@@ -65,11 +59,10 @@ export class SnipesCrawler implements Crawler {
   }
 
   getSizes(): ProductSizeAvailability[] {
-    return this.availabilityData.variants
-      .map(v => ({
-        id: v.variantCode,
-        name: v.size,
-        isAvailable: v.availableOnline,
+    return this.availabilityData.map(v => ({
+        id: v.id,
+        name: v.displayValue,
+        isAvailable: v.isOrderable,
       }));
   }
 
@@ -81,13 +74,12 @@ export class SnipesCrawler implements Crawler {
   }
 
   isSizeAvailable(id?: string): boolean {
-    const size = this.availabilityData.variants.find(v => v.variantCode === id);
-    return !!size && size.availableOnline;
+    const size = this.availabilityData.find(v => v.id === id);
+    return !!size && size.isOrderable;
   }
 
   isLowInStock(sizeId?: string): boolean {
-    const size = this.availabilityData.variants.find(v => v.variantCode === sizeId);
-    return this.isSizeAvailable(sizeId) && !!size && size.stock2Show < 3;
+    return false;
   }
 
   getUrl(): string {

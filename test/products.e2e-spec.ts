@@ -54,7 +54,7 @@ describe('ProductsController (e2e)', () => {
       expectedPrice: 25,
     },
     {
-      url: 'https://m.snipes.com/null/nike/sportswear-black-black-white/prod-00013801526092',
+      url: 'https://www.snipes.com/p/nike-sportswear-black%2Fblack%2Fwhite-00013801526092.html',
       name: 'Snipes',
       expectedPrice: 19.99,
     },
