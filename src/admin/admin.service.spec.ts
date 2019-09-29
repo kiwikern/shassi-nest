@@ -102,9 +102,15 @@ describe('AdminService', () => {
   });
 
   it('should reactivate a product', async () => {
-    productsService.reactivateProduct.mockReturnValueOnce({id: 1});
+    productsService.reactivateProduct.mockReturnValueOnce({ id: 1 });
     await service.reactivateProduct(ObjectID.createFromTime(0));
     expect(productsService.reactivateProduct).toHaveBeenCalledTimes(1);
+  });
+
+  it('should delete a product', async () => {
+    productsService.deleteProductAsAdmin.mockReturnValueOnce(true);
+    await service.deleteProduct(ObjectID.createFromTime(0));
+    expect(productsService.deleteProductAsAdmin).toHaveBeenCalledTimes(1);
   });
 
 });

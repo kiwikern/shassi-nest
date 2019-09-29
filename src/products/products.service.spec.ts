@@ -466,8 +466,21 @@ describe('ProductsService', () => {
     expect(repositoryMock.delete).toHaveBeenCalled();
   });
 
+  it('should delete a product as admin', async () => {
+    repositoryMock.findOne.mockReturnValue({ id: 1 });
+    const wasSuccessful = await service.deleteProductAsAdmin(objectId);
+    expect(wasSuccessful).toBe(true);
+    expect(repositoryMock.delete).toHaveBeenCalled();
+  });
+
   it('should throw on not found product when deleting', async () => {
     await expect(service.deleteProduct(objectId, objectId))
+      .rejects
+      .toThrow(NotFoundException);
+  });
+
+  it('should throw on not found product when deleting as admin', async () => {
+    await expect(service.deleteProductAsAdmin(objectId))
       .rejects
       .toThrow(NotFoundException);
   });
@@ -482,10 +495,10 @@ describe('ProductsService', () => {
   it('should reactivate a product', async () => {
     repositoryMock.findOne.mockReturnValueOnce({ id: 1, errors: ['e1', 'e2', 'e3'], isActive: false, updates: [] });
     crawlerServiceMock.getUpdateData.mockReturnValue({ price: 100, isAvailable: true });
-    repositoryMock.save.mockReturnValueOnce({id: ''});
-    repositoryMock.findOne.mockReturnValueOnce({id: ''});
+    repositoryMock.save.mockReturnValueOnce({ id: '' });
+    repositoryMock.findOne.mockReturnValueOnce({ id: '' });
     await service.reactivateProduct(objectId);
-    expect(repositoryMock.save).toHaveBeenCalledWith(expect.objectContaining({ id: 1, errors: [], isActive: true }))
+    expect(repositoryMock.save).toHaveBeenCalledWith(expect.objectContaining({ id: 1, errors: [], isActive: true }));
   });
 
   it('should throw on non-existent product', async () => {

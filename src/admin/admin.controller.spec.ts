@@ -37,4 +37,10 @@ describe('Admin Controller', () => {
     expect(service.reactivateProduct).toHaveBeenCalledTimes(1);
   });
 
+  it('should delete a product', async () => {
+    service.deleteProduct.mockReturnValueOnce(true);
+    expect(await controller.deleteProduct('123')).toBe(true);
+    expect(service.deleteProduct).toHaveBeenCalledTimes(1);
+  });
+
 });

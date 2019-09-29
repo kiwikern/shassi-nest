@@ -198,6 +198,15 @@ export class ProductsService {
       .then(() => true);
   }
 
+  async deleteProductAsAdmin(productId: ObjectID): Promise<boolean> {
+    const product = await this.productRepository.findOne({ _id: productId });
+    if (!product) {
+      throw new NotFoundException('Product not found.');
+    }
+    return this.productRepository.delete({ _id: productId })
+      .then(() => true);
+  }
+
   async findProductsWithErrors(): Promise<ProductEntity[]> {
     /* FIXME: Type FindConditions<ProductEntity> invalid
        see https://github.com/typeorm/typeorm/issues/3760 */

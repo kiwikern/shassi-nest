@@ -59,4 +59,8 @@ export class AdminService {
   async reactivateProduct(productId: ObjectID): Promise<ProductEntity> {
     return this.productsService.reactivateProduct(productId);
   }
+
+  deleteProduct(productId: ObjectID): Promise<boolean> {
+    return this.productsService.deleteProductAsAdmin(productId);
+  }
 }

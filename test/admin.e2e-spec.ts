@@ -144,6 +144,11 @@ describe('Admin (e2e)', () => {
           isActive: true,
           errors: [],
         }));
+
+    await request(app.getHttpServer())
+      .delete(`/admin/products/${errorProduct._id}`)
+      .set('Authorization', 'Bearer ' + adminLogin.jwt)
+      .expect(200);
   });
 
 });

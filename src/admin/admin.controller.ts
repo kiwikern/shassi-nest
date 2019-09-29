@@ -1,10 +1,18 @@
-import { Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { Roles } from '../auth/roles.decorator';
 import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from '../auth/roles.guard';
 import { AdminService } from './admin.service';
 import { AdminUserOverviewDto } from './dtos/admin-user-overview.dto';
-import { ApiUseTags, ApiBearerAuth, ApiOperation, ApiOkResponse, ApiForbiddenResponse, ApiCreatedResponse } from '@nestjs/swagger';
+import {
+  ApiUseTags,
+  ApiBearerAuth,
+  ApiOperation,
+  ApiOkResponse,
+  ApiForbiddenResponse,
+  ApiCreatedResponse,
+  ApiNotFoundResponse,
+} from '@nestjs/swagger';
 import { ProductEntity } from '../products/entities/products.entity';
 import { ObjectIdPipe } from '../common/object-id.pipe';
 
@@ -44,9 +52,21 @@ export class AdminController {
     description: 'Reactivates a product. The recorded errors are cleared and the state is set to isActive.',
   })
   @ApiOkResponse({ description: 'Returns the reactivated product.', type: ProductEntity })
+  @ApiNotFoundResponse({description: 'When product with given id does not exists.'})
   @Patch('reactivate-product/:id')
   async reactivateProduct(@Param('id', ObjectIdPipe) productId): Promise<ProductEntity> {
     return this.service.reactivateProduct(productId);
+  }
+
+  @ApiOperation({
+    title: 'Delete a Product',
+    description: 'Deletes a product that belongs to any user.',
+  })
+  @ApiOkResponse({ description: 'Returns true if the product was deleted.', type: ProductEntity })
+  @ApiNotFoundResponse({description: 'When product with given id does not exists.'})
+  @Delete('products/:id')
+  async deleteProduct(@Param('id', ObjectIdPipe) productId): Promise<boolean> {
+    return this.service.deleteProduct(productId);
   }
 
 }
