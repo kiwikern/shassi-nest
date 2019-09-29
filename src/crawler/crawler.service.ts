@@ -11,6 +11,7 @@ import { ZalandoCrawler } from './crawlers/zalando.crawler';
 import { ProductSizeAvailability } from './product-size.interface';
 import { StoriesCrawler } from './crawlers/stories.crawler';
 import { SnipesCrawler } from './crawlers/snipes.crawler';
+import { ArketCrawler } from './crawlers/arket.crawler';
 
 @Injectable()
 export class CrawlerService {
@@ -70,6 +71,8 @@ export class CrawlerService {
       crawler = new StoriesCrawler(this.httpService);
     } else if (url.includes('snipes.com')) {
       crawler = new SnipesCrawler(this.httpService);
+    } else if (url.includes('arket.com')) {
+      crawler = new ArketCrawler(this.httpService);
     } else {
       this.logger.error('No crawler found for given url.', url);
       throw new BadRequestException('Unknown store');

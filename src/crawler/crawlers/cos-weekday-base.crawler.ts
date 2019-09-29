@@ -52,7 +52,8 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
     }
     try {
       const productDataString = this.document.getElementsByClassName(this.getProductCssClasses())[0]
-        .getElementsByTagName('script')[0].innerHTML
+      // TODO: Search all script nodes for productArticleDetails instead of getScriptCounter
+        .getElementsByTagName('script')[this.getScriptCounter()].innerHTML
         .replace(/'/g, '"')
         .replace(/isDesktop \? ".*" :/g, '')
         // trailing slashes
@@ -159,5 +160,9 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
 
   getProductCssClasses(): string {
     return 'product parbase';
+  }
+
+  getScriptCounter() {
+    return 0;
   }
 }

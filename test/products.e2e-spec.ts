@@ -58,6 +58,11 @@ describe('ProductsController (e2e)', () => {
       name: 'Snipes',
       expectedPrice: 39.99,
     },
+    {
+      url: 'https://www.arket.com/en_eur/men/underwear-loungewear/product.pima-cotton-trunks-black.0494992001.html',
+      name: 'Arket',
+      expectedPrice: 10,
+    },
   ];
   let app: INestApplication;
   let tokenUser1: string;

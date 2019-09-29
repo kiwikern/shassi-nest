@@ -96,8 +96,9 @@ export class ProductEntity {
     return this.size ? this.size.name : '';
   }
 
+  // TODO: Mapping between URLs and Stores as Dictionary
   @Expose({ name: 'store' })
-  @ApiModelProperty({ enum: ['H&M', 'ASOS', 'Weekday', 'COS', 'ABOUT YOU', 'Amazon', 'Zalando', '& Other Stories', 'Snipes'] })
+  @ApiModelProperty({ enum: ['H&M', 'ASOS', 'Weekday', 'COS', 'ABOUT YOU', 'Amazon', 'Zalando', '& Other Stories', 'Snipes', 'Arket'] })
   get store(): string {
     if (this.url.includes('hm.com')) {
       return 'H&M';
@@ -117,6 +118,8 @@ export class ProductEntity {
       return '& Other Stories';
     } else if (this.url.includes('snipes.com')) {
       return 'Snipes';
+    } else if (this.url.includes('arket.com')) {
+      return 'Arket';
     } else {
       new Logger(ProductEntity.name).warn('Could not find store for URL', this.url);
       return '';

@@ -45,6 +45,7 @@ jest.mock('./crawlers/asos.crawler', () => ({ AsosCrawler: crawlerMock('Asos') }
 jest.mock('./crawlers/zalando.crawler', () => ({ ZalandoCrawler: crawlerMock('Zalando') }));
 jest.mock('./crawlers/stories.crawler', () => ({ StoriesCrawler: crawlerMock('Stories') }));
 jest.mock('./crawlers/snipes.crawler', () => ({ SnipesCrawler: crawlerMock('Snipes') }));
+jest.mock('./crawlers/arket.crawler', () => ({ ArketCrawler: crawlerMock('Arket') }));
 
 describe('CrawlerService', () => {
   let service: CrawlerService;
@@ -103,6 +104,11 @@ describe('CrawlerService', () => {
   it('should get the Snipes crawler', async () => {
     const initData = await service.getInitData('snipes.com');
     expect(initData.name).toEqual('Snipes');
+  });
+
+  it('should get the Arket crawler', async () => {
+    const initData = await service.getInitData('arket.com');
+    expect(initData.name).toEqual('Arket');
   });
 
   it('should throw on unknown url', async () => {
