@@ -5,6 +5,7 @@ import { ProductEntity } from '../products/entities/products.entity';
 import { AdminUserOverviewDto } from './dtos/admin-user-overview.dto';
 import { TelegramUserIdService } from '../telegram/telegram-user-id.service';
 import { UserEntity } from '../users/entities/user.entity';
+import { ObjectID } from 'mongodb';
 
 @Injectable()
 export class AdminService {
@@ -49,5 +50,13 @@ export class AdminService {
 
   private async getTelegramInfo(userId: string) {
     return { isConnectedToTelegram: await this.telegramIdService.findTelegramId(userId) !== null };
+  }
+
+  async getErrorProducts(): Promise<ProductEntity[]> {
+    return this.productsService.findProductsWithErrors();
+  }
+
+  async reactivateProduct(productId: ObjectID): Promise<ProductEntity> {
+    return this.productsService.reactivateProduct(productId);
   }
 }

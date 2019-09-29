@@ -19,10 +19,22 @@ describe('Admin Controller', () => {
     service = module.get(AdminService);
   });
 
-  it('should be defined', async () => {
+  it('should get the user overview', async () => {
     service.getUsersOverview.mockReturnValueOnce([]);
     expect(await controller.getAdminUserOverview()).toEqual([]);
     expect(service.getUsersOverview).toHaveBeenCalledTimes(1);
+  });
+
+  it('should get products with errors', async () => {
+    service.getErrorProducts.mockReturnValueOnce([]);
+    expect(await controller.getErrorProducts()).toEqual([]);
+    expect(service.getErrorProducts).toHaveBeenCalledTimes(1);
+  });
+
+  it('should reactivate a product', async () => {
+    service.reactivateProduct.mockReturnValueOnce({id: '123'});
+    expect(await controller.reactivateProduct('123')).toEqual({id: '123'});
+    expect(service.reactivateProduct).toHaveBeenCalledTimes(1);
   });
 
 });

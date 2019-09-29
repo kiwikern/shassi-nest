@@ -13,11 +13,13 @@ import { UserEntity } from '../src/users/entities/user.entity';
 import { CrawlerService } from '../src/crawler/crawler.service';
 import { crawlerServiceFactory } from './mocks/jest-mocks';
 import { ProductsService } from '../src/products/products.service';
+import { ProductEntity } from '../src/products/entities/products.entity';
 
 describe('Admin (e2e)', () => {
   let app: INestApplication;
   let adminLogin: { jwt: string; user: UserEntity };
   let userLogin: { jwt: string; user: UserEntity };
+  let productsRepository: Repository<ProductEntity>;
 
   beforeAll(async () => {
     jest.setTimeout(15_000);
@@ -36,14 +38,21 @@ describe('Admin (e2e)', () => {
     adminLogin = await createLogin('admin');
     userLogin = await createLogin('user');
 
+    // first product
     crawlerServiceMock.getUpdateData.mockReturnValueOnce(
       { price: 100, isAvailable: true, isLowInStock: false, createdAt: new Date() },
     );
+    // error product
     crawlerServiceMock.getUpdateData.mockReturnValueOnce(
       { price: 100, isAvailable: true, isLowInStock: false, createdAt: new Date('2010') },
     );
+    // update when reactivating product
+    crawlerServiceMock.getUpdateData.mockReturnValueOnce(
+      { price: 100, isAvailable: true, isLowInStock: false, createdAt: new Date('2010') },
+    );
+
     await createProduct();
-    await createProduct();
+    await createProductWithError();
   });
 
   afterAll(async () => {
@@ -58,18 +67,32 @@ describe('Admin (e2e)', () => {
     const userRepository: Repository<UserEntity> = app.get(getRepositoryToken(UserEntity));
     const user = await userService.createUser({ username, password: '123456' });
     await userRepository.update({ _id: user._id }, { roles: [username] });
+    productsRepository = app.get(getRepositoryToken(ProductEntity));
     return authService.login({ username, password: '123456' });
   }
 
   let sizeId = 0;
+
   async function createProduct() {
     const productService = app.get(ProductsService);
     return productService.addProduct(new ObjectID(userLogin.user._id), { name: 'Product', size: { name: 'S', id: sizeId++ + '' }, url: 'hm.com' });
   }
 
+  async function createProductWithError() {
+    const product = await createProduct();
+    product.errors = ['1', '2', '3'];
+    product.isActive = false;
+    return productsRepository.save(product);
+  }
+
   it('should reject a user without admin role', async () => {
     await request(app.getHttpServer())
       .get('/admin')
+      .set('Authorization', 'Bearer ' + userLogin.jwt)
+      .expect(403);
+
+    await request(app.getHttpServer())
+      .get('/admin/error-products')
       .set('Authorization', 'Bearer ' + userLogin.jwt)
       .expect(403);
   });
@@ -96,6 +119,31 @@ describe('Admin (e2e)', () => {
             isConnectedToTelegram: false,
           },
         ]));
+  });
+
+  it('should return all products with errors and reactivate one', async () => {
+    const errorProduct: ProductEntity = (await request(app.getHttpServer())
+      .get('/admin/error-products')
+      .set('Authorization', 'Bearer ' + adminLogin.jwt)
+      .expect(200)
+      .expect(res => expect(res.body)
+        .toMatchObject([
+          {
+            isActive: false,
+            errors: ['1', '2', '3'],
+          },
+        ]))).body[0];
+
+    await request(app.getHttpServer())
+      .patch(`/admin/reactivate-product/${errorProduct._id}`)
+      .set('Authorization', 'Bearer ' + adminLogin.jwt)
+      .expect(200)
+      .expect(res => expect(res.body)
+        .toMatchObject({
+          _id: errorProduct._id,
+          isActive: true,
+          errors: [],
+        }));
   });
 
 });

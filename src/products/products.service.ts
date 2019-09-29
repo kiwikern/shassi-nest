@@ -2,7 +2,7 @@ import { ConflictException, ForbiddenException, Injectable, Logger, NotFoundExce
 import { CreateProductDto } from './dtos/create-product.dto';
 import { ProductEntity } from './entities/products.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ObjectID as TObjectID, Repository } from 'typeorm';
+import { FindConditions, MongoRepository, ObjectID as TObjectID, Repository } from 'typeorm';
 import { CrawlerService } from '../crawler/crawler.service';
 import { ObjectID } from 'mongodb';
 import { ProductSizeAvailability } from '../crawler/product-size.interface';
@@ -17,7 +17,7 @@ export class ProductsService {
   private readonly logger: Logger = new Logger(ProductsService.name);
 
   constructor(
-    @InjectRepository(ProductEntity) private readonly productRepository: Repository<ProductEntity>,
+    @InjectRepository(ProductEntity) private readonly productRepository: MongoRepository<ProductEntity>,
     private readonly crawlerService: CrawlerService,
   ) {
   }
@@ -98,6 +98,7 @@ export class ProductsService {
       const sizeId = product.size ? product.size.id : null;
       const newUpdate = await this.crawlerService.getUpdateData(product.url, sizeId);
       const productAttributeChanges = this.getProductAttributeChanges(product, newUpdate);
+      // reset errors after successful update
       product.errors = [];
       if (productAttributeChanges.hasAnyChange) {
         product.updates.push(newUpdate);
@@ -195,5 +196,22 @@ export class ProductsService {
     }
     return this.productRepository.delete({ _id: productId, userId })
       .then(() => true);
+  }
+
+  async findProductsWithErrors(): Promise<ProductEntity[]> {
+    /* FIXME: Type FindConditions<ProductEntity> invalid
+       see https://github.com/typeorm/typeorm/issues/3760 */
+    const findConditions: any = { errors: { $exists: true, $ne: []} };
+    return this.productRepository.find(findConditions);
+  }
+
+  async reactivateProduct(productId: ObjectID): Promise<ProductEntity> {
+    const product = await this.productRepository.findOne({ _id: productId });
+    if (!product) {
+      throw new NotFoundException('Product not found.');
+    }
+    product.isActive = true;
+    await this.updateProduct(product);
+    return this.productRepository.findOne(product._id);
   }
 }

@@ -472,4 +472,27 @@ describe('ProductsService', () => {
       .toThrow(NotFoundException);
   });
 
+  it('should find all products with errors', async () => {
+    const expectedErrorProducts = [{ id: 1 }];
+    repositoryMock.find.mockReturnValue(expectedErrorProducts);
+    const errorProducts: ProductEntity[] = await service.findProductsWithErrors();
+    expect(errorProducts).toEqual(expectedErrorProducts);
+  });
+
+  it('should reactivate a product', async () => {
+    repositoryMock.findOne.mockReturnValueOnce({ id: 1, errors: ['e1', 'e2', 'e3'], isActive: false, updates: [] });
+    crawlerServiceMock.getUpdateData.mockReturnValue({ price: 100, isAvailable: true });
+    repositoryMock.save.mockReturnValueOnce({id: ''});
+    repositoryMock.findOne.mockReturnValueOnce({id: ''});
+    await service.reactivateProduct(objectId);
+    expect(repositoryMock.save).toHaveBeenCalledWith(expect.objectContaining({ id: 1, errors: [], isActive: true }))
+  });
+
+  it('should throw on non-existent product', async () => {
+    repositoryMock.findOne.mockReturnValueOnce(null);
+    await expect(service.reactivateProduct(objectId))
+      .rejects
+      .toThrow(NotFoundException);
+  });
+
 });

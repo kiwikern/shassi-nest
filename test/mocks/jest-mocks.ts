@@ -26,6 +26,8 @@ export const productsServiceFactory: () => MockType<ProductsService> = jest.fn((
   updateSingleProduct: jest.fn(),
   markRead: jest.fn(),
   setFavorite: jest.fn(),
+  findProductsWithErrors: jest.fn(),
+  reactivateProduct: jest.fn(),
 }));
 
 export const telegramServiceFactory: () => MockType<TelegramService> = jest.fn(() => ({
@@ -151,4 +153,6 @@ export const executionContextFactory: () => MockType<ExecutionContext> = jest.fn
 
 export const adminServiceFactory: () => MockType<AdminService> = jest.fn(() => ({
   getUsersOverview: jest.fn(),
+  getErrorProducts: jest.fn(),
+  reactivateProduct: jest.fn(),
 }));

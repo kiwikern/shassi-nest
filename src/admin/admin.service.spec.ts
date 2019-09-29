@@ -5,6 +5,7 @@ import { productsServiceFactory, telegramUserIdServiceFactory, usersServiceFacto
 import { ProductsService } from '../products/products.service';
 import { MockType } from '../../test/mock.type';
 import { TelegramUserIdService } from '../telegram/telegram-user-id.service';
+import { ObjectID } from 'mongodb';
 
 describe('AdminService', () => {
   let service: AdminService;
@@ -92,6 +93,18 @@ describe('AdminService', () => {
         isConnectedToTelegram: false,
       },
     ]);
+  });
+
+  it('should return products with errors', async () => {
+    productsService.findProductsWithErrors.mockReturnValueOnce([]);
+    const productsWithErrors = await service.getErrorProducts();
+    expect(productsWithErrors).toEqual([]);
+  });
+
+  it('should reactivate a product', async () => {
+    productsService.reactivateProduct.mockReturnValueOnce({id: 1});
+    await service.reactivateProduct(ObjectID.createFromTime(0));
+    expect(productsService.reactivateProduct).toHaveBeenCalledTimes(1);
   });
 
 });
