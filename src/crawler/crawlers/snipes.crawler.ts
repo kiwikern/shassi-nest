@@ -1,5 +1,5 @@
 import { Crawler } from '../crawler.interface';
-import { BadRequestException, HttpService, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
+import { HttpService, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { ProductSizeAvailability } from '../product-size.interface';
 import { JSDOM } from 'jsdom';
 
@@ -12,7 +12,7 @@ export class SnipesCrawler implements Crawler {
     id: string,
     displayValue: string,
     isOrderable: boolean,
-  }>;
+  }> = [];
 
   constructor(private httpService: HttpService) {
   }
@@ -28,6 +28,16 @@ export class SnipesCrawler implements Crawler {
     };
     const response = await this.httpService.get(this.url, { headers }).toPromise();
     const document = new JSDOM(response.data).window.document;
+    if (document.getElementsByClassName('b-pdp-one-size-label').length > 0) {
+      this.availabilityData.push({id: 'one size', displayValue: 'one size', isOrderable: true});
+    }
+    const sizeElements = document.getElementsByClassName('b-swatch-value-wrapper');
+    for (const sizeElement of sizeElements) {
+      const innerSizeElement = sizeElement.querySelector('span');
+      const sizeName = innerSizeElement.getAttribute('data-attr-value');
+      const isOrderable = innerSizeElement.classList.contains('b-swatch-value--orderable');
+      this.availabilityData.push({id: sizeName, displayValue: sizeName, isOrderable});
+    }
     for (const script of document.scripts) {
       if (script.type === 'application/ld+json') {
         const jsonString = script.innerHTML.replace(/\n|\t/g, '');
@@ -38,15 +48,6 @@ export class SnipesCrawler implements Crawler {
     if (!this.productData) {
       this.logger.error({ message: 'Could not get product data', url });
       throw new InternalServerErrorException('Could not get product json');
-    }
-    const shortenedUrl = url.replace(/\.html.*/, '') + '.html';
-    const params = '?chosen=size&dwvar=&dwvar_0_color=&format=ajax';
-    try {
-      const apiResponse = await this.httpService.get(shortenedUrl + params, { headers }).toPromise();
-      this.availabilityData = apiResponse.data.product.variationAttributes[0].values;
-    } catch (e) {
-      this.logger.error(`Could not parse product data for ${url}, error: ${e.message}`, e.stack);
-      throw new BadRequestException('The url could not be processed. Was this a proper product url?');
     }
   }
 

@@ -23,26 +23,4 @@ describe('Snipes',
         expect(e).toBeInstanceOf(InternalServerErrorException);
       }
     });
-
-    it('should throw on faulty availability response', async () => {
-      const httpMock = jest.fn(() => ({
-        get: jest.fn(),
-      }))();
-      httpMock.get.mockReturnValueOnce(of({
-        data: `
-        <script type="application/ld+json">
-            {}
-        </script>
-      `,
-      }));
-      httpMock.get.mockImplementationOnce(() => {
-        throw new Error('');
-      });
-      const crawler = new SnipesCrawler(httpMock as any);
-      await expect(crawler.init('https://m.snipes.com/accessoires/nike/elemental-graphic-black-black-white/prod-00013801571016'))
-        .rejects
-        .toThrow(BadRequestException);
-      expect(httpMock.get).toHaveBeenCalledTimes(2);
-    });
-
   });
