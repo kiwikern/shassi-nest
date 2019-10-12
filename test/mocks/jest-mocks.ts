@@ -139,6 +139,8 @@ export const authServiceFactory: () => MockType<AuthService> = jest.fn(() => ({
 export const reflectorFactory: () => MockType<Reflector> = jest.fn(() => ({
   get: jest.fn(),
   getAll: jest.fn(),
+  getAllAndMerge: jest.fn(),
+  getAllAndOverride: jest.fn(),
 }));
 
 export const executionContextFactory: () => MockType<ExecutionContext> = jest.fn(() => ({
