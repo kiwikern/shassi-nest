@@ -23,11 +23,11 @@ export class TelegramLoginService {
   async login(telegramLoginData: TelegramLoginData) {
     if (!this.isValidHash(telegramLoginData)) {
       this.logger.warn({ message: 'Invalid Telegram login hash', telegramLoginData });
-      throw new UnauthorizedException('The provided hash is not valid.');
+      throw new UnauthorizedException({key: 'telegram-invalid-hash', message: 'The provided hash is not valid.'});
     }
     if (!this.isRecentDate(telegramLoginData)) {
       this.logger.warn({ message: 'Telegram login data too old', telegramLoginData });
-      throw new UnauthorizedException('Telegram auth data is too old. Please try again.');
+      throw new UnauthorizedException({key: 'telegram-auth-expired', message: 'Telegram auth data is too old. Please try again.'});
     }
 
     const userId = await this.telegramUserIdService.findUserId(telegramLoginData.id);

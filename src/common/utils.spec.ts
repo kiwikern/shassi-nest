@@ -1,4 +1,4 @@
-import { canonicalizeUrl, toObjectId, toStringSafe, typeFn } from './utils';
+import { canonicalizeUrl, toInteger, toObjectId, toStringSafe, typeFn } from './utils';
 import { ObjectID } from 'mongodb';
 
 describe('utils', () => {
@@ -62,6 +62,12 @@ describe('utils', () => {
     it('should return an identity function', () => {
       const symbol = Symbol.for('identity');
       expect(typeFn(symbol)()).toEqual(symbol);
+    });
+  });
+
+  describe('toInteger', () => {
+    it('should return a parsed number', () => {
+      expect(toInteger('123')).toBe(123);
     });
   });
 
