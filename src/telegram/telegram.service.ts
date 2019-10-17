@@ -31,7 +31,7 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
     this.telegraf.catch(err => this.handleErrors(err));
     this.telegraf.use(session());
     this.telegraf.command('start', (ctx, next) => this.startCommand(ctx, next));
-    this.telegraf.help( (ctx, next) => this.helpCommand(ctx, next));
+    this.telegraf.help((ctx, next) => this.helpCommand(ctx, next));
     this.telegraf.use((ctx, next) => this.authSession(ctx, next));
     this.telegraf.hears(TelegramService.LINK_REGEX, ctx => this.addProductOnURLSent(ctx, ctx.match[1]));
     this.telegraf.on('photo', (ctx: ContextMessageUpdate, next) => this.handleReceivedPhoto(ctx, next));
@@ -185,7 +185,8 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
     }
 
     if (ctx.message.text && !ctx.message.text.includes('/start')) {
-      ctx.reply(`You need to link your shassi account first. 🔗 Go to ${this.configService.frontendDomain}?action=createTelegramToken`);
+      ctx.reply(`You need to link your shassi account first. 🔗 Go to ${this.configService.frontendDomain}?action=createTelegramToken or click the button below.`
+        , this.loginInlineButton);
     }
     // Do not call next() without account.
   }
@@ -199,13 +200,25 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
     }
   }
 
+  private loginInlineButton = {
+    reply_markup: Markup.inlineKeyboard([{
+      text: 'Login/Register',
+      login_url: {
+        url: `${this.configService.frontendDomain}/auth/telegram-login`,
+        request_write_access: true,
+      },
+      domain: this.configService.frontendDomain,
+    } as any]),
+  };
+
   async startCommand(ctx: ContextMessageUpdate, next) {
     const message = ctx.message.text.replace('/start ', '');
     const params = message.split('---');
     const userId = ObjectID.isValid(params[0]) ? new ObjectID(params[0]) : null;
     const token = params.length > 1 ? params[1] : null;
     if (!token) {
-      ctx.reply(`Hi! 👋 You need to link your shassi account first. Go to ${this.configService.frontendDomain}?action=createTelegramToken`);
+      ctx.reply(`Hi! 👋 You need to link your shassi account first. Go to ${this.configService.frontendDomain}?action=createTelegramToken or click the button below.`,
+        this.loginInlineButton);
       return next(ctx);
     }
     const isValid = await this.tokenService.checkToken(userId, token);
