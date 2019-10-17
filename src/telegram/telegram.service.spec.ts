@@ -17,6 +17,7 @@ import {
   tokenServiceFactory,
 } from '../../test/mocks/jest-mocks';
 import { NoOpLogger } from '../../test/mocks/no-op-logger';
+import anything = jasmine.anything;
 
 describe('TelegramService', () => {
   let service: TelegramService;
@@ -261,7 +262,7 @@ describe('TelegramService', () => {
     // there must be no userId associated to the session
     expect((ctx as any).session.userId).toBe(undefined);
     expect(ctx.reply).toHaveBeenCalledWith(
-      `You need to link your shassi account first. 🔗 Go to domain?action=createTelegramToken`);
+      `You need to link your shassi account first. 🔗 Go to domain?action=createTelegramToken or click the button below.`), anything();
   });
 
   it('should not do anything when /start is running', async () => {
@@ -394,7 +395,9 @@ describe('TelegramService', () => {
     expect((ctx as any).session.userId).toBe(undefined);
     expect(tokenService.checkToken).not.toHaveBeenCalled();
     expect(telegramUserIdService.saveTelegramId).not.toHaveBeenCalled();
-    expect(ctx.reply).toHaveBeenNthCalledWith(1, 'Hi! 👋 You need to link your shassi account first. Go to domain?action=createTelegramToken');
+    expect(ctx.reply).toHaveBeenNthCalledWith(1,
+      'Hi! 👋 You need to link your shassi account first. Go to domain?action=createTelegramToken or click the button below.',
+      expect.any(Object));
 
   });
 
@@ -412,7 +415,9 @@ describe('TelegramService', () => {
     expect((ctx as any).session.userId).toBe(undefined);
     expect(tokenService.checkToken).not.toHaveBeenCalled();
     expect(telegramUserIdService.saveTelegramId).not.toHaveBeenCalled();
-    expect(ctx.reply).toHaveBeenNthCalledWith(1, 'Hi! 👋 You need to link your shassi account first. Go to domain?action=createTelegramToken');
+    expect(ctx.reply).toHaveBeenNthCalledWith(1,
+      'Hi! 👋 You need to link your shassi account first. Go to domain?action=createTelegramToken or click the button below.',
+      expect.any(Object));
   });
 
   it('should not link telegram if no token is given', async () => {
