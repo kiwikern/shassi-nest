@@ -15,7 +15,7 @@ describe('CronJobService', () => {
 
   it('should be defined', () => {
     const cronJob = service.create('00 00 8 * * *', () => null);
-    expect(cronJob.nextDate().format('z')).toMatch(/CEST|CST/);
+    expect(cronJob.nextDate().format('z')).toMatch(/CEST|CST|CET/);
     expect(cronJob.nextDate().hour()).toBe(8);
   });
 
