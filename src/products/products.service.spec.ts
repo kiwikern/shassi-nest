@@ -149,6 +149,9 @@ describe('ProductsService', () => {
 
     it('should return availability updates', async () => {
 
+      // TODO: Mock timer in unit test for Observable delay
+      jest.setTimeout(15_000);
+
       const productMockWithAvailabilityUpdate = {
         url: 'hasAvailabilityUpdate',
         updates: [

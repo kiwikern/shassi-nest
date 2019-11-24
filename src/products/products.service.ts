@@ -78,7 +78,9 @@ export class ProductsService {
       if (update) {
         updatedProducts.push(update);
       }
-      await of('').pipe(delay(200)).toPromise();
+      // between 0.2 and 5 seconds
+      const randomDelay = Math.floor(Math.random() * 4801 + 200);
+      await of('').pipe(delay(randomDelay)).toPromise();
     }
 
     return updatedProducts;

@@ -11,7 +11,7 @@ import { TelegrafMock } from './mocks/telegraf.mock';
 import { ProductEntity } from '../src/products/entities/products.entity';
 
 describe('ProductsController (e2e)', () => {
-  jest.setTimeout(15_000);
+  jest.setTimeout(25_000);
   const testCases = [
     {
       url: 'https://www2.hm.com/de_de/productpage.0669091022.html',
