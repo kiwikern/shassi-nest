@@ -52,7 +52,8 @@
     "swagger-ui-express": "^4.1.2",
     "telegraf": "^3.32.0",
     "typeorm": "0.2.16",
-    "typescript": "^3.6.4"
+    "typescript": "^3.6.4",
+    "user-agents": "^1.0.450"
   },
   "devDependencies": {
     "@nestjs/testing": "^6.8.3",

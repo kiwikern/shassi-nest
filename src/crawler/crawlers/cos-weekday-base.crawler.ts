@@ -2,6 +2,7 @@ import { Crawler } from '../crawler.interface';
 import { BadGatewayException, BadRequestException, HttpService, InternalServerErrorException, Logger } from '@nestjs/common';
 import { ProductSizeAvailability } from '../product-size.interface';
 import { JSDOM, VirtualConsole } from 'jsdom';
+import { generateUserAgent } from './user-agent-generator';
 
 interface HmProductData {
   sizes: [{ sizeCode: string, size: string, name: string }];
@@ -109,7 +110,7 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
 
   private getHeaders() {
     return {
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+      'User-Agent': generateUserAgent(),
       'Cookie': 'HMCORP_locale=de_DE;HMCORP_currency=EUR;',
     };
   }

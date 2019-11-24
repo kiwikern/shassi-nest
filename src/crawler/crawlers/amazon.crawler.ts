@@ -2,6 +2,7 @@ import { Crawler } from '../crawler.interface';
 import { HttpService, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { ProductSizeAvailability } from '../product-size.interface';
 import { JSDOM } from 'jsdom';
+import { generateUserAgent } from './user-agent-generator';
 
 @Injectable()
 export class AmazonCrawler implements Crawler {
@@ -19,7 +20,7 @@ export class AmazonCrawler implements Crawler {
       'accept-encoding': 'gzip, deflate, br',
       'accept-language': 'en-US,en;q=0.9,de-DE;q=0.8,de;q=0.7',
       'cache-control': 'no-cache',
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+      'User-Agent': generateUserAgent(),
     };
     const response = await this.httpService.get(this.url, { headers }).toPromise();
     this.document = new JSDOM(response.data).window.document;

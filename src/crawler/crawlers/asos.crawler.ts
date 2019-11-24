@@ -2,6 +2,7 @@ import { Crawler } from '../crawler.interface';
 import { BadRequestException, HttpService, Injectable, Logger } from '@nestjs/common';
 import { ProductSizeAvailability } from '../product-size.interface';
 import { JSDOM } from 'jsdom';
+import { generateUserAgent } from './user-agent-generator';
 
 @Injectable()
 export class AsosCrawler implements Crawler {
@@ -22,7 +23,7 @@ export class AsosCrawler implements Crawler {
       'accept-language': 'en-US,en;q=0.9,de-DE;q=0.8,de;q=0.7',
       'Cookie': `ak_bmsc=${Math.random().toString(36).substring(20)}=; geocountry=DE`,
       'cache-control': 'no-cache',
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
+      'User-Agent': generateUserAgent(),
     };
     const response = await this.httpService.get(this.url, { headers }).toPromise();
     this.document = new JSDOM(response.data).window.document;
@@ -43,6 +44,8 @@ export class AsosCrawler implements Crawler {
       this.productData = JSON.parse(jsonString);
       const productId = /\/prd\/(\d+)/.exec(url)[1];
       const apiUrl = 'https://www.asos.de/api/product/catalogue/v2/stockprice?currency=EUR&store=DE&productIds=';
+      // this.logger.log({Cookies: cookies});
+      // const apiHeaders = Object.assign({Cookies: cookies}, headers);
       const apiResponse = await this.httpService.get(apiUrl + productId, { headers }).toPromise();
       this.apiData = apiResponse.data[0];
     } catch (e) {
