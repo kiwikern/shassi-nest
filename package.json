@@ -51,7 +51,7 @@
     "rxjs": "^6.5.3",
     "swagger-ui-express": "^4.1.2",
     "telegraf": "^3.33.3",
-    "typeorm": "0.2.16",
+    "typeorm": "0.2.22",
     "typescript": "^3.7.2",
     "user-agents": "^1.0.450"
   },
