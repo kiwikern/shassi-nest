@@ -53,7 +53,7 @@
     "telegraf": "^3.33.3",
     "typeorm": "0.2.16",
     "typescript": "^3.7.2",
-    "user-agents": "^1.0.450"
+    "user-agents": "^1.0.494"
   },
   "devDependencies": {
     "@nestjs/testing": "^6.10.1",
