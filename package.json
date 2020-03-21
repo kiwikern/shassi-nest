@@ -71,7 +71,7 @@
     "jest": "^24.9.0",
     "jest-sonar-reporter": "^2.0.0",
     "nodemon": "^2.0.1",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.0",
     "supertest": "^4.0.2",
     "telegram-test-server": "github:kiwikern/telegram-test-server",
     "ts-jest": "^24.2.0",
