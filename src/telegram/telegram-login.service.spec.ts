@@ -19,7 +19,6 @@ describe('TelegramLoginService', () => {
   let usersService: MockType<UsersService>;
   let telegramUserIdService: MockType<TelegramUserIdService>;
   let authService: MockType<AuthService>;
-  let configService: MockType<ConfigService>;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -40,7 +39,6 @@ describe('TelegramLoginService', () => {
     usersService = module.get(UsersService);
     telegramUserIdService = module.get(TelegramUserIdService);
     authService = module.get(AuthService);
-    configService = module.get(ConfigService);
   });
 
   function createLoginData({

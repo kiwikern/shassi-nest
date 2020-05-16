@@ -4,10 +4,7 @@ import { snipesNoSaleTestCase } from '../../../test/crawler-testcases/snipes-nos
 import { snipesSaleTestCase } from '../../../test/crawler-testcases/snipes-sale.testcase';
 import { snipesOneSizeTestCase } from '../../../test/crawler-testcases/snipes-onesize.testcase';
 import { SnipesCrawler } from './snipes.crawler';
-import {
-  BadRequestException,
-  InternalServerErrorException,
-} from '@nestjs/common';
+import { InternalServerErrorException } from '@nestjs/common';
 
 const testCases = [
   snipesNoSaleTestCase,

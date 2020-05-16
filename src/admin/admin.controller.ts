@@ -4,7 +4,6 @@ import {
   Get,
   Param,
   Patch,
-  Post,
   UseGuards,
 } from '@nestjs/common';
 import { Roles } from '../auth/roles.decorator';
@@ -18,7 +17,6 @@ import {
   ApiOperation,
   ApiOkResponse,
   ApiForbiddenResponse,
-  ApiCreatedResponse,
   ApiNotFoundResponse,
 } from '@nestjs/swagger';
 import { ProductEntity } from '../products/entities/products.entity';

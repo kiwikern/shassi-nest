@@ -8,12 +8,7 @@ import {
 import { CreateProductDto } from './dtos/create-product.dto';
 import { ProductEntity } from './entities/products.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import {
-  FindConditions,
-  MongoRepository,
-  ObjectID as TObjectID,
-  Repository,
-} from 'typeorm';
+import { MongoRepository, ObjectID as TObjectID } from 'typeorm';
 import { CrawlerService } from '../crawler/crawler.service';
 import { ObjectID } from 'mongodb';
 import { ProductSizeAvailability } from '../crawler/product-size.interface';

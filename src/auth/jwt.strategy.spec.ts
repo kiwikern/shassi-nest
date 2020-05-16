@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
 import { UnauthorizedException } from '@nestjs/common';
-import { ObjectID } from 'mongodb';
+
 import { MockType } from '../../test/mock.type';
 import { authServiceFactory } from '../../test/mocks/jest-mocks';
 import { NoOpLogger } from '../../test/mocks/no-op-logger';
