@@ -14,7 +14,7 @@ export class AuthService {
               private readonly jwtService: JwtService) {
   }
 
-  async login(login: UserLoginDto): Promise<{ jwt: string, user: {} }> {
+  async login(login: UserLoginDto): Promise<{ jwt: string, user: UserEntity }> {
     const user = await this.usersService.findOneByUsername(login.username);
     if (!user) {
       throw new UnauthorizedException('Unknown user');
@@ -36,7 +36,7 @@ export class AuthService {
       username: user.username,
       roles: user.roles || [],
     };
-    return { jwt: this.jwtService.sign(payload), user: classToPlain<UserEntity>(user) };
+    return { jwt: this.jwtService.sign(payload), user: classToPlain<UserEntity>(user) as UserEntity };
   }
 
   async validateUser(payload: JwtPayload): Promise<UserEntity> {

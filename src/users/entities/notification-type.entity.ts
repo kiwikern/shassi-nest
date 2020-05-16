@@ -1,15 +1,15 @@
 import { Column } from 'typeorm';
 import { IsBoolean } from 'class-validator';
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class NotificationType {
   @Column({ type: 'boolean' })
   @IsBoolean()
-  @ApiModelProperty()
+  @ApiProperty()
   telegram: boolean = true;
 
   @Column({ type: 'boolean' })
   @IsBoolean()
-  @ApiModelProperty()
+  @ApiProperty()
   email: boolean = false;
 }

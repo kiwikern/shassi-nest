@@ -1,16 +1,16 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class AdminUserOverviewDto {
-  @ApiModelProperty()
+  @ApiProperty()
   userId: string;
-  @ApiModelProperty()
+  @ApiProperty()
   username: string;
-  @ApiModelProperty()
+  @ApiProperty()
   productCount: number;
-  @ApiModelProperty()
+  @ApiProperty()
   latestProductAddedDate?: Date;
-  @ApiModelProperty()
+  @ApiProperty()
   latestProductUpdatedDate?: Date;
-  @ApiModelProperty()
+  @ApiProperty()
   isConnectedToTelegram: boolean;
 }

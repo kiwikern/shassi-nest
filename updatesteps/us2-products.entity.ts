@@ -4,7 +4,7 @@ import { UsProductSize } from './us2-product-size.entity';
 import { UsProductUpdate } from './us2-product-update.entity';
 import { ObjectID } from 'mongodb';
 import { Logger } from '@nestjs/common';
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { toObjectId, toStringSafe } from '../src/common/utils';
 
 @Entity({ name: 'products' })
@@ -12,22 +12,22 @@ export class UsProductEntity {
   @ObjectIdColumn()
   @Transform(toStringSafe, { toPlainOnly: true })
   @Transform(toObjectId, { toClassOnly: true })
-  @ApiModelProperty()
+  @ApiProperty()
     // tslint:disable-next-line:variable-name
   _id: ObjectID;
 
   // @Index({unique: true})
   @Column()
-  @ApiModelProperty()
+  @ApiProperty()
   url: string;
 
   @Column()
-  @ApiModelProperty()
+  @ApiProperty()
   name: string;
 
   @Column()
   @Transform((value) => value ? value.toString() : null, { toPlainOnly: true })
-  @ApiModelProperty()
+  @ApiProperty()
   userId: ObjectID;
 
   @Exclude({toPlainOnly: true})
@@ -36,52 +36,52 @@ export class UsProductEntity {
   size: UsProductSize;
 
   @Column({ default: true})
-  @ApiModelProperty()
+  @ApiProperty()
   isActive: boolean = true;
 
   @Column({ default: false })
-  @ApiModelProperty()
+  @ApiProperty()
   hasUnreadUpdate: boolean = false;
 
   @Column(() => UsProductUpdate)
-  @ApiModelProperty()
+  @ApiProperty()
   updates: UsProductUpdate[];
 
   @Expose({ name: 'price' })
-  @ApiModelProperty()
+  @ApiProperty()
   get price(): number {
     const latestUpdate = this.getLatestUpdate();
     return latestUpdate ? latestUpdate.price : null;
   }
 
   @Expose({ name: 'isAvailable' })
-  @ApiModelProperty()
+  @ApiProperty()
   get isAvailable(): boolean {
     const latestUpdate = this.getLatestUpdate();
     return latestUpdate ? latestUpdate.isAvailable : false;
   }
 
   @Expose({ name: 'createdAt' })
-  @ApiModelProperty()
+  @ApiProperty()
   get createdAt(): Date {
     return this._id.getTimestamp();
   }
 
   @Expose({ name: 'updatedAt' })
-  @ApiModelProperty()
+  @ApiProperty()
   get updatedAt(): Date {
     const latestUpdate = this.getLatestUpdate();
     return latestUpdate ? latestUpdate.createdAt : this.createdAt;
   }
 
   @Expose({ name: 'sizeName' })
-  @ApiModelProperty()
+  @ApiProperty()
   get sizeName(): string {
     return this.size ? this.size.name : '';
   }
 
   @Expose({ name: 'store' })
-  @ApiModelProperty({ enum: ['H&M', 'ASOS', 'Weekday', 'ABOUT YOU', 'COS', 'Amazon'] })
+  @ApiProperty({ enum: ['H&M', 'ASOS', 'Weekday', 'ABOUT YOU', 'COS', 'Amazon'] })
   get store(): string {
     if (this.url.includes('hm.com')) {
       return 'H&M';

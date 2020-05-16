@@ -4,7 +4,7 @@ import { ProductSize } from './product-size.entity';
 import { ProductUpdate } from './product-update.entity';
 import { ObjectID } from 'mongodb';
 import { Logger } from '@nestjs/common';
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { toObjectId, toStringSafe, typeFn } from '../../common/utils';
 
 @Entity({ name: 'products' })
@@ -12,22 +12,22 @@ export class ProductEntity {
   @ObjectIdColumn()
   @Transform(toStringSafe, { toPlainOnly: true })
   @Transform(toObjectId, { toClassOnly: true })
-  @ApiModelProperty()
+  @ApiProperty()
     // tslint:disable-next-line:variable-name
   _id: ObjectID;
 
   @Column()
-  @ApiModelProperty()
+  @ApiProperty()
   url: string;
 
   @Column()
-  @ApiModelProperty()
+  @ApiProperty()
   name: string;
 
   @Column()
   @Transform(toStringSafe, { toPlainOnly: true })
   @Transform(toObjectId, { toClassOnly: true })
-  @ApiModelProperty()
+  @ApiProperty()
   userId: ObjectID;
 
   @Exclude({ toPlainOnly: true })
@@ -36,15 +36,15 @@ export class ProductEntity {
   size: ProductSize;
 
   @Column({ default: true })
-  @ApiModelProperty()
+  @ApiProperty()
   isActive: boolean = true;
 
   @Column({ default: false })
-  @ApiModelProperty()
+  @ApiProperty()
   hasUnreadUpdate: boolean = false;
 
   @Column(typeFn(ProductUpdate))
-  @ApiModelProperty()
+  @ApiProperty()
   updates: ProductUpdate[];
 
   @Column({ default: [] })
@@ -52,53 +52,53 @@ export class ProductEntity {
   errors: string[] = [];
 
   @Column({ default: false })
-  @ApiModelProperty()
+  @ApiProperty()
   isFavorite: boolean = false;
 
   @Expose({ name: 'price' })
-  @ApiModelProperty()
+  @ApiProperty()
   get price(): number {
     const latestUpdate = this.getLatestUpdate();
     return latestUpdate ? latestUpdate.price : null;
   }
 
   @Expose({ name: 'isAvailable' })
-  @ApiModelProperty()
+  @ApiProperty()
   get isAvailable(): boolean {
     const latestUpdate = this.getLatestUpdate();
     return latestUpdate ? latestUpdate.isAvailable : false;
   }
 
   @Expose({ name: 'isLowInStock' })
-  @ApiModelProperty()
+  @ApiProperty()
   get isLowInStock(): boolean {
     const latestUpdate = this.getLatestUpdate();
     return latestUpdate ? latestUpdate.isLowInStock === true : false;
   }
 
   @Expose({ name: 'createdAt' })
-  @ApiModelProperty()
+  @ApiProperty()
   // Cannot be getter due to https://github.com/typeorm/typeorm/issues/3466
   getCreatedAt(): Date {
     return this._id ? this._id.getTimestamp() : null;
   }
 
   @Expose({ name: 'updatedAt' })
-  @ApiModelProperty()
+  @ApiProperty()
   get updatedAt(): Date {
     const latestUpdate = this.getLatestUpdate();
     return latestUpdate ? latestUpdate.createdAt : this.getCreatedAt();
   }
 
   @Expose({ name: 'sizeName' })
-  @ApiModelProperty()
+  @ApiProperty()
   get sizeName(): string {
     return this.size ? this.size.name : '';
   }
 
   // TODO: Mapping between URLs and Stores as Dictionary
   @Expose({ name: 'store' })
-  @ApiModelProperty({ enum: ['H&M', 'ASOS', 'Weekday', 'COS', 'ABOUT YOU', 'Amazon', 'Zalando', '& Other Stories', 'Snipes', 'Arket'] })
+  @ApiProperty({ enum: ['H&M', 'ASOS', 'Weekday', 'COS', 'ABOUT YOU', 'Amazon', 'Zalando', '& Other Stories', 'Snipes', 'Arket'] })
   get store(): string {
     if (this.url.includes('hm.com')) {
       return 'H&M';

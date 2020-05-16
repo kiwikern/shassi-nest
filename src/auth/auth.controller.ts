@@ -1,20 +1,30 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserLoginDto } from './user-login.dto';
-import { ApiBadRequestResponse, ApiCreatedResponse, ApiUseTags, ApiOperation } from '@nestjs/swagger';
+import { ApiBadRequestResponse, ApiCreatedResponse, ApiTags, ApiOperation, ApiProperty } from '@nestjs/swagger';
 import { UserEntity } from '../users/entities/user.entity';
 
+// tslint:disable:max-classes-per-file
+
+class LoginResponse {
+  @ApiProperty()
+  jwt: string;
+
+  @ApiProperty()
+  user: UserEntity;
+}
+
 @Controller('auth')
-@ApiUseTags('users')
+@ApiTags('users')
 export class AuthController {
   constructor(private authService: AuthService) {
   }
 
   @Post('/login')
-  @ApiOperation({title: 'Login', description: 'Login with username and password'})
-  @ApiCreatedResponse({description: 'Returns the jwt token for the logged in user.', type: { jwt: String, user: UserEntity}})
+  @ApiOperation({summary: 'Login', description: 'Login with username and password'})
+  @ApiCreatedResponse({description: 'Returns the jwt token for the logged in user.', type: LoginResponse})
   @ApiBadRequestResponse({description: 'Wrong username or password.'})
-  async login(@Body() userLogin: UserLoginDto): Promise<{ jwt: string, user: {}}> {
+  async login(@Body() userLogin: UserLoginDto): Promise<LoginResponse> {
     return await this.authService.login(userLogin);
   }
 

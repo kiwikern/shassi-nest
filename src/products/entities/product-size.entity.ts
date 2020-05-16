@@ -1,12 +1,12 @@
 import { Column } from 'typeorm';
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class ProductSize {
   @Column('text')
-  @ApiModelProperty()
+  @ApiProperty()
   id: string;
 
   @Column('text')
-  @ApiModelProperty()
+  @ApiProperty()
   name: string;
 }

@@ -15,9 +15,9 @@ async function bootstrap() {
     .setVersion(version)
     .addTag('users')
     .addTag('products')
-    .setContactEmail('shassi@kimkern.de')
+    .setContact('Kim Kern', 'https://kimkern.de','shassi@kimkern.de')
     .addBearerAuth()
-    .setSchemes(configService.isProduction ? 'https' : 'http')
+    .addServer(configService.isProduction ? 'https://' : 'http://')
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);

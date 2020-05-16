@@ -10,14 +10,14 @@ import {
   ApiOkResponse,
   ApiCreatedResponse,
   ApiForbiddenResponse,
-  ApiUseTags,
+  ApiTags,
   ApiBadRequestResponse,
   ApiOperation,
 } from '@nestjs/swagger';
 
 @Controller('users')
 @UseInterceptors(ClassSerializerInterceptor)
-@ApiUseTags('users')
+@ApiTags('users')
 export class UsersController {
 
   constructor(private usersService: UsersService) {
@@ -26,7 +26,7 @@ export class UsersController {
   @Get('/')
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth()
-  @ApiOperation({ title: 'Logged in user', description: 'Get the logged in user' })
+  @ApiOperation({ summary: 'Logged in user', description: 'Get the logged in user' })
   @ApiOkResponse({ description: 'Returns the logged in user.', type: UserEntity })
   @ApiForbiddenResponse({ description: 'User must be logged in.' })
   getUser(@User() user: UserEntity): UserEntity {
@@ -34,7 +34,7 @@ export class UsersController {
   }
 
   @Post('/')
-  @ApiOperation({ title: 'Registration', description: 'Registers a new user' })
+  @ApiOperation({ summary: 'Registration', description: 'Registers a new user' })
   @ApiCreatedResponse({ description: 'Returns the newly created user.', type: UserEntity })
   @ApiBadRequestResponse({ description: 'Wrong username or password.' })
   createUser(@Body() user: UserCreateDto): Promise<UserEntity> {
@@ -44,7 +44,7 @@ export class UsersController {
   @Put('/')
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth()
-  @ApiOperation({ title: 'Update user', description: 'Updates the user settings.' })
+  @ApiOperation({ summary: 'Update user', description: 'Updates the user settings.' })
   @ApiCreatedResponse({ description: 'Returns the updated user.', type: UserEntity })
   @ApiForbiddenResponse({ description: 'User must be logged in.' })
   @ApiBadRequestResponse({ description: 'Invalid request.' })
