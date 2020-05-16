@@ -9,11 +9,11 @@ export class SnipesCrawler implements Crawler {
   private logger: Logger = new Logger(SnipesCrawler.name);
   private url: string;
   private productData: { name: string, brand: { name: string }, offers: { price: string, availability: string } };
-  private availabilityData: Array<{
+  private availabilityData: {
     id: string,
     displayValue: string,
     isOrderable: boolean,
-  }> = [];
+  }[] = [];
 
   constructor(private httpService: HttpService) {
   }

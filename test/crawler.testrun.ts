@@ -20,11 +20,11 @@ export const crawlerTestRun = (
     crawlerType: Type<Crawler>,
     testResponse: string | object,
     sizes: ProductSizeAvailability[],
-    sizeChecks: Array<{
+    sizeChecks: {
       isLowInStock: boolean;
       size: string; isAvailable: boolean
-    }>,
-    name: string, priceChecks: Array<{ size: string; price: number }>,
+    }[],
+    name: string, priceChecks: { size: string; price: number }[],
     url?: string,
     expectedUrl?: string,
     secondResponse?: string | object,

@@ -1,5 +1,5 @@
 import { BadRequestException, ConflictException, Inject, Injectable, Logger, NotFoundException, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
-import Telegraf, { ContextMessageUpdate, Markup } from 'telegraf';
+import Telegraf, { Context, Markup } from 'telegraf';
 import * as session from 'telegraf/session';
 import { ProductsService } from '../products/products.service';
 import { ConfigService } from '../config/config.service';
@@ -34,8 +34,8 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
     this.telegraf.help((ctx, next) => this.helpCommand(ctx, next));
     this.telegraf.use((ctx, next) => this.authSession(ctx, next));
     this.telegraf.hears(TelegramService.LINK_REGEX, ctx => this.addProductOnURLSent(ctx, ctx.match[1]));
-    this.telegraf.on('photo', (ctx: ContextMessageUpdate, next) => this.handleReceivedPhoto(ctx, next));
-    this.telegraf.on('message', (ctx: ContextMessageUpdate) => this.handleMessageWithoutUrl(ctx));
+    this.telegraf.on('photo', (ctx: Context, next) => this.handleReceivedPhoto(ctx, next));
+    this.telegraf.on('message', (ctx: Context) => this.handleMessageWithoutUrl(ctx));
     (this.telegraf as any).action(/.+/, async ctx => this.updateProductOnSizeChosen(ctx));
     this.telegraf.startPolling();
   }
@@ -45,7 +45,7 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
     this.jobs.forEach(job => job.stop());
   }
 
-  handleMessageWithoutUrl(ctx: ContextMessageUpdate) {
+  handleMessageWithoutUrl(ctx: Context) {
     if (ctx.message.text && ctx.message.text.startsWith('/start')) {
       return;
     }
@@ -54,7 +54,7 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
       '\nOften, you can just use the share menu from your store\'s website.');
   }
 
-  handleReceivedPhoto(ctx: ContextMessageUpdate, next) {
+  handleReceivedPhoto(ctx: Context, next) {
     const matches = TelegramService.LINK_REGEX.exec(ctx.message.caption);
     if (matches && matches[1]) {
       return this.addProductOnURLSent(ctx, matches[1]);
@@ -123,7 +123,7 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
     }
   }
 
-  private handleProductAddErrors(err, ctx: ContextMessageUpdate) {
+  private handleProductAddErrors(err, ctx: Context) {
     if (err instanceof ConflictException) {
       ctx.reply('Product has already been added. 💁‍♂️');
     } else if (err instanceof BadRequestException) {
@@ -211,7 +211,7 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
     } as any]),
   };
 
-  async startCommand(ctx: ContextMessageUpdate, next) {
+  async startCommand(ctx: Context, next) {
     const message = ctx.message.text.replace('/start ', '');
     const params = message.split('---');
     const userId = ObjectID.isValid(params[0]) ? new ObjectID(params[0]) : null;
@@ -241,7 +241,7 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
     return next(ctx);
   }
 
-  helpCommand(ctx: ContextMessageUpdate, next) {
+  helpCommand(ctx: Context, next) {
     ctx.replyWithMarkdown(`*Shassi - Your Shopping Assistant 💁‍♂️*
 Shassi is a bot that helps you to buy products when they are on sale.
 

@@ -55,7 +55,7 @@ export class NotificationsService implements OnModuleInit, OnModuleDestroy {
 
   private async sendNotifications(changes: ProductChange[]) {
     this.logger.log(`Found ${changes.length} updates.`);
-    const sentNotifications: Array<Promise<any>> = changes
+    const sentNotifications: Promise<any>[] = changes
       .filter(update => this.isRelevantChange(update))
       .map(update => ({userId: update.product.userId, text: this.getMarkdownUpdateText(update)}))
       .filter(update => !!update.text)
