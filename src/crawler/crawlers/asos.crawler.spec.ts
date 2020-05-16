@@ -8,19 +8,18 @@ import { asosNoSaleTestCase } from '../../../test/crawler-testcases/asos-nosale.
 
 const testCases = [asosTestCase, asosOneSizeTestCase, asosNoSaleTestCase];
 
-describe('Asos',
-  () => {
-    testCases.forEach(testCase => crawlerTestRun(testCase));
+describe('Asos', () => {
+  testCases.forEach(testCase => crawlerTestRun(testCase));
 
-    it('should reject url without product data', async () => {
-      const httpService = {
-        get: () => of({ data: null }),
-      } as any;
-      const crawler = new AsosCrawler(httpService);
-      try {
-        await crawler.init('any url');
-      } catch (e) {
-        expect(e).toBeInstanceOf(BadRequestException);
-      }
-    });
+  it('should reject url without product data', async () => {
+    const httpService = {
+      get: () => of({ data: null }),
+    } as any;
+    const crawler = new AsosCrawler(httpService);
+    try {
+      await crawler.init('any url');
+    } catch (e) {
+      expect(e).toBeInstanceOf(BadRequestException);
+    }
   });
+});

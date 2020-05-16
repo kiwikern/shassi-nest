@@ -10,13 +10,13 @@ export class ZalandoCrawler implements Crawler {
   url: string;
   articleData;
 
-  constructor(private httpService: HttpService) {
-  }
+  constructor(private httpService: HttpService) {}
 
   async init(url: string) {
     this.url = url;
     const headers = {
-      'accept': 'text/html,application/xhtml+xml,application/xmlq=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+      accept:
+        'text/html,application/xhtml+xml,application/xmlq=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
       'accept-encoding': 'gzip, deflate, br',
       'accept-language': 'en-US,en;q=0.9,de-DE;q=0.8,de;q=0.7',
       'cache-control': 'no-cache',
@@ -24,8 +24,9 @@ export class ZalandoCrawler implements Crawler {
     };
     const response = await this.httpService.get(url, { headers }).toPromise();
     const document = new JSDOM(response.data).window.document;
-    const jsonString = document.getElementById('z-vegas-pdp-props').innerHTML
-      .replace('<![CDATA[', '')
+    const jsonString = document
+      .getElementById('z-vegas-pdp-props')
+      .innerHTML.replace('<![CDATA[', '')
       .replace(']]>', '');
     this.articleData = JSON.parse(jsonString).model.articleInfo;
   }
@@ -39,21 +40,23 @@ export class ZalandoCrawler implements Crawler {
     if (size) {
       return size.price.value;
     } else {
-      this.logger.warn({ message: 'Could not find given size', sizeId, url: this.url });
+      this.logger.warn({
+        message: 'Could not find given size',
+        sizeId,
+        url: this.url,
+      });
       return this.articleData.displayPrice.price.value;
     }
   }
 
   getSizes(): ProductSizeAvailability[] {
-    return this.articleData.units
-      .map(unit => {
-        return {
-          id: unit.id,
-          isAvailable: unit.stock > 0,
-          name: unit.size.local,
-        };
-      });
-
+    return this.articleData.units.map(unit => {
+      return {
+        id: unit.id,
+        isAvailable: unit.stock > 0,
+        name: unit.size.local,
+      };
+    });
   }
 
   isInCatalog(): boolean {
@@ -66,13 +69,11 @@ export class ZalandoCrawler implements Crawler {
   }
 
   isLowInStock(sizeId?: string): boolean {
-    const size = this.articleData.units
-      .find(unit => unit.id === sizeId);
+    const size = this.articleData.units.find(unit => unit.id === sizeId);
     return this.isSizeAvailable(sizeId) && !!size && size.stock <= 3;
   }
 
   getUrl(): string {
     return this.url;
   }
-
 }

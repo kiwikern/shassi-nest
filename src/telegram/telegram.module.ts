@@ -21,7 +21,8 @@ import Telegraf from 'telegraf';
     TelegramTokenService,
     {
       provide: Telegraf,
-      useFactory: async (configService: ConfigService) => new Telegraf(configService.telegramToken),
+      useFactory: async (configService: ConfigService) =>
+        new Telegraf(configService.telegramToken),
       inject: [ConfigService],
     },
     TelegramUserIdService,
@@ -35,11 +36,7 @@ import Telegraf from 'telegraf';
     AuthModule,
     UsersModule,
   ],
-  exports: [
-    TelegramService,
-    TelegramUserIdService,
-  ],
+  exports: [TelegramService, TelegramUserIdService],
   controllers: [TelegramController],
 })
-export class TelegramModule {
-}
+export class TelegramModule {}

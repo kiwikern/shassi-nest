@@ -4,7 +4,8 @@ import { StoriesCrawler } from '../../src/crawler/crawlers/stories.crawler';
 export const storiesTestCase = {
   crawlerType: StoriesCrawler,
 
-  url: 'https://www.stories.com/en_eur/sale/all-sale/product.wool-blend-coat-red.0196680008.html',
+  url:
+    'https://www.stories.com/en_eur/sale/all-sale/product.wool-blend-coat-red.0196680008.html',
 
   sizes: [
     { id: '0196680008001', name: '32', isAvailable: false },
@@ -13,7 +14,6 @@ export const storiesTestCase = {
     { id: '0196680008004', name: '38', isAvailable: true },
     { id: '0196680008005', name: '40', isAvailable: true },
     { id: '0196680008006', name: '42', isAvailable: true },
-
   ],
 
   sizeChecks: [
@@ -30,7 +30,16 @@ export const storiesTestCase = {
     { size: 'unknown-size', price: 88 },
   ],
 
-  secondResponse: { availability: ['0196680008006', '0196680008005', '0196680008004', '0196680008003', '0196680008002'], fewPieceLeft: [] },
+  secondResponse: {
+    availability: [
+      '0196680008006',
+      '0196680008005',
+      '0196680008004',
+      '0196680008003',
+      '0196680008002',
+    ],
+    fewPieceLeft: [],
+  },
 
   testResponse: `<!DOCTYPE HTML>
 <html lang="en" class="no-js">

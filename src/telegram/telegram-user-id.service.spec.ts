@@ -17,7 +17,10 @@ describe('TelegramUserIdService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         TelegramUserIdService,
-        { provide: getRepositoryToken(TelegramUserIdEntity), useFactory: repositoryMockFactory },
+        {
+          provide: getRepositoryToken(TelegramUserIdEntity),
+          useFactory: repositoryMockFactory,
+        },
       ],
     }).compile();
     module.useLogger(new NoOpLogger());
@@ -28,8 +31,11 @@ describe('TelegramUserIdService', () => {
   it('should create a token', async () => {
     const userId = ObjectID.createFromTime(0);
     const telegramId = 123456;
-    expect(await service.saveTelegramId(userId, telegramId)).toEqual({userId, telegramId});
-    expect(repositoryMock.save).toHaveBeenCalledWith({userId, telegramId});
+    expect(await service.saveTelegramId(userId, telegramId)).toEqual({
+      userId,
+      telegramId,
+    });
+    expect(repositoryMock.save).toHaveBeenCalledWith({ userId, telegramId });
   });
 
   it('should not create a token without userId', async () => {
@@ -56,7 +62,7 @@ describe('TelegramUserIdService', () => {
 
   it('should find the telegramId for a user', async () => {
     const userId = ObjectID.createFromTime(0);
-    repositoryMock.findOne.mockReturnValue({telegramId: 'id'});
+    repositoryMock.findOne.mockReturnValue({ telegramId: 'id' });
     expect(await service.findTelegramId(userId)).toEqual('id');
   });
 
@@ -68,7 +74,7 @@ describe('TelegramUserIdService', () => {
 
   it('should find the userId for a telegramId', async () => {
     const telegramId = 123456;
-    repositoryMock.findOne.mockReturnValue({userId: 'id'});
+    repositoryMock.findOne.mockReturnValue({ userId: 'id' });
     expect(await service.findUserId(telegramId)).toEqual('id');
   });
 
@@ -77,5 +83,4 @@ describe('TelegramUserIdService', () => {
     repositoryMock.findOne.mockReturnValue(null);
     expect(await service.findUserId(telegramId)).toEqual(null);
   });
-
 });

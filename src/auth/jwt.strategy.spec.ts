@@ -28,14 +28,27 @@ describe('JwtStrategy', () => {
 
   it('should return user if found', async () => {
     const payload = { userId: 'id', username: 'name', roles: [Role.ADMIN] };
-    const user: UserEntity = { _id: '', email: '', password: '', notificationTypes: null, username: '', roles: [Role.ADMIN] };
+    const user: UserEntity = {
+      _id: '',
+      email: '',
+      password: '',
+      notificationTypes: null,
+      username: '',
+      roles: [Role.ADMIN],
+    };
     authService.validateUser.mockReturnValueOnce(user);
     await expect(strategy.validate(payload)).resolves.toBe(user);
   });
 
   it('should return user without roles', async () => {
     const payload = { userId: 'id', username: 'name', roles: [] };
-    const user: UserEntity = { _id: '', email: '', password: '', notificationTypes: null, username: '' };
+    const user: UserEntity = {
+      _id: '',
+      email: '',
+      password: '',
+      notificationTypes: null,
+      username: '',
+    };
     authService.validateUser.mockReturnValueOnce(user);
     await expect(strategy.validate(payload)).resolves.toBe(user);
   });
@@ -43,7 +56,8 @@ describe('JwtStrategy', () => {
   it('should reject if no user is found', async () => {
     const payload = { userId: 'id', username: 'name', roles: [] };
     authService.validateUser.mockReturnValueOnce(undefined);
-    await expect(strategy.validate(payload)).rejects.toThrow(UnauthorizedException);
+    await expect(strategy.validate(payload)).rejects.toThrow(
+      UnauthorizedException,
+    );
   });
-
 });

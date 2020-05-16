@@ -1,5 +1,10 @@
 import { Crawler } from '../crawler.interface';
-import { BadRequestException, HttpService, Injectable, Logger } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpService,
+  Injectable,
+  Logger,
+} from '@nestjs/common';
 import { ProductSizeAvailability } from '../product-size.interface';
 import { JSDOM } from 'jsdom';
 import { generateUserAgent } from './user-agent-generator';
@@ -12,20 +17,24 @@ export class AsosCrawler implements Crawler {
   private apiData;
   private productData;
 
-  constructor(private httpService: HttpService) {
-  }
+  constructor(private httpService: HttpService) {}
 
   async init(url: string) {
     this.url = url;
     const headers = {
-      'accept': 'text/html,application/xhtml+xml,application/xmlq=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+      accept:
+        'text/html,application/xhtml+xml,application/xmlq=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
       'accept-encoding': 'gzip, deflate, br',
       'accept-language': 'en-US,en;q=0.9,de-DE;q=0.8,de;q=0.7',
-      'Cookie': `ak_bmsc=${Math.random().toString(36).substring(20)}=; geocountry=DE`,
+      Cookie: `ak_bmsc=${Math.random()
+        .toString(36)
+        .substring(20)}=; geocountry=DE`,
       'cache-control': 'no-cache',
       'User-Agent': generateUserAgent(),
     };
-    const response = await this.httpService.get(this.url, { headers }).toPromise();
+    const response = await this.httpService
+      .get(this.url, { headers })
+      .toPromise();
     this.document = new JSDOM(response.data).window.document;
     try {
       let script;
@@ -36,21 +45,29 @@ export class AsosCrawler implements Crawler {
         }
       }
       const jsonString = script.innerHTML
-        .replace(/\n/mg, '')
-        .replace(/.*view\('?/mg, '')
+        .replace(/\n/gm, '')
+        .replace(/.*view\('?/gm, '')
         .replace(/',.*/, '')
         .replace(/,\s*{"360".*/, '')
         .replace(/,\s*{"pdp_breadcrumbs_search_results_for".*/, '');
       this.productData = JSON.parse(jsonString);
       const productId = /\/prd\/(\d+)/.exec(url)[1];
-      const apiUrl = 'https://www.asos.de/api/product/catalogue/v2/stockprice?currency=EUR&store=DE&productIds=';
+      const apiUrl =
+        'https://www.asos.de/api/product/catalogue/v2/stockprice?currency=EUR&store=DE&productIds=';
       // this.logger.log({Cookies: cookies});
       // const apiHeaders = Object.assign({Cookies: cookies}, headers);
-      const apiResponse = await this.httpService.get(apiUrl + productId, { headers }).toPromise();
+      const apiResponse = await this.httpService
+        .get(apiUrl + productId, { headers })
+        .toPromise();
       this.apiData = apiResponse.data[0];
     } catch (e) {
-      this.logger.error(`Could not parse product data for ${url}, error: ${e.message}`, e.stack);
-      throw new BadRequestException('The url could not be processed. Was this a proper product url?');
+      this.logger.error(
+        `Could not parse product data for ${url}, error: ${e.message}`,
+        e.stack,
+      );
+      throw new BadRequestException(
+        'The url could not be processed. Was this a proper product url?',
+      );
     }
   }
 
@@ -68,12 +85,11 @@ export class AsosCrawler implements Crawler {
   }
 
   getSizes(): ProductSizeAvailability[] {
-    return this.apiData.variants
-      .map(v => ({
-        id: v.variantId + '',
-        name: this.getSizeName(v.variantId + ''),
-        isAvailable: v.isInStock,
-      }));
+    return this.apiData.variants.map(v => ({
+      id: v.variantId + '',
+      name: this.getSizeName(v.variantId + ''),
+      isAvailable: v.isInStock,
+    }));
   }
 
   private getSizeName(id): string {
@@ -81,7 +97,11 @@ export class AsosCrawler implements Crawler {
     if (size) {
       return size.size;
     } else {
-      this.logger.warn({ message: 'No size found for sizeId.', url: this.url, id });
+      this.logger.warn({
+        message: 'No size found for sizeId.',
+        url: this.url,
+        id,
+      });
       return 'NOSIZE';
     }
   }
@@ -103,5 +123,4 @@ export class AsosCrawler implements Crawler {
   getUrl(): string {
     return this.url;
   }
-
 }

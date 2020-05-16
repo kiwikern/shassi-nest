@@ -20,5 +20,4 @@ describe('BcryptService', () => {
   it('should hash data', async () => {
     expect(await service.hash('data')).toBeDefined();
   });
-
 });

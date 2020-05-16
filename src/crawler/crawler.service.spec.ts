@@ -1,6 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CrawlerService } from './crawler.service';
-import { BadRequestException, HttpService, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpService,
+  NotFoundException,
+} from '@nestjs/common';
 import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
 let savedUrl;
@@ -37,25 +41,38 @@ function crawlerMock(name) {
 }
 
 jest.mock('./crawlers/hm.crawler', () => ({ HmCrawler: crawlerMock('H&M') }));
-jest.mock('./crawlers/aboutyou.crawler', () => ({ AboutyouCrawler: crawlerMock('Aboutyou') }));
-jest.mock('./crawlers/amazon.crawler', () => ({ AmazonCrawler: crawlerMock('Amazon') }));
+jest.mock('./crawlers/aboutyou.crawler', () => ({
+  AboutyouCrawler: crawlerMock('Aboutyou'),
+}));
+jest.mock('./crawlers/amazon.crawler', () => ({
+  AmazonCrawler: crawlerMock('Amazon'),
+}));
 jest.mock('./crawlers/cos.crawler', () => ({ CosCrawler: crawlerMock('COS') }));
-jest.mock('./crawlers/weekday.crawler', () => ({ WeekdayCrawler: crawlerMock('Weekday') }));
-jest.mock('./crawlers/asos.crawler', () => ({ AsosCrawler: crawlerMock('Asos') }));
-jest.mock('./crawlers/zalando.crawler', () => ({ ZalandoCrawler: crawlerMock('Zalando') }));
-jest.mock('./crawlers/stories.crawler', () => ({ StoriesCrawler: crawlerMock('Stories') }));
-jest.mock('./crawlers/snipes.crawler', () => ({ SnipesCrawler: crawlerMock('Snipes') }));
-jest.mock('./crawlers/arket.crawler', () => ({ ArketCrawler: crawlerMock('Arket') }));
+jest.mock('./crawlers/weekday.crawler', () => ({
+  WeekdayCrawler: crawlerMock('Weekday'),
+}));
+jest.mock('./crawlers/asos.crawler', () => ({
+  AsosCrawler: crawlerMock('Asos'),
+}));
+jest.mock('./crawlers/zalando.crawler', () => ({
+  ZalandoCrawler: crawlerMock('Zalando'),
+}));
+jest.mock('./crawlers/stories.crawler', () => ({
+  StoriesCrawler: crawlerMock('Stories'),
+}));
+jest.mock('./crawlers/snipes.crawler', () => ({
+  SnipesCrawler: crawlerMock('Snipes'),
+}));
+jest.mock('./crawlers/arket.crawler', () => ({
+  ArketCrawler: crawlerMock('Arket'),
+}));
 
 describe('CrawlerService', () => {
   let service: CrawlerService;
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        CrawlerService,
-        { provide: HttpService, useValue: null },
-      ],
+      providers: [CrawlerService, { provide: HttpService, useValue: null }],
     }).compile();
     module.useLogger(new NoOpLogger());
     service = module.get<CrawlerService>(CrawlerService);

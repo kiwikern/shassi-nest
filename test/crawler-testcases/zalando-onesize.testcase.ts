@@ -4,9 +4,7 @@ import { ZalandoCrawler } from '../../src/crawler/crawlers/zalando.crawler';
 export const zalandoOneSizeTestCase = {
   crawlerType: ZalandoCrawler,
 
-  sizes: [
-    { id: 'BU752K007-C110052000', isAvailable: true, name: '52' },
-  ],
+  sizes: [{ id: 'BU752K007-C110052000', isAvailable: true, name: '52' }],
 
   sizeChecks: [
     { size: 'BU752K007-C110052000', isAvailable: true, isLowInStock: false },

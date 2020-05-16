@@ -1,4 +1,10 @@
-import { Column, CreateDateColumn, Entity, Index, ObjectIdColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  Index,
+  ObjectIdColumn,
+} from 'typeorm';
 import { ObjectID } from 'mongodb';
 
 @Entity({ name: 'telegram-auth-tokens' })
@@ -15,5 +21,4 @@ export class TelegramTokenEntity {
 
   @CreateDateColumn()
   createdAt: Date;
-
 }

@@ -10,14 +10,18 @@ describe('Users Controller', () => {
   let module: TestingModule;
   let controller: UsersController;
   let userServiceMock: MockType<UsersService>;
-  const user: UserEntity = { _id: null, username: 'name', email: '', notificationTypes: null, password: '' };
+  const user: UserEntity = {
+    _id: null,
+    username: 'name',
+    email: '',
+    notificationTypes: null,
+    password: '',
+  };
 
   beforeEach(async () => {
     module = await Test.createTestingModule({
       controllers: [UsersController],
-      providers: [
-        { provide: UsersService, useFactory: usersServiceFactory },
-      ],
+      providers: [{ provide: UsersService, useFactory: usersServiceFactory }],
     }).compile();
     module.useLogger(new NoOpLogger());
     controller = module.get<UsersController>(UsersController);
@@ -29,12 +33,14 @@ describe('Users Controller', () => {
   });
 
   it('should create a user', async () => {
-    (userServiceMock.createUser).mockReturnValueOnce(user);
-    await expect(controller.createUser({ password: '', email: '', username: 'name' })).toBe(user);
+    userServiceMock.createUser.mockReturnValueOnce(user);
+    await expect(
+      controller.createUser({ password: '', email: '', username: 'name' }),
+    ).toBe(user);
   });
 
   it('should update a user', async () => {
-    (userServiceMock.updateUser).mockReturnValueOnce(user);
+    userServiceMock.updateUser.mockReturnValueOnce(user);
     await expect(controller.updateUser(user, { email: 'test' })).toBe(user);
   });
 });

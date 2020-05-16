@@ -1,5 +1,10 @@
 import { Crawler } from '../crawler.interface';
-import { HttpService, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
+import {
+  HttpService,
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
 import { ProductSizeAvailability } from '../product-size.interface';
 import { JSDOM } from 'jsdom';
 import { generateUserAgent } from './user-agent-generator';
@@ -10,19 +15,21 @@ export class AmazonCrawler implements Crawler {
   document: Document;
   logger: Logger = new Logger(AmazonCrawler.name);
 
-  constructor(private httpService: HttpService) {
-  }
+  constructor(private httpService: HttpService) {}
 
   async init(url: string) {
     this.url = url;
     const headers = {
-      'accept': 'text/html,application/xhtml+xml,application/xmlq=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+      accept:
+        'text/html,application/xhtml+xml,application/xmlq=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
       'accept-encoding': 'gzip, deflate, br',
       'accept-language': 'en-US,en;q=0.9,de-DE;q=0.8,de;q=0.7',
       'cache-control': 'no-cache',
       'User-Agent': generateUserAgent(),
     };
-    const response = await this.httpService.get(this.url, { headers }).toPromise();
+    const response = await this.httpService
+      .get(this.url, { headers })
+      .toPromise();
     this.document = new JSDOM(response.data).window.document;
   }
 
@@ -32,9 +39,7 @@ export class AmazonCrawler implements Crawler {
       return ebookTitle.innerHTML.trim();
     }
 
-    return this.document.getElementById('productTitle')
-      .innerHTML
-      .trim();
+    return this.document.getElementById('productTitle').innerHTML.trim();
   }
 
   getPrice(): number {
@@ -79,7 +84,10 @@ export class AmazonCrawler implements Crawler {
 
   isInCatalog(): boolean {
     const availabilityDiv = this.document.getElementById('availability');
-    return !availabilityDiv || !availabilityDiv.innerHTML.includes('Derzeit nicht verfügbar');
+    return (
+      !availabilityDiv ||
+      !availabilityDiv.innerHTML.includes('Derzeit nicht verfügbar')
+    );
   }
 
   isSizeAvailable(id?: string): boolean {
@@ -100,5 +108,4 @@ export class AmazonCrawler implements Crawler {
       return Number.parseFloat(matches[1].replace(',', '.'));
     }
   }
-
 }

@@ -21,7 +21,7 @@ import { AdminModule } from './admin/admin.module';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => {
-        return ({
+        return {
           type: 'mongodb',
           host: configService.databaseHost,
           port: configService.databasePort,
@@ -36,8 +36,9 @@ import { AdminModule } from './admin/admin.module';
           ],
           extra: { useNewUrlParser: true },
           synchronize: true,
-          keepConnectionAlive: !configService.isProduction && configService.keepConnectionAlive,
-        });
+          keepConnectionAlive:
+            !configService.isProduction && configService.keepConnectionAlive,
+        };
       },
       inject: [ConfigService],
     }),
@@ -50,9 +51,6 @@ import { AdminModule } from './admin/admin.module';
     NotificationsModule,
     AdminModule,
   ],
-  providers: [
-    { provide: APP_PIPE, useValue: new ValidationPipe() },
-  ],
+  providers: [{ provide: APP_PIPE, useValue: new ValidationPipe() }],
 })
-export class AppModule {
-}
+export class AppModule {}

@@ -1,8 +1,13 @@
-import { canonicalizeUrl, toInteger, toObjectId, toStringSafe, typeFn } from './utils';
+import {
+  canonicalizeUrl,
+  toInteger,
+  toObjectId,
+  toStringSafe,
+  typeFn,
+} from './utils';
 import { ObjectID } from 'mongodb';
 
 describe('utils', () => {
-
   describe('toStringSafe', () => {
     it('should handle null', () => {
       expect(toStringSafe(null)).toBe(null);
@@ -17,7 +22,9 @@ describe('utils', () => {
     });
 
     it('should handle ObjectID', () => {
-      expect(toStringSafe(ObjectID.createFromTime(0))).toBe('000000000000000000000000');
+      expect(toStringSafe(ObjectID.createFromTime(0))).toBe(
+        '000000000000000000000000',
+      );
     });
   });
 
@@ -35,7 +42,9 @@ describe('utils', () => {
     });
 
     it('should handle ObjectID', () => {
-      expect(toObjectId('000000000000000000000000')).toEqual(ObjectID.createFromTime(0));
+      expect(toObjectId('000000000000000000000000')).toEqual(
+        ObjectID.createFromTime(0),
+      );
     });
   });
 
@@ -55,7 +64,6 @@ describe('utils', () => {
     it('should not change url', () => {
       expect(canonicalizeUrl('http://www.text')).toBe('http://www.text');
     });
-
   });
 
   describe('typeFn', () => {
@@ -70,5 +78,4 @@ describe('utils', () => {
       expect(toInteger('123')).toBe(123);
     });
   });
-
 });

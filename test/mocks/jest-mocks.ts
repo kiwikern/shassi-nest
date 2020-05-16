@@ -17,68 +17,82 @@ import { AdminService } from '../../src/admin/admin.service';
 import { TelegramLoginService } from '../../src/telegram/telegram-login.service';
 
 /* eslint-disable @typescript-eslint/ban-ts-ignore */
-export const productsServiceFactory: () => MockType<ProductsService> = jest.fn(() => ({
-  updateAllProducts: jest.fn(),
-  updateAllFavorites: jest.fn(),
-  getProducts: jest.fn(),
-  initializeProduct: jest.fn(),
-  addProduct: jest.fn(),
-  deleteProduct: jest.fn(),
-  updateSingleProduct: jest.fn(),
-  markRead: jest.fn(),
-  setFavorite: jest.fn(),
-  findProductsWithErrors: jest.fn(),
-  reactivateProduct: jest.fn(),
-  deleteProductAsAdmin: jest.fn(),
-}));
+export const productsServiceFactory: () => MockType<ProductsService> = jest.fn(
+  () => ({
+    updateAllProducts: jest.fn(),
+    updateAllFavorites: jest.fn(),
+    getProducts: jest.fn(),
+    initializeProduct: jest.fn(),
+    addProduct: jest.fn(),
+    deleteProduct: jest.fn(),
+    updateSingleProduct: jest.fn(),
+    markRead: jest.fn(),
+    setFavorite: jest.fn(),
+    findProductsWithErrors: jest.fn(),
+    reactivateProduct: jest.fn(),
+    deleteProductAsAdmin: jest.fn(),
+  }),
+);
 
-export const telegramServiceFactory: () => MockType<TelegramService> = jest.fn(() => ({
-  notifyAboutUpdate: jest.fn(),
-  onModuleInit: jest.fn(),
-  onModuleDestroy: jest.fn(),
-  handleErrors: jest.fn(),
-  addProductOnURLSent: jest.fn(),
-  authSession: jest.fn(),
-  startCommand: jest.fn(),
-  updateProductOnSizeChosen: jest.fn(),
-  cleanUpSessionData: jest.fn(),
-  evenlySplitArray: jest.fn(),
-  handleReceivedPhoto: jest.fn(),
-  handleMessageWithoutUrl: jest.fn(),
-  helpCommand: jest.fn(),
-}));
+export const telegramServiceFactory: () => MockType<TelegramService> = jest.fn(
+  () => ({
+    notifyAboutUpdate: jest.fn(),
+    onModuleInit: jest.fn(),
+    onModuleDestroy: jest.fn(),
+    handleErrors: jest.fn(),
+    addProductOnURLSent: jest.fn(),
+    authSession: jest.fn(),
+    startCommand: jest.fn(),
+    updateProductOnSizeChosen: jest.fn(),
+    cleanUpSessionData: jest.fn(),
+    evenlySplitArray: jest.fn(),
+    handleReceivedPhoto: jest.fn(),
+    handleMessageWithoutUrl: jest.fn(),
+    helpCommand: jest.fn(),
+  }),
+);
 
-export const cronJobServiceFactory: () => MockType<CronJobService> = jest.fn(() => ({
-  create: jest.fn(() => ({
-    start: () => null,
-    nextDates: () => new Date(),
-    stop: jest.fn(),
-  })),
-}));
+export const cronJobServiceFactory: () => MockType<CronJobService> = jest.fn(
+  () => ({
+    create: jest.fn(() => ({
+      start: () => null,
+      nextDates: () => new Date(),
+      stop: jest.fn(),
+    })),
+  }),
+);
 
-export const telegramUserIdServiceFactory: () => MockType<TelegramUserIdService> = jest.fn(() => ({
+export const telegramUserIdServiceFactory: () => MockType<
+  TelegramUserIdService
+> = jest.fn(() => ({
   findUserId: jest.fn(),
   findTelegramId: jest.fn(),
   saveTelegramId: jest.fn(),
 }));
 
-export const telegramLoginServiceFactory: () => MockType<TelegramLoginService> = jest.fn(() => ({
+export const telegramLoginServiceFactory: () => MockType<
+  TelegramLoginService
+> = jest.fn(() => ({
   login: jest.fn(),
 }));
 
 // @ts-ignore
-export const repositoryMockFactory: () => MockType<Repository<any>> = jest.fn(() => ({
-  find: jest.fn(),
-  findOne: jest.fn(),
-  create: jest.fn(entity => entity),
-  save: jest.fn(entity => entity),
-  delete: jest.fn(() => Promise.resolve()),
-  queryRunner: jest.fn(),
-  metadata: jest.fn(),
-  manager: jest.fn(),
-}));
+export const repositoryMockFactory: () => MockType<Repository<any>> = jest.fn(
+  () => ({
+    find: jest.fn(),
+    findOne: jest.fn(),
+    create: jest.fn(entity => entity),
+    save: jest.fn(entity => entity),
+    delete: jest.fn(() => Promise.resolve()),
+    queryRunner: jest.fn(),
+    metadata: jest.fn(),
+    manager: jest.fn(),
+  }),
+);
 
-export const tokenServiceFactory: () => MockType<TelegramTokenService> = jest.fn(() => ({
+export const tokenServiceFactory: () => MockType<
+  TelegramTokenService
+> = jest.fn(() => ({
   checkToken: jest.fn(),
   createToken: jest.fn(),
   onModuleInit: jest.fn(),
@@ -99,24 +113,30 @@ export const telegrafFactory: () => MockType<Telegraf<any>> = jest.fn(() => ({
 }));
 
 // @ts-ignore
-export const entityManagerMockFactory: () => MockType<MongoEntityManager> = jest.fn(() => ({
+export const entityManagerMockFactory: () => MockType<
+  MongoEntityManager
+> = jest.fn(() => ({
   createCollectionIndex: jest.fn(),
 }));
 
-export const bcryptServiceFactory: () => MockType<BcryptService> = jest.fn(() => ({
-  hash: jest.fn(),
-  checkEncryptedData: jest.fn(),
-}));
+export const bcryptServiceFactory: () => MockType<BcryptService> = jest.fn(
+  () => ({
+    hash: jest.fn(),
+    checkEncryptedData: jest.fn(),
+  }),
+);
 
-export const usersServiceFactory: () => MockType<UsersService> = jest.fn(() => ({
-  findOneByUsername: jest.fn(),
-  createUser: jest.fn(),
-  createUserWithUniqueName: jest.fn(),
-  updateUser: jest.fn(),
-  findOneByEmail: jest.fn(),
-  getAllUsers: jest.fn(),
-  findOneById: jest.fn(),
-}));
+export const usersServiceFactory: () => MockType<UsersService> = jest.fn(
+  () => ({
+    findOneByUsername: jest.fn(),
+    createUser: jest.fn(),
+    createUserWithUniqueName: jest.fn(),
+    updateUser: jest.fn(),
+    findOneByEmail: jest.fn(),
+    getAllUsers: jest.fn(),
+    findOneById: jest.fn(),
+  }),
+);
 
 export const jwtServiceFactory: () => MockType<JwtService> = jest.fn(() => ({
   sign: jest.fn(),
@@ -126,10 +146,12 @@ export const jwtServiceFactory: () => MockType<JwtService> = jest.fn(() => ({
   decode: jest.fn(),
 }));
 
-export const crawlerServiceFactory: () => MockType<CrawlerService> = jest.fn(() => ({
-  getInitData: jest.fn(),
-  getUpdateData: jest.fn(),
-}));
+export const crawlerServiceFactory: () => MockType<CrawlerService> = jest.fn(
+  () => ({
+    getInitData: jest.fn(),
+    getUpdateData: jest.fn(),
+  }),
+);
 
 export const authServiceFactory: () => MockType<AuthService> = jest.fn(() => ({
   validateUser: jest.fn(),
@@ -144,7 +166,9 @@ export const reflectorFactory: () => MockType<Reflector> = jest.fn(() => ({
   getAllAndOverride: jest.fn(),
 }));
 
-export const executionContextFactory: () => MockType<ExecutionContext> = jest.fn(() => ({
+export const executionContextFactory: () => MockType<
+  ExecutionContext
+> = jest.fn(() => ({
   getClass: jest.fn(),
   getHandler: jest.fn(),
   switchToHttp: jest.fn(),
@@ -155,9 +179,11 @@ export const executionContextFactory: () => MockType<ExecutionContext> = jest.fn
   switchToWs: jest.fn(),
 }));
 
-export const adminServiceFactory: () => MockType<AdminService> = jest.fn(() => ({
-  getUsersOverview: jest.fn(),
-  getErrorProducts: jest.fn(),
-  reactivateProduct: jest.fn(),
-  deleteProduct: jest.fn(),
-}));
+export const adminServiceFactory: () => MockType<AdminService> = jest.fn(
+  () => ({
+    getUsersOverview: jest.fn(),
+    getErrorProducts: jest.fn(),
+    reactivateProduct: jest.fn(),
+    deleteProduct: jest.fn(),
+  }),
+);

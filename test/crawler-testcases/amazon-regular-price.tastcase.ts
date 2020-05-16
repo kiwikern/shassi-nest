@@ -4,19 +4,13 @@ import { AmazonCrawler } from '../../src/crawler/crawlers/amazon.crawler';
 
 export const amazonRegularPriceTaseCase = {
   crawlerType: AmazonCrawler,
-  sizes: [
-    { id: 'ONESIZE', isAvailable: true, name: 'ONESIZE' },
-  ],
+  sizes: [{ id: 'ONESIZE', isAvailable: true, name: 'ONESIZE' }],
 
-  sizeChecks: [
-    { size: 'ONESIZE', isAvailable: true, isLowInStock: false },
-  ],
+  sizeChecks: [{ size: 'ONESIZE', isAvailable: true, isLowInStock: false }],
 
   name: 'WINOMO Kleiderhaken Klappbar Wand-Kleiderständer',
 
-  priceChecks: [
-    { size: 'ONESIZE', price: 14.99 },
-  ],
+  priceChecks: [{ size: 'ONESIZE', price: 14.99 }],
 
   testResponse: `<!doctype html><html lang="de-de" class="a-no-js" data-19ax5a9jf="dingo"><!-- sp:feature:head-start -->
 <head><script>var aPageStart = (new Date()).getTime();</script><meta charset="utf-8">

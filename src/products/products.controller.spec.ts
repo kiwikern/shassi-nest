@@ -35,7 +35,10 @@ describe('Product Controller', () => {
 
   it('should add a product', async () => {
     await controller.addProduct({ _id: 'id' } as any, 'product' as any);
-    expect(productsServiceMock.addProduct).toHaveBeenCalledWith('id', 'product');
+    expect(productsServiceMock.addProduct).toHaveBeenCalledWith(
+      'id',
+      'product',
+    );
   });
 
   it('should mark a product as read', async () => {
@@ -46,22 +49,38 @@ describe('Product Controller', () => {
 
   it('should set a product as favorite', async () => {
     const productId = ObjectID.createFromTime(0);
-    await controller.setFavorite({ _id: 'id' } as any, productId, {isFavorite: true});
-    expect(productsServiceMock.setFavorite).toHaveBeenCalledWith('id', productId, true);
+    await controller.setFavorite({ _id: 'id' } as any, productId, {
+      isFavorite: true,
+    });
+    expect(productsServiceMock.setFavorite).toHaveBeenCalledWith(
+      'id',
+      productId,
+      true,
+    );
   });
 
   it('should update a product', async () => {
     const productId = ObjectID.createFromTime(0);
     await controller.updateProduct({ _id: 'id' } as any, productId);
-    expect(productsServiceMock.updateSingleProduct).toHaveBeenCalledWith('id', productId);
+    expect(productsServiceMock.updateSingleProduct).toHaveBeenCalledWith(
+      'id',
+      productId,
+    );
   });
 
   it('should delete a product', async () => {
     const productId = ObjectID.createFromTime(0);
-    productsServiceMock.deleteProduct.mockImplementation(() => Promise.resolve(true));
-    const result = await controller.deleteProduct({ _id: 'id' } as any, productId);
+    productsServiceMock.deleteProduct.mockImplementation(() =>
+      Promise.resolve(true),
+    );
+    const result = await controller.deleteProduct(
+      { _id: 'id' } as any,
+      productId,
+    );
     expect(result.success).toBe(true);
-    expect(productsServiceMock.deleteProduct).toHaveBeenCalledWith('id', productId);
+    expect(productsServiceMock.deleteProduct).toHaveBeenCalledWith(
+      'id',
+      productId,
+    );
   });
-
 });

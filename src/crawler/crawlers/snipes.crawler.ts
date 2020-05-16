@@ -1,5 +1,10 @@
 import { Crawler } from '../crawler.interface';
-import { HttpService, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
+import {
+  HttpService,
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
 import { ProductSizeAvailability } from '../product-size.interface';
 import { JSDOM } from 'jsdom';
 import { generateUserAgent } from './user-agent-generator';
@@ -8,36 +13,54 @@ import { generateUserAgent } from './user-agent-generator';
 export class SnipesCrawler implements Crawler {
   private logger: Logger = new Logger(SnipesCrawler.name);
   private url: string;
-  private productData: { name: string; brand: { name: string }; offers: { price: string; availability: string } };
+  private productData: {
+    name: string;
+    brand: { name: string };
+    offers: { price: string; availability: string };
+  };
   private availabilityData: {
     id: string;
     displayValue: string;
     isOrderable: boolean;
   }[] = [];
 
-  constructor(private httpService: HttpService) {
-  }
+  constructor(private httpService: HttpService) {}
 
   async init(url: string) {
     this.url = url;
     const headers = {
-      'accept': 'text/html,application/xhtml+xml,application/xmlq=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+      accept:
+        'text/html,application/xhtml+xml,application/xmlq=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
       'accept-encoding': 'gzip, deflate, br',
       'accept-language': 'en-US,en;q=0.9,de-DE;q=0.8,de;q=0.7',
       'cache-control': 'no-cache',
       'User-Agent': generateUserAgent(),
     };
-    const response = await this.httpService.get(this.url, { headers }).toPromise();
+    const response = await this.httpService
+      .get(this.url, { headers })
+      .toPromise();
     const document = new JSDOM(response.data).window.document;
     if (document.getElementsByClassName('b-pdp-one-size-label').length > 0) {
-      this.availabilityData.push({id: 'one size', displayValue: 'one size', isOrderable: true});
+      this.availabilityData.push({
+        id: 'one size',
+        displayValue: 'one size',
+        isOrderable: true,
+      });
     }
-    const sizeElements = document.getElementsByClassName('b-swatch-value-wrapper');
+    const sizeElements = document.getElementsByClassName(
+      'b-swatch-value-wrapper',
+    );
     for (const sizeElement of sizeElements) {
       const innerSizeElement = sizeElement.querySelector('span');
       const sizeName = innerSizeElement.getAttribute('data-attr-value');
-      const isOrderable = innerSizeElement.classList.contains('b-swatch-value--orderable');
-      this.availabilityData.push({id: sizeName, displayValue: sizeName, isOrderable});
+      const isOrderable = innerSizeElement.classList.contains(
+        'b-swatch-value--orderable',
+      );
+      this.availabilityData.push({
+        id: sizeName,
+        displayValue: sizeName,
+        isOrderable,
+      });
     }
     for (const script of document.scripts) {
       if (script.type === 'application/ld+json') {
@@ -62,17 +85,19 @@ export class SnipesCrawler implements Crawler {
 
   getSizes(): ProductSizeAvailability[] {
     return this.availabilityData.map(v => ({
-        id: v.id,
-        name: v.displayValue,
-        isAvailable: v.isOrderable,
-      }));
+      id: v.id,
+      name: v.displayValue,
+      isAvailable: v.isOrderable,
+    }));
   }
 
   isInCatalog(): boolean {
-    return this.productData
-      && this.productData.offers
-      && this.productData.offers.availability
-      && this.productData.offers.availability.includes('InStock');
+    return (
+      this.productData &&
+      this.productData.offers &&
+      this.productData.offers.availability &&
+      this.productData.offers.availability.includes('InStock')
+    );
   }
 
   isSizeAvailable(id?: string): boolean {
@@ -87,5 +112,4 @@ export class SnipesCrawler implements Crawler {
   getUrl(): string {
     return this.url;
   }
-
 }

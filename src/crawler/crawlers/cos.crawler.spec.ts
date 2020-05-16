@@ -7,19 +7,18 @@ import { of } from 'rxjs';
 
 const testCases = [cosTestCase, cosOneSizeTestCase];
 
-describe('Cos',
-  () => {
-    testCases.forEach(testCase => crawlerTestRun(testCase));
+describe('Cos', () => {
+  testCases.forEach(testCase => crawlerTestRun(testCase));
 
-    it('should reject url without product data', async () => {
-      const httpService = {
-        get: () => of({ data: null }),
-      } as any;
-      const crawler = new CosCrawler(httpService);
-      try {
-        await crawler.init('any url');
-      } catch (e) {
-        expect(e).toBeInstanceOf(BadRequestException);
-      }
-    });
+  it('should reject url without product data', async () => {
+    const httpService = {
+      get: () => of({ data: null }),
+    } as any;
+    const crawler = new CosCrawler(httpService);
+    try {
+      await crawler.init('any url');
+    } catch (e) {
+      expect(e).toBeInstanceOf(BadRequestException);
+    }
   });
+});

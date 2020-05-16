@@ -6,9 +6,7 @@ export const asosOneSizeTestCase = {
 
   url: 'https://asos/prd/293828?dasdas',
 
-  sizes: [
-    { id: '11493211', isAvailable: true, name: 'No Size' },
-  ],
+  sizes: [{ id: '11493211', isAvailable: true, name: 'No Size' }],
 
   sizeChecks: [
     { size: '11493211', isAvailable: true, isLowInStock: false },
@@ -22,34 +20,38 @@ export const asosOneSizeTestCase = {
     { size: 'unknown-size', price: 7.49 },
   ],
 
-  secondResponse: [{
-    productId: 11493201,
-    productCode: '1413879',
-    productPrice: {
-      current: { value: 7.49, text: '7,49 €' },
-      previous: { value: 0.0, text: '0,00 €' },
-      rrp: { value: 0.0, text: '0,00 €' },
-      xrp: { value: 5.17, text: '£5.17' },
-      currency: 'EUR',
-      isMarkedDown: false,
-      isOutletPrice: false,
-    },
-    variants: [{
-      variantId: 11493211,
-      sku: '8165186',
-      isInStock: true,
-      isLowInStock: false,
-      price: {
+  secondResponse: [
+    {
+      productId: 11493201,
+      productCode: '1413879',
+      productPrice: {
         current: { value: 7.49, text: '7,49 €' },
-        previous: { value: 7.49, text: '7,49 €' },
+        previous: { value: 0.0, text: '0,00 €' },
         rrp: { value: 0.0, text: '0,00 €' },
         xrp: { value: 5.17, text: '£5.17' },
         currency: 'EUR',
         isMarkedDown: false,
         isOutletPrice: false,
       },
-    }],
-  }],
+      variants: [
+        {
+          variantId: 11493211,
+          sku: '8165186',
+          isInStock: true,
+          isLowInStock: false,
+          price: {
+            current: { value: 7.49, text: '7,49 €' },
+            previous: { value: 7.49, text: '7,49 €' },
+            rrp: { value: 0.0, text: '0,00 €' },
+            xrp: { value: 5.17, text: '£5.17' },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+      ],
+    },
+  ],
 
   testResponse: `
     <!DOCTYPE html>

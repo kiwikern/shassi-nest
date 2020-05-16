@@ -4,19 +4,14 @@ import { AmazonCrawler } from '../../src/crawler/crawlers/amazon.crawler';
 
 export const amazonDealPriceTaseCase = {
   crawlerType: AmazonCrawler,
-  sizes: [
-    { id: 'ONESIZE', isAvailable: true, name: 'ONESIZE' },
-  ],
+  sizes: [{ id: 'ONESIZE', isAvailable: true, name: 'ONESIZE' }],
 
-  sizeChecks: [
-    { size: 'ONESIZE', isAvailable: true, isLowInStock: false },
-  ],
+  sizeChecks: [{ size: 'ONESIZE', isAvailable: true, isLowInStock: false }],
 
-  name: 'MaxiNutrition Whey Protein Pro Vanille – Eiweißpulver für den Muskelaufbau nach dem Training – 1 x 390 g Packung Protein Shake mit Vanille Geschmack',
+  name:
+    'MaxiNutrition Whey Protein Pro Vanille – Eiweißpulver für den Muskelaufbau nach dem Training – 1 x 390 g Packung Protein Shake mit Vanille Geschmack',
 
-  priceChecks: [
-    { size: 'ONESIZE', price: 8.99 },
-  ],
+  priceChecks: [{ size: 'ONESIZE', price: 8.99 }],
 
   testResponse: `<!doctype html><html lang="de-de" class="a-no-js" data-19ax5a9jf="dingo"><!-- sp:feature:head-start -->
 <head><script>var aPageStart = (new Date()).getTime();</script><meta charset="utf-8">

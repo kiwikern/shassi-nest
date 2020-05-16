@@ -8,12 +8,7 @@ import { CrawlerModule } from '../crawler/crawler.module';
 @Module({
   controllers: [ProductsController],
   providers: [ProductsService],
-  imports: [
-    TypeOrmModule.forFeature([ProductEntity]),
-    CrawlerModule,
-  ],
+  imports: [TypeOrmModule.forFeature([ProductEntity]), CrawlerModule],
   exports: [ProductsService],
 })
-export class ProductsModule {
-
-}
+export class ProductsModule {}

@@ -4,11 +4,10 @@ import { CosCrawler } from '../../src/crawler/crawlers/cos.crawler';
 export const cosOneSizeTestCase = {
   crawlerType: CosCrawler,
 
-  url: 'https://www.cosstores.com/en_eur/women/accessories/product.oval-shaped-hair-barrette-gold.0695515001.html',
+  url:
+    'https://www.cosstores.com/en_eur/women/accessories/product.oval-shaped-hair-barrette-gold.0695515001.html',
 
-  sizes: [
-    { id: '0695515001001', isAvailable: true, name: 'ONESIZE' },
-  ],
+  sizes: [{ id: '0695515001001', isAvailable: true, name: 'ONESIZE' }],
 
   sizeChecks: [
     { size: '0695515001001', isAvailable: true, isLowInStock: false },
@@ -22,7 +21,7 @@ export const cosOneSizeTestCase = {
     { size: 'unknown-size', price: 25 },
   ],
 
-  secondResponse: {availability: ['0695515001001'], fewPieceLeft: []},
+  secondResponse: { availability: ['0695515001001'], fewPieceLeft: [] },
 
   testResponse: `<!DOCTYPE HTML>
 <html class="no-js">

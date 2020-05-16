@@ -7,7 +7,8 @@ import { AsosCrawler } from '../../src/crawler/crawlers/asos.crawler';
 export const asosNoSaleTestCase = {
   crawlerType: AsosCrawler,
 
-  url: 'https://www.asos.de/asos-design/asos-design-extrem-enge-jeans-in-schwarz/prd/6655290',
+  url:
+    'https://www.asos.de/asos-design/asos-design-extrem-enge-jeans-in-schwarz/prd/6655290',
 
   sizes: [
     { id: '6655296', name: 'W26 L30', isAvailable: true },
@@ -55,789 +56,791 @@ export const asosNoSaleTestCase = {
     { size: 'unknown-size', price: 33.99 },
   ],
 
-  secondResponse: [{
-    productId: 6655290,
-    productCode: '711297',
-    productPrice: {
-      current: {
-        value: 33.99,
-        text: '33,99 €',
+  secondResponse: [
+    {
+      productId: 6655290,
+      productCode: '711297',
+      productPrice: {
+        current: {
+          value: 33.99,
+          text: '33,99 €',
+        },
+        previous: {
+          value: 0,
+          text: '0,00 €',
+        },
+        rrp: {
+          value: 0,
+          text: '0,00 €',
+        },
+        xrp: {
+          value: 23.45,
+          text: '£23.45',
+        },
+        currency: 'EUR',
+        isMarkedDown: false,
+        isOutletPrice: false,
       },
-      previous: {
-        value: 0,
-        text: '0,00 €',
-      },
-      rrp: {
-        value: 0,
-        text: '0,00 €',
-      },
-      xrp: {
-        value: 23.45,
-        text: '£23.45',
-      },
-      currency: 'EUR',
-      isMarkedDown: false,
-      isOutletPrice: false,
+      variants: [
+        {
+          variantId: 6655296,
+          sku: '4862172',
+          isInStock: true,
+          isLowInStock: true,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 6655295,
+          sku: '4862171',
+          isInStock: true,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 6655298,
+          sku: '4862174',
+          isInStock: false,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 6655297,
+          sku: '4862173',
+          isInStock: false,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 8114874,
+          sku: '6102859',
+          isInStock: true,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 8114851,
+          sku: '6102860',
+          isInStock: false,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 6655303,
+          sku: '4862177',
+          isInStock: true,
+          isLowInStock: true,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 6655301,
+          sku: '4862176',
+          isInStock: false,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 6655299,
+          sku: '4862175',
+          isInStock: true,
+          isLowInStock: true,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 8114885,
+          sku: '6102861',
+          isInStock: false,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 8114844,
+          sku: '6102862',
+          isInStock: false,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 8114881,
+          sku: '6102863',
+          isInStock: false,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 6655310,
+          sku: '4862180',
+          isInStock: false,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 6655307,
+          sku: '4862179',
+          isInStock: false,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 6655305,
+          sku: '4862178',
+          isInStock: false,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 8114852,
+          sku: '6102864',
+          isInStock: true,
+          isLowInStock: true,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 8114893,
+          sku: '6102865',
+          isInStock: false,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 8114840,
+          sku: '6102866',
+          isInStock: false,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 6655318,
+          sku: '4862183',
+          isInStock: true,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 6655315,
+          sku: '4862182',
+          isInStock: false,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 6655312,
+          sku: '4862181',
+          isInStock: false,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 8346357,
+          sku: '6301163',
+          isInStock: false,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 6655300,
+          sku: '4862185',
+          isInStock: false,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 6655321,
+          sku: '4862184',
+          isInStock: false,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 8346465,
+          sku: '6301164',
+          isInStock: true,
+          isLowInStock: true,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 6655304,
+          sku: '4862187',
+          isInStock: false,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 6655302,
+          sku: '4862186',
+          isInStock: false,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+        {
+          variantId: 6655306,
+          sku: '4862188',
+          isInStock: false,
+          isLowInStock: false,
+          price: {
+            current: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            previous: {
+              value: 33.99,
+              text: '33,99 €',
+            },
+            rrp: {
+              value: 0,
+              text: '0,00 €',
+            },
+            xrp: {
+              value: 23.45,
+              text: '£23.45',
+            },
+            currency: 'EUR',
+            isMarkedDown: false,
+            isOutletPrice: false,
+          },
+        },
+      ],
     },
-    variants: [
-      {
-        variantId: 6655296,
-        sku: '4862172',
-        isInStock: true,
-        isLowInStock: true,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 6655295,
-        sku: '4862171',
-        isInStock: true,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 6655298,
-        sku: '4862174',
-        isInStock: false,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 6655297,
-        sku: '4862173',
-        isInStock: false,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 8114874,
-        sku: '6102859',
-        isInStock: true,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 8114851,
-        sku: '6102860',
-        isInStock: false,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 6655303,
-        sku: '4862177',
-        isInStock: true,
-        isLowInStock: true,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 6655301,
-        sku: '4862176',
-        isInStock: false,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 6655299,
-        sku: '4862175',
-        isInStock: true,
-        isLowInStock: true,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 8114885,
-        sku: '6102861',
-        isInStock: false,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 8114844,
-        sku: '6102862',
-        isInStock: false,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 8114881,
-        sku: '6102863',
-        isInStock: false,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 6655310,
-        sku: '4862180',
-        isInStock: false,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 6655307,
-        sku: '4862179',
-        isInStock: false,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 6655305,
-        sku: '4862178',
-        isInStock: false,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 8114852,
-        sku: '6102864',
-        isInStock: true,
-        isLowInStock: true,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 8114893,
-        sku: '6102865',
-        isInStock: false,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 8114840,
-        sku: '6102866',
-        isInStock: false,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 6655318,
-        sku: '4862183',
-        isInStock: true,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 6655315,
-        sku: '4862182',
-        isInStock: false,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 6655312,
-        sku: '4862181',
-        isInStock: false,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 8346357,
-        sku: '6301163',
-        isInStock: false,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 6655300,
-        sku: '4862185',
-        isInStock: false,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 6655321,
-        sku: '4862184',
-        isInStock: false,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 8346465,
-        sku: '6301164',
-        isInStock: true,
-        isLowInStock: true,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 6655304,
-        sku: '4862187',
-        isInStock: false,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 6655302,
-        sku: '4862186',
-        isInStock: false,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-      {
-        variantId: 6655306,
-        sku: '4862188',
-        isInStock: false,
-        isLowInStock: false,
-        price: {
-          current: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          previous: {
-            value: 33.99,
-            text: '33,99 €',
-          },
-          rrp: {
-            value: 0,
-            text: '0,00 €',
-          },
-          xrp: {
-            value: 23.45,
-            text: '£23.45',
-          },
-          currency: 'EUR',
-          isMarkedDown: false,
-          isOutletPrice: false,
-        },
-      },
-    ],
-  }],
+  ],
 
   testResponse: `
     <!DOCTYPE html>

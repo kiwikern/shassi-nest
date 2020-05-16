@@ -1,4 +1,10 @@
-import { BadRequestException, HttpService, Injectable, Logger, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpService,
+  Injectable,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
 import { Crawler } from './crawler.interface';
 import { HmCrawler } from './crawlers/hm.crawler';
 import { ProductUpdate } from '../products/entities/product-update.entity';
@@ -15,13 +21,13 @@ import { ArketCrawler } from './crawlers/arket.crawler';
 
 @Injectable()
 export class CrawlerService {
-
   private readonly logger: Logger = new Logger(CrawlerService.name);
 
-  constructor(private httpService: HttpService) {
-  }
+  constructor(private httpService: HttpService) {}
 
-  async getInitData(url: string): Promise<{ name: string; sizes: ProductSizeAvailability[]; url: string }> {
+  async getInitData(
+    url: string,
+  ): Promise<{ name: string; sizes: ProductSizeAvailability[]; url: string }> {
     const crawler = await this.getCrawler(url);
     if (!crawler.isInCatalog()) {
       throw new NotFoundException('Product does not exist.');
@@ -81,5 +87,4 @@ export class CrawlerService {
     await crawler.init(url);
     return crawler;
   }
-
 }

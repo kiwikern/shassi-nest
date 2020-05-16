@@ -4,7 +4,8 @@ import { CosCrawler } from '../../src/crawler/crawlers/cos.crawler';
 export const cosTestCase = {
   crawlerType: CosCrawler,
 
-  url: 'https://www.cosstores.com/en_eur/men/menswear/coats-jackets/product.wool-blend-bomber-jacket-green.0722148001.html?utm_source=newsletter&utm_medium=email&utm_campaign=2019_SUN_W07_EU&utm_content=re_actives',
+  url:
+    'https://www.cosstores.com/en_eur/men/menswear/coats-jackets/product.wool-blend-bomber-jacket-green.0722148001.html?utm_source=newsletter&utm_medium=email&utm_campaign=2019_SUN_W07_EU&utm_content=re_actives',
 
   sizes: [
     { id: '0722148001001', isAvailable: false, name: 'XS' },
@@ -30,7 +31,15 @@ export const cosTestCase = {
     { size: 'unknown-size', price: 49 },
   ],
 
-  secondResponse: { availability: ['0722148001005', '0722148001003', '0722148001004', '0722148001002'], fewPieceLeft: ['0722148001002'] },
+  secondResponse: {
+    availability: [
+      '0722148001005',
+      '0722148001003',
+      '0722148001004',
+      '0722148001002',
+    ],
+    fewPieceLeft: ['0722148001002'],
+  },
 
   testResponse: `<!DOCTYPE HTML>
 <html class="no-js">

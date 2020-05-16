@@ -4,9 +4,7 @@ import { HmCrawler } from '../../src/crawler/crawlers/hm.crawler';
 export const hmClubPriceTestcase = {
   crawlerType: HmCrawler,
 
-  sizes: [
-    { id: '0391032007001', isAvailable: true, name: 'ONESIZE' },
-  ],
+  sizes: [{ id: '0391032007001', isAvailable: true, name: 'ONESIZE' }],
 
   sizeChecks: [
     { size: '0391032007001', isAvailable: true, isLowInStock: false },
@@ -22,7 +20,7 @@ export const hmClubPriceTestcase = {
 
   url: 'https://www2.hm.com/de_de/productpage.0391032007.html',
 
-  secondResponse: { 'availability': ['0391032007001'], 'fewPieceLeft': [] },
+  secondResponse: { availability: ['0391032007001'], fewPieceLeft: [] },
 
   testResponse: `<!DOCTYPE HTML>
 <html lang="de" class="no-js de-de">

@@ -1,7 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AdminService } from './admin.service';
 import { UsersService } from '../users/users.service';
-import { productsServiceFactory, telegramUserIdServiceFactory, usersServiceFactory } from '../../test/mocks/jest-mocks';
+import {
+  productsServiceFactory,
+  telegramUserIdServiceFactory,
+  usersServiceFactory,
+} from '../../test/mocks/jest-mocks';
 import { ProductsService } from '../products/products.service';
 import { MockType } from '../../test/mock.type';
 import { TelegramUserIdService } from '../telegram/telegram-user-id.service';
@@ -19,7 +23,10 @@ describe('AdminService', () => {
         AdminService,
         { provide: UsersService, useFactory: usersServiceFactory },
         { provide: ProductsService, useFactory: productsServiceFactory },
-        { provide: TelegramUserIdService, useFactory: telegramUserIdServiceFactory },
+        {
+          provide: TelegramUserIdService,
+          useFactory: telegramUserIdServiceFactory,
+        },
       ],
     }).compile();
     service = module.get<AdminService>(AdminService);
@@ -34,19 +41,30 @@ describe('AdminService', () => {
   });
 
   it('should work without any products', async () => {
-    usersService.getAllUsers.mockReturnValueOnce([{ _id: '123', username: 'user' }]);
+    usersService.getAllUsers.mockReturnValueOnce([
+      { _id: '123', username: 'user' },
+    ]);
     productsService.getProducts.mockReturnValueOnce([]);
     telegramUserIdService.findTelegramId.mockReturnValue(null);
     expect(await service.getUsersOverview()).toEqual([
-      { userId: '123', username: 'user', productCount: 0, isConnectedToTelegram: false },
+      {
+        userId: '123',
+        username: 'user',
+        productCount: 0,
+        isConnectedToTelegram: false,
+      },
     ]);
   });
 
   it('should work with one user', async () => {
-    usersService.getAllUsers.mockReturnValueOnce([{ _id: '123', username: 'user' }]);
+    usersService.getAllUsers.mockReturnValueOnce([
+      { _id: '123', username: 'user' },
+    ]);
     telegramUserIdService.findTelegramId.mockReturnValue('321');
     const date = new Date();
-    productsService.getProducts.mockReturnValueOnce([{ getCreatedAt: () => date, updatedAt: date }]);
+    productsService.getProducts.mockReturnValueOnce([
+      { getCreatedAt: () => date, updatedAt: date },
+    ]);
     expect(await service.getUsersOverview()).toEqual([
       {
         userId: '123',
@@ -60,7 +78,10 @@ describe('AdminService', () => {
   });
 
   it('should work with multiple users and products', async () => {
-    usersService.getAllUsers.mockReturnValueOnce([{ _id: '1', username: 'user' }, { _id: '2', username: 'user2' }]);
+    usersService.getAllUsers.mockReturnValueOnce([
+      { _id: '1', username: 'user' },
+      { _id: '2', username: 'user2' },
+    ]);
     telegramUserIdService.findTelegramId.mockReturnValueOnce('321');
     telegramUserIdService.findTelegramId.mockReturnValueOnce(null);
     const recentDate = new Date('2019');
@@ -112,5 +133,4 @@ describe('AdminService', () => {
     await service.deleteProduct(ObjectID.createFromTime(0));
     expect(productsService.deleteProductAsAdmin).toHaveBeenCalledTimes(1);
   });
-
 });

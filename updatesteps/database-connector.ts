@@ -2,7 +2,6 @@ import { createConnection } from 'typeorm';
 import { ConfigService } from '../src/config/config.service';
 
 export class DatabaseConnector {
-
   connect(entityClass?) {
     const configService = new ConfigService();
     let entities;

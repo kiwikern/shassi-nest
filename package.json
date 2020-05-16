@@ -7,7 +7,7 @@
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig.build.json",
     "mongod": "mongod",
-    "format": "prettier --write \"src/**/*.ts\"",
+    "format": "prettier --write \"**/*.{ts,json}\"",
     "start": "cross-env NODE_ENV=development ts-node -r tsconfig-paths/register src/main.ts",
     "start:dev": "nodemon",
     "start:debug": "nodemon --config nodemon-debug.json",
@@ -75,6 +75,7 @@
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "jest-sonar-reporter": "^2.0.0",
+    "lint-staged": "^10.2.2",
     "nodemon": "^2.0.4",
     "prettier": "^2.0.5",
     "supertest": "^4.0.2",
@@ -104,8 +105,14 @@
   },
   "husky": {
     "hooks": {
+      "pre-commit": "lint-staged",
       "pre-push": "npm run lint && npm run test"
     }
+  },
+  "lint-staged": {
+    "**/*.{ts,json}": [
+      "prettier --ignore-path ./.prettierignore --write"
+    ]
   },
   "engines": {
     "node": "12.x"

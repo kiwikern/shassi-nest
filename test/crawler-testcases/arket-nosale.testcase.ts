@@ -5,7 +5,8 @@ import { ArketCrawler } from '../../src/crawler/crawlers/arket.crawler';
 export const arketNoSaleTestCase = {
   crawlerType: ArketCrawler,
 
-  url: 'https://www.arket.com/en_eur/men/underwear-loungewear/product.pima-cotton-trunks-black.0494992001.html',
+  url:
+    'https://www.arket.com/en_eur/men/underwear-loungewear/product.pima-cotton-trunks-black.0494992001.html',
 
   sizes: [
     { id: '0494992001002', isAvailable: true, name: 'S' },
@@ -27,7 +28,34 @@ export const arketNoSaleTestCase = {
     { size: 'unknown-size', price: 10 },
   ],
 
-  secondResponse: {availability: ['0494992005004', '0494992005005', '0494992005002', '0494992005003', '0494992001002', '0494992003005', '0494992001003', '0494992001005', '0494992006005', '0494992002002', '0494992004002', '0494992002004', '0494992002003', '0494992002005', '0494992011003', '0494992011004', '0494992013005', '0494992013004', '0494992011002', '0494992013003', '0494992006002', '0494992013002', '0494992011005'], fewPieceLeft: []},
+  secondResponse: {
+    availability: [
+      '0494992005004',
+      '0494992005005',
+      '0494992005002',
+      '0494992005003',
+      '0494992001002',
+      '0494992003005',
+      '0494992001003',
+      '0494992001005',
+      '0494992006005',
+      '0494992002002',
+      '0494992004002',
+      '0494992002004',
+      '0494992002003',
+      '0494992002005',
+      '0494992011003',
+      '0494992011004',
+      '0494992013005',
+      '0494992013004',
+      '0494992011002',
+      '0494992013003',
+      '0494992006002',
+      '0494992013002',
+      '0494992011005',
+    ],
+    fewPieceLeft: [],
+  },
 
   testResponse: `<!DOCTYPE HTML>
 <html class="no-js">

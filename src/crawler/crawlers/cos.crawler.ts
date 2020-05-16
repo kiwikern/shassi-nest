@@ -12,5 +12,4 @@ export class CosCrawler extends CosWeekdayBaseCrawler {
   getBaseUrl(): string {
     return 'https://cosstores.com/en_eur';
   }
-
 }

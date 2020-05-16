@@ -4,33 +4,33 @@ import { Crawler } from '../src/crawler/crawler.interface';
 import { Logger, Type } from '@nestjs/common';
 import { NoOpLogger } from './mocks/no-op-logger';
 
-export const crawlerTestRun = (
-  {
-    crawlerType,
-    testResponse,
-    sizes,
-    sizeChecks,
-    name,
-    priceChecks,
-    url = 'my-url',
-    expectedUrl = null,
-    secondResponse = null,
-    thirdResponse = null,
-  }: {
-    crawlerType: Type<Crawler>;
-    testResponse: string | object;
-    sizes: ProductSizeAvailability[];
-    sizeChecks: {
-      isLowInStock: boolean;
-      size: string; isAvailable: boolean;
-    }[];
-    name: string; priceChecks: { size: string; price: number }[];
-    url?: string;
-    expectedUrl?: string;
-    secondResponse?: string | object;
-    thirdResponse?: string | object;
-  }) => {
-
+export const crawlerTestRun = ({
+  crawlerType,
+  testResponse,
+  sizes,
+  sizeChecks,
+  name,
+  priceChecks,
+  url = 'my-url',
+  expectedUrl = null,
+  secondResponse = null,
+  thirdResponse = null,
+}: {
+  crawlerType: Type<Crawler>;
+  testResponse: string | object;
+  sizes: ProductSizeAvailability[];
+  sizeChecks: {
+    isLowInStock: boolean;
+    size: string;
+    isAvailable: boolean;
+  }[];
+  name: string;
+  priceChecks: { size: string; price: number }[];
+  url?: string;
+  expectedUrl?: string;
+  secondResponse?: string | object;
+  thirdResponse?: string | object;
+}) => {
   class HttpServiceMock {
     calls = 0;
 
@@ -43,7 +43,9 @@ export const crawlerTestRun = (
       } else if (this.calls === 3 && thirdResponse) {
         return of({ data: thirdResponse });
       } else {
-        throw new Error(`Unexpected http request (request number ${this.calls})`);
+        throw new Error(
+          `Unexpected http request (request number ${this.calls})`,
+        );
       }
     }
 
@@ -67,8 +69,12 @@ export const crawlerTestRun = (
 
     sizeChecks.forEach(sizeCheck => {
       it('should return if a size is available', async () => {
-        expect(crawler.isSizeAvailable(sizeCheck.size)).toBe(sizeCheck.isAvailable);
-        expect(crawler.isLowInStock(sizeCheck.size)).toBe(sizeCheck.isLowInStock);
+        expect(crawler.isSizeAvailable(sizeCheck.size)).toBe(
+          sizeCheck.isAvailable,
+        );
+        expect(crawler.isLowInStock(sizeCheck.size)).toBe(
+          sizeCheck.isLowInStock,
+        );
       });
     });
 

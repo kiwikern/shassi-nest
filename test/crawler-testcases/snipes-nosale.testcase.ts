@@ -5,13 +5,15 @@ import { SnipesCrawler } from '../../src/crawler/crawlers/snipes.crawler';
 export const snipesNoSaleTestCase = {
   crawlerType: SnipesCrawler,
 
-  url: 'https://m.snipes.com/null/adidas/kids-marble-multicolor-multicolor/prod-00013801702421?st=PRODUCT',
+  url:
+    'https://m.snipes.com/null/adidas/kids-marble-multicolor-multicolor/prod-00013801702421?st=PRODUCT',
 
-  sizes: [{
-    id: '128',
-    isAvailable: false,
-    name: '128',
-  },
+  sizes: [
+    {
+      id: '128',
+      isAvailable: false,
+      name: '128',
+    },
     {
       id: '140',
       isAvailable: false,
@@ -36,7 +38,8 @@ export const snipesNoSaleTestCase = {
       id: '164',
       isAvailable: true,
       name: '164',
-    }],
+    },
+  ],
 
   sizeChecks: [
     { size: '140', isAvailable: false, isLowInStock: false },
@@ -54,7 +57,8 @@ export const snipesNoSaleTestCase = {
 
   secondResponse: {
     action: 'Product-Show',
-    queryString: 'chosen=size&dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&format=ajax&pid=00013801702421',
+    queryString:
+      'chosen=size&dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&format=ajax&pid=00013801702421',
     locale: 'de_DE',
     product: {
       uuid: '9da989ecc39b661f579a5bf1a4',
@@ -72,412 +76,629 @@ export const snipesNoSaleTestCase = {
         list: null,
         promotionID: '',
         isFreeShippingApplicable: false,
-        html: '\n\n\n<div class="b-product-tile-price">\n    \n    \n\n\n\n<span class="b-product-tile-price-outer">\n    <span class="b-product-tile-price-item">\n        29,99 &euro;\n\n\n    </span>\n</span>\n\n</div>\n\n',
+        html:
+          '\n\n\n<div class="b-product-tile-price">\n    \n    \n\n\n\n<span class="b-product-tile-price-outer">\n    <span class="b-product-tile-price-item">\n        29,99 &euro;\n\n\n    </span>\n</span>\n\n</div>\n\n',
       },
       images: [
         {
-          'pdp': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=450&sh=450&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=900&sh=900&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+          pdp: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=450&sh=450&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=900&sh=900&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
-          'plp': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=175&sh=175&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=240&sh=240&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=300&sh=300&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=350&sh=350&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=480&sh=480&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=600&sh=600&sm=fit&sfrm=png',
+          plp: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=175&sh=175&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=240&sh=240&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=350&sh=350&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=480&sh=480&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=600&sh=600&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
-          'suggestions': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+          suggestions: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
-          'cart': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=140&sh=140&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=150&sh=150&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=200&sh=200&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=280&sh=280&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+          cart: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=140&sh=140&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=150&sh=150&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=200&sh=200&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=280&sh=280&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=300&sh=300&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
           'plp-swatch': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
           'pdp-swatch': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=130&sh=130&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=80&sh=80&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=260&sh=260&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=160&sh=160&sm=fit&sfrm=png',
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=130&sh=130&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=80&sh=80&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=260&sh=260&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=160&sh=160&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
         },
         {
-          'pdp': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=450&sh=450&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=900&sh=900&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+          pdp: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=450&sh=450&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=900&sh=900&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
-          'plp': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=175&sh=175&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=240&sh=240&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=300&sh=300&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=350&sh=350&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=480&sh=480&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=600&sh=600&sm=fit&sfrm=png',
+          plp: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=175&sh=175&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=240&sh=240&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=350&sh=350&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=480&sh=480&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=600&sh=600&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
-          'suggestions': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+          suggestions: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
-          'cart': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=140&sh=140&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=150&sh=150&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=200&sh=200&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=280&sh=280&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+          cart: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=140&sh=140&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=150&sh=150&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=200&sh=200&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=280&sh=280&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=300&sh=300&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
           'plp-swatch': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
           'pdp-swatch': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=130&sh=130&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=80&sh=80&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=260&sh=260&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=160&sh=160&sm=fit&sfrm=png',
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=130&sh=130&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=80&sh=80&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=260&sh=260&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=160&sh=160&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
         },
         {
-          'pdp': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=450&sh=450&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=900&sh=900&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+          pdp: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=450&sh=450&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=900&sh=900&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
-          'plp': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=175&sh=175&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=240&sh=240&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=300&sh=300&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=350&sh=350&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=480&sh=480&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=600&sh=600&sm=fit&sfrm=png',
+          plp: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=175&sh=175&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=240&sh=240&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=350&sh=350&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=480&sh=480&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=600&sh=600&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
-          'suggestions': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+          suggestions: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
-          'cart': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=140&sh=140&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=150&sh=150&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=200&sh=200&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=280&sh=280&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+          cart: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=140&sh=140&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=150&sh=150&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=200&sh=200&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=280&sh=280&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=300&sh=300&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
           'plp-swatch': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
           'pdp-swatch': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=130&sh=130&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=80&sh=80&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=260&sh=260&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=160&sh=160&sm=fit&sfrm=png',
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=130&sh=130&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=80&sh=80&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=260&sh=260&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=160&sh=160&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
         },
         {
-          'pdp': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=450&sh=450&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=900&sh=900&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+          pdp: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=450&sh=450&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=900&sh=900&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
-          'plp': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=175&sh=175&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=240&sh=240&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=300&sh=300&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=350&sh=350&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=480&sh=480&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=600&sh=600&sm=fit&sfrm=png',
+          plp: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=175&sh=175&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=240&sh=240&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=350&sh=350&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=480&sh=480&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=600&sh=600&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
-          'suggestions': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+          suggestions: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
-          'cart': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=140&sh=140&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=150&sh=150&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=200&sh=200&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=280&sh=280&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+          cart: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=140&sh=140&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=150&sh=150&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=200&sh=200&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=280&sh=280&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=300&sh=300&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
           'plp-swatch': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
           'pdp-swatch': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=130&sh=130&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=80&sh=80&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=260&sh=260&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=160&sh=160&sm=fit&sfrm=png',
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=130&sh=130&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=80&sh=80&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=260&sh=260&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=160&sh=160&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
         },
         {
-          'pdp': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=450&sh=450&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=900&sh=900&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+          pdp: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=450&sh=450&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=900&sh=900&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
-          'plp': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=175&sh=175&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=240&sh=240&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=300&sh=300&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=350&sh=350&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=480&sh=480&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=600&sh=600&sm=fit&sfrm=png',
+          plp: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=175&sh=175&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=240&sh=240&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=350&sh=350&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=480&sh=480&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=600&sh=600&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
-          'suggestions': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+          suggestions: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
-          'cart': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=140&sh=140&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=150&sh=150&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=200&sh=200&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=280&sh=280&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+          cart: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=140&sh=140&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=150&sh=150&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=200&sh=200&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=280&sh=280&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=300&sh=300&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
           'plp-swatch': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
           'pdp-swatch': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=130&sh=130&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=80&sh=80&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=260&sh=260&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=160&sh=160&sm=fit&sfrm=png',
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=130&sh=130&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=80&sh=80&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=260&sh=260&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=160&sh=160&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
         },
         {
-          'pdp': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=450&sh=450&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=900&sh=900&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+          pdp: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=450&sh=450&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=900&sh=900&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
-          'plp': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=175&sh=175&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=240&sh=240&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=300&sh=300&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=350&sh=350&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=480&sh=480&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=600&sh=600&sm=fit&sfrm=png',
+          plp: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=175&sh=175&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=240&sh=240&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=350&sh=350&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=480&sh=480&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=600&sh=600&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
-          'suggestions': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+          suggestions: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
-          'cart': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=140&sh=140&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=150&sh=150&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=200&sh=200&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=280&sh=280&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+          cart: {
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=140&sh=140&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=150&sh=150&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=200&sh=200&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=280&sh=280&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=300&sh=300&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
           'plp-swatch': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
           },
           'pdp-swatch': {
-            srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-            srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=130&sh=130&sm=fit&sfrm=png',
-            srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=80&sh=80&sm=fit&sfrm=png',
-            srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-            srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=260&sh=260&sm=fit&sfrm=png',
-            srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=160&sh=160&sm=fit&sfrm=png',
+            srcM:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+            srcT:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=130&sh=130&sm=fit&sfrm=png',
+            srcD:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=80&sh=80&sm=fit&sfrm=png',
+            srcMRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+            srcTRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=260&sh=260&sm=fit&sfrm=png',
+            srcDRetina:
+              'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=160&sh=160&sm=fit&sfrm=png',
             alt: 'Marble Leggings',
             title: 'Marble Leggings',
             classValue: 'b-dynamic_image',
@@ -643,7 +864,8 @@ export const snipesNoSaleTestCase = {
                 dimension25: 'multicolor/multicolor',
                 dimension27: '0001380170242100000006',
               },
-              url: 'https://www.snipes.com/p/adidas-marble_leggings-multicolor%2Fmulticolor-00013801702421.html?chosen=size&dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor',
+              url:
+                'https://www.snipes.com/p/adidas-marble_leggings-multicolor%2Fmulticolor-00013801702421.html?chosen=size&dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor',
               isOrderable: true,
               isInStoreOnly: false,
               isComingSoon: null,
@@ -674,14 +896,16 @@ export const snipesNoSaleTestCase = {
                 dimension25: 'multicolor/multicolor',
                 dimension27: '0001380170242100000006',
               },
-              url: 'https://www.snipes.com/p/adidas-marble_leggings-multicolor%2Fmulticolor-00013801702421.html?chosen=size&dwvar_00013801702421_5598=164&dwvar_00013801702421_color=multicolor%2Fmulticolor',
+              url:
+                'https://www.snipes.com/p/adidas-marble_leggings-multicolor%2Fmulticolor-00013801702421.html?chosen=size&dwvar_00013801702421_5598=164&dwvar_00013801702421_color=multicolor%2Fmulticolor',
               isOrderable: true,
               isInStoreOnly: false,
               isComingSoon: null,
               isSoldOut: false,
             },
           ],
-          resetUrl: 'https://www.snipes.com/p/adidas-marble_leggings-multicolor%2Fmulticolor-00013801702421.html?chosen=size&dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor',
+          resetUrl:
+            'https://www.snipes.com/p/adidas-marble_leggings-multicolor%2Fmulticolor-00013801702421.html?chosen=size&dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor',
           selectedValue: {
             id: '158',
             pid: '0001380170242100000006',
@@ -707,7 +931,8 @@ export const snipesNoSaleTestCase = {
               dimension25: 'multicolor/multicolor',
               dimension27: '0001380170242100000006',
             },
-            url: 'https://www.snipes.com/p/adidas-marble_leggings-multicolor%2Fmulticolor-00013801702421.html?chosen=size&dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor',
+            url:
+              'https://www.snipes.com/p/adidas-marble_leggings-multicolor%2Fmulticolor-00013801702421.html?chosen=size&dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor',
             isOrderable: true,
             isInStoreOnly: false,
             isComingSoon: null,
@@ -744,411 +969,628 @@ export const snipesNoSaleTestCase = {
                 dimension24: 'Multicolor',
                 dimension25: 'multicolor/multicolor',
               },
-              url: '/p/adidas-marble_leggings-multicolor%2Fmulticolor-00013801702421.html?chosen=color&dwvar_00013801702421_color=multicolor%2Fmulticolor',
+              url:
+                '/p/adidas-marble_leggings-multicolor%2Fmulticolor-00013801702421.html?chosen=color&dwvar_00013801702421_color=multicolor%2Fmulticolor',
               images: [
                 {
-                  'pdp': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=450&sh=450&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=900&sh=900&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                  pdp: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=450&sh=450&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=900&sh=900&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
-                  'plp': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=175&sh=175&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=240&sh=240&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=300&sh=300&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=350&sh=350&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=480&sh=480&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=600&sh=600&sm=fit&sfrm=png',
+                  plp: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=175&sh=175&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=240&sh=240&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=350&sh=350&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=480&sh=480&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=600&sh=600&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
-                  'suggestions': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  suggestions: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
-                  'cart': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=140&sh=140&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=150&sh=150&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=200&sh=200&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=280&sh=280&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                  cart: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=140&sh=140&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=150&sh=150&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=200&sh=200&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=280&sh=280&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=300&sh=300&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
                   'plp-swatch': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
                   'pdp-swatch': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=130&sh=130&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=80&sh=80&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=260&sh=260&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=160&sh=160&sm=fit&sfrm=png',
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=130&sh=130&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=80&sh=80&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=260&sh=260&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=160&sh=160&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
                 },
                 {
-                  'pdp': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=450&sh=450&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=900&sh=900&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                  pdp: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=450&sh=450&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=900&sh=900&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
-                  'plp': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=175&sh=175&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=240&sh=240&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=300&sh=300&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=350&sh=350&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=480&sh=480&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=600&sh=600&sm=fit&sfrm=png',
+                  plp: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=175&sh=175&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=240&sh=240&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=350&sh=350&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=480&sh=480&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=600&sh=600&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
-                  'suggestions': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  suggestions: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
-                  'cart': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=140&sh=140&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=150&sh=150&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=200&sh=200&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=280&sh=280&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                  cart: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=140&sh=140&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=150&sh=150&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=200&sh=200&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=280&sh=280&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=300&sh=300&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
                   'plp-swatch': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
                   'pdp-swatch': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=130&sh=130&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=80&sh=80&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=260&sh=260&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=160&sh=160&sm=fit&sfrm=png',
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=130&sh=130&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=80&sh=80&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=260&sh=260&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=160&sh=160&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
                 },
                 {
-                  'pdp': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=450&sh=450&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=900&sh=900&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                  pdp: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=450&sh=450&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=900&sh=900&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
-                  'plp': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=175&sh=175&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=240&sh=240&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=300&sh=300&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=350&sh=350&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=480&sh=480&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=600&sh=600&sm=fit&sfrm=png',
+                  plp: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=175&sh=175&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=240&sh=240&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=350&sh=350&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=480&sh=480&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=600&sh=600&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
-                  'suggestions': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  suggestions: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
-                  'cart': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=140&sh=140&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=150&sh=150&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=200&sh=200&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=280&sh=280&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                  cart: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=140&sh=140&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=150&sh=150&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=200&sh=200&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=280&sh=280&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=300&sh=300&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
                   'plp-swatch': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
                   'pdp-swatch': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=130&sh=130&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=80&sh=80&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=260&sh=260&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=160&sh=160&sm=fit&sfrm=png',
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=130&sh=130&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=80&sh=80&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=260&sh=260&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=160&sh=160&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
                 },
                 {
-                  'pdp': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=450&sh=450&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=900&sh=900&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                  pdp: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=450&sh=450&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=900&sh=900&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
-                  'plp': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=175&sh=175&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=240&sh=240&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=300&sh=300&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=350&sh=350&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=480&sh=480&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=600&sh=600&sm=fit&sfrm=png',
+                  plp: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=175&sh=175&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=240&sh=240&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=350&sh=350&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=480&sh=480&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=600&sh=600&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
-                  'suggestions': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  suggestions: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
-                  'cart': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=140&sh=140&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=150&sh=150&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=200&sh=200&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=280&sh=280&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                  cart: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=140&sh=140&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=150&sh=150&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=200&sh=200&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=280&sh=280&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=300&sh=300&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
                   'plp-swatch': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
                   'pdp-swatch': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=130&sh=130&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=80&sh=80&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=260&sh=260&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=160&sh=160&sm=fit&sfrm=png',
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=130&sh=130&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=80&sh=80&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=260&sh=260&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=160&sh=160&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
                 },
                 {
-                  'pdp': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=450&sh=450&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=900&sh=900&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                  pdp: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=450&sh=450&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=900&sh=900&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
-                  'plp': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=175&sh=175&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=240&sh=240&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=300&sh=300&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=350&sh=350&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=480&sh=480&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=600&sh=600&sm=fit&sfrm=png',
+                  plp: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=175&sh=175&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=240&sh=240&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=350&sh=350&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=480&sh=480&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=600&sh=600&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
-                  'suggestions': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  suggestions: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
-                  'cart': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=140&sh=140&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=150&sh=150&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=200&sh=200&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=280&sh=280&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                  cart: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=140&sh=140&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=150&sh=150&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=200&sh=200&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=280&sh=280&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=300&sh=300&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
                   'plp-swatch': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
                   'pdp-swatch': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=130&sh=130&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=80&sh=80&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=260&sh=260&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=160&sh=160&sm=fit&sfrm=png',
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=130&sh=130&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=80&sh=80&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=260&sh=260&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=160&sh=160&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
                 },
                 {
-                  'pdp': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=450&sh=450&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=900&sh=900&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                  pdp: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=450&sh=450&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=900&sh=900&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
-                  'plp': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=175&sh=175&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=240&sh=240&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=300&sh=300&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=350&sh=350&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=480&sh=480&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=600&sh=600&sm=fit&sfrm=png',
+                  plp: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=175&sh=175&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=240&sh=240&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=350&sh=350&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=480&sh=480&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=600&sh=600&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
-                  'suggestions': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  suggestions: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
-                  'cart': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=140&sh=140&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=150&sh=150&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=200&sh=200&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=280&sh=280&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                  cart: {
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=140&sh=140&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=150&sh=150&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=200&sh=200&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=280&sh=280&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=300&sh=300&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
                   'plp-swatch': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
                   },
                   'pdp-swatch': {
-                    srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                    srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=130&sh=130&sm=fit&sfrm=png',
-                    srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=80&sh=80&sm=fit&sfrm=png',
-                    srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                    srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=260&sh=260&sm=fit&sfrm=png',
-                    srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=160&sh=160&sm=fit&sfrm=png',
+                    srcM:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                    srcT:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=130&sh=130&sm=fit&sfrm=png',
+                    srcD:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=80&sh=80&sm=fit&sfrm=png',
+                    srcMRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                    srcTRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=260&sh=260&sm=fit&sfrm=png',
+                    srcDRetina:
+                      'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=160&sh=160&sm=fit&sfrm=png',
                     alt: 'multicolor/multicolor',
                     title: 'multicolor/multicolor',
                     classValue: 'b-dynamic_image',
@@ -1182,411 +1624,628 @@ export const snipesNoSaleTestCase = {
               dimension24: 'Multicolor',
               dimension25: 'multicolor/multicolor',
             },
-            url: '/p/adidas-marble_leggings-multicolor%2Fmulticolor-00013801702421.html?chosen=color&dwvar_00013801702421_color=multicolor%2Fmulticolor',
+            url:
+              '/p/adidas-marble_leggings-multicolor%2Fmulticolor-00013801702421.html?chosen=color&dwvar_00013801702421_color=multicolor%2Fmulticolor',
             images: [
               {
-                'pdp': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=450&sh=450&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=900&sh=900&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                pdp: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=450&sh=450&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=900&sh=900&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
-                'plp': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=175&sh=175&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=240&sh=240&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=300&sh=300&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=350&sh=350&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=480&sh=480&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=600&sh=600&sm=fit&sfrm=png',
+                plp: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=175&sh=175&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=240&sh=240&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=350&sh=350&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=480&sh=480&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=600&sh=600&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
-                'suggestions': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                suggestions: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
-                'cart': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=140&sh=140&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=150&sh=150&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=200&sh=200&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=280&sh=280&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                cart: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=140&sh=140&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=150&sh=150&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=200&sh=200&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=280&sh=280&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=300&sh=300&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
                 'plp-swatch': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
                 'pdp-swatch': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=130&sh=130&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=80&sh=80&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=260&sh=260&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=160&sh=160&sm=fit&sfrm=png',
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=130&sh=130&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=80&sh=80&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=260&sh=260&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw9ad91081/1702421_P.jpg?sw=160&sh=160&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
               },
               {
-                'pdp': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=450&sh=450&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=900&sh=900&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                pdp: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=450&sh=450&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=900&sh=900&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
-                'plp': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=175&sh=175&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=240&sh=240&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=300&sh=300&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=350&sh=350&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=480&sh=480&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=600&sh=600&sm=fit&sfrm=png',
+                plp: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=175&sh=175&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=240&sh=240&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=350&sh=350&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=480&sh=480&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=600&sh=600&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
-                'suggestions': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                suggestions: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
-                'cart': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=140&sh=140&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=150&sh=150&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=200&sh=200&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=280&sh=280&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                cart: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=140&sh=140&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=150&sh=150&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=200&sh=200&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=280&sh=280&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=300&sh=300&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
                 'plp-swatch': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
                 'pdp-swatch': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=130&sh=130&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=80&sh=80&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=260&sh=260&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=160&sh=160&sm=fit&sfrm=png',
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=130&sh=130&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=80&sh=80&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=260&sh=260&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw5143bb69/1702421_P1.jpg?sw=160&sh=160&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
               },
               {
-                'pdp': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=450&sh=450&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=900&sh=900&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                pdp: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=450&sh=450&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=900&sh=900&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
-                'plp': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=175&sh=175&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=240&sh=240&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=300&sh=300&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=350&sh=350&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=480&sh=480&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=600&sh=600&sm=fit&sfrm=png',
+                plp: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=175&sh=175&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=240&sh=240&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=350&sh=350&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=480&sh=480&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=600&sh=600&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
-                'suggestions': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                suggestions: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
-                'cart': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=140&sh=140&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=150&sh=150&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=200&sh=200&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=280&sh=280&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                cart: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=140&sh=140&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=150&sh=150&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=200&sh=200&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=280&sh=280&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=300&sh=300&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
                 'plp-swatch': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
                 'pdp-swatch': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=130&sh=130&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=80&sh=80&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=260&sh=260&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=160&sh=160&sm=fit&sfrm=png',
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=130&sh=130&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=80&sh=80&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=260&sh=260&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw2c753063/1702421_P2.jpg?sw=160&sh=160&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
               },
               {
-                'pdp': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=450&sh=450&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=900&sh=900&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                pdp: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=450&sh=450&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=900&sh=900&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
-                'plp': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=175&sh=175&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=240&sh=240&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=300&sh=300&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=350&sh=350&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=480&sh=480&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=600&sh=600&sm=fit&sfrm=png',
+                plp: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=175&sh=175&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=240&sh=240&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=350&sh=350&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=480&sh=480&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=600&sh=600&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
-                'suggestions': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                suggestions: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
-                'cart': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=140&sh=140&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=150&sh=150&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=200&sh=200&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=280&sh=280&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                cart: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=140&sh=140&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=150&sh=150&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=200&sh=200&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=280&sh=280&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=300&sh=300&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
                 'plp-swatch': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
                 'pdp-swatch': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=130&sh=130&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=80&sh=80&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=260&sh=260&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=160&sh=160&sm=fit&sfrm=png',
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=130&sh=130&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=80&sh=80&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=260&sh=260&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dw16120e07/1702421_P3.jpg?sw=160&sh=160&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
               },
               {
-                'pdp': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=450&sh=450&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=900&sh=900&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                pdp: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=450&sh=450&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=900&sh=900&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
-                'plp': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=175&sh=175&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=240&sh=240&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=300&sh=300&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=350&sh=350&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=480&sh=480&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=600&sh=600&sm=fit&sfrm=png',
+                plp: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=175&sh=175&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=240&sh=240&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=350&sh=350&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=480&sh=480&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=600&sh=600&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
-                'suggestions': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                suggestions: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
-                'cart': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=140&sh=140&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=150&sh=150&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=200&sh=200&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=280&sh=280&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                cart: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=140&sh=140&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=150&sh=150&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=200&sh=200&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=280&sh=280&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=300&sh=300&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
                 'plp-swatch': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
                 'pdp-swatch': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=130&sh=130&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=80&sh=80&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=260&sh=260&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=160&sh=160&sm=fit&sfrm=png',
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=130&sh=130&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=80&sh=80&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=260&sh=260&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dweeecfe72/1702421_P4.jpg?sw=160&sh=160&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
               },
               {
-                'pdp': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=450&sh=450&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=780&sh=780&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=900&sh=900&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                pdp: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=450&sh=450&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=780&sh=780&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=900&sh=900&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=1560&sh=1560&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
-                'plp': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=175&sh=175&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=240&sh=240&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=300&sh=300&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=350&sh=350&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=480&sh=480&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=600&sh=600&sm=fit&sfrm=png',
+                plp: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=175&sh=175&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=240&sh=240&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=350&sh=350&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=480&sh=480&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=600&sh=600&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
-                'suggestions': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=50&sh=50&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                suggestions: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=50&sh=50&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
-                'cart': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=140&sh=140&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=150&sh=150&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=200&sh=200&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=280&sh=280&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=300&sh=300&sm=fit&sfrm=png',
+                cart: {
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=100&sh=100&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=140&sh=140&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=150&sh=150&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=200&sh=200&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=280&sh=280&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=300&sh=300&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
                 'plp-swatch': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
                 },
                 'pdp-swatch': {
-                  srcM: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
-                  srcT: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=130&sh=130&sm=fit&sfrm=png',
-                  srcD: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=80&sh=80&sm=fit&sfrm=png',
-                  srcMRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
-                  srcTRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=260&sh=260&sm=fit&sfrm=png',
-                  srcDRetina: 'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=160&sh=160&sm=fit&sfrm=png',
+                  srcM:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=60&sh=60&sm=fit&sfrm=png',
+                  srcT:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=130&sh=130&sm=fit&sfrm=png',
+                  srcD:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=80&sh=80&sm=fit&sfrm=png',
+                  srcMRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=120&sh=120&sm=fit&sfrm=png',
+                  srcTRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=260&sh=260&sm=fit&sfrm=png',
+                  srcDRetina:
+                    'https://www.snipes.com/dw/image/v2/BDCB_PRD/on/demandware.static/-/Sites-snse-master-eu/default/dwbb429be5/1702421_P5.jpg?sw=160&sh=160&sm=fit&sfrm=png',
                   alt: 'multicolor/multicolor',
                   title: 'multicolor/multicolor',
                   classValue: 'b-dynamic_image',
@@ -1599,7 +2258,8 @@ export const snipesNoSaleTestCase = {
       ],
       isVariationProduct: true,
       reviews: [],
-      longDescription: 'Diese <strong>adidas Kids Marble Leggings in Kindergr&ouml;&szlig;en</strong> featured einen &bdquo;Marble&ldquo; Allover-Print, einen elastischen Materialmix, seitliche adidas Streifen und ein zus&auml;tzliches adidas Logo am linken Bein.<br />\n<br />\n<strong>Features</strong>:\n<ul>\n\t<li><strong>Kindergr&ouml;&szlig;en</strong></li>\n\t<li>elastischer Bund</li>\n\t<li>elastischer Materialmix</li>\n\t<li>seitliche adidas Streifen</li>\n\t<li>adidas Logo am linken Bein</li>\n\t<li>Material: 89% Polyester, 11% Elasthan&nbsp;</li>\n</ul>\n<br />\n<strong>Kindergr&ouml;&szlig;en</strong>:\n\n<ul>\n\t<li>XS - 128</li>\n\t<li>S - 140</li>\n\t<li>M - 146</li>\n\t<li>L - 158</li>\n\t<li>XL - 164</li>\n</ul>\n<br />\n<strong>Gr&ouml;&szlig;enhinweis:</strong>&nbsp;Kathrin ist 1,61 m gro&szlig; und tr&auml;gt diese Leggings in 164.',
+      longDescription:
+        'Diese <strong>adidas Kids Marble Leggings in Kindergr&ouml;&szlig;en</strong> featured einen &bdquo;Marble&ldquo; Allover-Print, einen elastischen Materialmix, seitliche adidas Streifen und ein zus&auml;tzliches adidas Logo am linken Bein.<br />\n<br />\n<strong>Features</strong>:\n<ul>\n\t<li><strong>Kindergr&ouml;&szlig;en</strong></li>\n\t<li>elastischer Bund</li>\n\t<li>elastischer Materialmix</li>\n\t<li>seitliche adidas Streifen</li>\n\t<li>adidas Logo am linken Bein</li>\n\t<li>Material: 89% Polyester, 11% Elasthan&nbsp;</li>\n</ul>\n<br />\n<strong>Kindergr&ouml;&szlig;en</strong>:\n\n<ul>\n\t<li>XS - 128</li>\n\t<li>S - 140</li>\n\t<li>M - 146</li>\n\t<li>L - 158</li>\n\t<li>XL - 164</li>\n</ul>\n<br />\n<strong>Gr&ouml;&szlig;enhinweis:</strong>&nbsp;Kathrin ist 1,61 m gro&szlig; und tr&auml;gt diese Leggings in 164.',
       shortDescription: null,
       ratings: {
         tsReviewMark: null,
@@ -1609,9 +2269,7 @@ export const snipesNoSaleTestCase = {
       promotions: null,
       attributes: null,
       availability: {
-        messages: [
-          'Sofort lieferbar',
-        ],
+        messages: ['Sofort lieferbar'],
         inStockDate: null,
         custom: {
           code: 'lowStock',
@@ -1635,64 +2293,67 @@ export const snipesNoSaleTestCase = {
         {
           value: '1',
           selected: true,
-          url: '/on/demandware.store/Sites-snse-DE-AT-Site/de_DE/Product-Variation?dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&pid=0001380170242100000006&quantity=1',
+          url:
+            '/on/demandware.store/Sites-snse-DE-AT-Site/de_DE/Product-Variation?dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&pid=0001380170242100000006&quantity=1',
         },
         {
           value: '2',
           selected: false,
-          url: '/on/demandware.store/Sites-snse-DE-AT-Site/de_DE/Product-Variation?dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&pid=0001380170242100000006&quantity=2',
+          url:
+            '/on/demandware.store/Sites-snse-DE-AT-Site/de_DE/Product-Variation?dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&pid=0001380170242100000006&quantity=2',
         },
         {
           value: '3',
           selected: false,
-          url: '/on/demandware.store/Sites-snse-DE-AT-Site/de_DE/Product-Variation?dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&pid=0001380170242100000006&quantity=3',
+          url:
+            '/on/demandware.store/Sites-snse-DE-AT-Site/de_DE/Product-Variation?dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&pid=0001380170242100000006&quantity=3',
         },
         {
           value: '4',
           selected: false,
-          url: '/on/demandware.store/Sites-snse-DE-AT-Site/de_DE/Product-Variation?dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&pid=0001380170242100000006&quantity=4',
+          url:
+            '/on/demandware.store/Sites-snse-DE-AT-Site/de_DE/Product-Variation?dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&pid=0001380170242100000006&quantity=4',
         },
         {
           value: '5',
           selected: false,
-          url: '/on/demandware.store/Sites-snse-DE-AT-Site/de_DE/Product-Variation?dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&pid=0001380170242100000006&quantity=5',
+          url:
+            '/on/demandware.store/Sites-snse-DE-AT-Site/de_DE/Product-Variation?dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&pid=0001380170242100000006&quantity=5',
         },
         {
           value: '6',
           selected: false,
-          url: '/on/demandware.store/Sites-snse-DE-AT-Site/de_DE/Product-Variation?dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&pid=0001380170242100000006&quantity=6',
+          url:
+            '/on/demandware.store/Sites-snse-DE-AT-Site/de_DE/Product-Variation?dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&pid=0001380170242100000006&quantity=6',
         },
         {
           value: '7',
           selected: false,
-          url: '/on/demandware.store/Sites-snse-DE-AT-Site/de_DE/Product-Variation?dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&pid=0001380170242100000006&quantity=7',
+          url:
+            '/on/demandware.store/Sites-snse-DE-AT-Site/de_DE/Product-Variation?dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&pid=0001380170242100000006&quantity=7',
         },
         {
           value: '8',
           selected: false,
-          url: '/on/demandware.store/Sites-snse-DE-AT-Site/de_DE/Product-Variation?dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&pid=0001380170242100000006&quantity=8',
+          url:
+            '/on/demandware.store/Sites-snse-DE-AT-Site/de_DE/Product-Variation?dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&pid=0001380170242100000006&quantity=8',
         },
         {
           value: '9',
           selected: false,
-          url: '/on/demandware.store/Sites-snse-DE-AT-Site/de_DE/Product-Variation?dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&pid=0001380170242100000006&quantity=9',
+          url:
+            '/on/demandware.store/Sites-snse-DE-AT-Site/de_DE/Product-Variation?dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&pid=0001380170242100000006&quantity=9',
         },
       ],
-      selectedProductUrl: '/p/adidas-marble_leggings-multicolor%2Fmulticolor-00013801702421.html?dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&quantity=undefined',
+      selectedProductUrl:
+        '/p/adidas-marble_leggings-multicolor%2Fmulticolor-00013801702421.html?dwvar_00013801702421_5598=158&dwvar_00013801702421_color=multicolor%2Fmulticolor&quantity=undefined',
       readyToOrder: true,
       online: true,
       pageTitle: 'adidas Kids Marble Leggings multicolor bei SNIPES bestellen',
-      pageDescription: 'Kindermode jetzt online bei SNIPES bestellen ✓ gro&szlig;e Auswahl im Onlineshop ✓ versandkostenfrei schon ab 60 Euro ✓ Lieferung in 1 bis 3 Werktagen ✓',
+      pageDescription:
+        'Kindermode jetzt online bei SNIPES bestellen ✓ gro&szlig;e Auswahl im Onlineshop ✓ versandkostenfrei schon ab 60 Euro ✓ Lieferung in 1 bis 3 Werktagen ✓',
       pageKeywords: null,
-      pageMetaTags: [
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-      ],
+      pageMetaTags: [{}, {}, {}, {}, {}, {}, {}],
       template: null,
       badge: [
         {
@@ -1750,11 +2411,14 @@ export const snipesNoSaleTestCase = {
         showTwitter: true,
         showEmail: true,
         showWhatsApp: true,
-        pdpUrlEncoded: 'https://www.snipes.com/p-multicolor%252Fmulticolor-0001380170242100000006.html',
+        pdpUrlEncoded:
+          'https://www.snipes.com/p-multicolor%252Fmulticolor-0001380170242100000006.html',
         emailSubject: 'adidas Marble Leggings',
-        emailBody: 'https://www.snipes.com/p-multicolor%252Fmulticolor-0001380170242100000006.html',
+        emailBody:
+          'https://www.snipes.com/p-multicolor%252Fmulticolor-0001380170242100000006.html',
       },
-      variables: '[{"optionId":"color","selectedValueId":"multicolor/multicolor"},{"optionId":"5598","selectedValueId":"158"}]',
+      variables:
+        '[{"optionId":"color","selectedValueId":"multicolor/multicolor"},{"optionId":"5598","selectedValueId":"158"}]',
       gtm: {
         name: 'Marble Leggings',
         id: '6304034',

@@ -13,6 +13,8 @@ describe('HashService', () => {
   });
 
   it('should be defined', () => {
-    expect(service.createHash('data', 'secret')).toEqual('871f289e521daf3174cb9b6fe72c9bbf9a3d0feb9a004735afd1b86dd38cf0a2');
+    expect(service.createHash('data', 'secret')).toEqual(
+      '871f289e521daf3174cb9b6fe72c9bbf9a3d0feb9a004735afd1b86dd38cf0a2',
+    );
   });
 });

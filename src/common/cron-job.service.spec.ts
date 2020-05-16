@@ -18,5 +18,4 @@ describe('CronJobService', () => {
     expect(cronJob.nextDate().format('z')).toMatch(/CEST|CST|CET/);
     expect(cronJob.nextDate().hour()).toBe(8);
   });
-
 });

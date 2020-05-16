@@ -5,7 +5,7 @@ import { toInteger } from '../common/utils';
 
 export class TelegramLoginData {
   @IsNumber()
-  @Transform(toInteger, {toClassOnly: true})
+  @Transform(toInteger, { toClassOnly: true })
   id: number;
 
   @IsString()
@@ -25,7 +25,7 @@ export class TelegramLoginData {
   photo_url?: string;
 
   @IsNumber()
-  @Transform(toInteger, {toClassOnly: true})
+  @Transform(toInteger, { toClassOnly: true })
   auth_date: number;
 
   @IsString()

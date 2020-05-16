@@ -7,9 +7,11 @@ import { CronJob } from 'cron';
  */
 @Injectable()
 export class CronJobService {
-
   create(cronTime: string, cronFunction: () => void): CronJob {
-    return new CronJob({ cronTime, onTick: cronFunction, timeZone: 'Europe/Berlin' });
+    return new CronJob({
+      cronTime,
+      onTick: cronFunction,
+      timeZone: 'Europe/Berlin',
+    });
   }
-
 }

@@ -3,7 +3,10 @@ import { TelegramTokenService } from './telegram-token.service';
 import { ObjectID } from 'mongodb';
 import { TelegramTokenEntity } from './telegram-token.entity';
 import { getEntityManagerToken, getRepositoryToken } from '@nestjs/typeorm';
-import { entityManagerMockFactory, repositoryMockFactory } from '../../test/mocks/jest-mocks';
+import {
+  entityManagerMockFactory,
+  repositoryMockFactory,
+} from '../../test/mocks/jest-mocks';
 import { MockType } from '../../test/mock.type';
 import { MongoEntityManager, Repository } from 'typeorm';
 import { NoOpLogger } from '../../test/mocks/no-op-logger';
@@ -17,8 +20,14 @@ describe('TelegramTokenService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         TelegramTokenService,
-        { provide: getEntityManagerToken(), useFactory: entityManagerMockFactory },
-        { provide: getRepositoryToken(TelegramTokenEntity), useFactory: repositoryMockFactory },
+        {
+          provide: getEntityManagerToken(),
+          useFactory: entityManagerMockFactory,
+        },
+        {
+          provide: getRepositoryToken(TelegramTokenEntity),
+          useFactory: repositoryMockFactory,
+        },
       ],
     }).compile();
     module.useLogger(new NoOpLogger());

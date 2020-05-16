@@ -10,10 +10,7 @@ import { ConfigService } from '../config/config.service';
 import { CommonModule } from '../common/common.module';
 
 @Module({
-  providers: [
-    AuthService,
-    JwtStrategy,
-  ],
+  providers: [AuthService, JwtStrategy],
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
@@ -33,5 +30,4 @@ import { CommonModule } from '../common/common.module';
   controllers: [AuthController],
   exports: [AuthService],
 })
-export class AuthModule {
-}
+export class AuthModule {}

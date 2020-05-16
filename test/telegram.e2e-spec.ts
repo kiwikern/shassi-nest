@@ -29,8 +29,15 @@ describe('TelegramBot (e2e)', () => {
 
     const moduleFixture = await Test.createTestingModule({
       imports: [AppModule],
-    }).overrideProvider(Telegraf).useValue(new Telegraf(bot.token, { telegram: { apiRoot: telegramServer.getApiEndpoint() } } as any))
-      .overrideProvider(CrawlerService).useValue(crawlerMock)
+    })
+      .overrideProvider(Telegraf)
+      .useValue(
+        new Telegraf(bot.token, {
+          telegram: { apiRoot: telegramServer.getApiEndpoint() },
+        } as any),
+      )
+      .overrideProvider(CrawlerService)
+      .useValue(crawlerMock)
       .compile();
     app = moduleFixture.createNestApplication();
 
@@ -40,7 +47,10 @@ describe('TelegramBot (e2e)', () => {
   async function createTelegramUserToken(): Promise<string> {
     const userService = app.get(UsersService);
     const tokenService = app.get(TelegramTokenService);
-    const user = await userService.createUser({ username: 'user', password: '123456' });
+    const user = await userService.createUser({
+      username: 'user',
+      password: '123456',
+    });
     userId = user._id;
     return tokenService.createToken(user._id);
   }
@@ -50,10 +60,15 @@ describe('TelegramBot (e2e)', () => {
     return telegramIdService.findTelegramId(userId);
   }
 
-  async function linkTelegramAccountToNewUser(telegramId: number): Promise<TelegramUserIdEntity> {
+  async function linkTelegramAccountToNewUser(
+    telegramId: number,
+  ): Promise<TelegramUserIdEntity> {
     const userService = app.get(UsersService);
     const telegramIdService = app.get(TelegramUserIdService);
-    const user = await userService.createUser({ username: 'user2', password: '123456' });
+    const user = await userService.createUser({
+      username: 'user2',
+      password: '123456',
+    });
     userId = user._id;
     return telegramIdService.saveTelegramId(user._id, telegramId);
   }
@@ -90,9 +105,7 @@ describe('TelegramBot (e2e)', () => {
     const token = await createTelegramUserToken();
     chat.postMessage(client, {
       text: `/start ${token}`,
-      entities: [
-        { offset: 0, length: 6, type: 'bot_command' },
-      ],
+      entities: [{ offset: 0, length: 6, type: 'bot_command' }],
     });
     await telegramServer.waitForNextMessages(2);
     expect(chat.history[5].message.text).toContain('successfully connected');
@@ -118,22 +131,29 @@ describe('TelegramBot (e2e)', () => {
     expect(chat.history.length).toBe(9);
 
     // User chooses a size and the product is added
-    const chosenSize = chat.history[8].message.reply_markup.inline_keyboard[0][0];
+    const chosenSize =
+      chat.history[8].message.reply_markup.inline_keyboard[0][0];
     crawlerMock.getUpdateData.mockReturnValueOnce({
       price: 20,
       isAvailable: true,
       isLowInStock: true,
       createdAt: new Date(),
     });
-    const replyMessage = Object.assign({}, chat.history[8].message, { reply_to_message: { message_id: chat.history[8].message.message_id } });
+    const replyMessage = Object.assign({}, chat.history[8].message, {
+      reply_to_message: { message_id: chat.history[8].message.message_id },
+    });
     chat.postCbQuery(client, replyMessage, chosenSize.callback_data);
     await telegramServer.waitForNextMessages(3);
     expect(chat.history.length).toBe(13);
-    expect(chat.history[10].callback_query_answer.text).toContain('You chose S');
+    expect(chat.history[10].callback_query_answer.text).toContain(
+      'You chose S',
+    );
     // The inline keyboard is removed
     expect(chat.history[11].edit_message_reply_markup).toBeDefined();
     // TODO: Add method: editMessageText should edit message 8 instead of adding new one
-    expect(chat.history[12].message.text).toContain('Product with multiple sizes for 20.00€');
+    expect(chat.history[12].message.text).toContain(
+      'Product with multiple sizes for 20.00€',
+    );
     expect(crawlerMock.getUpdateData).toHaveBeenLastCalledWith(url, '1');
   });
 
@@ -152,9 +172,7 @@ describe('TelegramBot (e2e)', () => {
     const url = 'https://hm.com';
     crawlerMock.getInitData.mockReturnValueOnce({
       name: 'Product with one size',
-      sizes: [
-        { id: '1', name: 'S', isAvailable: true },
-      ],
+      sizes: [{ id: '1', name: 'S', isAvailable: true }],
       url,
     });
     crawlerMock.getUpdateData.mockReturnValueOnce({
@@ -166,8 +184,9 @@ describe('TelegramBot (e2e)', () => {
     chat2.postMessage(user, { text: url });
     await telegramServer.waitForNextMessages(1);
     expect(chat2.history.length).toBe(4);
-    expect(chat2.history[3].message.text).toContain('Product with one size for 20.00€');
+    expect(chat2.history[3].message.text).toContain(
+      'Product with one size for 20.00€',
+    );
     expect(crawlerMock.getUpdateData).toHaveBeenLastCalledWith(url, '1');
   });
-
 });

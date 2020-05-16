@@ -11,9 +11,7 @@ describe('Admin Controller', () => {
   beforeAll(async () => {
     const module = await Test.createTestingModule({
       controllers: [AdminController],
-      providers: [
-        { provide: AdminService, useFactory: adminServiceFactory },
-      ],
+      providers: [{ provide: AdminService, useFactory: adminServiceFactory }],
     }).compile();
     controller = module.get<AdminController>(AdminController);
     service = module.get(AdminService);
@@ -32,8 +30,8 @@ describe('Admin Controller', () => {
   });
 
   it('should reactivate a product', async () => {
-    service.reactivateProduct.mockReturnValueOnce({id: '123'});
-    expect(await controller.reactivateProduct('123')).toEqual({id: '123'});
+    service.reactivateProduct.mockReturnValueOnce({ id: '123' });
+    expect(await controller.reactivateProduct('123')).toEqual({ id: '123' });
     expect(service.reactivateProduct).toHaveBeenCalledTimes(1);
   });
 
@@ -42,5 +40,4 @@ describe('Admin Controller', () => {
     expect(await controller.deleteProduct('123')).toBe(true);
     expect(service.deleteProduct).toHaveBeenCalledTimes(1);
   });
-
 });

@@ -7,8 +7,14 @@ import { MockType } from '../../test/mock.type';
 import { Repository } from 'typeorm';
 import { ObjectID } from 'mongodb';
 import { BcryptService } from '../common/bcrypt.service';
-import { BadRequestException, InternalServerErrorException } from '@nestjs/common';
-import { bcryptServiceFactory, repositoryMockFactory } from '../../test/mocks/jest-mocks';
+import {
+  BadRequestException,
+  InternalServerErrorException,
+} from '@nestjs/common';
+import {
+  bcryptServiceFactory,
+  repositoryMockFactory,
+} from '../../test/mocks/jest-mocks';
 import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
 describe('UsersService', () => {
@@ -20,7 +26,10 @@ describe('UsersService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         UsersService,
-        { provide: getRepositoryToken(UserEntity), useFactory: repositoryMockFactory },
+        {
+          provide: getRepositoryToken(UserEntity),
+          useFactory: repositoryMockFactory,
+        },
         { provide: BcryptService, useFactory: bcryptServiceFactory },
       ],
     }).compile();
@@ -31,14 +40,22 @@ describe('UsersService', () => {
   });
 
   it('should create a user', async () => {
-    const user: UserCreateDto = { email: 'email', password: 'password', username: 'user' };
+    const user: UserCreateDto = {
+      email: 'email',
+      password: 'password',
+      username: 'user',
+    };
     bcryptService.hash.mockReturnValue('hashed');
     const newUser = Object.assign({}, user, { password: 'hashed' });
     expect(await service.createUser(user)).toEqual(newUser);
   });
 
   it('should reject a duplicate username', async () => {
-    const user: UserCreateDto = { email: 'email', password: 'password', username: 'user' };
+    const user: UserCreateDto = {
+      email: 'email',
+      password: 'password',
+      username: 'user',
+    };
     repositoryMock.findOne.mockReturnValue(user);
     try {
       await service.createUser(user);
@@ -50,7 +67,11 @@ describe('UsersService', () => {
   });
 
   it('should reject a duplicate mail address', async () => {
-    const user: UserCreateDto = { email: 'email', password: 'password', username: 'user' };
+    const user: UserCreateDto = {
+      email: 'email',
+      password: 'password',
+      username: 'user',
+    };
     repositoryMock.findOne.mockReturnValueOnce(null);
     repositoryMock.findOne.mockReturnValueOnce(user);
     try {
@@ -65,7 +86,9 @@ describe('UsersService', () => {
 
   it('should accept a null mail address', async () => {
     const user: UserCreateDto = { password: 'password', username: 'user' };
-    repositoryMock.findOne.mockImplementation(d => d.hasOwnProperty('email') ? user : null);
+    repositoryMock.findOne.mockImplementation(d =>
+      d.hasOwnProperty('email') ? user : null,
+    );
     await service.createUser(user);
     expect(repositoryMock.findOne).toHaveBeenCalledTimes(1);
     expect(repositoryMock.save).toHaveBeenCalledTimes(1);
@@ -81,34 +104,51 @@ describe('UsersService', () => {
   });
 
   it('should create a unique username for Telegram login', async () => {
-    repositoryMock.find.mockReturnValueOnce([{ username: 'amir' }, { username: 'mara' }]);
-    expect(await service.createUserWithUniqueName('mara')).toEqual(expect.objectContaining({ username: 'mara0' }));
+    repositoryMock.find.mockReturnValueOnce([
+      { username: 'amir' },
+      { username: 'mara' },
+    ]);
+    expect(await service.createUserWithUniqueName('mara')).toEqual(
+      expect.objectContaining({ username: 'mara0' }),
+    );
     expect(repositoryMock.find).toHaveBeenCalledTimes(1);
     expect(repositoryMock.save).toHaveBeenCalledTimes(1);
     expect(bcryptService.hash).not.toHaveBeenCalled();
   });
 
   it('should create a unique username with given username', async () => {
-    repositoryMock.find.mockReturnValueOnce([{ username: 'amir' }, { username: 'yannis' }]);
-    expect(await service.createUserWithUniqueName('mara')).toEqual(expect.objectContaining({ username: 'mara' }));
+    repositoryMock.find.mockReturnValueOnce([
+      { username: 'amir' },
+      { username: 'yannis' },
+    ]);
+    expect(await service.createUserWithUniqueName('mara')).toEqual(
+      expect.objectContaining({ username: 'mara' }),
+    );
     expect(repositoryMock.find).toHaveBeenCalledTimes(1);
     expect(repositoryMock.save).toHaveBeenCalledTimes(1);
     expect(bcryptService.hash).not.toHaveBeenCalled();
   });
 
   it('should create a unique username without given username', async () => {
-    repositoryMock.find.mockReturnValueOnce([{ username: 'amir' }, { username: 'yannis' }]);
-    await expect(await service.createUserWithUniqueName(null)).toEqual(expect.objectContaining({ username: expect.any(String) }));
+    repositoryMock.find.mockReturnValueOnce([
+      { username: 'amir' },
+      { username: 'yannis' },
+    ]);
+    await expect(await service.createUserWithUniqueName(null)).toEqual(
+      expect.objectContaining({ username: expect.any(String) }),
+    );
     expect(repositoryMock.find).toHaveBeenCalledTimes(1);
     expect(repositoryMock.save).toHaveBeenCalledTimes(1);
     expect(bcryptService.hash).not.toHaveBeenCalled();
   });
 
   it('should reject, if unique name could not be generated', async () => {
-    repositoryMock.find.mockReturnValueOnce(['', ...Array(100).keys()]
-      .map(i => ({ username: 'mara' + i })));
-    await expect(service.createUserWithUniqueName('mara'))
-      .rejects.toThrow(InternalServerErrorException);
+    repositoryMock.find.mockReturnValueOnce(
+      ['', ...Array(100).keys()].map(i => ({ username: 'mara' + i })),
+    );
+    await expect(service.createUserWithUniqueName('mara')).rejects.toThrow(
+      InternalServerErrorException,
+    );
     expect(repositoryMock.find).toHaveBeenCalledTimes(1);
     expect(repositoryMock.save).not.toHaveBeenCalled();
     expect(bcryptService.hash).not.toHaveBeenCalled();
@@ -126,13 +166,13 @@ describe('UsersService', () => {
 
   it('should update a user', async () => {
     repositoryMock.findOne.mockReturnValue({ email: 'old' });
-    expect(await service.updateUser(null, { email: 'new' }))
-      .toEqual({ email: 'new' });
+    expect(await service.updateUser(null, { email: 'new' })).toEqual({
+      email: 'new',
+    });
   });
 
   it('should find all users', async () => {
     repositoryMock.find.mockReturnValue([{}]);
     expect(await service.getAllUsers()).toEqual([{}]);
   });
-
 });

@@ -4,12 +4,10 @@ import { StoriesCrawler } from '../../src/crawler/crawlers/stories.crawler';
 export const storiesOneSizeTestCase = {
   crawlerType: StoriesCrawler,
 
-  url: 'https://www.stories.com/en_eur/bags/bum-bags/product.leather-beltbag-black.0675990002.html',
+  url:
+    'https://www.stories.com/en_eur/bags/bum-bags/product.leather-beltbag-black.0675990002.html',
 
-  sizes: [
-    { id: '0675990002001', name: 'NOSIZE', isAvailable: true },
-
-  ],
+  sizes: [{ id: '0675990002001', name: 'NOSIZE', isAvailable: true }],
 
   sizeChecks: [
     { size: '0675990002001', isAvailable: true, isLowInStock: true },
@@ -23,7 +21,10 @@ export const storiesOneSizeTestCase = {
     { size: 'unknown-size', price: 69 },
   ],
 
-  secondResponse: { availability: ['0675990003001', '0675990002001'], fewPieceLeft: ['0675990002001'] },
+  secondResponse: {
+    availability: ['0675990003001', '0675990002001'],
+    fewPieceLeft: ['0675990002001'],
+  },
 
   testResponse: `<!DOCTYPE HTML>
 <html lang="en" class="no-js">

@@ -3,9 +3,7 @@ import { AmazonCrawler } from '../../src/crawler/crawlers/amazon.crawler';
 
 export const amazonKindleTaseCase = {
   crawlerType: AmazonCrawler,
-  sizes: [
-    { id: 'ONESIZE', isAvailable: true, name: 'ONESIZE' },
-  ],
+  sizes: [{ id: 'ONESIZE', isAvailable: true, name: 'ONESIZE' }],
 
   sizeChecks: [
     { size: 'ONESIZE', isAvailable: true, isLowInStock: false },

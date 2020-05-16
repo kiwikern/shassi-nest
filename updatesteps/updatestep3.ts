@@ -6,10 +6,13 @@ import { UsProductEntity } from './us2-products.entity';
 async function run() {
   const connection = await new DatabaseConnector().connect(UsProductEntity);
   const productRepository = connection.getRepository(UsProductEntity);
-  const productsWithNoAvailability = await productRepository.find({ 'updates.isAvailable': null } as any);
+  const productsWithNoAvailability = await productRepository.find({
+    'updates.isAvailable': null,
+  } as any);
   productsWithNoAvailability.forEach(product => createDates(product));
-  return productRepository.save(productsWithNoAvailability)
-    .then(entities => Array.isArray(entities) ? entities.length : 0);
+  return productRepository
+    .save(productsWithNoAvailability)
+    .then(entities => (Array.isArray(entities) ? entities.length : 0));
 }
 
 function createDates(product) {

@@ -6,16 +6,19 @@ import { ObjectID } from 'mongodb';
 
 @Injectable()
 export class TelegramTokenService implements OnModuleInit {
-  constructor(@InjectEntityManager() private entityManager: MongoEntityManager,
-              @InjectRepository(TelegramTokenEntity) private tokenRepository: Repository<TelegramTokenEntity>) {
-  }
+  constructor(
+    @InjectEntityManager() private entityManager: MongoEntityManager,
+    @InjectRepository(TelegramTokenEntity)
+    private tokenRepository: Repository<TelegramTokenEntity>,
+  ) {}
 
   public static readonly expireAfterSeconds = 5 * 60;
 
   onModuleInit() {
     // Telegram auth tokens should only be valid for 5 minutes.
-    this.entityManager.createCollectionIndex(TelegramTokenEntity,
-      'createdAt', { expireAfterSeconds: TelegramTokenService.expireAfterSeconds });
+    this.entityManager.createCollectionIndex(TelegramTokenEntity, 'createdAt', {
+      expireAfterSeconds: TelegramTokenService.expireAfterSeconds,
+    });
   }
 
   async createToken(userId: ObjectID): Promise<string> {
@@ -39,5 +42,4 @@ export class TelegramTokenService implements OnModuleInit {
     const dbToken = await this.tokenRepository.findOne({ userId });
     return dbToken && dbToken.token === token;
   }
-
 }

@@ -4,16 +4,15 @@ import { AmazonCrawler } from '../../src/crawler/crawlers/amazon.crawler';
 
 export const amazonEchoTaseCase = {
   crawlerType: AmazonCrawler,
-  sizes: [
-    { id: 'ONESIZE', isAvailable: true, name: 'ONESIZE' },
-  ],
+  sizes: [{ id: 'ONESIZE', isAvailable: true, name: 'ONESIZE' }],
 
   sizeChecks: [
     { size: 'ONESIZE', isAvailable: true, isLowInStock: false },
     { size: 'any', isAvailable: true, isLowInStock: false },
   ],
 
-  name: 'Echo Input (Schwarz) – Bringen Sie Alexa auf Ihren Lautsprecher – Externer Lautsprecher mit 3,5-mm-Audioeingang oder Bluetooth erforderlich',
+  name:
+    'Echo Input (Schwarz) – Bringen Sie Alexa auf Ihren Lautsprecher – Externer Lautsprecher mit 3,5-mm-Audioeingang oder Bluetooth erforderlich',
 
   priceChecks: [
     { size: 'ONESIZE', price: 39.99 },

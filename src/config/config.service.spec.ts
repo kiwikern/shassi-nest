@@ -83,7 +83,6 @@ describe('ConfigService', () => {
       ALLMISSING=null
     `);
     expect(() => new ConfigService()).toThrow('Config validation error');
-
   });
 
   it('should fallback to environment variables without .env file', async () => {
@@ -99,5 +98,4 @@ describe('ConfigService', () => {
       delete process.env.DATABASE_NAME;
     }
   });
-
 });

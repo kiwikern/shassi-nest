@@ -8,11 +8,7 @@ import { CommonModule } from '../common/common.module';
 @Module({
   providers: [UsersService],
   controllers: [UsersController],
-  imports: [
-    CommonModule,
-    TypeOrmModule.forFeature([UserEntity]),
-  ],
+  imports: [CommonModule, TypeOrmModule.forFeature([UserEntity])],
   exports: [UsersService],
 })
-export class UsersModule {
-}
+export class UsersModule {}

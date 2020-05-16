@@ -4,16 +4,7 @@ import { CronJobService } from './cron-job.service';
 import { HashService } from './hash.service';
 
 @Module({
-  providers: [
-    BcryptService,
-    CronJobService,
-    HashService,
-  ],
-  exports: [
-    BcryptService,
-    CronJobService,
-    HashService,
-  ],
+  providers: [BcryptService, CronJobService, HashService],
+  exports: [BcryptService, CronJobService, HashService],
 })
-export class CommonModule {
-}
+export class CommonModule {}

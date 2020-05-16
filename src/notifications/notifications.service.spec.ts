@@ -7,7 +7,11 @@ import { CronJobService } from '../common/cron-job.service';
 import { MockType } from '../../test/mock.type';
 import { ProductsService } from '../products/products.service';
 import { InternalServerErrorException } from '@nestjs/common';
-import { cronJobServiceFactory, productsServiceFactory, telegramServiceFactory } from '../../test/mocks/jest-mocks';
+import {
+  cronJobServiceFactory,
+  productsServiceFactory,
+  telegramServiceFactory,
+} from '../../test/mocks/jest-mocks';
 import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
 describe('NotificationsService', () => {
@@ -36,11 +40,17 @@ describe('NotificationsService', () => {
   });
 
   describe('should send only relevant notifications', () => {
-
     it('should notify about a price increase with low stock', async () => {
       const changes: ProductChange[] = [
         {
-          product: { userId: 'userId', name: 'name', _id: 'id', isAvailable: true, isLowInStock: true, url: 'myurl' } as any,
+          product: {
+            userId: 'userId',
+            name: 'name',
+            _id: 'id',
+            isAvailable: true,
+            isLowInStock: true,
+            url: 'myurl',
+          } as any,
           productAttributeChanges: {
             hasAnyChange: true,
             hasAvailabilityChange: false,
@@ -59,9 +69,11 @@ describe('NotificationsService', () => {
       productsService.updateAllFavorites.mockReturnValue(changes);
 
       await service.sendFavoritesNotifications();
-      expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
+      expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(
+        1,
         'userId',
-        'Your [product](myurl) [name](domain/products/id) is now at 100.00€ (+10.00€, low in stock). 👚');
+        'Your [product](myurl) [name](domain/products/id) is now at 100.00€ (+10.00€, low in stock). 👚',
+      );
       expect(telegramService.notifyAboutUpdate).toHaveBeenCalledTimes(1);
     });
 
@@ -86,9 +98,11 @@ describe('NotificationsService', () => {
       });
       productsService.updateAllProducts.mockReturnValue(changes);
       await service.sendAllNotifications();
-      expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
+      expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(
+        1,
         'userId',
-        'Your [product](undefined) [undefined](domain/products/undefined) is now at 90.00€ (-10.00€). 👚');
+        'Your [product](undefined) [undefined](domain/products/undefined) is now at 90.00€ (-10.00€). 👚',
+      );
       expect(telegramService.notifyAboutUpdate).toHaveBeenCalledTimes(1);
     });
 
@@ -119,7 +133,12 @@ describe('NotificationsService', () => {
     it('should notify about low in stock change when low in stock', async () => {
       const changes: ProductChange[] = [
         {
-          product: { userId: 'userId', isAvailable: true, isLowInStock: true, price: 10 } as any,
+          product: {
+            userId: 'userId',
+            isAvailable: true,
+            isLowInStock: true,
+            price: 10,
+          } as any,
           productAttributeChanges: {
             oldPriceValue: undefined,
             newPriceValue: undefined,
@@ -137,16 +156,22 @@ describe('NotificationsService', () => {
       });
       productsService.updateAllProducts.mockReturnValue(changes);
       await service.sendAllNotifications();
-      expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
+      expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(
+        1,
         'userId',
-        'Your [product](undefined) [undefined](domain/products/undefined) is now low in stock (10.00€). 👚');
+        'Your [product](undefined) [undefined](domain/products/undefined) is now low in stock (10.00€). 👚',
+      );
       expect(telegramService.notifyAboutUpdate).toHaveBeenCalledTimes(1);
     });
 
     it('should not notify about low in stock change when not low in stock', async () => {
       const changes: ProductChange[] = [
         {
-          product: { userId: 'userId', isAvailable: true, isLowInStock: false } as any,
+          product: {
+            userId: 'userId',
+            isAvailable: true,
+            isLowInStock: false,
+          } as any,
           productAttributeChanges: {
             oldPriceValue: undefined,
             newPriceValue: undefined,
@@ -170,7 +195,11 @@ describe('NotificationsService', () => {
     it('should not notify about low in stock change when it has already been low in stock before', async () => {
       const changes: ProductChange[] = [
         {
-          product: { userId: 'userId', isAvailable: true, isLowInStock: true } as any,
+          product: {
+            userId: 'userId',
+            isAvailable: true,
+            isLowInStock: true,
+          } as any,
           productAttributeChanges: {
             oldPriceValue: undefined,
             newPriceValue: undefined,
@@ -194,7 +223,12 @@ describe('NotificationsService', () => {
     it('should notify about first availability change with low in stock', async () => {
       const changes: ProductChange[] = [
         {
-          product: { userId: 'userId', isAvailable: true, isLowInStock: true, price: 5.5 } as any,
+          product: {
+            userId: 'userId',
+            isAvailable: true,
+            isLowInStock: true,
+            price: 5.5,
+          } as any,
           productAttributeChanges: {
             oldPriceValue: undefined,
             newPriceValue: undefined,
@@ -212,16 +246,23 @@ describe('NotificationsService', () => {
       });
       productsService.updateAllProducts.mockReturnValue(changes);
       await service.sendAllNotifications();
-      expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
+      expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(
+        1,
         'userId',
-        'Your [product](undefined) [undefined](domain/products/undefined) is available again and low in stock (5.50€). 👚');
+        'Your [product](undefined) [undefined](domain/products/undefined) is available again and low in stock (5.50€). 👚',
+      );
       expect(telegramService.notifyAboutUpdate).toHaveBeenCalledTimes(1);
     });
 
     it('should notify about first availability change not low in stock', async () => {
       const changes: ProductChange[] = [
         {
-          product: { userId: 'userId', isAvailable: true, isLowInStock: false, price: 9.99 } as any,
+          product: {
+            userId: 'userId',
+            isAvailable: true,
+            isLowInStock: false,
+            price: 9.99,
+          } as any,
           productAttributeChanges: {
             oldPriceValue: undefined,
             newPriceValue: undefined,
@@ -239,16 +280,22 @@ describe('NotificationsService', () => {
       });
       productsService.updateAllProducts.mockReturnValue(changes);
       await service.sendAllNotifications();
-      expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
+      expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(
+        1,
         'userId',
-        'Your [product](undefined) [undefined](domain/products/undefined) is available again (9.99€). 👚');
+        'Your [product](undefined) [undefined](domain/products/undefined) is available again (9.99€). 👚',
+      );
       expect(telegramService.notifyAboutUpdate).toHaveBeenCalledTimes(1);
     });
 
     it('should handle unknown change', async () => {
       const changes: ProductChange[] = [
         {
-          product: { userId: 'userId', isAvailable: true, isLowInStock: false } as any,
+          product: {
+            userId: 'userId',
+            isAvailable: true,
+            isLowInStock: false,
+          } as any,
           productAttributeChanges: {
             oldPriceValue: undefined,
             newPriceValue: undefined,
@@ -272,7 +319,13 @@ describe('NotificationsService', () => {
     it('should notify about favorites low in stock change when it has already been low in stock before', async () => {
       const changes: ProductChange[] = [
         {
-          product: { userId: 'userId', isAvailable: true, isLowInStock: true, isFavorite: true, price: 10 } as any,
+          product: {
+            userId: 'userId',
+            isAvailable: true,
+            isLowInStock: true,
+            isFavorite: true,
+            price: 10,
+          } as any,
           productAttributeChanges: {
             oldPriceValue: undefined,
             newPriceValue: undefined,
@@ -290,16 +343,24 @@ describe('NotificationsService', () => {
       });
       productsService.updateAllProducts.mockReturnValue(changes);
       await service.sendAllNotifications();
-      expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
+      expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(
+        1,
         'userId',
-        'Your [product](undefined) [undefined](domain/products/undefined) is now low in stock (10.00€). 👚');
+        'Your [product](undefined) [undefined](domain/products/undefined) is now low in stock (10.00€). 👚',
+      );
       expect(telegramService.notifyAboutUpdate).toHaveBeenCalledTimes(1);
     });
 
     it('should notify about favorites availability change when it has already been available before', async () => {
       const changes: ProductChange[] = [
         {
-          product: { userId: 'userId', isAvailable: true, isLowInStock: false, isFavorite: true, price: 10 } as any,
+          product: {
+            userId: 'userId',
+            isAvailable: true,
+            isLowInStock: false,
+            isFavorite: true,
+            price: 10,
+          } as any,
           productAttributeChanges: {
             oldPriceValue: undefined,
             newPriceValue: undefined,
@@ -317,16 +378,24 @@ describe('NotificationsService', () => {
       });
       productsService.updateAllProducts.mockReturnValue(changes);
       await service.sendAllNotifications();
-      expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
+      expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(
+        1,
         'userId',
-        'Your [product](undefined) [undefined](domain/products/undefined) is available again (10.00€). 👚');
+        'Your [product](undefined) [undefined](domain/products/undefined) is available again (10.00€). 👚',
+      );
       expect(telegramService.notifyAboutUpdate).toHaveBeenCalledTimes(1);
     });
 
     it('should not notify about favorites availability change when it is unavailable', async () => {
       const changes: ProductChange[] = [
         {
-          product: { userId: 'userId', isAvailable: false, isLowInStock: false, isFavorite: true, price: 10 } as any,
+          product: {
+            userId: 'userId',
+            isAvailable: false,
+            isLowInStock: false,
+            isFavorite: true,
+            price: 10,
+          } as any,
           productAttributeChanges: {
             oldPriceValue: undefined,
             newPriceValue: undefined,
@@ -350,7 +419,13 @@ describe('NotificationsService', () => {
     it('should not notify about favorites low in stock change when it is not low in stock', async () => {
       const changes: ProductChange[] = [
         {
-          product: { userId: 'userId', isAvailable: false, isLowInStock: false, isFavorite: true, price: 10 } as any,
+          product: {
+            userId: 'userId',
+            isAvailable: false,
+            isLowInStock: false,
+            isFavorite: true,
+            price: 10,
+          } as any,
           productAttributeChanges: {
             oldPriceValue: undefined,
             newPriceValue: undefined,
@@ -380,7 +455,12 @@ describe('NotificationsService', () => {
     it('should handle multiple changes', async () => {
       const changes: ProductChange[] = [
         {
-          product: { userId: 'userId', isAvailable: true, isLowInStock: true, price: 10 } as any,
+          product: {
+            userId: 'userId',
+            isAvailable: true,
+            isLowInStock: true,
+            price: 10,
+          } as any,
           productAttributeChanges: {
             oldPriceValue: undefined,
             newPriceValue: undefined,
@@ -393,7 +473,12 @@ describe('NotificationsService', () => {
           },
         },
         {
-          product: { userId: 'userId', isAvailable: true, isLowInStock: false, price: 10 } as any,
+          product: {
+            userId: 'userId',
+            isAvailable: true,
+            isLowInStock: false,
+            price: 10,
+          } as any,
           productAttributeChanges: {
             oldPriceValue: undefined,
             newPriceValue: undefined,
@@ -411,19 +496,21 @@ describe('NotificationsService', () => {
       });
       productsService.updateAllProducts.mockReturnValue(changes);
       await service.sendAllNotifications();
-      expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(1,
+      expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(
+        1,
         'userId',
-        'Your [product](undefined) [undefined](domain/products/undefined) is available again and low in stock (10.00€). 👚');
-      expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(2,
+        'Your [product](undefined) [undefined](domain/products/undefined) is available again and low in stock (10.00€). 👚',
+      );
+      expect(telegramService.notifyAboutUpdate).toHaveBeenNthCalledWith(
+        2,
         'userId',
-        'Your [product](undefined) [undefined](domain/products/undefined) is available again (10.00€). 👚');
+        'Your [product](undefined) [undefined](domain/products/undefined) is available again (10.00€). 👚',
+      );
       expect(telegramService.notifyAboutUpdate).toHaveBeenCalledTimes(2);
     });
-
   });
 
   describe('CronJob', () => {
-
     it('should start and stop the cron jobs', async () => {
       service.onModuleInit();
       expect(cronJobService.create).toHaveBeenCalledTimes(2);
@@ -433,7 +520,5 @@ describe('NotificationsService', () => {
     it('should handle cleanup of not-started cron jobs', async () => {
       expect(() => service.onModuleDestroy()).not.toThrow();
     });
-
   });
-
 });

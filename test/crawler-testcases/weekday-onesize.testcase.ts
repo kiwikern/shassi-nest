@@ -4,11 +4,10 @@ import { WeekdayCrawler } from '../../src/crawler/crawlers/weekday.crawler';
 export const weekdayOneSizeTestCase = {
   crawlerType: WeekdayCrawler,
 
-  url: 'https://www.weekday.com/en_eur/women/accessories/product.eye-webbing-key-ring-black.0622708001.html',
+  url:
+    'https://www.weekday.com/en_eur/women/accessories/product.eye-webbing-key-ring-black.0622708001.html',
 
-  sizes: [
-    { id: '0622708001001', isAvailable: true, name: 'NOSIZE' },
-  ],
+  sizes: [{ id: '0622708001001', isAvailable: true, name: 'NOSIZE' }],
 
   sizeChecks: [
     { size: '0622708001001', isAvailable: true, isLowInStock: false },

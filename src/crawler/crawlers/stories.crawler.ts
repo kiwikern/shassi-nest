@@ -16,5 +16,4 @@ export class StoriesCrawler extends CosWeekdayBaseCrawler {
   getProductCssClasses(): string {
     return 'o-page-content';
   }
-
 }

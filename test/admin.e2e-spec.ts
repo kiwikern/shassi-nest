@@ -24,7 +24,9 @@ describe('Admin (e2e)', () => {
   async function createLogin(username): Promise<{ jwt: string; user: any }> {
     const userService = app.get(UsersService);
     const authService = app.get(AuthService);
-    const userRepository: Repository<UserEntity> = app.get(getRepositoryToken(UserEntity));
+    const userRepository: Repository<UserEntity> = app.get(
+      getRepositoryToken(UserEntity),
+    );
     const user = await userService.createUser({ username, password: '123456' });
     await userRepository.update({ _id: user._id }, { roles: [username] });
     productsRepository = app.get(getRepositoryToken(ProductEntity));
@@ -34,7 +36,11 @@ describe('Admin (e2e)', () => {
   let sizeId = 0;
   async function createProduct() {
     const productService = app.get(ProductsService);
-    return productService.addProduct(new ObjectID(userLogin.user._id), { name: 'Product', size: { name: 'S', id: sizeId++ + '' }, url: 'hm.com' });
+    return productService.addProduct(new ObjectID(userLogin.user._id), {
+      name: 'Product',
+      size: { name: 'S', id: sizeId++ + '' },
+      url: 'hm.com',
+    });
   }
 
   async function createProductWithError() {
@@ -49,8 +55,11 @@ describe('Admin (e2e)', () => {
     const crawlerServiceMock = crawlerServiceFactory();
     const moduleFixture = await Test.createTestingModule({
       imports: [AppModule],
-    }).overrideProvider(Telegraf).useClass(TelegrafMock)
-      .overrideProvider(CrawlerService).useValue(crawlerServiceMock)
+    })
+      .overrideProvider(Telegraf)
+      .useClass(TelegrafMock)
+      .overrideProvider(CrawlerService)
+      .useValue(crawlerServiceMock)
       .compile();
     app = moduleFixture.createNestApplication();
     await app.init();
@@ -62,17 +71,26 @@ describe('Admin (e2e)', () => {
     userLogin = await createLogin('user');
 
     // first product
-    crawlerServiceMock.getUpdateData.mockReturnValueOnce(
-      { price: 100, isAvailable: true, isLowInStock: false, createdAt: new Date() },
-    );
+    crawlerServiceMock.getUpdateData.mockReturnValueOnce({
+      price: 100,
+      isAvailable: true,
+      isLowInStock: false,
+      createdAt: new Date(),
+    });
     // error product
-    crawlerServiceMock.getUpdateData.mockReturnValueOnce(
-      { price: 100, isAvailable: true, isLowInStock: false, createdAt: new Date('2010') },
-    );
+    crawlerServiceMock.getUpdateData.mockReturnValueOnce({
+      price: 100,
+      isAvailable: true,
+      isLowInStock: false,
+      createdAt: new Date('2010'),
+    });
     // update when reactivating product
-    crawlerServiceMock.getUpdateData.mockReturnValueOnce(
-      { price: 100, isAvailable: true, isLowInStock: false, createdAt: new Date('2010') },
-    );
+    crawlerServiceMock.getUpdateData.mockReturnValueOnce({
+      price: 100,
+      isAvailable: true,
+      isLowInStock: false,
+      createdAt: new Date('2010'),
+    });
 
     await createProduct();
     await createProductWithError();
@@ -101,8 +119,8 @@ describe('Admin (e2e)', () => {
       .get('/admin')
       .set('Authorization', 'Bearer ' + adminLogin.jwt)
       .expect(200)
-      .expect(res => expect(res.body)
-        .toMatchObject([
+      .expect(res =>
+        expect(res.body).toMatchObject([
           {
             username: 'admin',
             productCount: 0,
@@ -113,41 +131,49 @@ describe('Admin (e2e)', () => {
             username: 'user',
             productCount: 2,
             userId: userLogin.user._id,
-            latestProductAddedDate: expect.stringContaining(new Date().getFullYear() + ''),
-            latestProductUpdatedDate: expect.stringContaining(new Date().getFullYear() + ''),
+            latestProductAddedDate: expect.stringContaining(
+              new Date().getFullYear() + '',
+            ),
+            latestProductUpdatedDate: expect.stringContaining(
+              new Date().getFullYear() + '',
+            ),
             isConnectedToTelegram: false,
           },
-        ]));
+        ]),
+      );
   });
 
   it('should return all products with errors and reactivate one', async () => {
-    const errorProduct: ProductEntity = (await request(app.getHttpServer())
-      .get('/admin/error-products')
-      .set('Authorization', 'Bearer ' + adminLogin.jwt)
-      .expect(200)
-      .expect(res => expect(res.body)
-        .toMatchObject([
-          {
-            isActive: false,
-            errors: ['1', '2', '3'],
-          },
-        ]))).body[0];
+    const errorProduct: ProductEntity = (
+      await request(app.getHttpServer())
+        .get('/admin/error-products')
+        .set('Authorization', 'Bearer ' + adminLogin.jwt)
+        .expect(200)
+        .expect(res =>
+          expect(res.body).toMatchObject([
+            {
+              isActive: false,
+              errors: ['1', '2', '3'],
+            },
+          ]),
+        )
+    ).body[0];
 
     await request(app.getHttpServer())
       .patch(`/admin/reactivate-product/${errorProduct._id}`)
       .set('Authorization', 'Bearer ' + adminLogin.jwt)
       .expect(200)
-      .expect(res => expect(res.body)
-        .toMatchObject({
+      .expect(res =>
+        expect(res.body).toMatchObject({
           _id: errorProduct._id,
           isActive: true,
           errors: [],
-        }));
+        }),
+      );
 
     await request(app.getHttpServer())
       .delete(`/admin/products/${errorProduct._id}`)
       .set('Authorization', 'Bearer ' + adminLogin.jwt)
       .expect(200);
   });
-
 });

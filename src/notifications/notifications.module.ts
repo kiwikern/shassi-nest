@@ -6,18 +6,10 @@ import { ProductsModule } from '../products/products.module';
 import { CommonModule } from '../common/common.module';
 
 @Module({
-  providers: [
-    NotificationsService,
-  ],
-  imports: [
-    ConfigModule,
-    TelegramModule,
-    ProductsModule,
-    CommonModule,
-  ],
+  providers: [NotificationsService],
+  imports: [ConfigModule, TelegramModule, ProductsModule, CommonModule],
   // exports: [
   //   NotificationsService,
   // ],
 })
-export class NotificationsModule {
-}
+export class NotificationsModule {}

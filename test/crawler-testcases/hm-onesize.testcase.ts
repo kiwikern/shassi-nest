@@ -4,9 +4,7 @@ import { HmCrawler } from '../../src/crawler/crawlers/hm.crawler';
 export const hmOneSizeTestCase = {
   crawlerType: HmCrawler,
 
-  sizes: [
-    { id: '0736967002003', isAvailable: true, name: 'ONESIZE' },
-  ],
+  sizes: [{ id: '0736967002003', isAvailable: true, name: 'ONESIZE' }],
 
   sizeChecks: [
     { size: '0736967002003', isAvailable: true, isLowInStock: false },

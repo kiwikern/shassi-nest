@@ -1,5 +1,10 @@
 import { Crawler } from '../crawler.interface';
-import { BadRequestException, HttpService, Injectable, Logger } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpService,
+  Injectable,
+  Logger,
+} from '@nestjs/common';
 import { ProductSizeAvailability } from '../product-size.interface';
 
 @Injectable()
@@ -9,8 +14,7 @@ export class AboutyouCrawler implements Crawler {
   productId: string;
   logger: Logger = new Logger(AboutyouCrawler.name);
 
-  constructor(private httpService: HttpService) {
-  }
+  constructor(private httpService: HttpService) {}
 
   async init(url: string) {
     this.url = url;
@@ -36,7 +40,11 @@ export class AboutyouCrawler implements Crawler {
       }
       return size.attributes.price.current / 100;
     } else {
-      this.logger.warn({ message: 'Could not find given size', sizeId, productId: this.productId });
+      this.logger.warn({
+        message: 'Could not find given size',
+        sizeId,
+        productId: this.productId,
+      });
       if (this.body.data.attributes.campaignPrice.min > 0) {
         return this.body.data.attributes.campaignPrice.min / 100;
       }
@@ -52,10 +60,11 @@ export class AboutyouCrawler implements Crawler {
         return {
           id: sizeId,
           isAvailable: size.quantity > 0,
-          name: size.sizes.shop + (size.sizes.length ? `/${size.sizes.length}` : ''),
+          name:
+            size.sizes.shop +
+            (size.sizes.length ? `/${size.sizes.length}` : ''),
         };
       });
-
   }
 
   isInCatalog(): boolean {
@@ -78,5 +87,4 @@ export class AboutyouCrawler implements Crawler {
   getUrl(): string {
     return this.url;
   }
-
 }

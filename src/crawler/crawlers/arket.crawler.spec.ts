@@ -7,19 +7,18 @@ import { arketNoSaleTestCase } from '../../../test/crawler-testcases/arket-nosal
 
 const testCases = [arketNoSaleTestCase, arketOneSizeTestCase];
 
-describe('Arket',
-  () => {
-    testCases.forEach(testCase => crawlerTestRun(testCase));
+describe('Arket', () => {
+  testCases.forEach(testCase => crawlerTestRun(testCase));
 
-    it('should reject url without product data', async () => {
-      const httpService = {
-        get: () => of({ data: null }),
-      } as any;
-      const crawler = new ArketCrawler(httpService);
-      try {
-        await crawler.init('any url');
-      } catch (e) {
-        expect(e).toBeInstanceOf(BadRequestException);
-      }
-    });
+  it('should reject url without product data', async () => {
+    const httpService = {
+      get: () => of({ data: null }),
+    } as any;
+    const crawler = new ArketCrawler(httpService);
+    try {
+      await crawler.init('any url');
+    } catch (e) {
+      expect(e).toBeInstanceOf(BadRequestException);
+    }
   });
+});

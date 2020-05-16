@@ -4,7 +4,6 @@ import { weekdayOneSizeTestCase } from '../../../test/crawler-testcases/weekday-
 
 const testCases = [weekdayTestCase, weekdayOneSizeTestCase];
 
-describe('Weekday',
-  () => {
-    testCases.forEach(testCase => crawlerTestRun(testCase));
-  });
+describe('Weekday', () => {
+  testCases.forEach(testCase => crawlerTestRun(testCase));
+});

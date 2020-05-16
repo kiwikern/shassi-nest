@@ -1,4 +1,13 @@
-import { BadRequestException, ConflictException, Inject, Injectable, Logger, NotFoundException, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Inject,
+  Injectable,
+  Logger,
+  NotFoundException,
+  OnModuleDestroy,
+  OnModuleInit,
+} from '@nestjs/common';
 import Telegraf, { Context, Markup } from 'telegraf';
 import * as session from 'telegraf/session';
 import { ProductsService } from '../products/products.service';
@@ -14,19 +23,19 @@ import { CronJob } from 'cron';
 /* eslint-disable @typescript-eslint/camelcase */
 @Injectable()
 export class TelegramService implements OnModuleInit, OnModuleDestroy {
-
   private static readonly ONE_DAY_MS = 1000 * 60 * 60 * 24;
   private static readonly LINK_REGEX = /^(?!\/).*((?:(?:http)|(?:www))\S+)/m;
   private logger: Logger = new Logger(TelegramService.name);
   private jobs: CronJob[] = [];
 
-  constructor(@Inject('Telegraf') private telegraf: Telegraf<any>,
-              private productsService: ProductsService,
-              private tokenService: TelegramTokenService,
-              private telegramIdService: TelegramUserIdService,
-              private cronJobService: CronJobService,
-              private configService: ConfigService) {
-  }
+  constructor(
+    @Inject('Telegraf') private telegraf: Telegraf<any>,
+    private productsService: ProductsService,
+    private tokenService: TelegramTokenService,
+    private telegramIdService: TelegramUserIdService,
+    private cronJobService: CronJobService,
+    private configService: ConfigService,
+  ) {}
 
   onModuleInit() {
     this.telegraf.catch(err => this.handleErrors(err));
@@ -34,10 +43,18 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
     this.telegraf.command('start', (ctx, next) => this.startCommand(ctx, next));
     this.telegraf.help((ctx, next) => this.helpCommand(ctx, next));
     this.telegraf.use((ctx, next) => this.authSession(ctx, next));
-    this.telegraf.hears(TelegramService.LINK_REGEX, ctx => this.addProductOnURLSent(ctx, ctx.match[1]));
-    this.telegraf.on('photo', (ctx: Context, next) => this.handleReceivedPhoto(ctx, next));
-    this.telegraf.on('message', (ctx: Context) => this.handleMessageWithoutUrl(ctx));
-    (this.telegraf as any).action(/.+/, async ctx => this.updateProductOnSizeChosen(ctx));
+    this.telegraf.hears(TelegramService.LINK_REGEX, ctx =>
+      this.addProductOnURLSent(ctx, ctx.match[1]),
+    );
+    this.telegraf.on('photo', (ctx: Context, next) =>
+      this.handleReceivedPhoto(ctx, next),
+    );
+    this.telegraf.on('message', (ctx: Context) =>
+      this.handleMessageWithoutUrl(ctx),
+    );
+    (this.telegraf as any).action(/.+/, async ctx =>
+      this.updateProductOnSizeChosen(ctx),
+    );
     this.telegraf.startPolling();
   }
 
@@ -50,9 +67,14 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
     if (ctx.message.text && ctx.message.text.startsWith('/start')) {
       return;
     }
-    this.logger.log({ message: 'Received message without url', telegramMessage: ctx.message });
-    return ctx.reply('I did not understand. 🤷‍♀️ Please, send a URL to a product. 🔗' +
-      '\nOften, you can just use the share menu from your store\'s website.');
+    this.logger.log({
+      message: 'Received message without url',
+      telegramMessage: ctx.message,
+    });
+    return ctx.reply(
+      'I did not understand. 🤷‍♀️ Please, send a URL to a product. 🔗' +
+        "\nOften, you can just use the share menu from your store's website.",
+    );
   }
 
   handleReceivedPhoto(ctx: Context, next) {
@@ -67,11 +89,15 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
   async notifyAboutUpdate(userId, text) {
     const telegramId = await this.telegramIdService.findTelegramId(userId);
     if (!telegramId) {
-      this.logger.log(`User ${userId} has telegram notification activated, but no account is linked.`);
+      this.logger.log(
+        `User ${userId} has telegram notification activated, but no account is linked.`,
+      );
       return;
     }
 
-    this.telegraf.telegram.sendMessage(telegramId, text, { parse_mode: 'Markdown' });
+    this.telegraf.telegram.sendMessage(telegramId, text, {
+      parse_mode: 'Markdown',
+    });
   }
 
   handleErrors(err) {
@@ -84,18 +110,36 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
       const product = await this.productsService.initializeProduct(url);
       if (product.sizes && product.sizes.length > 1) {
         const productId = Date.now();
-        ctx.session.productData.set(productId, { url: product.url, name: product.name });
+        ctx.session.productData.set(productId, {
+          url: product.url,
+          name: product.name,
+        });
         ctx.reply('Which size do you want? 📏', {
           reply_markup: this.createKeyboard(product.sizes, productId),
           reply_to_message_id: ctx.message.message_id,
         });
       } else {
-        const productUpdate = { name: product.name, url: product.url, size: { name: 'ONESIZE', id: 'ONESIZE' } };
-        if (product.sizes && product.sizes[0] && product.sizes[0].id !== 'ONESIZE') {
+        const productUpdate = {
+          name: product.name,
+          url: product.url,
+          size: { name: 'ONESIZE', id: 'ONESIZE' },
+        };
+        if (
+          product.sizes &&
+          product.sizes[0] &&
+          product.sizes[0].id !== 'ONESIZE'
+        ) {
           Object.assign(productUpdate, { size: product.sizes[0] });
         }
-        const newProduct = await this.productsService.addProduct(userId, productUpdate);
-        ctx.reply(`Product ${newProduct.name} for ${newProduct.price.toFixed(2)}€ at store ${newProduct.store} was added. 🛍️`);
+        const newProduct = await this.productsService.addProduct(
+          userId,
+          productUpdate,
+        );
+        ctx.reply(
+          `Product ${newProduct.name} for ${newProduct.price.toFixed(
+            2,
+          )}€ at store ${newProduct.store} was added. 🛍️`,
+        );
       }
     } catch (err) {
       this.handleProductAddErrors(err, ctx);
@@ -111,13 +155,25 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
       ctx.editMessageReplyMarkup();
       const productData = ctx.session.productData.get(productId);
       if (!productData) {
-        return ctx.reply('Your request timed out. Please add the product again. ⌛',
-          { reply_to_message_id: ctx.callbackQuery.message.reply_to_message.message_id });
+        return ctx.reply(
+          'Your request timed out. Please add the product again. ⌛',
+          {
+            reply_to_message_id:
+              ctx.callbackQuery.message.reply_to_message.message_id,
+          },
+        );
       }
       ctx.session.productData.delete(productId);
       Object.assign(productData, { size });
-      const p = await this.productsService.addProduct(ctx.session.userId, productData);
-      const text = `Your product ${p.name} for ${p.price.toFixed(2)}€ at store ${p.store} with size ${size.name} was added successfully. 🛍️`;
+      const p = await this.productsService.addProduct(
+        ctx.session.userId,
+        productData,
+      );
+      const text = `Your product ${p.name} for ${p.price.toFixed(
+        2,
+      )}€ at store ${p.store} with size ${
+        size.name
+      } was added successfully. 🛍️`;
       ctx.editMessageText(text);
     } catch (err) {
       this.handleProductAddErrors(err, ctx);
@@ -179,15 +235,19 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
     if (userId) {
       ctx.session.userId = userId;
       ctx.session.productData = new Map();
-      const job = this.cronJobService.create('0 0 3 * * *', () => this.cleanUpSessionData(ctx));
+      const job = this.cronJobService.create('0 0 3 * * *', () =>
+        this.cleanUpSessionData(ctx),
+      );
       job.start();
       this.jobs.push(job);
       return next(ctx);
     }
 
     if (ctx.message.text && !ctx.message.text.includes('/start')) {
-      ctx.reply(`You need to link your shassi account first. 🔗 Go to ${this.configService.frontendDomain}?action=createTelegramToken or click the button below.`
-        , this.loginInlineButton);
+      ctx.reply(
+        `You need to link your shassi account first. 🔗 Go to ${this.configService.frontendDomain}?action=createTelegramToken or click the button below.`,
+        this.loginInlineButton,
+      );
     }
     // Do not call next() without account.
   }
@@ -202,14 +262,16 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
   }
 
   private loginInlineButton = {
-    reply_markup: Markup.inlineKeyboard([{
-      text: 'Login/Register',
-      login_url: {
-        url: `${this.configService.frontendDomain}/auth/telegram-login`,
-        request_write_access: true,
-      },
-      domain: this.configService.frontendDomain,
-    } as any]),
+    reply_markup: Markup.inlineKeyboard([
+      {
+        text: 'Login/Register',
+        login_url: {
+          url: `${this.configService.frontendDomain}/auth/telegram-login`,
+          request_write_access: true,
+        },
+        domain: this.configService.frontendDomain,
+      } as any,
+    ]),
   };
 
   async startCommand(ctx: Context, next) {
@@ -218,12 +280,15 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
     const userId = ObjectID.isValid(params[0]) ? new ObjectID(params[0]) : null;
     const token = params.length > 1 ? params[1] : null;
     if (!token) {
-      ctx.reply(`Hi! 👋 You need to link your shassi account first. Go to ${this.configService.frontendDomain}?action=createTelegramToken or click the button below.`,
-        this.loginInlineButton);
+      ctx.reply(
+        `Hi! 👋 You need to link your shassi account first. Go to ${this.configService.frontendDomain}?action=createTelegramToken or click the button below.`,
+        this.loginInlineButton,
+      );
       return next(ctx);
     }
     const isValid = await this.tokenService.checkToken(userId, token);
-    const isAlreadyConnected = (await this.telegramIdService.findTelegramId(userId)) === ctx.from.id;
+    const isAlreadyConnected =
+      (await this.telegramIdService.findTelegramId(userId)) === ctx.from.id;
     if (isValid) {
       try {
         if (!isAlreadyConnected) {
@@ -233,11 +298,15 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
         ctx.reply('You can add a product by sending its URL to this chat.');
         return this.authSession(ctx, next);
       } catch (err) {
-        ctx.reply('Could not connect Telegram account. Already linked to different shassi user account. 🙌');
+        ctx.reply(
+          'Could not connect Telegram account. Already linked to different shassi user account. 🙌',
+        );
       }
     } else {
       ctx.reply('Given token was invalid. Try again! 🙇');
-      ctx.reply(`To create a new token, go to ${this.configService.frontendDomain}?action=createTelegramToken`);
+      ctx.reply(
+        `To create a new token, go to ${this.configService.frontendDomain}?action=createTelegramToken`,
+      );
     }
     return next(ctx);
   }

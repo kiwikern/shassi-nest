@@ -5,11 +5,10 @@ import { ArketCrawler } from '../../src/crawler/crawlers/arket.crawler';
 export const arketOneSizeTestCase = {
   crawlerType: ArketCrawler,
 
-  url: 'https://www.arket.com/en_eur/homeware/kitchen/product.glazed-plate-19-cm-beige.0775166002.html',
+  url:
+    'https://www.arket.com/en_eur/homeware/kitchen/product.glazed-plate-19-cm-beige.0775166002.html',
 
-  sizes: [
-    { id: '0775166002001', isAvailable: true, name: 'NOSIZE' },
-  ],
+  sizes: [{ id: '0775166002001', isAvailable: true, name: 'NOSIZE' }],
 
   sizeChecks: [
     { size: '0775166002001', isAvailable: true, isLowInStock: false },
@@ -23,7 +22,7 @@ export const arketOneSizeTestCase = {
     { size: 'unknown-size', price: 8 },
   ],
 
-  secondResponse: {availability: ['0775166002001'], fewPieceLeft: []},
+  secondResponse: { availability: ['0775166002001'], fewPieceLeft: [] },
 
   testResponse: `<!DOCTYPE HTML>
 <html class="no-js">

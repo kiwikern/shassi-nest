@@ -23,7 +23,9 @@ export class ConfigService {
       this.envConfig = this.validateInput(config);
     }
     if (process.env.MONGODB_URI) {
-      const matches = /mongodb:\/\/(\w+):(\w+)@((?:\w|\.)+):(\d+)\/(\w+)/.exec(process.env.MONGODB_URI);
+      const matches = /mongodb:\/\/(\w+):(\w+)@((?:\w|\.)+):(\d+)\/(\w+)/.exec(
+        process.env.MONGODB_URI,
+      );
       this.envConfig.DATABASE_USERNAME = matches[1];
       this.envConfig.DATABASE_PASSWORD = matches[2];
       this.envConfig.DATABASE_HOST = matches[3];
@@ -53,7 +55,9 @@ export class ConfigService {
   }
 
   get databasePort(): number {
-    return Number(process.env.DATABASE_PORT) || Number(this.envConfig.DATABASE_PORT);
+    return (
+      Number(process.env.DATABASE_PORT) || Number(this.envConfig.DATABASE_PORT)
+    );
   }
 
   get jwtSecret(): string {
@@ -61,7 +65,11 @@ export class ConfigService {
   }
 
   get jwtExpiresIn(): number {
-    return Number(process.env.JWT_EXPIRES_IN) || Number(this.envConfig.JWT_EXPIRES_IN) || 30 * 24 * 60 * 60;
+    return (
+      Number(process.env.JWT_EXPIRES_IN) ||
+      Number(this.envConfig.JWT_EXPIRES_IN) ||
+      30 * 24 * 60 * 60
+    );
   }
 
   get mailServer(): string {
@@ -118,5 +126,4 @@ export class ConfigService {
     }
     return validatedEnvConfig;
   }
-
 }

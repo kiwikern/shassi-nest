@@ -4,7 +4,8 @@ import { WeekdayCrawler } from '../../src/crawler/crawlers/weekday.crawler';
 export const weekdayTestCase = {
   crawlerType: WeekdayCrawler,
 
-  url: 'https://www.weekday.com/en_eur/men/shirts/product.split-velvet-shirt-blue.0566155004.html',
+  url:
+    'https://www.weekday.com/en_eur/men/shirts/product.split-velvet-shirt-blue.0566155004.html',
 
   sizes: [
     { id: '0566155004002', isAvailable: true, name: 'S' },
@@ -26,7 +27,19 @@ export const weekdayTestCase = {
     { size: 'unknown-size', price: 30 },
   ],
 
-  secondResponse: {availability: ['0566155004003', '0566155005004', '0566155004002', '0566155005003', '0566155005002', '0566155004005', '0566155004004', '0566155005005'], fewPieceLeft: ['0566155004004']},
+  secondResponse: {
+    availability: [
+      '0566155004003',
+      '0566155005004',
+      '0566155004002',
+      '0566155005003',
+      '0566155005002',
+      '0566155004005',
+      '0566155004004',
+      '0566155005005',
+    ],
+    fewPieceLeft: ['0566155004004'],
+  },
 
   testResponse: `<!DOCTYPE HTML>
 <html class="no-js">

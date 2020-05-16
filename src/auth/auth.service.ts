@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './jwt-payload.interface';
@@ -9,10 +13,11 @@ import { classToPlain } from 'class-transformer';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly usersService: UsersService,
-              private readonly bcryptService: BcryptService,
-              private readonly jwtService: JwtService) {
-  }
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly bcryptService: BcryptService,
+    private readonly jwtService: JwtService,
+  ) {}
 
   async login(login: UserLoginDto): Promise<{ jwt: string; user: UserEntity }> {
     const user = await this.usersService.findOneByUsername(login.username);
@@ -21,10 +26,18 @@ export class AuthService {
     }
 
     if (!user.password) {
-      throw new BadRequestException('Login only possible via Telegram button.', 'login-via-telegram-only');
+      throw new BadRequestException(
+        'Login only possible via Telegram button.',
+        'login-via-telegram-only',
+      );
     }
 
-    if (!await this.bcryptService.checkEncryptedData(login.password, user.password)) {
+    if (
+      !(await this.bcryptService.checkEncryptedData(
+        login.password,
+        user.password,
+      ))
+    ) {
       throw new UnauthorizedException('Wrong password');
     }
     return this.createToken(user);
@@ -36,11 +49,13 @@ export class AuthService {
       username: user.username,
       roles: user.roles || [],
     };
-    return { jwt: this.jwtService.sign(payload), user: classToPlain<UserEntity>(user) as UserEntity };
+    return {
+      jwt: this.jwtService.sign(payload),
+      user: classToPlain<UserEntity>(user) as UserEntity,
+    };
   }
 
   async validateUser(payload: JwtPayload): Promise<UserEntity> {
     return this.usersService.findOneByUsername(payload.username);
   }
-
 }

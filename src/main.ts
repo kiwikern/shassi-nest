@@ -15,7 +15,7 @@ async function bootstrap() {
     .setVersion(version)
     .addTag('users')
     .addTag('products')
-    .setContact('Kim Kern', 'https://kimkern.de','shassi@kimkern.de')
+    .setContact('Kim Kern', 'https://kimkern.de', 'shassi@kimkern.de')
     .addBearerAuth()
     .addServer(configService.isProduction ? 'https://' : 'http://')
     .build();

@@ -1,5 +1,11 @@
 import { Crawler } from '../crawler.interface';
-import { BadGatewayException, BadRequestException, HttpService, InternalServerErrorException, Logger } from '@nestjs/common';
+import {
+  BadGatewayException,
+  BadRequestException,
+  HttpService,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
 import { ProductSizeAvailability } from '../product-size.interface';
 import { JSDOM, VirtualConsole } from 'jsdom';
 import { generateUserAgent } from './user-agent-generator';
@@ -41,8 +47,12 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
       const headers = this.getHeaders();
       const virtualConsole = new VirtualConsole();
       virtualConsole.on('error', (...data) => null);
-      const response = await this.httpService.get(this.url, { headers }).toPromise();
-      this.document = new JSDOM(response.data, { virtualConsole }).window.document;
+      const response = await this.httpService
+        .get(this.url, { headers })
+        .toPromise();
+      this.document = new JSDOM(response.data, {
+        virtualConsole,
+      }).window.document;
     } catch (e) {
       this.logger.error({
         message: 'failed to request product data',
@@ -52,10 +62,11 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
       throw new InternalServerErrorException('Failed to request data');
     }
     try {
-      const productDataString = this.document.getElementsByClassName(this.getProductCssClasses())[0]
-      // TODO: Search all script nodes for productArticleDetails instead of getScriptCounter
-        .getElementsByTagName('script')[this.getScriptCounter()].innerHTML
-        .replace(/'/g, '"')
+      const productDataString = this.document
+        .getElementsByClassName(this.getProductCssClasses())[0]
+        // TODO: Search all script nodes for productArticleDetails instead of getScriptCounter
+        .getElementsByTagName('script')
+        [this.getScriptCounter()].innerHTML.replace(/'/g, '"')
         .replace(/isDesktop \? ".*" :/g, '')
         // trailing slashes
         .replace(/\/$/gm, ',')
@@ -75,11 +86,19 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
       }
       if (data.alternate) {
         // H&M is missing name attribute, replace color placeholder
-        this.productData.altName = data.alternate.replace(/ - {a.*/, ` - ${this.productData.name}`);
+        this.productData.altName = data.alternate.replace(
+          / - {a.*/,
+          ` - ${this.productData.name}`,
+        );
       }
     } catch (e) {
-      this.logger.error(`Could not parse product data for ${url}, error: ${e.message}`, e.stack);
-      throw new BadRequestException('The url could not be processed. Was this a proper product url?');
+      this.logger.error(
+        `Could not parse product data for ${url}, error: ${e.message}`,
+        e.stack,
+      );
+      throw new BadRequestException(
+        'The url could not be processed. Was this a proper product url?',
+      );
     }
 
     const apiUrl = this.getBaseUrl() + '/getAvailability?format=json&variants=';
@@ -87,20 +106,30 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
       // might be sizes instead of variants for h&m?
       const variants = this.getProductVariants();
       const headers = this.getHeaders();
-      const availabilityResponse = await this.httpService.get(apiUrl + variants, { headers }).toPromise();
-      if (!Array.isArray(availabilityResponse.data.availability) || !Array.isArray(availabilityResponse.data.fewPieceLeft)) {
+      const availabilityResponse = await this.httpService
+        .get(apiUrl + variants, { headers })
+        .toPromise();
+      if (
+        !Array.isArray(availabilityResponse.data.availability) ||
+        !Array.isArray(availabilityResponse.data.fewPieceLeft)
+      ) {
         throw new BadGatewayException('Unexpected availability response.');
       }
       this.availability = availabilityResponse.data.availability;
       this.lowInStock = availabilityResponse.data.fewPieceLeft;
     } catch (e) {
-      this.logger.error({
-        message: 'Could not get availability data',
-        productUrl: this.url,
-        apiUrl,
-        originalError: e.message,
-      }, e.stack);
-      throw new InternalServerErrorException('Could not get product availability from store API.');
+      this.logger.error(
+        {
+          message: 'Could not get availability data',
+          productUrl: this.url,
+          apiUrl,
+          originalError: e.message,
+        },
+        e.stack,
+      );
+      throw new InternalServerErrorException(
+        'Could not get product availability from store API.',
+      );
     }
   }
 
@@ -111,7 +140,7 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
   private getHeaders() {
     return {
       'User-Agent': generateUserAgent(),
-      'Cookie': 'HMCORP_locale=de_DE;HMCORP_currency=EUR;',
+      Cookie: 'HMCORP_locale=de_DE;HMCORP_currency=EUR;',
     };
   }
 
@@ -120,21 +149,21 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
   }
 
   getPrice(): number {
-    const priceText: string = this.productData.priceClubValue
-      || this.productData.priceSaleValue
-      || this.productData.redPriceValue
-      || this.productData.whitePriceValue
-      || this.productData.priceValue;
+    const priceText: string =
+      this.productData.priceClubValue ||
+      this.productData.priceSaleValue ||
+      this.productData.redPriceValue ||
+      this.productData.whitePriceValue ||
+      this.productData.priceValue;
     return parseFloat(priceText);
   }
 
   getSizes(): ProductSizeAvailability[] {
-    return this.productData.variants
-      .map(v => ({
-        id: v.variantCode,
-        name: v.sizeName,
-        isAvailable: this.isSizeAvailable(v.variantCode),
-      }));
+    return this.productData.variants.map(v => ({
+      id: v.variantCode,
+      name: v.sizeName,
+      isAvailable: this.isSizeAvailable(v.variantCode),
+    }));
   }
 
   isInCatalog(): boolean {

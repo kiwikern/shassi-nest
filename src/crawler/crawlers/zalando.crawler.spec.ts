@@ -4,7 +4,6 @@ import { zalandoOneSizeTestCase } from '../../../test/crawler-testcases/zalando-
 
 const testCases = [zalandoTestCase, zalandoOneSizeTestCase];
 
-describe('Zalando',
-  () => {
-    testCases.forEach(testCase => crawlerTestRun(testCase));
-  });
+describe('Zalando', () => {
+  testCases.forEach(testCase => crawlerTestRun(testCase));
+});

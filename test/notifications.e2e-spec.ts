@@ -29,8 +29,15 @@ describe('Notifications (e2e)', () => {
 
     const moduleFixture = await Test.createTestingModule({
       imports: [AppModule],
-    }).overrideProvider(Telegraf).useValue(new Telegraf(bot.token, { telegram: { apiRoot: telegramServer.getApiEndpoint() } } as any))
-      .overrideProvider(CrawlerService).useValue(crawlerMock)
+    })
+      .overrideProvider(Telegraf)
+      .useValue(
+        new Telegraf(bot.token, {
+          telegram: { apiRoot: telegramServer.getApiEndpoint() },
+        } as any),
+      )
+      .overrideProvider(CrawlerService)
+      .useValue(crawlerMock)
       .compile();
     app = moduleFixture.createNestApplication();
     notificationsService = app.get(NotificationsService);
@@ -56,15 +63,26 @@ describe('Notifications (e2e)', () => {
 
   async function createProduct() {
     const productService = app.get(ProductsService);
-    crawlerMock.getUpdateData.mockReturnValueOnce({ price: 100, isAvailable: true, isLowInStock: false });
-    await productService.addProduct(userId, { name: 'Product', size: { name: 'S', id: '01' }, url: 'hm.com/' + productCount });
+    crawlerMock.getUpdateData.mockReturnValueOnce({
+      price: 100,
+      isAvailable: true,
+      isLowInStock: false,
+    });
+    await productService.addProduct(userId, {
+      name: 'Product',
+      size: { name: 'S', id: '01' },
+      url: 'hm.com/' + productCount,
+    });
     productCount++;
   }
 
   async function linkTelegramAccountToNewUser(): Promise<Chat> {
     const userService = app.get(UsersService);
     const telegramIdService = app.get(TelegramUserIdService);
-    const user = await userService.createUser({ username: 'user2', password: '123456' });
+    const user = await userService.createUser({
+      username: 'user2',
+      password: '123456',
+    });
     userId = user._id;
     const client = telegramServer.createUser();
     await telegramIdService.saveTelegramId(user._id, client.info.id);
@@ -77,20 +95,36 @@ describe('Notifications (e2e)', () => {
     await createProduct();
     await createProduct();
     // price update
-    crawlerMock.getUpdateData.mockReturnValueOnce({ price: 90, isAvailable: true, isLowInStock: true });
+    crawlerMock.getUpdateData.mockReturnValueOnce({
+      price: 90,
+      isAvailable: true,
+      isLowInStock: true,
+    });
     // low in stock update
-    crawlerMock.getUpdateData.mockReturnValueOnce({ price: 100, isAvailable: true, isLowInStock: true });
+    crawlerMock.getUpdateData.mockReturnValueOnce({
+      price: 100,
+      isAvailable: true,
+      isLowInStock: true,
+    });
     // no update
-    crawlerMock.getUpdateData.mockReturnValueOnce({ price: 100, isAvailable: true, isLowInStock: false });
+    crawlerMock.getUpdateData.mockReturnValueOnce({
+      price: 100,
+      isAvailable: true,
+      isLowInStock: false,
+    });
     await notificationsService.sendAllNotifications();
     await telegramServer.waitForNextMessages(2);
     expect(chat.history.length).toBe(4);
-    const notifications = [chat.history[2].message.text, chat.history[3].message.text];
+    const notifications = [
+      chat.history[2].message.text,
+      chat.history[3].message.text,
+    ];
     // The order of the HTTP requests can differ
-    expect(notifications).toEqual(expect.arrayContaining([
-      expect.stringContaining('-10.00€, low in stock'),
-      expect.stringContaining('now low in stock'),
-    ]));
+    expect(notifications).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining('-10.00€, low in stock'),
+        expect.stringContaining('now low in stock'),
+      ]),
+    );
   });
-
 });

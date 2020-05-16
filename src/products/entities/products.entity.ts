@@ -13,7 +13,7 @@ export class ProductEntity {
   @Transform(toStringSafe, { toPlainOnly: true })
   @Transform(toObjectId, { toClassOnly: true })
   @ApiProperty()
-    // eslint-disable-line camelcase, no-underscore-dangle, id-blacklist, id-match
+  // eslint-disable-line camelcase, no-underscore-dangle, id-blacklist, id-match
   _id: ObjectID;
 
   @Column()
@@ -98,7 +98,20 @@ export class ProductEntity {
 
   // TODO: Mapping between URLs and Stores as Dictionary
   @Expose({ name: 'store' })
-  @ApiProperty({ enum: ['H&M', 'ASOS', 'Weekday', 'COS', 'ABOUT YOU', 'Amazon', 'Zalando', '& Other Stories', 'Snipes', 'Arket'] })
+  @ApiProperty({
+    enum: [
+      'H&M',
+      'ASOS',
+      'Weekday',
+      'COS',
+      'ABOUT YOU',
+      'Amazon',
+      'Zalando',
+      '& Other Stories',
+      'Snipes',
+      'Arket',
+    ],
+  })
   get store(): string {
     if (this.url.includes('hm.com')) {
       return 'H&M';
@@ -121,7 +134,10 @@ export class ProductEntity {
     } else if (this.url.includes('arket.com')) {
       return 'Arket';
     } else {
-      new Logger(ProductEntity.name).warn('Could not find store for URL', this.url);
+      new Logger(ProductEntity.name).warn(
+        'Could not find store for URL',
+        this.url,
+      );
       return '';
     }
   }

@@ -1,4 +1,12 @@
-import { Body, ClassSerializerInterceptor, Controller, Get, Post, UseGuards, UseInterceptors } from '@nestjs/common';
+import {
+  Body,
+  ClassSerializerInterceptor,
+  Controller,
+  Get,
+  Post,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import {
   ApiBearerAuth,
@@ -7,7 +15,8 @@ import {
   ApiOkResponse,
   ApiOperation,
   ApiUnauthorizedResponse,
-  ApiTags, ApiProperty,
+  ApiTags,
+  ApiProperty,
 } from '@nestjs/swagger';
 import { User } from '../auth/user.decorator';
 import { UserEntity } from '../users/entities/user.entity';
@@ -39,23 +48,31 @@ class LoginResponse {
 @UseInterceptors(ClassSerializerInterceptor)
 @ApiTags('telegram')
 export class TelegramController {
-
-  constructor(private telegramTokenService: TelegramTokenService,
-              private telegramUserIdService: TelegramUserIdService,
-              private telegramLoginService: TelegramLoginService) {
-  }
+  constructor(
+    private telegramTokenService: TelegramTokenService,
+    private telegramUserIdService: TelegramUserIdService,
+    private telegramLoginService: TelegramLoginService,
+  ) {}
 
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth()
   @ApiForbiddenResponse({ description: 'User must be logged in.' })
-  @ApiOperation({ summary: 'Connection status', description: 'Returns whether the logged in user is connected to a telegram account.' })
+  @ApiOperation({
+    summary: 'Connection status',
+    description:
+      'Returns whether the logged in user is connected to a telegram account.',
+  })
   @ApiOkResponse({
     description: 'Returns whether user is connected to telegram bot.',
     type: TelegramConnectionStatusResponse,
   })
   @Get()
-  async getConnectionStatus(@User() user: UserEntity): Promise<TelegramConnectionStatusResponse> {
-    const telegramId = await this.telegramUserIdService.findTelegramId(user._id);
+  async getConnectionStatus(
+    @User() user: UserEntity,
+  ): Promise<TelegramConnectionStatusResponse> {
+    const telegramId = await this.telegramUserIdService.findTelegramId(
+      user._id,
+    );
     return { isConnectedToTelegram: !!telegramId };
   }
 
@@ -64,8 +81,11 @@ export class TelegramController {
   @ApiForbiddenResponse({ description: 'User must be logged in.' })
   @ApiOperation({
     summary: 'Create temporary token',
-    description: `Creates a temporary token (expires after ${TelegramTokenService.expireAfterSeconds / 60}`
-      + ' minutes) with which a telegram account can be linked to the logged in user.',
+    description:
+      `Creates a temporary token (expires after ${
+        TelegramTokenService.expireAfterSeconds / 60
+      }` +
+      ' minutes) with which a telegram account can be linked to the logged in user.',
   })
   @ApiCreatedResponse({
     description: 'Returns the temporary telegram token.',
@@ -78,7 +98,8 @@ export class TelegramController {
 
   @ApiOperation({
     summary: 'Login/Register via Telegram',
-    description: 'You can use Telegram seamless login to login into an existing account ' +
+    description:
+      'You can use Telegram seamless login to login into an existing account ' +
       'that is linked to Telegram or to automatically create a new account.',
   })
   @ApiCreatedResponse({
@@ -86,12 +107,12 @@ export class TelegramController {
     type: LoginResponse,
   })
   @ApiUnauthorizedResponse({
-    description: 'You cannot login when the given hash is invalid or the authentication ' +
+    description:
+      'You cannot login when the given hash is invalid or the authentication ' +
       'data is older than 10 minutes',
   })
   @Post('login')
   async login(@Body() telegramLoginData: TelegramLoginData) {
     return this.telegramLoginService.login(telegramLoginData);
   }
-
 }

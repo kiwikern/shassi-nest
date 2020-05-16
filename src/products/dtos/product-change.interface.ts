@@ -27,7 +27,13 @@ export class ProductAttributeChangesBuilder {
   private hasNeverBeenLowInStockBefore = false;
   private hasLowInStockChange = false;
 
-  setPriceChange({ oldValue, newValue }: { oldValue: number; newValue: number }) {
+  setPriceChange({
+    oldValue,
+    newValue,
+  }: {
+    oldValue: number;
+    newValue: number;
+  }) {
     this.hasAnyChange = true;
     this.hasPriceChange = true;
     this.oldPriceValue = oldValue;
@@ -58,5 +64,4 @@ export class ProductAttributeChangesBuilder {
       hasNeverBeenLowInStockBefore: this.hasNeverBeenLowInStockBefore,
     };
   }
-
 }

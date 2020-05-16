@@ -13,28 +13,48 @@ export class TelegramLoginService {
 
   private logger: Logger = new Logger(TelegramLoginService.name);
 
-  constructor(private telegramUserIdService: TelegramUserIdService,
-              private authService: AuthService,
-              private userService: UsersService,
-              private configService: ConfigService,
-              private hashService: HashService) {
-  }
+  constructor(
+    private telegramUserIdService: TelegramUserIdService,
+    private authService: AuthService,
+    private userService: UsersService,
+    private configService: ConfigService,
+    private hashService: HashService,
+  ) {}
 
   async login(telegramLoginData: TelegramLoginData) {
     if (!this.isValidHash(telegramLoginData)) {
-      this.logger.warn({ message: 'Invalid Telegram login hash', telegramLoginData });
-      throw new UnauthorizedException({key: 'telegram-invalid-hash', message: 'The provided hash is not valid.'});
+      this.logger.warn({
+        message: 'Invalid Telegram login hash',
+        telegramLoginData,
+      });
+      throw new UnauthorizedException({
+        key: 'telegram-invalid-hash',
+        message: 'The provided hash is not valid.',
+      });
     }
     if (!this.isRecentDate(telegramLoginData)) {
-      this.logger.warn({ message: 'Telegram login data too old', telegramLoginData });
-      throw new UnauthorizedException({key: 'telegram-auth-expired', message: 'Telegram auth data is too old. Please try again.'});
+      this.logger.warn({
+        message: 'Telegram login data too old',
+        telegramLoginData,
+      });
+      throw new UnauthorizedException({
+        key: 'telegram-auth-expired',
+        message: 'Telegram auth data is too old. Please try again.',
+      });
     }
 
-    const userId = await this.telegramUserIdService.findUserId(telegramLoginData.id);
+    const userId = await this.telegramUserIdService.findUserId(
+      telegramLoginData.id,
+    );
     let user: UserEntity;
     if (!userId) {
-      user = await this.userService.createUserWithUniqueName(telegramLoginData.username);
-      await this.telegramUserIdService.saveTelegramId(user._id, telegramLoginData.id);
+      user = await this.userService.createUserWithUniqueName(
+        telegramLoginData.username,
+      );
+      await this.telegramUserIdService.saveTelegramId(
+        user._id,
+        telegramLoginData.id,
+      );
     } else {
       user = await this.userService.findOneById(userId);
     }
@@ -42,7 +62,10 @@ export class TelegramLoginService {
   }
 
   private isValidHash(telegramLoginData: TelegramLoginData): boolean {
-    const hash = this.hashService.createHash(this.getDataCheckString(telegramLoginData), this.configService.telegramToken);
+    const hash = this.hashService.createHash(
+      this.getDataCheckString(telegramLoginData),
+      this.configService.telegramToken,
+    );
     return hash === telegramLoginData.hash;
   }
 
@@ -58,5 +81,4 @@ export class TelegramLoginService {
       .map(key => `${key}=${telegramLoginData[key]}`)
       .join('\n');
   }
-
 }

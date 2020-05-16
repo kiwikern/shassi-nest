@@ -9,7 +9,10 @@ import { NoOpLogger } from '../../../test/mocks/no-op-logger';
 const date = new Date();
 date.setMilliseconds(0);
 
-function getProductEntity(updates: ProductUpdate[], size?: ProductSize): ProductEntity {
+function getProductEntity(
+  updates: ProductUpdate[],
+  size?: ProductSize,
+): ProductEntity {
   const plain = {
     url: '',
     _id: ObjectID.createFromTime(date.getTime() / 1000).toString(),
@@ -20,7 +23,6 @@ function getProductEntity(updates: ProductUpdate[], size?: ProductSize): Product
 }
 
 describe('Product Entity', () => {
-
   beforeAll(() => {
     Logger.overrideLogger(new NoOpLogger());
   });
@@ -49,7 +51,17 @@ describe('Product Entity', () => {
 
   it('should handle one update', async () => {
     const updateDate = new Date();
-    const entity = getProductEntity([{ price: 100, createdAt: updateDate, isAvailable: true, isLowInStock: true }], { id: 'id', name: 'name' });
+    const entity = getProductEntity(
+      [
+        {
+          price: 100,
+          createdAt: updateDate,
+          isAvailable: true,
+          isLowInStock: true,
+        },
+      ],
+      { id: 'id', name: 'name' },
+    );
     expect(entity.price).toBe(100);
     expect(entity.isAvailable).toBe(true);
     expect(entity.getCreatedAt()).toEqual(date);
@@ -64,8 +76,18 @@ describe('Product Entity', () => {
     const oldUpdateDate = new Date();
     oldUpdateDate.setFullYear(2009);
     const updates = [
-      { price: 100, createdAt: updateDate, isAvailable: true, isLowInStock: true },
-      { price: 10, createdAt: oldUpdateDate, isAvailable: false, isLowInStock: false },
+      {
+        price: 100,
+        createdAt: updateDate,
+        isAvailable: true,
+        isLowInStock: true,
+      },
+      {
+        price: 10,
+        createdAt: oldUpdateDate,
+        isAvailable: false,
+        isLowInStock: false,
+      },
     ];
     const entity = getProductEntity(updates);
     expect(entity.price).toBe(10);
@@ -114,5 +136,4 @@ describe('Product Entity', () => {
     expect(typeof (classToPlain(entity) as any)._id).toBe('string');
     expect(typeof (classToPlain(entity) as any).userId).toBe('string');
   });
-
 });

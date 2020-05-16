@@ -5,7 +5,12 @@ import Telegraf, { Context } from 'telegraf';
 import { TelegramTokenService } from './telegram-token.service';
 import { TelegramUserIdService } from './telegram-user-id.service';
 import { ConfigService } from '../config/config.service';
-import { BadRequestException, ConflictException, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CronJobService } from '../common/cron-job.service';
 import { MockType } from '../../test/mock.type';
 import { ObjectID } from 'mongodb';
@@ -36,7 +41,10 @@ describe('TelegramService', () => {
         { provide: ProductsService, useFactory: productsServiceFactory },
         { provide: Telegraf, useFactory: telegrafFactory },
         { provide: TelegramTokenService, useFactory: tokenServiceFactory },
-        { provide: TelegramUserIdService, useFactory: telegramUserIdServiceFactory },
+        {
+          provide: TelegramUserIdService,
+          useFactory: telegramUserIdServiceFactory,
+        },
         { provide: ConfigService, useValue: configService },
         { provide: CronJobService, useFactory: cronJobServiceFactory },
       ],
@@ -62,18 +70,23 @@ describe('TelegramService', () => {
       message: { message_id: 'id' },
       reply: jest.fn(),
     }))();
-    productsService.initializeProduct.mockReturnValue({ name: 'name', url: 'url', sizes });
+    productsService.initializeProduct.mockReturnValue({
+      name: 'name',
+      url: 'url',
+      sizes,
+    });
     await service.addProductOnURLSent(ctx, 'url');
-    expect((ctx as any).session.productData.set).toHaveBeenCalledWith(expect.any(Number),
-      { name: 'name', url: 'url' });
-    expect(ctx.reply).toHaveBeenLastCalledWith('Which size do you want? 📏',
-      { reply_markup: expect.anything(), reply_to_message_id: 'id' });
+    expect(
+      (ctx as any).session.productData.set,
+    ).toHaveBeenCalledWith(expect.any(Number), { name: 'name', url: 'url' });
+    expect(ctx.reply).toHaveBeenLastCalledWith('Which size do you want? 📏', {
+      reply_markup: expect.anything(),
+      reply_to_message_id: 'id',
+    });
   });
 
   it('should add the product instantly with one size', async () => {
-    const sizes = [
-      { name: '1', id: 's1', isAvailable: true },
-    ];
+    const sizes = [{ name: '1', id: 's1', isAvailable: true }];
 
     // @ts-ignore
     const ctx: MockType<Context> = jest.fn(() => ({
@@ -81,12 +94,24 @@ describe('TelegramService', () => {
       match: ['full-match', 'url'],
       reply: jest.fn(),
     }))();
-    productsService.initializeProduct.mockReturnValue({ name: 'name', url: 'url', sizes });
-    productsService.addProduct.mockReturnValue({ name: 'name', price: 10, store: 'H&M' });
+    productsService.initializeProduct.mockReturnValue({
+      name: 'name',
+      url: 'url',
+      sizes,
+    });
+    productsService.addProduct.mockReturnValue({
+      name: 'name',
+      price: 10,
+      store: 'H&M',
+    });
     await service.addProductOnURLSent(ctx, 'url');
     expect(productsService.addProduct).toHaveBeenLastCalledWith(
-      'userId', expect.objectContaining({ size: expect.objectContaining({ id: 's1' }) }));
-    expect(ctx.reply).toHaveBeenLastCalledWith('Product name for 10.00€ at store H&M was added. 🛍️');
+      'userId',
+      expect.objectContaining({ size: expect.objectContaining({ id: 's1' }) }),
+    );
+    expect(ctx.reply).toHaveBeenLastCalledWith(
+      'Product name for 10.00€ at store H&M was added. 🛍️',
+    );
   });
 
   it('should handle rejection when product already added', async () => {
@@ -96,12 +121,17 @@ describe('TelegramService', () => {
       match: ['full-match', 'url'],
       reply: jest.fn(),
     }))();
-    productsService.initializeProduct.mockReturnValue({ name: 'name', url: 'url' });
+    productsService.initializeProduct.mockReturnValue({
+      name: 'name',
+      url: 'url',
+    });
     productsService.addProduct.mockImplementation(() => {
       throw new ConflictException();
     });
     await service.addProductOnURLSent(ctx, 'url');
-    expect(ctx.reply).toHaveBeenLastCalledWith('Product has already been added. 💁‍♂️');
+    expect(ctx.reply).toHaveBeenLastCalledWith(
+      'Product has already been added. 💁‍♂️',
+    );
   });
 
   it('should handle rejection on unknown store', async () => {
@@ -115,7 +145,9 @@ describe('TelegramService', () => {
       throw new BadRequestException('Unknown store');
     });
     await service.addProductOnURLSent(ctx, 'url');
-    expect(ctx.reply).toHaveBeenLastCalledWith('Invalid URL. Is store supported? 🤔');
+    expect(ctx.reply).toHaveBeenLastCalledWith(
+      'Invalid URL. Is store supported? 🤔',
+    );
   });
 
   it('should handle rejection on invalid url', async () => {
@@ -129,7 +161,9 @@ describe('TelegramService', () => {
       throw new NotFoundException();
     });
     await service.addProductOnURLSent(ctx, 'url');
-    expect(ctx.reply).toHaveBeenLastCalledWith('Product does not exist. Check URL. 🤷‍♀️');
+    expect(ctx.reply).toHaveBeenLastCalledWith(
+      'Product does not exist. Check URL. 🤷‍♀️',
+    );
   });
 
   it('should handle rejection on internal error', async () => {
@@ -143,13 +177,18 @@ describe('TelegramService', () => {
       throw new InternalServerErrorException();
     });
     await service.addProductOnURLSent(ctx, 'url');
-    expect(ctx.reply).toHaveBeenLastCalledWith('Internal error. Could not add product. 🤦‍♂️');
+    expect(ctx.reply).toHaveBeenLastCalledWith(
+      'Internal error. Could not add product. 🤦‍♂️',
+    );
   });
 
   it('should update the product when a size was chosen', async () => {
     // @ts-ignore
     const ctx: MockType<Context> = jest.fn(() => ({
-      session: { productData: { get: jest.fn(), delete: jest.fn() }, userId: 'userId' },
+      session: {
+        productData: { get: jest.fn(), delete: jest.fn() },
+        userId: 'userId',
+      },
       match: ['sizeName|-|sizeId|-|productSessionId'],
       editMessageText: jest.fn(),
       answerCbQuery: jest.fn(),
@@ -157,22 +196,36 @@ describe('TelegramService', () => {
       callbackQuery: { message: { reply_to_message: { message_id: 'mId' } } },
     }))();
     (ctx as any).session.productData.get.mockReturnValue({ url: 'url' });
-    productsService.addProduct.mockReturnValue({ name: 'name', price: 10, store: 'H&M' });
+    productsService.addProduct.mockReturnValue({
+      name: 'name',
+      price: 10,
+      store: 'H&M',
+    });
 
     await service.updateProductOnSizeChosen(ctx);
-    expect(productsService.addProduct).toHaveBeenLastCalledWith(
-      'userId', { url: 'url', size: { id: 'sizeId', name: 'sizeName' } });
-    expect(ctx.answerCbQuery).toHaveBeenLastCalledWith('You chose sizeName. 📐');
+    expect(productsService.addProduct).toHaveBeenLastCalledWith('userId', {
+      url: 'url',
+      size: { id: 'sizeId', name: 'sizeName' },
+    });
+    expect(ctx.answerCbQuery).toHaveBeenLastCalledWith(
+      'You chose sizeName. 📐',
+    );
     expect(ctx.editMessageReplyMarkup).toHaveBeenCalledWith();
     expect(ctx.editMessageText).toHaveBeenLastCalledWith(
-      'Your product name for 10.00€ at store H&M with size sizeName was added successfully. 🛍️');
-    expect((ctx as any).session.productData.delete).toHaveBeenLastCalledWith(expect.any(Number));
+      'Your product name for 10.00€ at store H&M with size sizeName was added successfully. 🛍️',
+    );
+    expect((ctx as any).session.productData.delete).toHaveBeenLastCalledWith(
+      expect.any(Number),
+    );
   });
 
   it('should handle when init data in session has been deleted.', async () => {
     // @ts-ignore
     const ctx: MockType<Context> = jest.fn(() => ({
-      session: { productData: { get: jest.fn(), delete: jest.fn() }, userId: 'userId' },
+      session: {
+        productData: { get: jest.fn(), delete: jest.fn() },
+        userId: 'userId',
+      },
       match: ['sizeName|-|sizeId|-|productSessionId'],
       reply: jest.fn(),
       answerCbQuery: jest.fn(),
@@ -182,17 +235,25 @@ describe('TelegramService', () => {
     (ctx as any).session.productData.get.mockReturnValue(null);
 
     await service.updateProductOnSizeChosen(ctx);
-    expect(ctx.answerCbQuery).toHaveBeenLastCalledWith('You chose sizeName. 📐');
+    expect(ctx.answerCbQuery).toHaveBeenLastCalledWith(
+      'You chose sizeName. 📐',
+    );
     expect(ctx.editMessageReplyMarkup).toHaveBeenCalledWith();
-    expect(ctx.reply).toHaveBeenLastCalledWith(
+    expect(
+      ctx.reply,
+    ).toHaveBeenLastCalledWith(
       'Your request timed out. Please add the product again. ⌛',
-      { reply_to_message_id: 'mId' });
+      { reply_to_message_id: 'mId' },
+    );
   });
 
   it('should handle errors.', async () => {
     // @ts-ignore
     const ctx: MockType<Context> = jest.fn(() => ({
-      session: { productData: { get: jest.fn(), delete: jest.fn() }, userId: 'userId' },
+      session: {
+        productData: { get: jest.fn(), delete: jest.fn() },
+        userId: 'userId',
+      },
       match: ['sizeName|-|sizeId|-|productSessionId'],
       reply: jest.fn(),
       answerCbQuery: jest.fn(),
@@ -205,25 +266,33 @@ describe('TelegramService', () => {
       throw new ConflictException();
     });
     await service.updateProductOnSizeChosen(ctx);
-    expect(ctx.reply).toHaveBeenLastCalledWith('Product has already been added. 💁‍♂️');
+    expect(ctx.reply).toHaveBeenLastCalledWith(
+      'Product has already been added. 💁‍♂️',
+    );
 
     productsService.addProduct.mockImplementation(() => {
       throw new NotFoundException();
     });
     await service.updateProductOnSizeChosen(ctx);
-    expect(ctx.reply).toHaveBeenLastCalledWith('Product does not exist. Check URL. 🤷‍♀️');
+    expect(ctx.reply).toHaveBeenLastCalledWith(
+      'Product does not exist. Check URL. 🤷‍♀️',
+    );
 
     productsService.addProduct.mockImplementation(() => {
       throw new BadRequestException('Unknown store');
     });
     await service.updateProductOnSizeChosen(ctx);
-    expect(ctx.reply).toHaveBeenLastCalledWith('Invalid URL. Is store supported? 🤔');
+    expect(ctx.reply).toHaveBeenLastCalledWith(
+      'Invalid URL. Is store supported? 🤔',
+    );
 
     productsService.addProduct.mockImplementation(() => {
       throw new InternalServerErrorException();
     });
     await service.updateProductOnSizeChosen(ctx);
-    expect(ctx.reply).toHaveBeenLastCalledWith('Internal error. Could not add product. 🤦‍♂️');
+    expect(ctx.reply).toHaveBeenLastCalledWith(
+      'Internal error. Could not add product. 🤦‍♂️',
+    );
   });
 
   it('should return the userId if already in session', async () => {
@@ -263,7 +332,9 @@ describe('TelegramService', () => {
     // there must be no userId associated to the session
     expect((ctx as any).session.userId).toBe(undefined);
     expect(ctx.reply).toHaveBeenCalledWith(
-      'You need to link your shassi account first. 🔗 Go to domain?action=createTelegramToken or click the button below.', anything());
+      'You need to link your shassi account first. 🔗 Go to domain?action=createTelegramToken or click the button below.',
+      anything(),
+    );
   });
 
   it('should not do anything when /start is running', async () => {
@@ -296,8 +367,14 @@ describe('TelegramService', () => {
     };
     ctx.session.productData.set(Date.now(), 'remain');
     ctx.session.productData.set(Date.now() + 1, 'remain');
-    ctx.session.productData.set(Date.now() - 1000 * 60 * 60 * 24 - 100, 'delete');
-    ctx.session.productData.set(Date.now() - 1000 * 60 * 60 * 24 - 50, 'delete');
+    ctx.session.productData.set(
+      Date.now() - 1000 * 60 * 60 * 24 - 100,
+      'delete',
+    );
+    ctx.session.productData.set(
+      Date.now() - 1000 * 60 * 60 * 24 - 50,
+      'delete',
+    );
     service.cleanUpSessionData(ctx);
     expect(ctx.session.productData.size).toBe(2);
     for (const value of ctx.session.productData.values()) {
@@ -314,14 +391,30 @@ describe('TelegramService', () => {
       reply: jest.fn(),
     }))();
     const next = () => 'next was called';
-    telegramUserIdService.findUserId.mockReturnValue(ObjectID.createFromTime(0));
+    telegramUserIdService.findUserId.mockReturnValue(
+      ObjectID.createFromTime(0),
+    );
     tokenService.checkToken.mockReturnValue(true);
-    expect(await service.startCommand(ctx as any, next)).toBe('next was called');
+    expect(await service.startCommand(ctx as any, next)).toBe(
+      'next was called',
+    );
     expect((ctx as any).session.userId).toEqual(ObjectID.createFromTime(0));
-    expect(tokenService.checkToken).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'token');
-    expect(telegramUserIdService.saveTelegramId).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'telegramId');
-    expect(ctx.reply).toHaveBeenNthCalledWith(1, 'Welcome! 👋 Your account was successfully connected.');
-    expect(ctx.reply).toHaveBeenNthCalledWith(2, 'You can add a product by sending its URL to this chat.');
+    expect(tokenService.checkToken).toHaveBeenCalledWith(
+      ObjectID.createFromTime(0),
+      'token',
+    );
+    expect(telegramUserIdService.saveTelegramId).toHaveBeenCalledWith(
+      ObjectID.createFromTime(0),
+      'telegramId',
+    );
+    expect(ctx.reply).toHaveBeenNthCalledWith(
+      1,
+      'Welcome! 👋 Your account was successfully connected.',
+    );
+    expect(ctx.reply).toHaveBeenNthCalledWith(
+      2,
+      'You can add a product by sending its URL to this chat.',
+    );
   });
 
   it('should not link telegram account if already in use', async () => {
@@ -335,13 +428,25 @@ describe('TelegramService', () => {
     const next = () => 'next was called';
     tokenService.checkToken.mockReturnValue(true);
     telegramUserIdService.saveTelegramId.mockImplementation(() => {
-      throw new BadRequestException('User already linked with telegram Account');
+      throw new BadRequestException(
+        'User already linked with telegram Account',
+      );
     });
-    expect(await service.startCommand(ctx as any, next)).toBe('next was called');
+    expect(await service.startCommand(ctx as any, next)).toBe(
+      'next was called',
+    );
     expect((ctx as any).session.userId).toBe(undefined);
-    expect(tokenService.checkToken).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'token');
-    expect(telegramUserIdService.saveTelegramId).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'telegramId');
-    expect(ctx.reply).toHaveBeenCalledWith('Could not connect Telegram account. Already linked to different shassi user account. 🙌');
+    expect(tokenService.checkToken).toHaveBeenCalledWith(
+      ObjectID.createFromTime(0),
+      'token',
+    );
+    expect(telegramUserIdService.saveTelegramId).toHaveBeenCalledWith(
+      ObjectID.createFromTime(0),
+      'telegramId',
+    );
+    expect(ctx.reply).toHaveBeenCalledWith(
+      'Could not connect Telegram account. Already linked to different shassi user account. 🙌',
+    );
   });
 
   it('should not error if telegram account already connected to same user', async () => {
@@ -353,15 +458,28 @@ describe('TelegramService', () => {
       reply: jest.fn(),
     }))();
     const next = () => 'next was called';
-    telegramUserIdService.findUserId.mockReturnValueOnce(ObjectID.createFromTime(0));
+    telegramUserIdService.findUserId.mockReturnValueOnce(
+      ObjectID.createFromTime(0),
+    );
     tokenService.checkToken.mockReturnValueOnce(true);
     telegramUserIdService.findTelegramId.mockReturnValueOnce('telegramId');
-    expect(await service.startCommand(ctx as any, next)).toBe('next was called');
+    expect(await service.startCommand(ctx as any, next)).toBe(
+      'next was called',
+    );
     expect((ctx as any).session.userId).toEqual(ObjectID.createFromTime(0));
-    expect(tokenService.checkToken).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'token');
+    expect(tokenService.checkToken).toHaveBeenCalledWith(
+      ObjectID.createFromTime(0),
+      'token',
+    );
     expect(telegramUserIdService.saveTelegramId).not.toHaveBeenCalled();
-    expect(ctx.reply).toHaveBeenNthCalledWith(1, 'Welcome! 👋 Your account was successfully connected.');
-    expect(ctx.reply).toHaveBeenNthCalledWith(2, 'You can add a product by sending its URL to this chat.');
+    expect(ctx.reply).toHaveBeenNthCalledWith(
+      1,
+      'Welcome! 👋 Your account was successfully connected.',
+    );
+    expect(ctx.reply).toHaveBeenNthCalledWith(
+      2,
+      'You can add a product by sending its URL to this chat.',
+    );
   });
 
   it('should not link telegram if token invalid', async () => {
@@ -374,12 +492,23 @@ describe('TelegramService', () => {
     }))();
     const next = () => 'next was called';
     tokenService.checkToken.mockReturnValue(false);
-    expect(await service.startCommand(ctx as any, next)).toBe('next was called');
+    expect(await service.startCommand(ctx as any, next)).toBe(
+      'next was called',
+    );
     expect((ctx as any).session.userId).toBe(undefined);
-    expect(tokenService.checkToken).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'token');
+    expect(tokenService.checkToken).toHaveBeenCalledWith(
+      ObjectID.createFromTime(0),
+      'token',
+    );
     expect(telegramUserIdService.saveTelegramId).not.toHaveBeenCalled();
-    expect(ctx.reply).toHaveBeenNthCalledWith(1, 'Given token was invalid. Try again! 🙇');
-    expect(ctx.reply).toHaveBeenNthCalledWith(2, 'To create a new token, go to domain?action=createTelegramToken');
+    expect(ctx.reply).toHaveBeenNthCalledWith(
+      1,
+      'Given token was invalid. Try again! 🙇',
+    );
+    expect(ctx.reply).toHaveBeenNthCalledWith(
+      2,
+      'To create a new token, go to domain?action=createTelegramToken',
+    );
   });
 
   it('should not link telegram if token format invalid', async () => {
@@ -392,14 +521,17 @@ describe('TelegramService', () => {
     }))();
     const next = () => 'next was called';
     tokenService.checkToken.mockReturnValue(false);
-    expect(await service.startCommand(ctx as any, next)).toBe('next was called');
+    expect(await service.startCommand(ctx as any, next)).toBe(
+      'next was called',
+    );
     expect((ctx as any).session.userId).toBe(undefined);
     expect(tokenService.checkToken).not.toHaveBeenCalled();
     expect(telegramUserIdService.saveTelegramId).not.toHaveBeenCalled();
-    expect(ctx.reply).toHaveBeenNthCalledWith(1,
+    expect(ctx.reply).toHaveBeenNthCalledWith(
+      1,
       'Hi! 👋 You need to link your shassi account first. Go to domain?action=createTelegramToken or click the button below.',
-      expect.any(Object));
-
+      expect.any(Object),
+    );
   });
 
   it('should not link telegram if no token is given', async () => {
@@ -412,13 +544,17 @@ describe('TelegramService', () => {
     }))();
     const next = () => 'next was called';
     tokenService.checkToken.mockReturnValue(false);
-    expect(await service.startCommand(ctx as any, next)).toBe('next was called');
+    expect(await service.startCommand(ctx as any, next)).toBe(
+      'next was called',
+    );
     expect((ctx as any).session.userId).toBe(undefined);
     expect(tokenService.checkToken).not.toHaveBeenCalled();
     expect(telegramUserIdService.saveTelegramId).not.toHaveBeenCalled();
-    expect(ctx.reply).toHaveBeenNthCalledWith(1,
+    expect(ctx.reply).toHaveBeenNthCalledWith(
+      1,
       'Hi! 👋 You need to link your shassi account first. Go to domain?action=createTelegramToken or click the button below.',
-      expect.any(Object));
+      expect.any(Object),
+    );
   });
 
   it('should not link telegram if no token is given', async () => {
@@ -439,7 +575,9 @@ describe('TelegramService', () => {
     telegramUserIdService.findTelegramId.mockReturnValue('telegramId');
     await service.notifyAboutUpdate('userId', 'text');
     expect(telegramUserIdService.findTelegramId).toHaveBeenCalledWith('userId');
-    expect((telegraf.telegram as any).sendMessage).toHaveBeenCalledWith('telegramId', 'text', { parse_mode: 'Markdown' });
+    expect(
+      (telegraf.telegram as any).sendMessage,
+    ).toHaveBeenCalledWith('telegramId', 'text', { parse_mode: 'Markdown' });
   });
 
   it('should skip when user to be notified has no linked account', async () => {
@@ -464,7 +602,6 @@ describe('TelegramService', () => {
   });
 
   describe('handleMessageWithoutUrl', () => {
-
     it('should handle messages without urls', async () => {
       // @ts-ignore
       const ctx: MockType<Context> = jest.fn(() => ({
@@ -472,9 +609,10 @@ describe('TelegramService', () => {
         reply: jest.fn(),
       }))();
       await service.handleMessageWithoutUrl(ctx as any);
-      expect(ctx.reply)
-        .toHaveBeenCalledWith('I did not understand. 🤷‍♀️ Please, send a URL to a product. 🔗' +
-          '\nOften, you can just use the share menu from your store\'s website.');
+      expect(ctx.reply).toHaveBeenCalledWith(
+        'I did not understand. 🤷‍♀️ Please, send a URL to a product. 🔗' +
+          "\nOften, you can just use the share menu from your store's website.",
+      );
     });
 
     it('should ignore /start commands', async () => {
@@ -486,11 +624,9 @@ describe('TelegramService', () => {
       await service.handleMessageWithoutUrl(ctx as any);
       expect(ctx.reply).not.toHaveBeenCalled();
     });
-
   });
 
   describe('handleReceivedPhoto', () => {
-
     it('should ignore captions without urls and call next middleware', async () => {
       // @ts-ignore
       const ctx: MockType<Context> = jest.fn(() => ({
@@ -514,69 +650,149 @@ describe('TelegramService', () => {
       });
       const next = jest.fn();
       await service.handleReceivedPhoto(ctx as any, next);
-      expect(productsService.initializeProduct).toHaveBeenCalledWith('https://myurl');
+      expect(productsService.initializeProduct).toHaveBeenCalledWith(
+        'https://myurl',
+      );
       expect(next).not.toHaveBeenCalled();
     });
-
   });
 
   describe('evenlySplitArray', () => {
-
     it('should handle null', () => {
-      expect(service.evenlySplitArray(null))
-        .toEqual([[]]);
+      expect(service.evenlySplitArray(null)).toEqual([[]]);
     });
 
     it('should handle empty array', () => {
-      expect(service.evenlySplitArray([]))
-        .toEqual([]);
+      expect(service.evenlySplitArray([])).toEqual([]);
     });
 
     it('should handle one element', () => {
-      expect(service.evenlySplitArray([0]))
-        .toEqual([[0]]);
+      expect(service.evenlySplitArray([0])).toEqual([[0]]);
     });
 
     it('should handle four elements', () => {
-      expect(service.evenlySplitArray([0, 1, 2, 3]))
-        .toEqual([[0, 1], [2, 3]]);
+      expect(service.evenlySplitArray([0, 1, 2, 3])).toEqual([
+        [0, 1],
+        [2, 3],
+      ]);
     });
 
     it('should handle five elements', () => {
-      expect(service.evenlySplitArray([0, 1, 2, 3, 4]))
-        .toEqual([[0, 1, 2], [3, 4]]);
+      expect(service.evenlySplitArray([0, 1, 2, 3, 4])).toEqual([
+        [0, 1, 2],
+        [3, 4],
+      ]);
     });
 
     it('should handle seven elements', () => {
-      expect(service.evenlySplitArray([0, 1, 2, 3, 4, 5, 6]))
-        .toEqual([[0, 1], [2, 3], [4, 5, 6]]);
+      expect(service.evenlySplitArray([0, 1, 2, 3, 4, 5, 6])).toEqual([
+        [0, 1],
+        [2, 3],
+        [4, 5, 6],
+      ]);
     });
 
     it('should handle eight elements', () => {
-      expect(service.evenlySplitArray([0, 1, 2, 3, 4, 5, 6, 7]))
-        .toEqual([[0, 1, 2], [3, 4, 5], [6, 7]]);
+      expect(service.evenlySplitArray([0, 1, 2, 3, 4, 5, 6, 7])).toEqual([
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7],
+      ]);
     });
 
     it('should handle nine elements', () => {
-      expect(service.evenlySplitArray([0, 1, 2, 3, 4, 5, 6, 7, 8]))
-        .toEqual([[0, 1, 2], [3, 4, 5], [6, 7, 8]]);
+      expect(service.evenlySplitArray([0, 1, 2, 3, 4, 5, 6, 7, 8])).toEqual([
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+      ]);
     });
 
     it('should handle 15 elements', () => {
-      expect(service.evenlySplitArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]))
-        .toEqual([[0, 1, 2, 3, 4], [5, 6, 7, 8, 9], [10, 11, 12, 13, 14]]);
+      expect(
+        service.evenlySplitArray([
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+        ]),
+      ).toEqual([
+        [0, 1, 2, 3, 4],
+        [5, 6, 7, 8, 9],
+        [10, 11, 12, 13, 14],
+      ]);
     });
 
     it('should handle 18 elements', () => {
-      expect(service.evenlySplitArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]))
-        .toEqual([[0, 1, 2, 3, 4], [5, 6, 7, 8, 9], [10, 11, 12, 13, 14], [15, 16, 17]]);
+      expect(
+        service.evenlySplitArray([
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+        ]),
+      ).toEqual([
+        [0, 1, 2, 3, 4],
+        [5, 6, 7, 8, 9],
+        [10, 11, 12, 13, 14],
+        [15, 16, 17],
+      ]);
     });
 
     it('should handle 19 elements', () => {
-      expect(service.evenlySplitArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]))
-        .toEqual([[0, 1, 2, 3, 4], [5, 6, 7, 8, 9], [10, 11, 12, 13, 14], [15, 16, 17, 18]]);
+      expect(
+        service.evenlySplitArray([
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+        ]),
+      ).toEqual([
+        [0, 1, 2, 3, 4],
+        [5, 6, 7, 8, 9],
+        [10, 11, 12, 13, 14],
+        [15, 16, 17, 18],
+      ]);
     });
-
   });
-
 });

@@ -8,28 +8,29 @@ import { storiesNotInCatalogResponse } from '../../../test/crawler-testcases/sto
 
 const testCases = [storiesTestCase, storiesOneSizeTestCase];
 
-describe('Stories',
-  () => {
-    testCases.forEach(testCase => crawlerTestRun(testCase));
+describe('Stories', () => {
+  testCases.forEach(testCase => crawlerTestRun(testCase));
 
-    it('should reject url without product data', async () => {
-      const httpService = {
-        get: () => of({ data: null }),
-      } as any;
-      const crawler = new StoriesCrawler(httpService);
-      try {
-        await crawler.init('any url');
-      } catch (e) {
-        expect(e).toBeInstanceOf(BadRequestException);
-      }
-    });
-
-    it('should parse product which is not in catalog', async () => {
-      const httpService = {
-        get: () => of({ data: storiesNotInCatalogResponse }),
-      } as any;
-      const crawler = new StoriesCrawler(httpService);
-      await crawler.init('https://www.stories.com/en_eur/sale/all-sale/product.straight-stretch-jeans-light-blue.0473776005.html');
-      expect(crawler.isInCatalog()).toBe(false);
-    });
+  it('should reject url without product data', async () => {
+    const httpService = {
+      get: () => of({ data: null }),
+    } as any;
+    const crawler = new StoriesCrawler(httpService);
+    try {
+      await crawler.init('any url');
+    } catch (e) {
+      expect(e).toBeInstanceOf(BadRequestException);
+    }
   });
+
+  it('should parse product which is not in catalog', async () => {
+    const httpService = {
+      get: () => of({ data: storiesNotInCatalogResponse }),
+    } as any;
+    const crawler = new StoriesCrawler(httpService);
+    await crawler.init(
+      'https://www.stories.com/en_eur/sale/all-sale/product.straight-stretch-jeans-light-blue.0473776005.html',
+    );
+    expect(crawler.isInCatalog()).toBe(false);
+  });
+});

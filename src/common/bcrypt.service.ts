@@ -3,7 +3,6 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class BcryptService {
-
   checkEncryptedData(dataToBeChecked, encryptedControlData): Promise<boolean> {
     return bcrypt.compare(dataToBeChecked, encryptedControlData);
   }
@@ -11,5 +10,4 @@ export class BcryptService {
   hash(value: string): Promise<string> {
     return bcrypt.hash(value, 10);
   }
-
 }

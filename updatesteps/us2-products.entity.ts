@@ -13,7 +13,7 @@ export class UsProductEntity {
   @Transform(toStringSafe, { toPlainOnly: true })
   @Transform(toObjectId, { toClassOnly: true })
   @ApiProperty()
-    // tslint:disable-next-line:variable-name
+  // tslint:disable-next-line:variable-name
   _id: ObjectID;
 
   // @Index({unique: true})
@@ -26,16 +26,16 @@ export class UsProductEntity {
   name: string;
 
   @Column()
-  @Transform((value) => value ? value.toString() : null, { toPlainOnly: true })
+  @Transform(value => (value ? value.toString() : null), { toPlainOnly: true })
   @ApiProperty()
   userId: ObjectID;
 
-  @Exclude({toPlainOnly: true})
+  @Exclude({ toPlainOnly: true })
   @Column(() => UsProductSize)
   @Type(() => UsProductSize)
   size: UsProductSize;
 
-  @Column({ default: true})
+  @Column({ default: true })
   @ApiProperty()
   isActive = true;
 
@@ -81,7 +81,9 @@ export class UsProductEntity {
   }
 
   @Expose({ name: 'store' })
-  @ApiProperty({ enum: ['H&M', 'ASOS', 'Weekday', 'ABOUT YOU', 'COS', 'Amazon'] })
+  @ApiProperty({
+    enum: ['H&M', 'ASOS', 'Weekday', 'ABOUT YOU', 'COS', 'Amazon'],
+  })
   get store(): string {
     if (this.url.includes('hm.com')) {
       return 'H&M';

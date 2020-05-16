@@ -6,10 +6,13 @@ import { UsProductEntity } from './us2-products.entity';
 async function run() {
   const connection = await new DatabaseConnector().connect(UsProductEntity);
   const productRepository = connection.getRepository(UsProductEntity);
-  const productsWithNoDateUpdates = await productRepository.find({ 'updates.createdAt': null } as any);
+  const productsWithNoDateUpdates = await productRepository.find({
+    'updates.createdAt': null,
+  } as any);
   productsWithNoDateUpdates.forEach(product => createDates(product));
-  return productRepository.save(productsWithNoDateUpdates)
-    .then(entities => Array.isArray(entities) ? entities.length : 0);
+  return productRepository
+    .save(productsWithNoDateUpdates)
+    .then(entities => (Array.isArray(entities) ? entities.length : 0));
 }
 
 function createDates(product) {

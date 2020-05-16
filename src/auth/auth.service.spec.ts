@@ -6,7 +6,11 @@ import { JwtService } from '@nestjs/jwt';
 import { ObjectID } from 'mongodb';
 import { BcryptService } from '../common/bcrypt.service';
 import { MockType } from '../../test/mock.type';
-import { bcryptServiceFactory, jwtServiceFactory, usersServiceFactory } from '../../test/mocks/jest-mocks';
+import {
+  bcryptServiceFactory,
+  jwtServiceFactory,
+  usersServiceFactory,
+} from '../../test/mocks/jest-mocks';
 import { NoOpLogger } from '../../test/mocks/no-op-logger';
 
 describe('AuthService', () => {
@@ -34,41 +38,71 @@ describe('AuthService', () => {
   it('should reject login if user not found', async () => {
     bcryptService.checkEncryptedData.mockReturnValue(false);
     userService.findOneByUsername.mockReturnValue(null);
-    await expect(service.login({ username: 'user', password: '' }))
-      .rejects.toThrow(UnauthorizedException);
+    await expect(
+      service.login({ username: 'user', password: '' }),
+    ).rejects.toThrow(UnauthorizedException);
     expect(userService.findOneByUsername).toBeCalledWith('user');
   });
 
   it('should reject login if password is wrong', async () => {
     bcryptService.checkEncryptedData.mockReturnValue(false);
-    userService.findOneByUsername.mockReturnValue({ username: 'user', password: 'encrypted' });
-    await expect(service.login({ username: 'user', password: 'password' }))
-      .rejects.toThrow(UnauthorizedException);
+    userService.findOneByUsername.mockReturnValue({
+      username: 'user',
+      password: 'encrypted',
+    });
+    await expect(
+      service.login({ username: 'user', password: 'password' }),
+    ).rejects.toThrow(UnauthorizedException);
     expect(userService.findOneByUsername).toBeCalledWith('user');
-    expect(bcryptService.checkEncryptedData).toBeCalledWith('password', 'encrypted');
+    expect(bcryptService.checkEncryptedData).toBeCalledWith(
+      'password',
+      'encrypted',
+    );
   });
 
   it('should reject login if non-password account', async () => {
     bcryptService.checkEncryptedData.mockReturnValueOnce(false);
-    userService.findOneByUsername.mockReturnValueOnce({ username: 'user', password: null });
-    await expect(service.login({ username: 'user', password: 'password' }))
-      .rejects.toThrow(BadRequestException);
+    userService.findOneByUsername.mockReturnValueOnce({
+      username: 'user',
+      password: null,
+    });
+    await expect(
+      service.login({ username: 'user', password: 'password' }),
+    ).rejects.toThrow(BadRequestException);
     expect(userService.findOneByUsername).toBeCalledWith('user');
   });
 
   it('should accept login on correct credentials', async () => {
     bcryptService.checkEncryptedData.mockReturnValue(true);
     jwtService.sign.mockReturnValue('token');
-    const user = { _id: ObjectID.createFromTime(0), username: 'user', password: 'encrypted' };
+    const user = {
+      _id: ObjectID.createFromTime(0),
+      username: 'user',
+      password: 'encrypted',
+    };
     userService.findOneByUsername.mockReturnValue(user);
-    const token = await service.login({ username: 'user', password: 'password' });
-    expect(token).toEqual({ jwt: 'token', user: expect.objectContaining({ username: 'user', _id: expect.anything() }) });
+    const token = await service.login({
+      username: 'user',
+      password: 'password',
+    });
+    expect(token).toEqual({
+      jwt: 'token',
+      user: expect.objectContaining({
+        username: 'user',
+        _id: expect.anything(),
+      }),
+    });
     expect(userService.findOneByUsername).toBeCalledWith('user');
-    expect(bcryptService.checkEncryptedData).toBeCalledWith('password', 'encrypted');
+    expect(bcryptService.checkEncryptedData).toBeCalledWith(
+      'password',
+      'encrypted',
+    );
   });
 
   it('should validate user', async () => {
     userService.findOneByUsername.mockReturnValue('user');
-    expect(await service.validateUser({ username: 'user', userId: 'id', roles: [] })).toBe('user');
+    expect(
+      await service.validateUser({ username: 'user', userId: 'id', roles: [] }),
+    ).toBe('user');
   });
 });

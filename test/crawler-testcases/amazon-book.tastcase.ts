@@ -4,16 +4,15 @@ import { AmazonCrawler } from '../../src/crawler/crawlers/amazon.crawler';
 
 export const amazonBookTaseCase = {
   crawlerType: AmazonCrawler,
-  sizes: [
-    { id: 'ONESIZE', isAvailable: true, name: 'ONESIZE' },
-  ],
+  sizes: [{ id: 'ONESIZE', isAvailable: true, name: 'ONESIZE' }],
 
   sizeChecks: [
     { size: 'ONESIZE', isAvailable: true, isLowInStock: false },
     { size: 'any', isAvailable: true, isLowInStock: false },
   ],
 
-  name: 'Tiamat\'s Wrath: Book 8 of the Expanse (now a major TV series on Netflix)',
+  name:
+    "Tiamat's Wrath: Book 8 of the Expanse (now a major TV series on Netflix)",
 
   priceChecks: [
     { size: 'ONESIZE', price: 12.99 },

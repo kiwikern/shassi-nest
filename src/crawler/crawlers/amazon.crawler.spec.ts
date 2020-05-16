@@ -18,19 +18,17 @@ const testCases = [
   amazonDealPriceTaseCase,
 ];
 
-describe('Amazon',
-  () => {
-    testCases.forEach(testCase => crawlerTestRun(testCase));
+describe('Amazon', () => {
+  testCases.forEach(testCase => crawlerTestRun(testCase));
 
-    it('should throw when no price is found', async () => {
-      const httpMock = jest.fn(() => ({
-        get: jest.fn(),
-      }))();
-      httpMock.get.mockReturnValueOnce(of({data: '<html></html>'}));
-      const crawler = new AmazonCrawler(httpMock as any);
-      await crawler.init('https://www.amazon.de/0594303002.html');
-      expect(() => crawler.getPrice())
-        .toThrow(InternalServerErrorException);
-      expect(httpMock.get).toHaveBeenCalledTimes(1);
-    });
+  it('should throw when no price is found', async () => {
+    const httpMock = jest.fn(() => ({
+      get: jest.fn(),
+    }))();
+    httpMock.get.mockReturnValueOnce(of({ data: '<html></html>' }));
+    const crawler = new AmazonCrawler(httpMock as any);
+    await crawler.init('https://www.amazon.de/0594303002.html');
+    expect(() => crawler.getPrice()).toThrow(InternalServerErrorException);
+    expect(httpMock.get).toHaveBeenCalledTimes(1);
   });
+});

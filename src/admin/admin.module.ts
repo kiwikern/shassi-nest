@@ -8,11 +8,6 @@ import { TelegramModule } from '../telegram/telegram.module';
 @Module({
   controllers: [AdminController],
   providers: [AdminService],
-  imports: [
-    UsersModule,
-    ProductsModule,
-    TelegramModule,
-  ],
+  imports: [UsersModule, ProductsModule, TelegramModule],
 })
-export class AdminModule {
-}
+export class AdminModule {}

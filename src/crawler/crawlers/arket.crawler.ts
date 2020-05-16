@@ -20,5 +20,4 @@ export class ArketCrawler extends CosWeekdayBaseCrawler {
   getScriptCounter(): number {
     return 1;
   }
-
 }
