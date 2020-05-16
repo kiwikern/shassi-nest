@@ -63,8 +63,8 @@ describe('ConfigService', () => {
 
     const dbName = 'heroku_688asJszasbahs';
     const port = 1234;
-    const password = `jsdjjb7232bjhas7a78`;
-    const host = `fd568656.mydb.kiwi`;
+    const password = 'jsdjjb7232bjhas7a78';
+    const host = 'fd568656.mydb.kiwi';
     process.env.MONGODB_URI = `mongodb://${dbName}:${password}@${host}:${port}/${dbName}`;
     try {
       const configService = new ConfigService();

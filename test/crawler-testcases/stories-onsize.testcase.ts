@@ -1,4 +1,4 @@
-/* tslint:disable:max-line-length */
+/* eslint-disable max-len */
 import { StoriesCrawler } from '../../src/crawler/crawlers/stories.crawler';
 
 export const storiesOneSizeTestCase = {

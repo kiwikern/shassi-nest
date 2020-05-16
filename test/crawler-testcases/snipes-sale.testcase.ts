@@ -1,4 +1,4 @@
-/* tslint:disable:max-line-length */
+/* eslint-disable max-len, @typescript-eslint/camelcase */
 
 import { SnipesCrawler } from '../../src/crawler/crawlers/snipes.crawler';
 

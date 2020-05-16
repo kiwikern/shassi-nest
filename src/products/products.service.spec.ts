@@ -1,4 +1,4 @@
-/* tslint:disable:max-classes-per-file */
+/* eslint-disable max-classes-per-file */
 import { Test, TestingModule } from '@nestjs/testing';
 import { ProductsService } from './products.service';
 import { CrawlerService } from '../crawler/crawler.service';

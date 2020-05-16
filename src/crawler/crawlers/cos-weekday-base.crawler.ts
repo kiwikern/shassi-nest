@@ -5,8 +5,8 @@ import { JSDOM, VirtualConsole } from 'jsdom';
 import { generateUserAgent } from './user-agent-generator';
 
 interface HmProductData {
-  sizes: [{ sizeCode: string, size: string, name: string }];
-  variants: [{ variantCode: string, size: string, sizeName: string }];
+  sizes: [{ sizeCode: string; size: string; name: string }];
+  variants: [{ variantCode: string; size: string; sizeName: string }];
   whitePriceValue: string;
   priceClubValue: string;
   priceValue: string;
@@ -142,11 +142,11 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
   }
 
   isSizeAvailable(id?: string): boolean {
-    return !!this.availability && this.availability.indexOf(id) !== -1;
+    return !!this.availability && this.availability.includes(id);
   }
 
   isLowInStock(sizeId?: string): boolean {
-    return this.isSizeAvailable(sizeId) && this.lowInStock.indexOf(sizeId) !== -1;
+    return this.isSizeAvailable(sizeId) && this.lowInStock.includes(sizeId);
   }
 
   getUrl(): string {

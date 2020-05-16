@@ -14,7 +14,7 @@ export class AuthService {
               private readonly jwtService: JwtService) {
   }
 
-  async login(login: UserLoginDto): Promise<{ jwt: string, user: UserEntity }> {
+  async login(login: UserLoginDto): Promise<{ jwt: string; user: UserEntity }> {
     const user = await this.usersService.findOneByUsername(login.username);
     if (!user) {
       throw new UnauthorizedException('Unknown user');

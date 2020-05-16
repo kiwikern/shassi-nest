@@ -21,6 +21,29 @@ describe('Admin (e2e)', () => {
   let userLogin: { jwt: string; user: UserEntity };
   let productsRepository: Repository<ProductEntity>;
 
+  async function createLogin(username): Promise<{ jwt: string; user: any }> {
+    const userService = app.get(UsersService);
+    const authService = app.get(AuthService);
+    const userRepository: Repository<UserEntity> = app.get(getRepositoryToken(UserEntity));
+    const user = await userService.createUser({ username, password: '123456' });
+    await userRepository.update({ _id: user._id }, { roles: [username] });
+    productsRepository = app.get(getRepositoryToken(ProductEntity));
+    return authService.login({ username, password: '123456' });
+  }
+
+  let sizeId = 0;
+  async function createProduct() {
+    const productService = app.get(ProductsService);
+    return productService.addProduct(new ObjectID(userLogin.user._id), { name: 'Product', size: { name: 'S', id: sizeId++ + '' }, url: 'hm.com' });
+  }
+
+  async function createProductWithError() {
+    const product = await createProduct();
+    product.errors = ['1', '2', '3'];
+    product.isActive = false;
+    return productsRepository.save(product);
+  }
+
   beforeAll(async () => {
     jest.setTimeout(15_000);
     const crawlerServiceMock = crawlerServiceFactory();
@@ -60,30 +83,6 @@ describe('Admin (e2e)', () => {
       await app.close();
     }
   });
-
-  async function createLogin(username): Promise<{ jwt: string; user: any }> {
-    const userService = app.get(UsersService);
-    const authService = app.get(AuthService);
-    const userRepository: Repository<UserEntity> = app.get(getRepositoryToken(UserEntity));
-    const user = await userService.createUser({ username, password: '123456' });
-    await userRepository.update({ _id: user._id }, { roles: [username] });
-    productsRepository = app.get(getRepositoryToken(ProductEntity));
-    return authService.login({ username, password: '123456' });
-  }
-
-  let sizeId = 0;
-
-  async function createProduct() {
-    const productService = app.get(ProductsService);
-    return productService.addProduct(new ObjectID(userLogin.user._id), { name: 'Product', size: { name: 'S', id: sizeId++ + '' }, url: 'hm.com' });
-  }
-
-  async function createProductWithError() {
-    const product = await createProduct();
-    product.errors = ['1', '2', '3'];
-    product.isActive = false;
-    return productsRepository.save(product);
-  }
 
   it('should reject a user without admin role', async () => {
     await request(app.getHttpServer())

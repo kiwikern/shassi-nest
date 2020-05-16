@@ -13,6 +13,7 @@ import { TelegramUserIdService } from '../src/telegram/telegram-user-id.service'
 import { ObjectID } from 'mongodb';
 
 jest.setTimeout(10_000);
+/* eslint-disable @typescript-eslint/camelcase */
 
 describe('UsersController (e2e)', () => {
   let app: INestApplication;

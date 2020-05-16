@@ -1,4 +1,4 @@
-/* tslint:disable:max-line-length */
+/* eslint-disable max-len */
 import { HmCrawler } from '../../src/crawler/crawlers/hm.crawler';
 
 export const hmOneSizeTestCase = {

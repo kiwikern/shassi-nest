@@ -37,11 +37,11 @@ export class UsProductEntity {
 
   @Column({ default: true})
   @ApiProperty()
-  isActive: boolean = true;
+  isActive = true;
 
   @Column({ default: false })
   @ApiProperty()
-  hasUnreadUpdate: boolean = false;
+  hasUnreadUpdate = false;
 
   @Column(() => UsProductUpdate)
   @ApiProperty()

@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 import { HmCrawler } from '../../src/crawler/crawlers/hm.crawler';
 
 export const hmClubPriceTestcase = {

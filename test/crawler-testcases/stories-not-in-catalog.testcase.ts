@@ -1,4 +1,4 @@
-/* tslint:disable:max-line-length */
+/* eslint-disable max-len */
 export const storiesNotInCatalogResponse = `<!DOCTYPE HTML>
 <html lang="en" class="no-js">
 

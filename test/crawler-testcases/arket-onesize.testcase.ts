@@ -1,4 +1,4 @@
-/* tslint:disable:max-line-length */
+/* eslint-disable max-len */
 
 import { ArketCrawler } from '../../src/crawler/crawlers/arket.crawler';
 

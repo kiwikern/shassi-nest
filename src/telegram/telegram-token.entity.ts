@@ -4,7 +4,6 @@ import { ObjectID } from 'mongodb';
 @Entity({ name: 'telegram-auth-tokens' })
 export class TelegramTokenEntity {
   @ObjectIdColumn()
-    // tslint:disable-next-line:variable-name
   _id: ObjectID;
 
   @Column()

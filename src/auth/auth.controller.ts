@@ -4,7 +4,7 @@ import { UserLoginDto } from './user-login.dto';
 import { ApiBadRequestResponse, ApiCreatedResponse, ApiTags, ApiOperation, ApiProperty } from '@nestjs/swagger';
 import { UserEntity } from '../users/entities/user.entity';
 
-// tslint:disable:max-classes-per-file
+// eslint-disable max-classes-per-file
 
 class LoginResponse {
   @ApiProperty()

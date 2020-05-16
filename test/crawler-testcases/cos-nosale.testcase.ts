@@ -1,4 +1,4 @@
-/* tslint:disable:max-line-length */
+/* eslint-disable max-len */
 import { CosCrawler } from '../../src/crawler/crawlers/cos.crawler';
 
 export const cosTestCase = {

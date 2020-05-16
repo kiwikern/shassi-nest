@@ -1,4 +1,4 @@
-/* tslint:disable:max-classes-per-file */
+/* eslint-disable max-classes-per-file */
 import { ProductEntity } from '../entities/products.entity';
 
 export interface ProductChange {
@@ -18,16 +18,16 @@ export interface ProductAttributeChanges {
 }
 
 export class ProductAttributeChangesBuilder {
-  private hasAnyChange: boolean = false;
-  private hasPriceChange: boolean = false;
+  private hasAnyChange = false;
+  private hasPriceChange = false;
   private oldPriceValue: number;
   private newPriceValue: number;
-  private hasAvailabilityChange: boolean = false;
-  private hasNeverBeenAvailableBefore: boolean = false;
-  private hasNeverBeenLowInStockBefore: boolean = false;
-  private hasLowInStockChange: boolean = false;
+  private hasAvailabilityChange = false;
+  private hasNeverBeenAvailableBefore = false;
+  private hasNeverBeenLowInStockBefore = false;
+  private hasLowInStockChange = false;
 
-  setPriceChange({ oldValue, newValue }: { oldValue: number, newValue: number }) {
+  setPriceChange({ oldValue, newValue }: { oldValue: number; newValue: number }) {
     this.hasAnyChange = true;
     this.hasPriceChange = true;
     this.oldPriceValue = oldValue;

@@ -31,7 +31,7 @@ export class ProductInitResponse {
 }
 
 
-// tslint:disable-next-line:max-classes-per-file
+// eslint-disable-line max-classes-per-file
 @Controller('products')
 @UseGuards(AuthGuard('jwt'))
 @UseInterceptors(ClassSerializerInterceptor)

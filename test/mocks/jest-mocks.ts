@@ -16,6 +16,7 @@ import { ExecutionContext } from '@nestjs/common';
 import { AdminService } from '../../src/admin/admin.service';
 import { TelegramLoginService } from '../../src/telegram/telegram-login.service';
 
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 export const productsServiceFactory: () => MockType<ProductsService> = jest.fn(() => ({
   updateAllProducts: jest.fn(),
   updateAllFavorites: jest.fn(),

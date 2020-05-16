@@ -1,4 +1,4 @@
-/* tslint:disable:max-line-length */
+/* eslint-disable max-len */
 import { ZalandoCrawler } from '../../src/crawler/crawlers/zalando.crawler';
 
 export const zalandoOneSizeTestCase = {

@@ -1,4 +1,4 @@
-/* tslint:disable:max-line-length */
+/* eslint-disable max-len */
 import { WeekdayCrawler } from '../../src/crawler/crawlers/weekday.crawler';
 
 export const weekdayOneSizeTestCase = {

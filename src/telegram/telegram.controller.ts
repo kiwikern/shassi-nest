@@ -15,7 +15,7 @@ import { TelegramTokenService } from './telegram-token.service';
 import { TelegramUserIdService } from './telegram-user-id.service';
 import { TelegramLoginData } from './telegram-login-data.dto';
 import { TelegramLoginService } from './telegram-login.service';
-// tslint:disable:max-classes-per-file
+// eslint-disable max-classes-per-file
 
 class TelegramConnectionStatusResponse {
   @ApiProperty()
@@ -65,7 +65,7 @@ export class TelegramController {
   @ApiOperation({
     summary: 'Create temporary token',
     description: `Creates a temporary token (expires after ${TelegramTokenService.expireAfterSeconds / 60}`
-      + ` minutes) with which a telegram account can be linked to the logged in user.`,
+      + ' minutes) with which a telegram account can be linked to the logged in user.',
   })
   @ApiCreatedResponse({
     description: 'Returns the temporary telegram token.',

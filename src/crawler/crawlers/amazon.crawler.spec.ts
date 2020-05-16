@@ -1,5 +1,5 @@
-/* tslint:disable:max-line-length */
-/* tslint:disable:no-trailing-whitespace */
+/* eslint-disable max-len */
+/* eslint-disable no-trailing-spaces */
 import { crawlerTestRun } from '../../../test/crawler.testrun';
 import { AmazonCrawler } from './amazon.crawler';
 import { amazonKindleTaseCase } from '../../../test/crawler-testcases/amazon-kindle.tastcase';

@@ -24,6 +24,7 @@ export class ProductsService {
 
   /**
    * Get all products for given user.
+   *
    * @param userId
    */
   async getProducts(userId: ObjectID): Promise<ProductEntity[]> {
@@ -32,6 +33,7 @@ export class ProductsService {
 
   /**
    * Product is not yet saved in database.
+   *
    * @param productUrl
    */
   async initializeProduct(productUrl: string): Promise<{ sizes: ProductSizeAvailability[]; name: string; url: string }> {
@@ -41,6 +43,7 @@ export class ProductsService {
   /**
    * Product is saved in database with first update.
    * <code>initializeProduct</code> should be called first to create <code>CreateProductDto</code>.
+   *
    * @param userId
    * @param product
    */

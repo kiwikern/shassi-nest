@@ -4,7 +4,7 @@ import { ObjectID } from 'mongodb';
 @Entity({ name: 'telegram-user-ids' })
 export class TelegramUserIdEntity {
   @ObjectIdColumn()
-    // tslint:disable-next-line:variable-name
+    // eslint-disable-line camelcase, no-underscore-dangle, id-blacklist, id-match
   _id: ObjectID;
 
   @Index({unique: true})

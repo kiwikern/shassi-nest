@@ -21,7 +21,7 @@ export class CrawlerService {
   constructor(private httpService: HttpService) {
   }
 
-  async getInitData(url: string): Promise<{ name: string, sizes: ProductSizeAvailability[], url: string }> {
+  async getInitData(url: string): Promise<{ name: string; sizes: ProductSizeAvailability[]; url: string }> {
     const crawler = await this.getCrawler(url);
     if (!crawler.isInCatalog()) {
       throw new NotFoundException('Product does not exist.');

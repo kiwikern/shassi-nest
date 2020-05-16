@@ -15,6 +15,7 @@ import { TelegramUserIdEntity } from '../src/telegram/telegram-user-id.entity';
 import { crawlerServiceFactory } from './mocks/jest-mocks';
 
 jest.setTimeout(10_000);
+/* eslint-disable @typescript-eslint/camelcase */
 
 describe('TelegramBot (e2e)', () => {
   let app: INestApplication;

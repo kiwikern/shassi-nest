@@ -63,6 +63,7 @@ export class UsersService {
   /**
    * When you register directly via Telegram, your username might already
    * be taken. Then an available username is generated and the user is created.
+   *
    * @param username
    */
   async createUserWithUniqueName(username: string | null) {

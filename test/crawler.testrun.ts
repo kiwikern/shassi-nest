@@ -17,18 +17,18 @@ export const crawlerTestRun = (
     secondResponse = null,
     thirdResponse = null,
   }: {
-    crawlerType: Type<Crawler>,
-    testResponse: string | object,
-    sizes: ProductSizeAvailability[],
+    crawlerType: Type<Crawler>;
+    testResponse: string | object;
+    sizes: ProductSizeAvailability[];
     sizeChecks: {
       isLowInStock: boolean;
-      size: string; isAvailable: boolean
-    }[],
-    name: string, priceChecks: { size: string; price: number }[],
-    url?: string,
-    expectedUrl?: string,
-    secondResponse?: string | object,
-    thirdResponse?: string | object,
+      size: string; isAvailable: boolean;
+    }[];
+    name: string; priceChecks: { size: string; price: number }[];
+    url?: string;
+    expectedUrl?: string;
+    secondResponse?: string | object;
+    thirdResponse?: string | object;
   }) => {
 
   class HttpServiceMock {

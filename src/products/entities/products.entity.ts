@@ -13,7 +13,7 @@ export class ProductEntity {
   @Transform(toStringSafe, { toPlainOnly: true })
   @Transform(toObjectId, { toClassOnly: true })
   @ApiProperty()
-    // tslint:disable-next-line:variable-name
+    // eslint-disable-line camelcase, no-underscore-dangle, id-blacklist, id-match
   _id: ObjectID;
 
   @Column()
@@ -37,11 +37,11 @@ export class ProductEntity {
 
   @Column({ default: true })
   @ApiProperty()
-  isActive: boolean = true;
+  isActive = true;
 
   @Column({ default: false })
   @ApiProperty()
-  hasUnreadUpdate: boolean = false;
+  hasUnreadUpdate = false;
 
   @Column(typeFn(ProductUpdate))
   @ApiProperty()
@@ -53,7 +53,7 @@ export class ProductEntity {
 
   @Column({ default: false })
   @ApiProperty()
-  isFavorite: boolean = false;
+  isFavorite = false;
 
   @Expose({ name: 'price' })
   @ApiProperty()

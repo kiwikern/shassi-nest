@@ -9,6 +9,7 @@ import { MockType } from '../../test/mock.type';
 import { UnauthorizedException } from '@nestjs/common';
 import { HashService } from '../common/hash.service';
 
+/* eslint-disable @typescript-eslint/camelcase */
 describe('TelegramLoginService', () => {
   let service: TelegramLoginService;
   let usersService: MockType<UsersService>;

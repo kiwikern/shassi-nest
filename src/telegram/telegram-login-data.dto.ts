@@ -1,4 +1,4 @@
-/* tslint:disable:variable-name */
+/* eslint-disable camelcase, no-underscore-dangle, id-blacklist, id-match */
 import { IsNumber, IsOptional, IsString, IsUrl } from 'class-validator';
 import { Transform } from 'class-transformer';
 import { toInteger } from '../common/utils';

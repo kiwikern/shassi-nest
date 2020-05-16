@@ -15,7 +15,7 @@ export class UserEntity {
   @Transform(toStringSafe, { toPlainOnly: true })
   @Transform(toObjectId, { toClassOnly: true })
   @ApiProperty({ type: 'string' })
-    // tslint:disable-next-line:variable-name
+    // eslint-disable-line camelcase, no-underscore-dangle, id-blacklist, id-match
   _id: ObjectID;
 
   @Column()

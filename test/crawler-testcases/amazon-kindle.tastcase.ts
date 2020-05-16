@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 import { AmazonCrawler } from '../../src/crawler/crawlers/amazon.crawler';
 
 export const amazonKindleTaseCase = {

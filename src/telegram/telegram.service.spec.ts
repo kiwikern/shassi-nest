@@ -19,6 +19,7 @@ import {
 import { NoOpLogger } from '../../test/mocks/no-op-logger';
 import anything = jasmine.anything;
 
+/* eslint-disable @typescript-eslint/camelcase, @typescript-eslint/ban-ts-ignore */
 describe('TelegramService', () => {
   let service: TelegramService;
   let productsService: MockType<ProductsService>;
@@ -262,7 +263,7 @@ describe('TelegramService', () => {
     // there must be no userId associated to the session
     expect((ctx as any).session.userId).toBe(undefined);
     expect(ctx.reply).toHaveBeenCalledWith(
-      `You need to link your shassi account first. 🔗 Go to domain?action=createTelegramToken or click the button below.`, anything());
+      'You need to link your shassi account first. 🔗 Go to domain?action=createTelegramToken or click the button below.', anything());
   });
 
   it('should not do anything when /start is running', async () => {
@@ -319,7 +320,7 @@ describe('TelegramService', () => {
     expect((ctx as any).session.userId).toEqual(ObjectID.createFromTime(0));
     expect(tokenService.checkToken).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'token');
     expect(telegramUserIdService.saveTelegramId).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'telegramId');
-    expect(ctx.reply).toHaveBeenNthCalledWith(1, `Welcome! 👋 Your account was successfully connected.`);
+    expect(ctx.reply).toHaveBeenNthCalledWith(1, 'Welcome! 👋 Your account was successfully connected.');
     expect(ctx.reply).toHaveBeenNthCalledWith(2, 'You can add a product by sending its URL to this chat.');
   });
 
@@ -340,7 +341,7 @@ describe('TelegramService', () => {
     expect((ctx as any).session.userId).toBe(undefined);
     expect(tokenService.checkToken).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'token');
     expect(telegramUserIdService.saveTelegramId).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'telegramId');
-    expect(ctx.reply).toHaveBeenCalledWith(`Could not connect Telegram account. Already linked to different shassi user account. 🙌`);
+    expect(ctx.reply).toHaveBeenCalledWith('Could not connect Telegram account. Already linked to different shassi user account. 🙌');
   });
 
   it('should not error if telegram account already connected to same user', async () => {
@@ -359,7 +360,7 @@ describe('TelegramService', () => {
     expect((ctx as any).session.userId).toEqual(ObjectID.createFromTime(0));
     expect(tokenService.checkToken).toHaveBeenCalledWith(ObjectID.createFromTime(0), 'token');
     expect(telegramUserIdService.saveTelegramId).not.toHaveBeenCalled();
-    expect(ctx.reply).toHaveBeenNthCalledWith(1, `Welcome! 👋 Your account was successfully connected.`);
+    expect(ctx.reply).toHaveBeenNthCalledWith(1, 'Welcome! 👋 Your account was successfully connected.');
     expect(ctx.reply).toHaveBeenNthCalledWith(2, 'You can add a product by sending its URL to this chat.');
   });
 

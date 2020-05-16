@@ -30,7 +30,7 @@ export class AdminService {
     return Object.assign({}, userInfo, productInfo, telegramInfo);
   }
 
-  private async getProductInfo(userId): Promise<{ productCount: number, latestProductAddedDate?: Date, latestProductUpdatedDate?: Date }> {
+  private async getProductInfo(userId): Promise<{ productCount: number; latestProductAddedDate?: Date; latestProductUpdatedDate?: Date }> {
     const products = await this.productsService.getProducts(userId);
     if (products && products.length > 0) {
       return {

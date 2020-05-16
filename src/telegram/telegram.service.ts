@@ -11,6 +11,7 @@ import { ObjectID } from 'mongodb';
 import { ProductSizeAvailability } from '../crawler/product-size.interface';
 import { CronJob } from 'cron';
 
+/* eslint-disable @typescript-eslint/camelcase */
 @Injectable()
 export class TelegramService implements OnModuleInit, OnModuleDestroy {
 
@@ -228,11 +229,11 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
         if (!isAlreadyConnected) {
           await this.telegramIdService.saveTelegramId(userId, ctx.from.id);
         }
-        ctx.reply(`Welcome! 👋 Your account was successfully connected.`);
+        ctx.reply('Welcome! 👋 Your account was successfully connected.');
         ctx.reply('You can add a product by sending its URL to this chat.');
         return this.authSession(ctx, next);
       } catch (err) {
-        ctx.reply(`Could not connect Telegram account. Already linked to different shassi user account. 🙌`);
+        ctx.reply('Could not connect Telegram account. Already linked to different shassi user account. 🙌');
       }
     } else {
       ctx.reply('Given token was invalid. Try again! 🙇');

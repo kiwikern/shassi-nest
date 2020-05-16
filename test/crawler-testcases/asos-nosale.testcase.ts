@@ -1,4 +1,4 @@
-/* tslint:disable:max-line-length */
+/* eslint-disable max-len */
 import { AsosCrawler } from '../../src/crawler/crawlers/asos.crawler';
 
 /**
