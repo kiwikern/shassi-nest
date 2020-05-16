@@ -13,6 +13,7 @@ import { TelegramTokenService } from '../src/telegram/telegram-token.service';
 import { TelegramUserIdService } from '../src/telegram/telegram-user-id.service';
 import { TelegramUserIdEntity } from '../src/telegram/telegram-user-id.entity';
 import { crawlerServiceFactory } from './mocks/jest-mocks';
+import { ProductsService } from '../src/products/products.service';
 
 jest.setTimeout(10_000);
 /* eslint-disable @typescript-eslint/camelcase */
@@ -23,6 +24,7 @@ describe('TelegramBot (e2e)', () => {
   let userId: string;
   const telegramServer: TelegramServer = new (TelegramServerConstructor as any)();
   const bot = telegramServer.createBot();
+  let productsService: ProductsService;
 
   beforeAll(async () => {
     telegramServer.start();
@@ -40,6 +42,7 @@ describe('TelegramBot (e2e)', () => {
       .useValue(crawlerMock)
       .compile();
     app = moduleFixture.createNestApplication();
+    productsService = app.get(ProductsService);
 
     await app.init();
   });
@@ -157,7 +160,7 @@ describe('TelegramBot (e2e)', () => {
     expect(crawlerMock.getUpdateData).toHaveBeenLastCalledWith(url, '1');
   });
 
-  it('should add a one-size product with an already linked user', async () => {
+  it('should add a one-size product with an already linked user and then delete it', async () => {
     // User is already connected to Telegram
     const user = telegramServer.createUser();
     await linkTelegramAccountToNewUser(user.info.id);
@@ -188,5 +191,19 @@ describe('TelegramBot (e2e)', () => {
       'Product with one size for 20.00€',
     );
     expect(crawlerMock.getUpdateData).toHaveBeenLastCalledWith(url, '1');
+    expect(await productsService.getProducts(userId)).toHaveLength(1);
+
+    chat2.postMessage(user, {
+      text: '/delete',
+      reply_to_message: { message_id: chat2.history[3].message.message_id },
+      entities: [{ offset: 0, length: 7, type: 'bot_command' }],
+    } as any);
+    await telegramServer.waitForNextMessages(1);
+    expect(chat2.history.length).toBe(6);
+    console.log(chat2.history);
+    expect(chat2.history[5].message.text).toContain(
+      'product was successfully deleted',
+    );
+    expect(await productsService.getProducts(userId)).toHaveLength(0);
   });
 });

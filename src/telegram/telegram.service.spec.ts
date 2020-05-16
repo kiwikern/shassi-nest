@@ -70,6 +70,7 @@ describe('TelegramService', () => {
       message: { message_id: 'id' },
       reply: jest.fn(),
     }))();
+    ctx.reply.mockReturnValueOnce({ message_id: 'm_id' });
     productsService.initializeProduct.mockReturnValue({
       name: 'name',
       url: 'url',
@@ -94,6 +95,7 @@ describe('TelegramService', () => {
       match: ['full-match', 'url'],
       reply: jest.fn(),
     }))();
+    ctx.reply.mockReturnValueOnce({ message_id: 'm_id' });
     productsService.initializeProduct.mockReturnValue({
       name: 'name',
       url: 'url',
@@ -141,6 +143,7 @@ describe('TelegramService', () => {
       match: ['full-match', 'url'],
       reply: jest.fn(),
     }))();
+    ctx.reply.mockReturnValueOnce({ message_id: 'm_id' });
     productsService.initializeProduct.mockImplementation(() => {
       throw new BadRequestException('Unknown store');
     });
@@ -195,6 +198,7 @@ describe('TelegramService', () => {
       editMessageReplyMarkup: jest.fn(),
       callbackQuery: { message: { reply_to_message: { message_id: 'mId' } } },
     }))();
+    ctx.editMessageText.mockReturnValueOnce({ message_id: 'm_id' });
     (ctx as any).session.productData.get.mockReturnValue({ url: 'url' });
     productsService.addProduct.mockReturnValue({
       name: 'name',
@@ -571,9 +575,147 @@ describe('TelegramService', () => {
     expect(ctx.replyWithMarkdown).toHaveBeenCalledTimes(1);
   });
 
+  it('should reject /delete without reply-to', async () => {
+    // @ts-ignore
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
+      session: {},
+      from: { id: 'telegramId' },
+      message: { text: '/delete' },
+      replyWithMarkdown: jest.fn(),
+    }))();
+    const next = jest.fn();
+    await service.deleteCommand(ctx as any);
+    expect(next).not.toBeCalled();
+    expect(productsService.deleteProduct).not.toBeCalled();
+    expect(ctx.replyWithMarkdown).toHaveBeenCalledTimes(1);
+  });
+
+  it('should reject /delete with reply-to that is not associated with product', async () => {
+    // @ts-ignore
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
+      session: {},
+      from: { id: 'telegramId' },
+      message: {
+        text: '/delete',
+        reply_to_message: { message_id: 'non-product-message' },
+      },
+      replyWithMarkdown: jest.fn(),
+    }))();
+    const next = jest.fn();
+    await service.deleteCommand(ctx as any);
+    expect(next).not.toBeCalled();
+    expect(productsService.deleteProduct).not.toBeCalled();
+    expect(ctx.replyWithMarkdown).toHaveBeenCalledTimes(1);
+  });
+
+  it('should /delete a product when replying to update message', async () => {
+    // @ts-ignore
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
+      session: {
+        userId: 'userId',
+        messageHistory: [
+          { messageId: 'product-update', productId: 'productId' },
+        ],
+      },
+      from: { id: 'userId' },
+      message: {
+        text: '/delete',
+        reply_to_message: { message_id: 'product-update' },
+      },
+      replyWithMarkdown: jest.fn(),
+    }))();
+    const next = jest.fn();
+    await service.deleteCommand(ctx as any);
+    expect(next).not.toBeCalled();
+    expect(productsService.deleteProduct).toHaveBeenCalledWith(
+      'userId',
+      'productId',
+    );
+    expect(ctx.replyWithMarkdown).toHaveBeenCalledTimes(1);
+  });
+
+  it('should notify the user when a product has already been deleted', async () => {
+    // @ts-ignore
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
+      session: {
+        userId: 'userId',
+        messageHistory: [
+          { messageId: 'product-update', productId: 'productId' },
+        ],
+      },
+      from: { id: 'userId' },
+      message: {
+        text: '/delete',
+        reply_to_message: { message_id: 'product-update' },
+      },
+      replyWithMarkdown: jest.fn(),
+    }))();
+    productsService.deleteProduct.mockRejectedValueOnce(
+      new NotFoundException('') as never,
+    );
+    const next = jest.fn();
+    await service.deleteCommand(ctx as any);
+    expect(next).not.toBeCalled();
+    expect(ctx.replyWithMarkdown).toHaveBeenCalledWith(
+      `Your product has already been deleted. 🚯`,
+    );
+  });
+
+  it('should notify the user about a 500', async () => {
+    // @ts-ignore
+    const ctx: MockType<ContextMessageUpdate> = jest.fn(() => ({
+      session: {
+        userId: 'userId',
+        messageHistory: [
+          { messageId: 'product-update', productId: 'productId' },
+        ],
+      },
+      from: { id: 'userId' },
+      message: {
+        text: '/delete',
+        reply_to_message: { message_id: 'product-update' },
+      },
+      replyWithMarkdown: jest.fn(),
+    }))();
+    productsService.deleteProduct.mockRejectedValueOnce(
+      new InternalServerErrorException('') as never,
+    );
+    const next = jest.fn();
+    await service.deleteCommand(ctx as any);
+    expect(next).not.toBeCalled();
+    expect(ctx.replyWithMarkdown).toHaveBeenCalledWith(
+      `Your product could not be deleted. Sorry! 😢`,
+    );
+  });
+  it('should skip when user to be notified has no linked account', async () => {
+    telegramUserIdService.findTelegramId.mockReturnValue(null);
+    await service.notifyAboutUpdate('userId', 'text', 'productId');
+    expect(telegramUserIdService.findTelegramId).toHaveBeenCalledWith('userId');
+    expect((telegraf.telegram as any).sendMessage).not.toHaveBeenCalled();
+  });
+
+  it('should not exceed the limit of the message history', async () => {
+    telegramUserIdService.findTelegramId.mockReturnValue('telegramId');
+    (telegraf.telegram as any).sendMessage.mockReturnValueOnce({
+      message_id: 'messageId',
+    });
+    const session = { messageHistory: new Array(300) };
+    // @ts-ignore
+    service.sessionStore.set('telegramId', { session });
+    await service.notifyAboutUpdate('userId', 'text', 'productId');
+    expect(session.messageHistory).toHaveLength(300);
+    expect(session.messageHistory).toContainEqual({
+      messageId: 'messageId',
+      productId: 'productId',
+    });
+  });
+
   it('should notify about an update', async () => {
     telegramUserIdService.findTelegramId.mockReturnValue('telegramId');
-    await service.notifyAboutUpdate('userId', 'text');
+    (telegraf.telegram as any).sendMessage.mockReturnValueOnce({
+      message_id: 'messageId',
+    });
+    await service.notifyAboutUpdate('userId', 'text', 'productId');
     expect(telegramUserIdService.findTelegramId).toHaveBeenCalledWith('userId');
     expect(
       (telegraf.telegram as any).sendMessage,
@@ -582,7 +724,7 @@ describe('TelegramService', () => {
 
   it('should skip when user to be notified has no linked account', async () => {
     telegramUserIdService.findTelegramId.mockReturnValue(null);
-    await service.notifyAboutUpdate('userId', 'text');
+    await service.notifyAboutUpdate('userId', 'text', 'productId');
     expect(telegramUserIdService.findTelegramId).toHaveBeenCalledWith('userId');
     expect((telegraf.telegram as any).sendMessage).not.toHaveBeenCalled();
   });

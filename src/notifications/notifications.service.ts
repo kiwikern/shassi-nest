@@ -75,6 +75,7 @@ export class NotificationsService implements OnModuleInit, OnModuleDestroy {
       .map(update => ({
         userId: update.product.userId,
         text: this.getMarkdownUpdateText(update),
+        productId: update.product._id,
       }))
       .filter(update => !!update.text)
       .map(async update => {
@@ -82,6 +83,7 @@ export class NotificationsService implements OnModuleInit, OnModuleDestroy {
           return await this.telegramService.notifyAboutUpdate(
             update.userId,
             update.text,
+            update.productId,
           );
         } catch (e) {
           this.logger.error(

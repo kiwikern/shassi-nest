@@ -35,21 +35,21 @@ export const productsServiceFactory: () => MockType<ProductsService> = jest.fn(
 );
 
 export const telegramServiceFactory: () => MockType<TelegramService> = jest.fn(
-  () => ({
-    notifyAboutUpdate: jest.fn(),
-    onModuleInit: jest.fn(),
-    onModuleDestroy: jest.fn(),
-    handleErrors: jest.fn(),
-    addProductOnURLSent: jest.fn(),
-    authSession: jest.fn(),
-    startCommand: jest.fn(),
-    updateProductOnSizeChosen: jest.fn(),
-    cleanUpSessionData: jest.fn(),
-    evenlySplitArray: jest.fn(),
-    handleReceivedPhoto: jest.fn(),
-    handleMessageWithoutUrl: jest.fn(),
-    helpCommand: jest.fn(),
-  }),
+  () => ({notifyAboutUpdate: jest.fn(),
+  onModuleInit: jest.fn(),
+  onModuleDestroy: jest.fn(),
+  handleErrors: jest.fn(),
+  addProductOnURLSent: jest.fn(),
+  authSession: jest.fn(),
+  startCommand: jest.fn(),
+  updateProductOnSizeChosen: jest.fn(),
+  cleanUpSessionData: jest.fn(),
+  evenlySplitArray: jest.fn(),
+  handleReceivedPhoto: jest.fn(),
+  handleMessageWithoutUrl: jest.fn(),
+  helpCommand: jest.fn(),
+  deleteCommand: jest.fn(),
+}),
 );
 
 export const cronJobServiceFactory: () => MockType<CronJobService> = jest.fn(

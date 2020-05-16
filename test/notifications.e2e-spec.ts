@@ -14,12 +14,14 @@ import { crawlerServiceFactory } from './mocks/jest-mocks';
 import { ProductsService } from '../src/products/products.service';
 import { NotificationsService } from '../src/notifications/notifications.service';
 
-jest.setTimeout(10_000);
+jest.setTimeout(20_000);
 
 describe('Notifications (e2e)', () => {
   let app: INestApplication;
   const crawlerMock: MockType<CrawlerService> = crawlerServiceFactory();
   let userId: string;
+  let client;
+  let productsService: ProductsService;
   const telegramServer: TelegramServer = new (TelegramServerConstructor as any)();
   const bot = telegramServer.createBot();
   let notificationsService: NotificationsService;
@@ -40,6 +42,7 @@ describe('Notifications (e2e)', () => {
       .useValue(crawlerMock)
       .compile();
     app = moduleFixture.createNestApplication();
+    productsService = app.get(ProductsService);
     notificationsService = app.get(NotificationsService);
 
     await app.init();
@@ -84,7 +87,7 @@ describe('Notifications (e2e)', () => {
       password: '123456',
     });
     userId = user._id;
-    const client = telegramServer.createUser();
+    client = telegramServer.createUser();
     await telegramIdService.saveTelegramId(user._id, client.info.id);
     return client.startBot(bot, '');
   }
@@ -126,5 +129,16 @@ describe('Notifications (e2e)', () => {
         expect.stringContaining('now low in stock'),
       ]),
     );
+
+    // Delete a product from the notification
+    chat.postMessage(client, {
+      text: '/delete',
+      // eslint-disable-next-line @typescript-eslint/camelcase
+      reply_to_message: { message_id: chat.history[3].message.message_id },
+      entities: [{ offset: 0, length: 7, type: 'bot_command' }],
+    } as any);
+    await telegramServer.waitForNextMessages(1);
+    expect(await productsService.getProducts(userId)).toHaveLength(2);
+    expect(chat.history[5].message.text).toContain('successfully deleted');
   });
 });

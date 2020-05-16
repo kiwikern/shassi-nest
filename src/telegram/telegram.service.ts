@@ -27,6 +27,7 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
   private static readonly LINK_REGEX = /^(?!\/).*((?:(?:http)|(?:www))\S+)/m;
   private logger: Logger = new Logger(TelegramService.name);
   private jobs: CronJob[] = [];
+  private sessionStore: Map<string, any> = new Map();
 
   constructor(
     @Inject('Telegraf') private telegraf: Telegraf<any>,
@@ -39,10 +40,16 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
 
   onModuleInit() {
     this.telegraf.catch(err => this.handleErrors(err));
-    this.telegraf.use(session());
+    this.telegraf.use(
+      session({
+        getSessionKey: ctx => `${ctx.from?.id}`,
+        store: this.sessionStore,
+      }),
+    );
     this.telegraf.command('start', (ctx, next) => this.startCommand(ctx, next));
     this.telegraf.help((ctx, next) => this.helpCommand(ctx, next));
     this.telegraf.use((ctx, next) => this.authSession(ctx, next));
+    this.telegraf.command('delete', (ctx, next) => this.deleteCommand(ctx));
     this.telegraf.hears(TelegramService.LINK_REGEX, ctx =>
       this.addProductOnURLSent(ctx, ctx.match[1]),
     );
@@ -86,7 +93,7 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
     }
   }
 
-  async notifyAboutUpdate(userId, text) {
+  async notifyAboutUpdate(userId, text, productId) {
     const telegramId = await this.telegramIdService.findTelegramId(userId);
     if (!telegramId) {
       this.logger.log(
@@ -95,9 +102,17 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
       return;
     }
 
-    this.telegraf.telegram.sendMessage(telegramId, text, {
+    // If no session exists (e.g., after restart) init new session to store message history.
+    if (!this.sessionStore.has(telegramId + '')) {
+      const newSession = { session: {} };
+      this.initTelegramSession(newSession, k => k);
+      this.sessionStore.set(telegramId + '', newSession);
+    }
+    const session = this.sessionStore.get(telegramId + '').session;
+    const message = await this.telegraf.telegram.sendMessage(telegramId, text, {
       parse_mode: 'Markdown',
     });
+    this.addMessageHistory({ session }, message.message_id, productId);
   }
 
   handleErrors(err) {
@@ -135,11 +150,12 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
           userId,
           productUpdate,
         );
-        ctx.reply(
+        const reply = await ctx.reply(
           `Product ${newProduct.name} for ${newProduct.price.toFixed(
             2,
           )}€ at store ${newProduct.store} was added. 🛍️`,
         );
+        this.addMessageHistory(ctx, reply.message_id, newProduct._id);
       }
     } catch (err) {
       this.handleProductAddErrors(err, ctx);
@@ -165,16 +181,17 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
       }
       ctx.session.productData.delete(productId);
       Object.assign(productData, { size });
-      const p = await this.productsService.addProduct(
+      const product = await this.productsService.addProduct(
         ctx.session.userId,
         productData,
       );
-      const text = `Your product ${p.name} for ${p.price.toFixed(
+      const text = `Your product ${product.name} for ${product.price.toFixed(
         2,
-      )}€ at store ${p.store} with size ${
+      )}€ at store ${product.store} with size ${
         size.name
       } was added successfully. 🛍️`;
-      ctx.editMessageText(text);
+      const reply = await ctx.editMessageText(text);
+      this.addMessageHistory(ctx, reply.message_id, product._id);
     } catch (err) {
       this.handleProductAddErrors(err, ctx);
     }
@@ -233,13 +250,7 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
     const telegramId = ctx.from.id;
     const userId = await this.telegramIdService.findUserId(telegramId);
     if (userId) {
-      ctx.session.userId = userId;
-      ctx.session.productData = new Map();
-      const job = this.cronJobService.create('0 0 3 * * *', () =>
-        this.cleanUpSessionData(ctx),
-      );
-      job.start();
-      this.jobs.push(job);
+      this.initTelegramSession(ctx, userId);
       return next(ctx);
     }
 
@@ -250,6 +261,16 @@ export class TelegramService implements OnModuleInit, OnModuleDestroy {
       );
     }
     // Do not call next() without account.
+  }
+
+  private initTelegramSession(ctx, userId) {
+    ctx.session.userId = userId;
+    ctx.session.productData = new Map();
+    const job = this.cronJobService.create('0 0 3 * * *', () =>
+      this.cleanUpSessionData(ctx),
+    );
+    job.start();
+    this.jobs.push(job);
   }
 
   cleanUpSessionData(ctx) {
@@ -320,5 +341,63 @@ It is now tracking your product and will notify you when its price or availabili
 
 💸 Happy Shopping! 💸
 `);
+  }
+
+  private readonly MAXIMUM_SESSION_DATA_LENGTH = 300;
+
+  private addMessageHistory(
+    ctx: { session: any },
+    messageId: number,
+    productId: ObjectID,
+  ) {
+    if (!ctx.session.messageHistory) {
+      ctx.session.messageHistory = [];
+    }
+
+    const messageHistory = ctx.session.messageHistory;
+    if (messageHistory.length >= this.MAXIMUM_SESSION_DATA_LENGTH) {
+      messageHistory.shift();
+    }
+    messageHistory.push({ messageId, productId });
+  }
+
+  private findProductInMessageHistory(ctx, messageId: number): ObjectID | null {
+    const messageHistory = ctx.session.messageHistory;
+    if (!Array.isArray(messageHistory)) {
+      return null;
+    }
+
+    return messageHistory.find(i => i.messageId === messageId)?.productId;
+  }
+
+  async deleteCommand(ctx) {
+    const replyToMessage = ctx.message.reply_to_message;
+    if (!replyToMessage) {
+      return ctx.replyWithMarkdown(`Which product do you want to delete? 🗑
+Simply reply to a message from shassi concerning the product you want to delete.`);
+    }
+    const productId = this.findProductInMessageHistory(
+      ctx,
+      replyToMessage.message_id,
+    );
+    if (!productId) {
+      return ctx.replyWithMarkdown(
+        `The message you replied to is not about a product or too old. Try replying to a more recent product message.`,
+      );
+    }
+    try {
+      await this.productsService.deleteProduct(ctx.session.userId, productId);
+      return ctx.replyWithMarkdown(`Your product was successfully deleted. 🚮`);
+    } catch (e) {
+      if (e instanceof NotFoundException) {
+        return ctx.replyWithMarkdown(
+          `Your product has already been deleted. 🚯`,
+        );
+      } else {
+        return ctx.replyWithMarkdown(
+          `Your product could not be deleted. Sorry! 😢`,
+        );
+      }
+    }
   }
 }
