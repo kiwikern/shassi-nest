@@ -28,7 +28,7 @@ export class NotificationsService implements OnModuleInit, OnModuleDestroy {
   onModuleInit() {
     // if (!this.configService.isProduction) this.sendAllNotifications();
     // if (!this.configService.isProduction) this.sendFavoritesNotifications();
-    this.job = this.cronJobService.create('00 00 8,14,18 * * *', () =>
+    this.job = this.cronJobService.create('00 00 14 * * *', () =>
       this.sendAllNotifications(),
     );
     this.job.start();
@@ -37,9 +37,8 @@ export class NotificationsService implements OnModuleInit, OnModuleDestroy {
         this.job.nextDates().toString(),
     );
 
-    this.favoritesJob = this.cronJobService.create(
-      '00 00 6,10,12,16,20 * * *',
-      () => this.sendFavoritesNotifications(),
+    this.favoritesJob = this.cronJobService.create('00 00 6,20 * * *', () =>
+      this.sendFavoritesNotifications(),
     );
     this.favoritesJob.start();
     this.logger.log(
