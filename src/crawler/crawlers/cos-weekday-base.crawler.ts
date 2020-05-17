@@ -101,13 +101,14 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
       );
     }
 
-    const apiUrl = this.getBaseUrl() + '/getAvailability?format=json&variants=';
+    let apiUrl;
     try {
       // might be sizes instead of variants for h&m?
       const variants = this.getProductVariants();
+      apiUrl = this.getApiUrl(variants, productId);
       const headers = this.getHeaders();
       const availabilityResponse = await this.httpService
-        .get(apiUrl + variants, { headers })
+        .get(apiUrl, { headers })
         .toPromise();
       if (
         !Array.isArray(availabilityResponse.data.availability) ||
@@ -131,6 +132,10 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
         'Could not get product availability from store API.',
       );
     }
+  }
+
+  protected getApiUrl(variants: string, productId: string) {
+    return `${this.getBaseUrl()}/getAvailability?format=json&variants=${variants}`;
   }
 
   protected getProductVariants(): string {
