@@ -56,6 +56,8 @@
     "user-agents": "^1.0.559"
   },
   "devDependencies": {
+    "@nestjs/cli": "^7.1.5",
+    "@nestjs/schematics": "^7.0.0",
     "@nestjs/testing": "^7.0.13",
     "@types/bcrypt": "^3.0.0",
     "@types/cron": "^1.7.2",
