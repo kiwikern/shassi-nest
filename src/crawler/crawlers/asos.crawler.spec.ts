@@ -4,9 +4,9 @@ import { asosTestCase } from '../../../test/crawler-testcases/asos-sale.testcase
 import { of } from 'rxjs';
 import { AsosCrawler } from './asos.crawler';
 import { asosOneSizeTestCase } from '../../../test/crawler-testcases/asos-onesize.testcase';
-import { asosNoSaleTestCase } from '../../../test/crawler-testcases/asos-nosale.testcase';
+import { asosOutOfStock } from '../../../test/crawler-testcases/asos-out-of.stock';
 
-const testCases = [asosTestCase, asosOneSizeTestCase, asosNoSaleTestCase];
+const testCases = [asosTestCase, asosOneSizeTestCase, asosOutOfStock];
 
 describe('Asos', () => {
   testCases.forEach(testCase => crawlerTestRun(testCase));
