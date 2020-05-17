@@ -10,7 +10,7 @@ import Telegraf from 'telegraf';
 import { TelegrafMock } from './mocks/telegraf.mock';
 import { ProductEntity } from '../src/products/entities/products.entity';
 
-xdescribe('ProductsController (e2e)', () => {
+describe('ProductsController (e2e)', () => {
   jest.setTimeout(25_000);
   const testCases = [
     {

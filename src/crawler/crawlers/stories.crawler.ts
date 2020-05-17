@@ -1,19 +1,7 @@
-import { HttpService, Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { CosWeekdayBaseCrawler } from './cos-weekday-base.crawler';
 
 @Injectable()
 export class StoriesCrawler extends CosWeekdayBaseCrawler {
   logger: Logger = new Logger(StoriesCrawler.name);
-
-  constructor(protected httpService: HttpService) {
-    super();
-  }
-
-  getBaseUrl(): string {
-    return 'https://stories.com/en_eur';
-  }
-
-  getProductCssClasses(): string {
-    return 'o-page-content';
-  }
 }

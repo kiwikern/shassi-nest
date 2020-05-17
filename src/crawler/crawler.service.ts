@@ -60,13 +60,13 @@ export class CrawlerService {
     }
 
     if (url.includes('hm.com')) {
-      crawler = new HmCrawler(this.httpService);
+      crawler = new HmCrawler();
     } else if (url.includes('asos.')) {
       crawler = new AsosCrawler(this.httpService);
     } else if (url.includes('weekday.')) {
-      crawler = new WeekdayCrawler(this.httpService);
+      crawler = new WeekdayCrawler();
     } else if (url.includes('cosstores.')) {
-      crawler = new CosCrawler(this.httpService);
+      crawler = new CosCrawler();
     } else if (url.includes('aboutyou.de')) {
       crawler = new AboutyouCrawler(this.httpService);
     } else if (url.includes('amazon.de')) {
@@ -74,11 +74,11 @@ export class CrawlerService {
     } else if (url.includes('zalando.de')) {
       crawler = new ZalandoCrawler(this.httpService);
     } else if (url.includes('stories.com')) {
-      crawler = new StoriesCrawler(this.httpService);
+      crawler = new StoriesCrawler();
     } else if (url.includes('snipes.com')) {
       crawler = new SnipesCrawler(this.httpService);
     } else if (url.includes('arket.com')) {
-      crawler = new ArketCrawler(this.httpService);
+      crawler = new ArketCrawler();
     } else {
       this.logger.error('No crawler found for given url.', url);
       throw new BadRequestException('Unknown store');
