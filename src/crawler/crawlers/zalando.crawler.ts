@@ -1,5 +1,10 @@
 import { Crawler } from '../crawler.interface';
-import { HttpService, Injectable, Logger } from '@nestjs/common';
+import {
+  HttpService,
+  Injectable,
+  InternalServerErrorException,
+  Logger,
+} from '@nestjs/common';
 import { ProductSizeAvailability } from '../product-size.interface';
 import { JSDOM } from 'jsdom';
 import { generateUserAgent } from './user-agent-generator';
@@ -22,13 +27,21 @@ export class ZalandoCrawler implements Crawler {
       'cache-control': 'no-cache',
       'User-Agent': generateUserAgent(),
     };
-    const response = await this.httpService.get(url, { headers }).toPromise();
-    const document = new JSDOM(response.data).window.document;
-    const jsonString = document
-      .getElementById('z-vegas-pdp-props')
-      .innerHTML.replace('<![CDATA[', '')
-      .replace(']]>', '');
-    this.articleData = JSON.parse(jsonString).model.articleInfo;
+    let response;
+    try {
+      response = await this.httpService.get(url, { headers }).toPromise();
+      const document = new JSDOM(response.data).window.document;
+      const jsonString = document
+        .getElementById('z-vegas-pdp-props')
+        .innerHTML.replace('<![CDATA[', '')
+        .replace(']]>', '');
+      this.articleData = JSON.parse(jsonString).model.articleInfo;
+    } catch (error) {
+      throw new InternalServerErrorException(
+        { error, apiResponseCode: response?.status },
+        'Could not request or parse product data',
+      );
+    }
   }
 
   getName(): string {
