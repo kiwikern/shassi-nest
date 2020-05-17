@@ -3,14 +3,35 @@ import {
   BadRequestException,
   HttpService,
   Injectable,
+  InternalServerErrorException,
   Logger,
 } from '@nestjs/common';
 import { ProductSizeAvailability } from '../product-size.interface';
 
+interface ApiResponse {
+  isActive: boolean;
+  isSoldOut: boolean;
+  isNew: boolean;
+  attributes: {
+    name: { values: { label: string } };
+    brand: { values: { label: string } };
+  };
+  variants: {
+    id: number;
+    /** price in cents */
+    price: { withTax: number };
+    stock: { quantity: number };
+    attributes: {
+      shopSize: { values: { label: string } };
+      length?: { values: { label: string } };
+    };
+  }[];
+}
+
 @Injectable()
 export class AboutyouCrawler implements Crawler {
   url: string;
-  body;
+  body: ApiResponse;
   productId: string;
   logger: Logger = new Logger(AboutyouCrawler.name);
 
@@ -23,52 +44,46 @@ export class AboutyouCrawler implements Crawler {
       throw new BadRequestException('URL needs to end with the product id.');
     }
     this.productId = productIdMatch[0];
-    const apiUrl = `https://api.aboutyou.de/products/${this.productId}?include=variants.sizes`;
+    const apiUrl = `https://api-cloud.aboutyou.de/v1/products?ids=${this.productId}&with=attributes%3Akey%28brand%7CbrandLogo%7Cname%7CquantityPerPack%7CplusSize%7CcolorDetail%29%2Cvariants%2Cvariants.attributes%3Akey%28shopSize%7CcategoryShopFilterSizes%7Ccup%7Ccupsize%7CvendorSize%7Clength%7Cdimension3%7CsizeType%7Csort%29`;
     const response = await this.httpService.get(apiUrl).toPromise();
-    this.body = response.data;
+    this.body = response.data.entities[0];
   }
 
   getName(): string {
-    return this.body.data.attributes.name;
+    return [
+      this.body.attributes.brand.values.label,
+      this.body.attributes.name.values.label,
+    ].join(' - ');
   }
 
   getPrice(sizeId): number {
-    const size = this.body.included[sizeId];
+    const size = this.body.variants.find(v => v.id + '' === sizeId);
     if (size) {
-      if (size.attributes.campaignPrice.current > 0) {
-        return size.attributes.campaignPrice.current / 100;
-      }
-      return size.attributes.price.current / 100;
+      return size.price.withTax / 100;
     } else {
       this.logger.warn({
         message: 'Could not find given size',
         sizeId,
         productId: this.productId,
       });
-      if (this.body.data.attributes.campaignPrice.min > 0) {
-        return this.body.data.attributes.campaignPrice.min / 100;
-      }
-      return this.body.data.attributes.price.min / 100;
+      throw new InternalServerErrorException(
+        'Could not find price for variant',
+      );
     }
   }
 
   getSizes(): ProductSizeAvailability[] {
-    return Object.keys(this.body.included)
-      .filter(key => key.startsWith('variants:'))
-      .map(sizeId => {
-        const size = this.body.included[sizeId].attributes;
-        return {
-          id: sizeId,
-          isAvailable: size.quantity > 0,
-          name:
-            size.sizes.shop +
-            (size.sizes.length ? `/${size.sizes.length}` : ''),
-        };
-      });
+    return this.body.variants.map(v => ({
+      id: v.id + '',
+      isAvailable: v.stock.quantity > 0,
+      name:
+        v.attributes.shopSize.values.label +
+        (v.attributes.length ? '/' + v.attributes.length.values.label : ''),
+    }));
   }
 
   isInCatalog(): boolean {
-    return !this.body.errors && this.body.data.attributes.isActive;
+    return !this.body || this.body.isActive;
   }
 
   isSizeAvailable(sizeId?: string): boolean {
@@ -80,8 +95,8 @@ export class AboutyouCrawler implements Crawler {
   }
 
   private getQuantity(sizeId: string) {
-    const size = this.body.included[sizeId];
-    return !!size && size.attributes.quantity;
+    const size = this.body.variants.find(v => v.id + '' === sizeId);
+    return !!size && size.stock.quantity;
   }
 
   getUrl(): string {
