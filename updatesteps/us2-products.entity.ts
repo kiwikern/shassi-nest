@@ -4,7 +4,7 @@ import { UsProductSize } from './us2-product-size.entity';
 import { UsProductUpdate } from './us2-product-update.entity';
 import { ObjectID } from 'mongodb';
 import { Logger } from '@nestjs/common';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
 import { toObjectId, toStringSafe } from '../src/common/utils';
 
 @Entity({ name: 'products' })
@@ -12,39 +12,32 @@ export class UsProductEntity {
   @ObjectIdColumn()
   @Transform(toStringSafe, { toPlainOnly: true })
   @Transform(toObjectId, { toClassOnly: true })
-  @ApiProperty()
-  // tslint:disable-next-line:variable-name
   _id: ObjectID;
 
   // @Index({unique: true})
   @Column()
-  @ApiProperty()
   url: string;
 
   @Column()
-  @ApiProperty()
   name: string;
 
   @Column()
   @Transform(value => (value ? value.toString() : null), { toPlainOnly: true })
-  @ApiProperty()
   userId: ObjectID;
 
   @Exclude({ toPlainOnly: true })
   @Column(() => UsProductSize)
   @Type(() => UsProductSize)
+  @ApiHideProperty()
   size: UsProductSize;
 
   @Column({ default: true })
-  @ApiProperty()
   isActive = true;
 
   @Column({ default: false })
-  @ApiProperty()
   hasUnreadUpdate = false;
 
   @Column(() => UsProductUpdate)
-  @ApiProperty()
   updates: UsProductUpdate[];
 
   @Expose({ name: 'price' })

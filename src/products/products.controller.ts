@@ -25,18 +25,14 @@ import {
   ApiCreatedResponse,
   ApiOperation,
   ApiParam,
-  ApiProperty,
 } from '@nestjs/swagger';
 import { ProductSizeAvailability } from '../crawler/product-size.interface';
 import { ObjectIdPipe } from '../common/object-id.pipe';
 import { FavoriteProductDto } from './dtos/favorite-product.dto';
 
 export class ProductInitResponse {
-  @ApiProperty()
   sizes: ProductSizeAvailability[];
-  @ApiProperty()
   name: string;
-  @ApiProperty()
   url: string;
 }
 

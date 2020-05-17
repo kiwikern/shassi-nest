@@ -16,7 +16,6 @@ import {
   ApiOperation,
   ApiUnauthorizedResponse,
   ApiTags,
-  ApiProperty,
 } from '@nestjs/swagger';
 import { User } from '../auth/user.decorator';
 import { UserEntity } from '../users/entities/user.entity';
@@ -27,20 +26,15 @@ import { TelegramLoginService } from './telegram-login.service';
 // eslint-disable max-classes-per-file
 
 class TelegramConnectionStatusResponse {
-  @ApiProperty()
   isConnectedToTelegram: boolean;
 }
 
 class TemporaryTokenResponse {
-  @ApiProperty()
   token: string;
 }
 
 class LoginResponse {
-  @ApiProperty()
   jwt: string;
-
-  @ApiProperty()
   user: UserEntity;
 }
 

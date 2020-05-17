@@ -6,17 +6,13 @@ import {
   ApiCreatedResponse,
   ApiTags,
   ApiOperation,
-  ApiProperty,
 } from '@nestjs/swagger';
 import { UserEntity } from '../users/entities/user.entity';
 
 // eslint-disable max-classes-per-file
 
 class LoginResponse {
-  @ApiProperty()
   jwt: string;
-
-  @ApiProperty()
   user: UserEntity;
 }
 

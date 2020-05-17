@@ -12,22 +12,17 @@ export class ProductEntity {
   @ObjectIdColumn()
   @Transform(toStringSafe, { toPlainOnly: true })
   @Transform(toObjectId, { toClassOnly: true })
-  @ApiProperty()
-  // eslint-disable-line camelcase, no-underscore-dangle, id-blacklist, id-match
   _id: ObjectID;
 
   @Column()
-  @ApiProperty()
   url: string;
 
   @Column()
-  @ApiProperty()
   name: string;
 
   @Column()
   @Transform(toStringSafe, { toPlainOnly: true })
   @Transform(toObjectId, { toClassOnly: true })
-  @ApiProperty()
   userId: ObjectID;
 
   @Exclude({ toPlainOnly: true })
@@ -36,15 +31,12 @@ export class ProductEntity {
   size: ProductSize;
 
   @Column({ default: true })
-  @ApiProperty()
   isActive = true;
 
   @Column({ default: false })
-  @ApiProperty()
   hasUnreadUpdate = false;
 
   @Column(typeFn(ProductUpdate))
-  @ApiProperty()
   updates: ProductUpdate[];
 
   @Column({ default: [] })
@@ -52,7 +44,6 @@ export class ProductEntity {
   errors: string[] = [];
 
   @Column({ default: false })
-  @ApiProperty()
   isFavorite = false;
 
   @Expose({ name: 'price' })
