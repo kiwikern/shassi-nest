@@ -12,7 +12,6 @@
     "start:dev": "cross-env NODE_ENV=development nest start --watch",
     "start:debug": "cross-env NODE_ENV=development nest start --debug --watch",
     "start:webstorm-debug": "cross-env NODE_ENV=development TS_NODE_TRANSPILE_ONLY=true node --inspect -r tsconfig-paths/register -r ts-node/register src/main.ts --noEmit",
-    "prestart:prod": "npm run build",
     "start:prod": "cross-env NODE_ENV=production node dist/src/main",
     "webpack": "rimraf dist && webpack --config webpack.config.js",
     "post:webpack": "rimraf dist",
@@ -23,8 +22,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json --runInBand",
-    "updatestep": "cross-env NODE_ENV=development ts-node ./updatesteps/updatestep3.ts",
-    "heroku-postbuild": "echo Skip builds on Heroku"
+    "updatestep": "cross-env NODE_ENV=development ts-node ./updatesteps/updatestep3.ts"
   },
   "dependencies": {
     "@nestjs/common": "^7.0.13",
