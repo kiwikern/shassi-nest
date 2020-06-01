@@ -25,7 +25,7 @@
     "updatestep": "cross-env NODE_ENV=development ts-node ./updatesteps/updatestep3.ts"
   },
   "dependencies": {
-    "@nestjs/common": "^7.0.13",
+    "@nestjs/common": "^7.1.2",
     "@nestjs/core": "^7.0.13",
     "@nestjs/jwt": "^7.0.0",
     "@nestjs/passport": "^7.0.0",
