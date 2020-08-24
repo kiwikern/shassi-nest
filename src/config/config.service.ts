@@ -96,6 +96,10 @@ export class ConfigService {
     return process.env.PORT || this.envConfig.PORT;
   }
 
+  get host(): string {
+    return process.env.host || this.envConfig.HOST;
+  }
+
   get keepConnectionAlive(): boolean {
     return process.env.DB_KEEP_CONNECTION_ALIVE === 'true';
   }
@@ -115,6 +119,7 @@ export class ConfigService {
       TELEGRAM_TOKEN: Joi.string().required(),
       FRONTEND_DOMAIN: Joi.string().required(),
       PORT: Joi.number().default(3000),
+      HOST: Joi.string().default('localhost'),
     });
 
     const { error, value: validatedEnvConfig } = Joi.validate(
