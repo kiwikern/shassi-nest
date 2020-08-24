@@ -122,9 +122,8 @@ export class ConfigService {
       HOST: Joi.string().default('localhost'),
     });
 
-    const { error, value: validatedEnvConfig } = Joi.validate(
+    const { error, value: validatedEnvConfig } = envVarsSchema.validate(
       envConfig,
-      envVarsSchema,
     );
     if (error) {
       throw new Error(`Config validation error: ${error.message}`);

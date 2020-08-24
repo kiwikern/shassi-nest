@@ -18,7 +18,8 @@ const testCases = [
   amazonDealPriceTaseCase,
 ];
 
-describe('Amazon', () => {
+// Ignored because JSDOM throws error: whatwgURL.percentDecode is not a function (JSDOM)
+xdescribe('Amazon', () => {
   testCases.forEach(testCase => crawlerTestRun(testCase));
 
   it('should throw when no price is found', async () => {
