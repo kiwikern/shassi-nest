@@ -18,12 +18,16 @@ import { ProductSizeAvailability } from './product-size.interface';
 import { StoriesCrawler } from './crawlers/stories.crawler';
 import { SnipesCrawler } from './crawlers/snipes.crawler';
 import { ArketCrawler } from './crawlers/arket.crawler';
+import { PuppeteerService } from './puppeteer/puppeteer.service';
 
 @Injectable()
 export class CrawlerService {
   private readonly logger: Logger = new Logger(CrawlerService.name);
 
-  constructor(private httpService: HttpService) {}
+  constructor(
+    private httpService: HttpService,
+    private puppeteerService: PuppeteerService,
+  ) {}
 
   async getInitData(
     url: string,
@@ -60,25 +64,25 @@ export class CrawlerService {
     }
 
     if (url.includes('hm.com')) {
-      crawler = new HmCrawler();
+      crawler = new HmCrawler(this.puppeteerService);
     } else if (url.includes('asos.')) {
       crawler = new AsosCrawler(this.httpService);
     } else if (url.includes('weekday.')) {
-      crawler = new WeekdayCrawler();
+      crawler = new WeekdayCrawler(this.puppeteerService);
     } else if (url.includes('cosstores.')) {
-      crawler = new CosCrawler();
+      crawler = new CosCrawler(this.puppeteerService);
     } else if (url.includes('aboutyou.de')) {
       crawler = new AboutyouCrawler(this.httpService);
     } else if (url.includes('amazon.de')) {
       crawler = new AmazonCrawler(this.httpService);
     } else if (url.includes('zalando.de')) {
-      crawler = new ZalandoCrawler(this.httpService);
+      crawler = new ZalandoCrawler(this.puppeteerService);
     } else if (url.includes('stories.com')) {
-      crawler = new StoriesCrawler();
+      crawler = new StoriesCrawler(this.puppeteerService);
     } else if (url.includes('snipes.com')) {
       crawler = new SnipesCrawler(this.httpService);
     } else if (url.includes('arket.com')) {
-      crawler = new ArketCrawler();
+      crawler = new ArketCrawler(this.puppeteerService);
     } else {
       this.logger.error('No crawler found for given url.', url);
       throw new BadRequestException('Unknown store');

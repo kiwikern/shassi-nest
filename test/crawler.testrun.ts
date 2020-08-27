@@ -17,7 +17,7 @@ export const crawlerTestRun = ({
   thirdResponse = null,
 }: {
   crawlerType: Type<Crawler>;
-  testResponse: string | object;
+  testResponse: string | Record<string, unknown>;
   sizes: ProductSizeAvailability[];
   sizeChecks: {
     isLowInStock: boolean;
@@ -28,11 +28,16 @@ export const crawlerTestRun = ({
   priceChecks: { size: string; price: number }[];
   url?: string;
   expectedUrl?: string;
-  secondResponse?: string | object;
-  thirdResponse?: string | object;
+  secondResponse?: string | Record<string, unknown>;
+  thirdResponse?: string | Record<string, unknown>;
 }) => {
   class HttpServiceMock {
     calls = 0;
+
+    evaluateInBrowser(url, func) {
+      global['window'] = testResponse as any;
+      return func();
+    }
 
     get(): Observable<any> {
       this.calls++;
@@ -72,6 +77,8 @@ export const crawlerTestRun = ({
         expect(crawler.isSizeAvailable(sizeCheck.size)).toBe(
           sizeCheck.isAvailable,
         );
+      });
+      it('should return if a size is low in stock', async () => {
         expect(crawler.isLowInStock(sizeCheck.size)).toBe(
           sizeCheck.isLowInStock,
         );

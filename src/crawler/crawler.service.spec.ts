@@ -6,6 +6,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { NoOpLogger } from '../../test/mocks/no-op-logger';
+import { PuppeteerService } from './puppeteer/puppeteer.service';
 
 let savedUrl;
 
@@ -72,7 +73,11 @@ describe('CrawlerService', () => {
 
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [CrawlerService, { provide: HttpService, useValue: null }],
+      providers: [
+        CrawlerService,
+        { provide: HttpService, useValue: null },
+        { provide: PuppeteerService, useValue: null },
+      ],
     }).compile();
     module.useLogger(new NoOpLogger());
     service = module.get<CrawlerService>(CrawlerService);

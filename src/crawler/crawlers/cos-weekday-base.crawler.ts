@@ -1,7 +1,7 @@
 import { Crawler } from '../crawler.interface';
 import { BadRequestException, Logger } from '@nestjs/common';
 import { ProductSizeAvailability } from '../product-size.interface';
-import * as puppeteer from 'puppeteer';
+import { PuppeteerService } from '../puppeteer/puppeteer.service';
 
 interface HmProductData {
   sizes: [{ sizeCode: string; size: string; name: string }];
@@ -24,6 +24,8 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
 
   protected abstract logger: Logger;
 
+  constructor(private puppeteerService: PuppeteerService) {}
+
   async init(url: string) {
     this.url = this.normalizeUrl(url);
 
@@ -33,32 +35,48 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
       throw new BadRequestException('Invalid url: ' + url);
     }
     const productId = productIdMatches[1];
-    const browser = await puppeteer.launch({
-      args: ['--no-sandbox'],
-      headless: false,
-    });
-    try {
-      const page = await browser.newPage();
-      await page.goto(url);
-      const fullProductData = await page.evaluate(
-        () => window['productArticleDetails'],
+    const fullProductData = await this.puppeteerService.evaluateInBrowser(
+      url,
+      () => {
+        const appNames = ['cosApp', 'weekdayApp', 'storiesApp'];
+        let app;
+        for (const appName of appNames) {
+          app = window[appName];
+          if (app) break;
+        }
+        // productAvailability only for H&M
+        const availabilityData = window['productAvailability'] ?? {
+          availability:
+            app?.productDetails?.availableVariants ??
+            // For Arket
+            window['availableVariants'],
+          fewPiecesLeft:
+            app?.productDetails?.lowInStockVariants ??
+            app?.productDet?.lowInStockVariants,
+        };
+
+        return {
+          productData: window['productArticleDetails'],
+          availabilityData,
+        };
+      },
+    );
+    this.productData = fullProductData.productData?.[productId];
+    if (fullProductData.productData?.alternate) {
+      // H&M is missing name attribute, replace color placeholder
+      this.productData.altName = fullProductData.productData.alternate?.replace(
+        / - {a.*/,
+        ` - ${this.productData.name}`,
       );
-      this.productData = fullProductData[productId];
-      if (fullProductData.alternate) {
-        // H&M is missing name attribute, replace color placeholder
-        this.productData.altName = fullProductData.alternate.replace(
-          / - {a.*/,
-          ` - ${this.productData.name}`,
-        );
-      }
-      const availabilityData = await page.evaluate(
-        () => window['productAvailability'],
-      );
-      this.availability = availabilityData?.availability;
-      this.lowInStock = availabilityData?.fewPieceLeft;
-    } finally {
-      await browser.close();
     }
+    const availabilityData = fullProductData.availabilityData;
+    this.availability = availabilityData?.availability;
+    const fewPieces =
+      availabilityData?.fewPiecesLeft ?? availabilityData?.fewPieceLeft;
+    if (fewPieces == null) {
+      this.logger.warn('Could not detect fewPiecesLeft for ' + url);
+    }
+    this.lowInStock = fewPieces ?? [];
   }
 
   getName() {
@@ -99,7 +117,7 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
     return this.url;
   }
 
-  normalizeUrl(url): string {
+  normalizeUrl(url: string): string {
     return url;
   }
 }

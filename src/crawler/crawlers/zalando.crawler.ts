@@ -1,13 +1,11 @@
 import { Crawler } from '../crawler.interface';
 import {
-  HttpService,
   Injectable,
   InternalServerErrorException,
   Logger,
 } from '@nestjs/common';
 import { ProductSizeAvailability } from '../product-size.interface';
-import { JSDOM } from 'jsdom';
-import { generateUserAgent } from './user-agent-generator';
+import { PuppeteerService } from '../puppeteer/puppeteer.service';
 
 @Injectable()
 export class ZalandoCrawler implements Crawler {
@@ -15,30 +13,23 @@ export class ZalandoCrawler implements Crawler {
   url: string;
   articleData;
 
-  constructor(private httpService: HttpService) {}
+  constructor(private puppeteerService: PuppeteerService) {}
 
   async init(url: string) {
     this.url = url;
-    const headers = {
-      accept:
-        'text/html,application/xhtml+xml,application/xmlq=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
-      'accept-encoding': 'gzip, deflate, br',
-      'accept-language': 'en-US,en;q=0.9,de-DE;q=0.8,de;q=0.7',
-      'cache-control': 'no-cache',
-      'User-Agent': generateUserAgent(),
-    };
-    let response;
     try {
-      response = await this.httpService.get(url, { headers }).toPromise();
-      const document = new JSDOM(response.data).window.document;
-      const jsonString = document
-        .getElementById('z-vegas-pdp-props')
-        .innerHTML.replace('<![CDATA[', '')
+      const productProperties: string = await this.puppeteerService.evaluateInBrowser(
+        url,
+        () => window.document.getElementById('z-vegas-pdp-props').innerHTML,
+      );
+
+      const jsonString = productProperties
+        .replace('<![CDATA[', '')
         .replace(']]>', '');
       this.articleData = JSON.parse(jsonString).model.articleInfo;
     } catch (error) {
       throw new InternalServerErrorException(
-        { error, apiResponseCode: response?.status },
+        { error },
         'Could not request or parse product data',
       );
     }
@@ -48,7 +39,7 @@ export class ZalandoCrawler implements Crawler {
     return this.articleData.name;
   }
 
-  getPrice(sizeId): number {
+  getPrice(sizeId: string): number {
     const size = this.articleData.units.find(u => u.id === sizeId);
     if (size) {
       return size.price.value;
