@@ -1,14 +1,18 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 import * as puppeteer from 'puppeteer';
 import { enableStealthMode } from './stealth-mode.utils';
 
 @Injectable()
-export class PuppeteerService implements OnModuleInit {
+export class PuppeteerService implements OnModuleInit, OnModuleDestroy {
   private browser: puppeteer.Browser;
 
   async onModuleInit(): Promise<void> {
     await this.initializeBrowser();
     this.browser.on('disconnected', () => this.initializeBrowser());
+  }
+
+  async onModuleDestroy(): Promise<void> {
+    await this.browser.close();
   }
 
   async evaluateInBrowser<T>(url: string, evaluationFunc: () => T): Promise<T> {
