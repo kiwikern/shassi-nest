@@ -1,11 +1,32 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 import * as puppeteer from 'puppeteer';
 import { enableStealthMode } from './stealth-mode.utils';
 
 @Injectable()
-export class PuppeteerService {
-  async evaluateInBrowser(url: string, evaluationFunc: () => any) {
-    const browser = await puppeteer.launch({
+export class PuppeteerService implements OnModuleInit {
+  private browser: puppeteer.Browser;
+
+  async onModuleInit(): Promise<void> {
+    await this.initializeBrowser();
+    this.browser.on('disconnected', () => this.initializeBrowser());
+  }
+
+  async evaluateInBrowser<T>(url: string, evaluationFunc: () => T): Promise<T> {
+    const page = await this.browser.newPage();
+    try {
+      await page.setViewport({ width: 1024, height: 768 });
+      await enableStealthMode(page);
+      await page.goto(url);
+      await page.mouse.move(230, 291);
+      // page.screenshot({ path: 'screenshot.png', fullPage: true });
+      return (await page.evaluate(evaluationFunc)) as Promise<T>;
+    } finally {
+      await page.close();
+    }
+  }
+
+  private async initializeBrowser() {
+    this.browser = await puppeteer.launch({
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
@@ -17,12 +38,5 @@ export class PuppeteerService {
       ],
       headless: true,
     });
-    const page = await browser.newPage();
-    await page.setViewport({ width: 1024, height: 768 });
-    await enableStealthMode(page);
-    await page.goto(url);
-    await page.mouse.move(230, 291);
-    // page.screenshot({ path: 'screenshot.png', fullPage: true });
-    return page.evaluate(evaluationFunc);
   }
 }
