@@ -44,15 +44,21 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
           app = window[appName];
           if (app) break;
         }
+
+        const getData = (property: string) => {
+          const details = app?.productDetails?.[property];
+          // For Weekday
+          const dets = app?.productDet?.[property];
+          return (details && details.length > 0) || dets;
+        };
+
         // productAvailability only for H&M
         const availabilityData = window['productAvailability'] ?? {
           availability:
-            app?.productDetails?.availableVariants ??
+            getData('availableVariants') ||
             // For Arket
             window['availableVariants'],
-          fewPiecesLeft:
-            app?.productDetails?.lowInStockVariants ??
-            app?.productDet?.lowInStockVariants,
+          fewPiecesLeft: getData('lowInStockVariants'),
         };
 
         return {
