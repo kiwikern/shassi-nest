@@ -3,6 +3,7 @@ import {
   Injectable,
   InternalServerErrorException,
   Logger,
+  NotFoundException,
 } from '@nestjs/common';
 import { ProductSizeAvailability } from '../product-size.interface';
 import { PuppeteerService } from '../puppeteer/puppeteer.service';
@@ -20,8 +21,12 @@ export class ZalandoCrawler implements Crawler {
     try {
       const productProperties: string = await this.puppeteerService.evaluateInBrowser(
         url,
-        () => window.document.getElementById('z-vegas-pdp-props').innerHTML,
+        () => document.getElementById('z-vegas-pdp-props')?.innerHTML,
       );
+      if (!productProperties) {
+        this.logger.error('Product not found');
+        throw new NotFoundException('No product');
+      }
 
       const jsonString = productProperties
         .replace('<![CDATA[', '')

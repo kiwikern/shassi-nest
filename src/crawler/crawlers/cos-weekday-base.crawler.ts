@@ -48,8 +48,8 @@ export abstract class CosWeekdayBaseCrawler implements Crawler {
         const getData = (property: string) => {
           const details = app?.productDetails?.[property];
           // For Weekday
-          const dets = app?.productDet?.[property];
-          return (details && details.length > 0) || dets;
+          const weekdayDetails = app?.productDet?.[property];
+          return (details && details.length > 0) || weekdayDetails;
         };
 
         // productAvailability only for H&M

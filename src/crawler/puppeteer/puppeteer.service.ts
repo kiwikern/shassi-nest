@@ -1,10 +1,16 @@
-import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
+import {
+  Injectable,
+  Logger,
+  OnModuleDestroy,
+  OnModuleInit,
+} from '@nestjs/common';
 import * as puppeteer from 'puppeteer';
 import { enableStealthMode } from './stealth-mode.utils';
 
 @Injectable()
 export class PuppeteerService implements OnModuleInit, OnModuleDestroy {
   private browser: puppeteer.Browser;
+  logger: Logger = new Logger(PuppeteerService.name);
 
   async onModuleInit(): Promise<void> {
     await this.initializeBrowser();
@@ -16,6 +22,13 @@ export class PuppeteerService implements OnModuleInit, OnModuleDestroy {
   }
 
   async evaluateInBrowser<T>(url: string, evaluationFunc: () => T): Promise<T> {
+    if (!this.browser || !this.browser.isConnected()) {
+      await new Promise(resolve => setTimeout(() => resolve(), 1000));
+      if (!this.browser || !this.browser.isConnected()) {
+        this.logger.error('Browser is not connected');
+        await this.initializeBrowser();
+      }
+    }
     const page = await this.browser.newPage();
     try {
       await page.setViewport({ width: 1024, height: 768 });
