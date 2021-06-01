@@ -28,7 +28,7 @@
     "@nestjs/common": "^7.4.2",
     "@nestjs/core": "^7.4.2",
     "@nestjs/jwt": "^7.1.0",
-    "@nestjs/passport": "^7.1.0",
+    "@nestjs/passport": "^7.1.5",
     "@nestjs/platform-express": "^7.4.2",
     "@nestjs/swagger": "^4.6.0",
     "@nestjs/typeorm": "^7.1.1",
